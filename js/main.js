@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormValidation();
   initDropdowns();
   initScrollTop();
+  initDirectionToggle();
+  initVideoModal();
 });
 
 // Toggle Dropdown Menu
@@ -32,6 +34,132 @@ function initDropdowns() {
       });
     }
   });
+}
+
+// Direction Toggle (RTL/LTR)
+function initDirectionToggle() {
+  const savedDir = localStorage.getItem('vitality-direction') || 'ltr';
+  document.documentElement.setAttribute('dir', savedDir);
+  updateDirToggleUI(savedDir);
+}
+
+function toggleDirection() {
+  const currentDir = document.documentElement.getAttribute('dir') || 'ltr';
+  const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+  
+  document.documentElement.setAttribute('dir', newDir);
+  localStorage.setItem('vitality-direction', newDir);
+  updateDirToggleUI(newDir);
+}
+
+function updateDirToggleUI(dir) {
+  // Update toggle button appearance based on direction
+  const toggles = document.querySelectorAll('.dir-toggle');
+  toggles.forEach(toggle => {
+    // Add visual indicator for current direction
+    toggle.title = `Toggle Text Direction (Current: ${dir.toUpperCase()})`;
+    if (dir === 'rtl') {
+      toggle.classList.add('rtl-active');
+    } else {
+      toggle.classList.remove('rtl-active');
+    }
+  });
+}
+
+// Dashboard Sidebar Toggle (for mobile)
+function toggleDashboardSidebar() {
+  const sidebar = document.querySelector('.dashboard-sidebar');
+  const overlay = document.querySelector('.sidebar-overlay');
+  
+  if (sidebar) {
+    sidebar.classList.toggle('active');
+  }
+  if (overlay) {
+    overlay.classList.toggle('active');
+  }
+  
+  // Prevent body scroll when sidebar is open
+  if (sidebar && sidebar.classList.contains('active')) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+}
+
+// Close sidebar when clicking a link (mobile)
+document.addEventListener('DOMContentLoaded', () => {
+  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const sidebar = document.querySelector('.dashboard-sidebar');
+      const overlay = document.querySelector('.sidebar-overlay');
+      if (window.innerWidth <= 1024) {
+        if (sidebar) sidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+});
+
+// Video Modal
+function initVideoModal() {
+  // Create modal if it doesn't exist
+  if (!document.querySelector('.video-modal')) {
+    const modal = document.createElement('div');
+    modal.className = 'video-modal';
+    modal.innerHTML = `
+      <div class="video-modal-content">
+        <button class="video-modal-close" onclick="closeVideoModal()">
+          <i class="ph ph-x"></i>
+        </button>
+        <video id="heroVideo" controls poster="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=700&fit=crop">
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    
+    // Close modal on background click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeVideoModal();
+      }
+    });
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+      }
+    });
+  }
+}
+
+function openVideoModal() {
+  const modal = document.querySelector('.video-modal');
+  const video = document.getElementById('heroVideo');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (video) {
+      video.play();
+    }
+  }
+}
+
+function closeVideoModal() {
+  const modal = document.querySelector('.video-modal');
+  const video = document.getElementById('heroVideo');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+  }
 }
 
 // Initialize Navbar Scroll Effect

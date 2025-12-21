@@ -88,30 +88,47 @@
         <div class="container nav-container">
             <a href="index.html" class="logo"><i class="ph ph-leaf"></i> Vitality.AI</a>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" onclick="toggleDropdown(this)">
+                        Home <i class="ph ph-caret-down"></i>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <a href="index.html" class="nav-dropdown-item"><i class="ph ph-hospital"></i> Wellness Focus</a>
+                        <a href="index2.html" class="nav-dropdown-item"><i class="ph ph-barbell"></i> Fitness Focus</a>
+                    </div>
+                </li>
                 <li><a href="services.html" class="nav-link">Services</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="pricing.html" class="nav-link active">Pricing</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li><a href="book-appointment.html" class="btn btn-primary">Book Appointment</a></li>
-                <li><a href="login.html" class="nav-link">Login</a></li>
-                <li>
-                    <button class="lang-toggle" onclick="toggleLanguage()" aria-label="Toggle Language">
-                        <i class="ph ph-globe" style="font-size: 1.5rem;"></i>
-                        <span class="lang-label">EN</span>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-toggle" onclick="toggleDropdown(this)">
+                        Dashboard <i class="ph ph-caret-down"></i>
                     </button>
+                    <div class="nav-dropdown-menu">
+                        <a href="admin-dashboard.html" class="nav-dropdown-item"><i class="ph ph-users-three"></i> Admin</a>
+                        <a href="user-dashboard.html" class="nav-dropdown-item"><i class="ph ph-user"></i> User</a>
+                    </div>
                 </li>
             </ul>
+            
+            <div class="nav-actions">
+                <button class="dir-toggle" onclick="toggleDirection()" title="Toggle Text Direction (LTR/RTL)">
+                    <i class="ph ph-globe"></i>
+                </button>
+                <a href="book-appointment.html" class="btn btn-outline">Sign Up</a>
+                <a href="login.html" class="btn btn-dark">Login</a>
+            </div>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
-    <section class="hero" style="min-height: 50vh; background: linear-gradient(135deg, var(--color-lavender) 0%, var(--color-sage) 100%);">
+    <section class="hero" style="min-height: 50vh; background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-lavender) 100%);">
         <div class="container hero-content">
-            <h1 class="hero-title" style="color: white;">Wellness Plans</h1>
-            <p class="hero-subtitle" style="color: white;">Choose the perfect plan for your health journey</p>
+            <h1 class="hero-title" style="color: var(--color-gray-900);">Wellness Plans</h1>
+            <p class="hero-subtitle" style="color: var(--color-gray-700);">Choose the perfect plan for your health journey</p>
         </div>
     </section>
 

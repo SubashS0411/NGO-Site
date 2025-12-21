@@ -30,10 +30,10 @@
                     </button>
                     <div class="nav-dropdown-menu">
                         <a href="index.html" class="nav-dropdown-item">
-                            <i class="ph ph-hospital"></i> Home Version 1
+                            <i class="ph ph-hospital"></i> Wellness Focus
                         </a>
                         <a href="index2.html" class="nav-dropdown-item">
-                            <i class="ph ph-dumbbell"></i> Home Version 2
+                            <i class="ph ph-barbell"></i> Fitness Focus
                         </a>
                     </div>
                 </li>
@@ -57,7 +57,7 @@
             </ul>
             
             <div class="nav-actions">
-                <button class="lang-toggle" aria-label="Language">
+                <button class="dir-toggle" onclick="toggleDirection()" title="Toggle Text Direction (LTR/RTL)">
                     <i class="ph ph-globe"></i>
                 </button>
                 <a href="book-appointment.html" class="btn btn-outline">Sign Up</a>
@@ -114,7 +114,7 @@
                 <div class="hero-visual">
                     <div class="video-placeholder">
                         <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=700&fit=crop" alt="Healthcare">
-                        <button class="play-btn" onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')">
+                        <button class="play-btn" onclick="openVideoModal()">
                             <i class="ph-fill ph-play"></i>
                         </button>
                     </div>
@@ -246,28 +246,28 @@
     </section>
 
     <!-- Stats Section -->
-    <section style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-accent) 100%); color: white;">
+    <section style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-accent) 100%); color: white; padding: 4rem 0;">
         <div class="container">
             <div class="grid grid-4">
                 <div class="text-center animate-on-scroll">
-                    <i class="ph ph-users" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.9;"></i>
+                    <i class="ph ph-users" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
                     <h3 style="color: white; font-size: 3rem; margin-bottom: 0.5rem;">5000+</h3>
-                    <p style="color: white; opacity: 0.9;">Happy Patients</p>
+                    <p style="color: white;">Happy Patients</p>
                 </div>
                 <div class="text-center animate-on-scroll">
-                    <i class="ph ph-certificate" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.9;"></i>
+                    <i class="ph ph-certificate" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
                     <h3 style="color: white; font-size: 3rem; margin-bottom: 0.5rem;">50+</h3>
-                    <p style="color: white; opacity: 0.9;">Expert Doctors</p>
+                    <p style="color: white;">Expert Doctors</p>
                 </div>
                 <div class="text-center animate-on-scroll">
-                    <i class="ph ph-trophy" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.9;"></i>
+                    <i class="ph ph-trophy" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
                     <h3 style="color: white; font-size: 3rem; margin-bottom: 0.5rem;">25+</h3>
-                    <p style="color: white; opacity: 0.9;">Awards Won</p>
+                    <p style="color: white;">Awards Won</p>
                 </div>
                 <div class="text-center animate-on-scroll">
-                    <i class="ph ph-star" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.9;"></i>
+                    <i class="ph ph-star" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
                     <h3 style="color: white; font-size: 3rem; margin-bottom: 0.5rem;">4.9/5</h3>
-                    <p style="color: white; opacity: 0.9;">Patient Rating</p>
+                    <p style="color: white;">Patient Rating</p>
                 </div>
             </div>
         </div>
@@ -282,10 +282,10 @@
             <div class="grid grid-3">
                 <div class="clay-card animate-on-scroll">
                     <div class="flex items-center gap-3 mb-3">
-                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-sage), var(--color-mint)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">SM</div>
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">SM</div>
                         <div>
-                            <h4 style="margin: 0;">Sarah Mitchell</h4>
-                            <div style="color: var(--color-coral);">
+                            <h4 style="margin: 0; color: var(--color-gray-900);">Sarah Mitchell</h4>
+                            <div style="color: var(--color-accent);">
                                 <i class="ph-fill ph-star"></i>
                                 <i class="ph-fill ph-star"></i>
                                 <i class="ph-fill ph-star"></i>
@@ -294,15 +294,15 @@
                             </div>
                         </div>
                     </div>
-                    <p style="color: var(--color-gray-600); font-style: italic;">"The AI diagnostics caught a health issue early that my regular doctor missed. The team here saved my life. Forever grateful!"</p>
+                    <p style="color: var(--color-gray-700); font-style: italic;">"The AI diagnostics caught a health issue early that my regular doctor missed. The team here saved my life. Forever grateful!"</p>
                 </div>
                 
                 <div class="clay-card animate-on-scroll">
                     <div class="flex items-center gap-3 mb-3">
-                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-lavender), #D4A5F3); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">JC</div>
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-purple), var(--color-violet)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">JC</div>
                         <div>
-                            <h4 style="margin: 0;">James Chen</h4>
-                            <div style="color: var(--color-coral);">
+                            <h4 style="margin: 0; color: var(--color-gray-900);">James Chen</h4>
+                            <div style="color: var(--color-accent);">
                                 <i class="ph-fill ph-star"></i>
                                 <i class="ph-fill ph-star"></i>
                                 <i class="ph-fill ph-star"></i>
@@ -311,15 +311,15 @@
                             </div>
                         </div>
                     </div>
-                    <p style="color: var(--color-gray-600); font-style: italic;">"As an athlete, cryotherapy and personal training here have taken my performance to the next level. Highly recommend!"</p>
+                    <p style="color: var(--color-gray-700); font-style: italic;">"As an athlete, cryotherapy and personal training here have taken my performance to the next level. Highly recommend!"</p>
                 </div>
                 
                 <div class="clay-card animate-on-scroll">
                     <div class="flex items-center gap-3 mb-3">
-                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-coral), #FF8A73); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">EA</div>
+                        <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent), var(--color-rose)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">EA</div>
                         <div>
-                            <h4 style="margin: 0;">Emma Anderson</h4>
-                            <div style="color: var(--color-coral);">
+                            <h4 style="margin: 0; color: var(--color-gray-900);">Emma Anderson</h4>
+                            <div style="color: var(--color-accent);">
                                 <i class="ph-fill ph-star"></i>
                                 <i class="ph-fill ph-star"></i>
                                 <i class="ph-fill ph-star"></i>
@@ -328,20 +328,20 @@
                             </div>
                         </div>
                     </div>
-                    <p style="color: var(--color-gray-600); font-style: italic;">"The wellness spa is pure luxury. I feel rejuvenated after every session. It's my monthly self-care ritual now."</p>
+                    <p style="color: var(--color-gray-700); font-style: italic;">"The wellness spa is pure luxury. I feel rejuvenated after every session. It's my monthly self-care ritual now."</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section style="background: linear-gradient(135deg, var(--color-lavender) 0%, var(--color-coral) 100%); color: white; text-align: center;">
+    <section style="background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-accent) 100%); color: white; text-align: center; padding: 5rem 0;">
         <div class="container">
             <h2 style="color: white; margin-bottom: 1rem;">Ready to Transform Your Health?</h2>
-            <p style="color: white; font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.95;">Join thousands of satisfied patients on their wellness journey</p>
+            <p style="color: white; font-size: 1.25rem; margin-bottom: 2rem;">Join thousands of satisfied patients on their wellness journey</p>
             <div class="flex gap-3 justify-center" style="flex-wrap: wrap;">
-                <a href="book-appointment.html" class="btn btn-accent" style="background: white; color: var(--color-coral);">Book Your First Session</a>
-                <a href="contact.html" class="btn btn-glass">Contact Us</a>
+                <a href="book-appointment.html" class="btn btn-accent" style="background: white; color: var(--color-primary);">Book Your First Session</a>
+                <a href="contact.html" class="btn btn-glass" style="color: white; border-color: rgba(255,255,255,0.5);">Contact Us</a>
             </div>
         </div>
     </section>

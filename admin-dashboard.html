@@ -53,7 +53,7 @@
         }
         .appointment-slot {
             padding: 1rem;
-            background: linear-gradient(135deg, var(--color-sage), var(--color-mint));
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
             color: white;
             border-radius: var(--radius-md);
             margin-bottom: 0.5rem;
@@ -72,7 +72,7 @@
         }
         .revenue-bar {
             height: 200px;
-            background: linear-gradient(to top, var(--color-sage) 0%, var(--color-mint) 100%);
+            background: linear-gradient(to top, var(--color-primary) 0%, var(--color-primary-light) 100%);
             border-radius: var(--radius-md);
             position: relative;
             display: flex;
@@ -81,6 +81,55 @@
             padding: 1rem;
             color: white;
             font-weight: 700;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+        .chart-anim-line {
+            stroke-dasharray: 900;
+            stroke-dashoffset: 900;
+            animation: drawLine 1.8s ease forwards;
+        }
+        .chart-anim-line-delayed { animation: drawLine 1.8s ease 0.25s forwards; }
+        .chart-anim-fill {
+            transform-origin: bottom;
+            animation: riseFill 1.4s ease forwards;
+        }
+        .chart-glow { filter: drop-shadow(0 6px 14px rgba(17, 24, 39, 0.2)); }
+        .chart-pulse { animation: pulseDot 2s ease-in-out infinite; }
+        .chart-spark {
+            stroke: rgba(255, 255, 255, 0.28);
+            stroke-width: 1.25;
+            stroke-dasharray: 4 8;
+            animation: drift 5s linear infinite;
+        }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        @keyframes riseFill { from { opacity: 0; transform: scaleY(0.85) translateY(12px); } to { opacity: 1; transform: scaleY(1) translateY(0); } }
+        @keyframes pulseDot { 0%, 100% { r: 3.5; opacity: 0.9; } 50% { r: 5; opacity: 1; } }
+        @keyframes drift { to { stroke-dashoffset: -80; } }
+        .chart-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .chart-placeholder {
+            height: 240px;
+            border: 2px dashed var(--color-gray-200);
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--color-porcelain), #fff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gray-600);
+            gap: 0.5rem;
+        }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
         }
         @media (max-width: 768px) {
             .dashboard-sidebar {
@@ -118,6 +167,8 @@
             .dashboard-main {
                 margin-left: 0;
             }
+            .grid.grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+            .grid.grid-2 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -313,7 +364,7 @@
                                 <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-600);">Cryotherapy</p>
                             </div>
                         </div>
-                        <span style="background: var(--color-sage); color: white; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem;">Checked In</span>
+                        <span style="background: var(--color-primary); color: white; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem;">Checked In</span>
                     </div>
                     <div class="flex gap-2">
                         <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem; flex: 1;">Start Appointment</button>
@@ -379,6 +430,125 @@
                         $7.3K
                     </div>
                     <p style="margin-top: 0.5rem; font-weight: 600;">Training</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Operational Insights -->
+        <div class="charts-grid mb-4">
+            <div class="chart-card">
+                <div class="flex justify-between items-center" style="margin-bottom: 0.75rem;">
+                    <h3 style="margin: 0;">Appointments vs Cancellations</h3>
+                    <span style="color: var(--color-gray-600); font-size: 0.9rem;">Last 30 days</span>
+                </div>
+                <div class="chart-placeholder" aria-label="Appointments vs cancellations line chart">
+                    <svg width="100%" height="240" viewBox="0 0 320 240" role="img">
+                        <defs>
+                            <linearGradient id="lineA" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#8bbf9f" stop-opacity="0.85" />
+                                <stop offset="100%" stop-color="#8bbf9f" stop-opacity="0.05" />
+                            </linearGradient>
+                            <linearGradient id="lineB" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#ff9f88" stop-opacity="0.85" />
+                                <stop offset="100%" stop-color="#ff9f88" stop-opacity="0.05" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width="320" height="240" fill="url(#bgGridAdmin1)" fill-opacity="0" />
+                        <g stroke="#e5e7eb" stroke-width="1" opacity="0.5">
+                            <line x1="0" y1="200" x2="320" y2="200" />
+                            <line x1="0" y1="150" x2="320" y2="150" />
+                            <line x1="0" y1="100" x2="320" y2="100" />
+                            <line x1="0" y1="50" x2="320" y2="50" />
+                        </g>
+                        <path d="M10 180 C 40 120, 70 140, 100 90 S 160 80, 190 110 S 250 70, 310 60" fill="none" stroke="#8bbf9f" stroke-width="3" stroke-linecap="round" class="chart-anim-line chart-glow" />
+                        <path d="M10 190 C 50 160, 90 150, 130 170 S 190 150, 230 140 S 270 130, 310 150" fill="none" stroke="#ff9f88" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6" class="chart-anim-line-delayed chart-glow" />
+                        <g fill="#8bbf9f" opacity="0.9">
+                            <circle cx="100" cy="90" r="4" class="chart-pulse" />
+                            <circle cx="190" cy="110" r="4" class="chart-pulse" />
+                            <circle cx="310" cy="60" r="4" class="chart-pulse" />
+                        </g>
+                        <g fill="#ff9f88" opacity="0.9">
+                            <circle cx="130" cy="170" r="4" class="chart-pulse" />
+                            <circle cx="230" cy="140" r="4" class="chart-pulse" />
+                            <circle cx="310" cy="150" r="4" class="chart-pulse" />
+                        </g>
+                        <path d="M20 95 C 60 75, 120 85, 160 70" class="chart-spark" />
+                    </svg>
+                </div>
+                <div class="kpi-grid" style="margin-top: 1rem;">
+                    <div class="premium-card" style="padding: 0.9rem;">
+                        <p style="margin: 0; color: var(--color-gray-500);">Completion rate</p>
+                        <strong style="font-size: 1.4rem; color: var(--color-sage);">92%</strong>
+                    </div>
+                    <div class="premium-card" style="padding: 0.9rem;">
+                        <p style="margin: 0; color: var(--color-gray-500);">Cancellations</p>
+                        <strong style="font-size: 1.4rem; color: var(--color-coral);">14</strong>
+                    </div>
+                    <div class="premium-card" style="padding: 0.9rem;">
+                        <p style="margin: 0; color: var(--color-gray-500);">Average wait</p>
+                        <strong style="font-size: 1.4rem; color: var(--color-primary);">6m</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="flex justify-between items-center" style="margin-bottom: 0.75rem;">
+                    <h3 style="margin: 0;">Patient Satisfaction Trend</h3>
+                    <span style="color: var(--color-gray-600); font-size: 0.9rem;">Quarter to date</span>
+                </div>
+                <div class="chart-placeholder" style="height: 260px;" aria-label="Patient satisfaction area chart">
+                    <svg width="100%" height="260" viewBox="0 0 320 260" role="img">
+                        <defs>
+                            <linearGradient id="csatFill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#8bbf9f" stop-opacity="0.32" />
+                                <stop offset="100%" stop-color="#8bbf9f" stop-opacity="0.08" />
+                            </linearGradient>
+                        </defs>
+                        <g stroke="#e5e7eb" stroke-width="1" opacity="0.45">
+                            <line x1="0" y1="210" x2="320" y2="210" />
+                            <line x1="0" y1="150" x2="320" y2="150" />
+                            <line x1="0" y1="90" x2="320" y2="90" />
+                        </g>
+                        <path d="M0 200 L0 160 C40 140 80 150 120 120 C160 95 200 110 240 80 C280 65 310 70 320 60 L320 200 Z" fill="url(#csatFill)" stroke="none" class="chart-anim-fill" />
+                        <path d="M0 160 C40 140 80 150 120 120 C160 95 200 110 240 80 C280 65 310 70 320 60" fill="none" stroke="#8bbf9f" stroke-width="3" stroke-linecap="round" class="chart-anim-line chart-glow" />
+                        <path d="M0 190 C60 170 110 175 150 160 C200 145 245 150 320 135" fill="none" stroke="#ff9f88" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" class="chart-anim-line-delayed chart-glow" />
+                        <path d="M30 120 C70 105 120 110 170 95" class="chart-spark" />
+                    </svg>
+                </div>
+                <div class="flex gap-2" style="margin-top: 1rem; flex-wrap: wrap;">
+                    <span class="pill" style="background: rgba(139,191,159,0.15); color: var(--color-sage); padding: 0.35rem 0.75rem; border-radius: 999px;">CSAT 4.8/5</span>
+                    <span class="pill" style="background: rgba(255,159,136,0.15); color: var(--color-coral); padding: 0.35rem 0.75rem; border-radius: 999px;">NPS +6</span>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="flex justify-between items-center" style="margin-bottom: 0.75rem;">
+                    <h3 style="margin: 0;">Resource Utilization</h3>
+                    <span style="color: var(--color-gray-600); font-size: 0.9rem;">This week</span>
+                </div>
+                <div class="chart-placeholder" style="height: 200px;" aria-label="Resource utilization donut chart">
+                    <svg width="100%" height="200" viewBox="0 0 200 200" role="img">
+                        <circle cx="100" cy="100" r="70" fill="#f5f7fb" />
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#8bbf9f" stroke-width="20" stroke-dasharray="330 440" transform="rotate(-90 100 100)" class="chart-anim-line chart-glow" style="stroke-dashoffset: 440;" />
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#ff9f88" stroke-width="20" stroke-dasharray="120 440" transform="rotate(20 100 100)" stroke-linecap="round" class="chart-anim-line-delayed chart-glow" style="stroke-dashoffset: 440;" />
+                        <circle cx="100" cy="100" r="70" fill="none" stroke="#a78bfa" stroke-width="20" stroke-dasharray="90 440" transform="rotate(90 100 100)" stroke-linecap="round" class="chart-anim-line-delayed chart-glow" style="stroke-dashoffset: 440; animation-delay: 0.4s;" />
+                        <text x="100" y="105" text-anchor="middle" font-size="22" fill="#111827" font-weight="700">82%</text>
+                        <text x="100" y="125" text-anchor="middle" font-size="12" fill="#6b7280">Utilized</text>
+                    </svg>
+                </div>
+                <div class="kpi-grid" style="margin-top: 1rem;">
+                    <div class="premium-card" style="padding: 0.9rem;">
+                        <p style="margin: 0; color: var(--color-gray-500);">Rooms booked</p>
+                        <strong style="font-size: 1.4rem;">78%</strong>
+                    </div>
+                    <div class="premium-card" style="padding: 0.9rem;">
+                        <p style="margin: 0; color: var(--color-gray-500);">Staff utilization</p>
+                        <strong style="font-size: 1.4rem;">83%</strong>
+                    </div>
+                    <div class="premium-card" style="padding: 0.9rem;">
+                        <p style="margin: 0; color: var(--color-gray-500);">Avg session length</p>
+                        <strong style="font-size: 1.4rem;">54m</strong>
+                    </div>
                 </div>
             </div>
         </div>

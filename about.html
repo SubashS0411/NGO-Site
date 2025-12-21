@@ -147,24 +147,33 @@
     </nav>
 
     <!-- Hero -->
-    <section class="hero" style="min-height: 60vh; background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(236, 72, 153, 0.9) 100%); position: relative;">
-        <div class="organic-bg" style="opacity: 0.3;">
-            <div class="blob blob-1"></div>
-            <div class="blob blob-2"></div>
+    <section class="hero" style="min-height: 60vh; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%); position: relative; overflow: hidden;">
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 25%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 55%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 0.5s;"></div>
+            <div class="particle" style="left: 85%; animation-delay: 2.5s;"></div>
         </div>
         
-        <div class="container hero-content">
-            <h1 class="hero-title" style="color: white; text-shadow: 0 2px 20px rgba(0,0,0,0.5);">About Vitality.AI</h1>
-            <p class="hero-subtitle" style="color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">Pioneering the future of healthcare with AI-powered wellness solutions</p>
+        <div class="container hero-content" style="position: relative; z-index: 2;">
+            <span class="animate-fade-up" style="display: inline-block; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 50px; color: white; font-size: 0.9rem; margin-bottom: 1rem;">
+                <i class="ph ph-info"></i> Our Story
+            </span>
+            <h1 class="hero-title animate-fade-up delay-100" style="color: white;">About Vitality.AI</h1>
+            <p class="hero-subtitle animate-fade-up delay-200" style="color: rgba(255,255,255,0.9);">Pioneering the future of healthcare with AI-powered wellness solutions</p>
         </div>
     </section>
 
     <!-- Mission -->
-    <section>
+    <section style="padding: 5rem 0;">
         <div class="container">
             <div class="grid grid-2" style="align-items: center; gap: 4rem;">
-                <div class="animate-on-scroll">
-                    <h2>Our Mission</h2>
+                <div class="animate-fade-up">
+                    <span class="section-badge" style="margin-bottom: 1rem;"><i class="ph ph-rocket"></i> Our Mission</span>
+                    <h2 style="margin-top: 1rem;">Transforming Healthcare Through Innovation</h2>
                     <p style="color: var(--color-gray-600); font-size: 1.1rem; line-height: 1.8;">
                         At Vitality.AI, we're pioneering the future of healthcare by seamlessly integrating artificial intelligence, 
                         cutting-edge medical technology, and personalized wellness programs. Our mission is to empower individuals 
@@ -174,10 +183,27 @@
                         We believe that optimal health is not just about treating illness—it's about prevention, optimization, 
                         and achieving peak performance in every aspect of life.
                     </p>
+                    <div style="display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-700);">
+                            <i class="ph ph-check-circle" style="color: var(--color-success); font-size: 1.25rem;"></i>
+                            <span>Evidence-Based Care</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-700);">
+                            <i class="ph ph-check-circle" style="color: var(--color-success); font-size: 1.25rem;"></i>
+                            <span>Patient-First Approach</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-700);">
+                            <i class="ph ph-check-circle" style="color: var(--color-success); font-size: 1.25rem;"></i>
+                            <span>Continuous Innovation</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="clay-card animate-on-scroll" style="padding: 3rem; text-align: center;">
-                    <i class="ph ph-target" style="font-size: 5rem; color: var(--color-sage); margin-bottom: 1.5rem;"></i>
-                    <h3 style="color: var(--color-sage);">Our Vision</h3>
+                <div class="premium-card hover-lift animate-fade-up delay-200" style="padding: 3rem; text-align: center; position: relative; overflow: hidden;">
+                    <div class="shimmer"></div>
+                    <div class="animate-float">
+                        <i class="ph ph-target" style="font-size: 5rem; color: var(--color-primary); margin-bottom: 1.5rem;"></i>
+                    </div>
+                    <h3 style="color: var(--color-gray-900);">Our Vision</h3>
                     <p style="color: var(--color-gray-600);">To become the global leader in AI-powered wellness, making premium healthcare accessible and transforming millions of lives.</p>
                 </div>
             </div>
@@ -185,32 +211,43 @@
     </section>
 
     <!-- Values -->
-    <section style="background: var(--color-porcelain);">
+    <section style="background: var(--color-porcelain); padding: 5rem 0;">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Our Core Values</h2>
+            <div class="section-header">
+                <span class="section-badge animate-fade-up"><i class="ph ph-star"></i> What We Stand For</span>
+                <h2 class="section-title animate-fade-up delay-100">Our Core Values</h2>
+            </div>
             
-            <div class="grid grid-4">
-                <div class="glass-card text-center animate-on-scroll">
-                    <i class="ph ph-heart" style="font-size: 3rem; color: var(--color-coral); margin-bottom: 1rem;"></i>
-                    <h4>Compassion</h4>
+            <div class="grid grid-4 stagger-container" style="margin-top: 3rem;">
+                <div class="premium-card hover-lift text-center animate-fade-up" style="padding: 2rem;">
+                    <div class="animate-float">
+                        <i class="ph ph-heart" style="font-size: 3rem; color: var(--color-coral); margin-bottom: 1rem;"></i>
+                    </div>
+                    <h4 style="color: var(--color-gray-900);">Compassion</h4>
                     <p style="color: var(--color-gray-600);">Every patient is treated with empathy, respect, and personalized attention.</p>
                 </div>
                 
-                <div class="glass-card text-center animate-on-scroll">
-                    <i class="ph ph-lightbulb" style="font-size: 3rem; color: var(--color-sage); margin-bottom: 1rem;"></i>
-                    <h4>Innovation</h4>
+                <div class="premium-card hover-lift text-center animate-fade-up delay-100" style="padding: 2rem;">
+                    <div class="animate-float" style="animation-delay: 0.3s;">
+                        <i class="ph ph-lightbulb" style="font-size: 3rem; color: var(--color-warning); margin-bottom: 1rem;"></i>
+                    </div>
+                    <h4 style="color: var(--color-gray-900);">Innovation</h4>
                     <p style="color: var(--color-gray-600);">We embrace cutting-edge technology to deliver superior healthcare outcomes.</p>
                 </div>
                 
-                <div class="glass-card text-center animate-on-scroll">
-                    <i class="ph ph-shield-check" style="font-size: 3rem; color: var(--color-lavender); margin-bottom: 1rem;"></i>
-                    <h4>Excellence</h4>
+                <div class="premium-card hover-lift text-center animate-fade-up delay-200" style="padding: 2rem;">
+                    <div class="animate-float" style="animation-delay: 0.6s;">
+                        <i class="ph ph-shield-check" style="font-size: 3rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
+                    </div>
+                    <h4 style="color: var(--color-gray-900);">Excellence</h4>
                     <p style="color: var(--color-gray-600);">We maintain the highest standards in medical care and service delivery.</p>
                 </div>
                 
-                <div class="glass-card text-center animate-on-scroll">
-                    <i class="ph ph-users-three" style="font-size: 3rem; color: var(--color-mint); margin-bottom: 1rem;"></i>
-                    <h4>Community</h4>
+                <div class="premium-card hover-lift text-center animate-fade-up delay-300" style="padding: 2rem;">
+                    <div class="animate-float" style="animation-delay: 0.9s;">
+                        <i class="ph ph-users-three" style="font-size: 3rem; color: var(--color-success); margin-bottom: 1rem;"></i>
+                    </div>
+                    <h4 style="color: var(--color-gray-900);">Community</h4>
                     <p style="color: var(--color-gray-600);">We build lasting relationships and support our patients' wellness journeys.</p>
                 </div>
             </div>
@@ -218,10 +255,13 @@
     </section>
 
     <!-- Team Carousel -->
-    <section>
+    <section style="padding: 5rem 0;">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Meet Our Expert Team</h2>
-            <p class="section-subtitle animate-on-scroll">World-class medical professionals dedicated to your wellness</p>
+            <div class="section-header">
+                <span class="section-badge animate-fade-up"><i class="ph ph-users"></i> Our Team</span>
+                <h2 class="section-title animate-fade-up delay-100">Meet Our Expert Team</h2>
+                <p class="section-subtitle animate-fade-up delay-200">World-class medical professionals dedicated to your wellness</p>
+            </div>
             
             <div class="carousel-container">
                 <div class="carousel-wrapper" id="doctorCarousel">
@@ -324,35 +364,60 @@
     </section>
 
     <!-- Stats -->
-    <section style="background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-mint) 100%); color: white;">
-        <div class="container">
-            <div class="grid grid-4">
-                <div class="text-center animate-on-scroll">
-                    <h3 style="color: white; font-size: 3.5rem; margin-bottom: 0.5rem;">50+</h3>
-                    <p style="color: white;">Medical Experts</p>
+    <section style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); padding: 5rem 0; position: relative; overflow: hidden;">
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+            <div class="particle" style="left: 15%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 35%; animation-delay: 1.5s;"></div>
+            <div class="particle" style="left: 55%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 75%; animation-delay: 0.5s;"></div>
+            <div class="particle" style="left: 95%; animation-delay: 2.5s;"></div>
+        </div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="grid grid-4 stagger-container">
+                <div class="text-center animate-fade-up hover-lift" style="padding: 2rem;">
+                    <div class="animate-float">
+                        <i class="ph ph-stethoscope" style="font-size: 2.5rem; color: white; margin-bottom: 1rem; display: block;"></i>
+                    </div>
+                    <h3 style="color: white; font-size: 3.5rem; margin-bottom: 0.5rem; font-weight: 700;">50+</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Medical Experts</p>
                 </div>
-                <div class="text-center animate-on-scroll">
-                    <h3 style="color: white; font-size: 3.5rem; margin-bottom: 0.5rem;">15</h3>
-                    <p style="color: white;">Years Experience</p>
+                <div class="text-center animate-fade-up delay-100 hover-lift" style="padding: 2rem;">
+                    <div class="animate-float" style="animation-delay: 0.3s;">
+                        <i class="ph ph-calendar" style="font-size: 2.5rem; color: white; margin-bottom: 1rem; display: block;"></i>
+                    </div>
+                    <h3 style="color: white; font-size: 3.5rem; margin-bottom: 0.5rem; font-weight: 700;">15</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Years Experience</p>
                 </div>
-                <div class="text-center animate-on-scroll">
-                    <h3 style="color: white; font-size: 3.5rem; margin-bottom: 0.5rem;">5000+</h3>
-                    <p style="color: white;">Happy Patients</p>
+                <div class="text-center animate-fade-up delay-200 hover-lift" style="padding: 2rem;">
+                    <div class="animate-float" style="animation-delay: 0.6s;">
+                        <i class="ph ph-users" style="font-size: 2.5rem; color: white; margin-bottom: 1rem; display: block;"></i>
+                    </div>
+                    <h3 style="color: white; font-size: 3.5rem; margin-bottom: 0.5rem; font-weight: 700;">5000+</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Happy Patients</p>
                 </div>
-                <div class="text-center animate-on-scroll">
-                    <h3 style="color: white; font-size: 3.5rem; margin-bottom: 0.5rem;">25+</h3>
-                    <p style="color: white;">Awards Won</p>
+                <div class="text-center animate-fade-up delay-300 hover-lift" style="padding: 2rem;">
+                    <div class="animate-float" style="animation-delay: 0.9s;">
+                        <i class="ph ph-trophy" style="font-size: 2.5rem; color: white; margin-bottom: 1rem; display: block;"></i>
+                    </div>
+                    <h3 style="color: white; font-size: 3.5rem; margin-bottom: 0.5rem; font-weight: 700;">25+</h3>
+                    <p style="color: rgba(255,255,255,0.9);">Awards Won</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
-    <section style="text-align: center;">
+    <section style="text-align: center; padding: 5rem 0; background: var(--color-white);">
         <div class="container">
-            <h2 class="animate-on-scroll">Ready to Transform Your Health?</h2>
-            <p style="font-size: 1.25rem; color: var(--color-gray-600); margin-bottom: 2rem;" class="animate-on-scroll">Join thousands of satisfied patients on their wellness journey</p>
-            <a href="book-appointment.html" class="btn btn-accent" style="padding: 1.25rem 2.5rem; font-size: 1.1rem;">Book Your First Visit</a>
+            <div class="animate-float" style="display: inline-block; margin-bottom: 1rem;">
+                <i class="ph ph-rocket-launch" style="font-size: 3rem; color: var(--color-primary);"></i>
+            </div>
+            <h2 class="animate-fade-up">Ready to Transform Your Health?</h2>
+            <p style="font-size: 1.25rem; color: var(--color-gray-600); margin-bottom: 2rem;" class="animate-fade-up delay-100">Join thousands of satisfied patients on their wellness journey</p>
+            <a href="book-appointment.html" class="btn btn-accent hover-scale animate-fade-up delay-200" style="padding: 1.25rem 2.5rem; font-size: 1.1rem;">
+                <i class="ph ph-calendar-check"></i> Book Your First Visit
+            </a>
         </div>
     </section>
 

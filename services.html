@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="css/styles.css">
     
     <style>
+        /* Prevent stray horizontal whitespace from animations/particles */
+        body { overflow-x: hidden; background: var(--color-porcelain); }
+
         .service-accordion {
             margin-bottom: 1.5rem;
         }
@@ -147,33 +150,170 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" style="min-height: 60vh; background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-mint) 100%);">
-        <div class="organic-bg">
-            <div class="blob blob-1"></div>
-            <div class="blob blob-2"></div>
+    <section class="hero" style="min-height: 60vh; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); position: relative; overflow: hidden;">
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 25%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 55%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 85%; animation-delay: 5s;"></div>
         </div>
         
-        <div class="container hero-content">
-            <h1 class="hero-title" style="color: white;">Our Premium Services</h1>
-            <p class="hero-subtitle" style="color: white;">Discover comprehensive wellness solutions tailored to your unique needs</p>
+        <div class="container hero-content" style="position: relative; z-index: 2;">
+            <span class="animate-fade-up" style="display: inline-block; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 50px; color: white; font-size: 0.9rem; margin-bottom: 1rem;">
+                <i class="ph ph-sparkle"></i> World-Class Healthcare
+            </span>
+            <h1 class="hero-title animate-fade-up delay-100" style="color: white;">Our Premium Services</h1>
+            <p class="hero-subtitle animate-fade-up delay-200" style="color: rgba(255,255,255,0.9);">Discover comprehensive wellness solutions tailored to your unique needs</p>
+            <div class="animate-fade-up delay-300" style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9);">
+                    <i class="ph ph-check-circle" style="color: var(--color-success);"></i> Expert Specialists
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9);">
+                    <i class="ph ph-check-circle" style="color: var(--color-success);"></i> Advanced Technology
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9);">
+                    <i class="ph ph-check-circle" style="color: var(--color-success);"></i> Personalized Care
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Care Pathways -->
+    <section style="background: var(--color-porcelain); padding: 4rem 0; border-top: 1px solid var(--color-gray-200);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge animate-fade-up"><i class="ph ph-path"></i> Care Pathways</span>
+                <h2 class="section-title animate-fade-up delay-100">Built-for-You Programs</h2>
+                <p class="section-subtitle animate-fade-up delay-200">Layer services into guided tracks with clear milestones and check-ins.</p>
+            </div>
+
+            <div class="grid grid-3 stagger-container" style="gap: 1.5rem; margin-top: 2rem;">
+                <div class="premium-card hover-lift animate-fade-up" style="padding: 1.75rem; display: grid; gap: 0.75rem;">
+                    <div class="flex items-center gap-2" style="color: var(--color-primary); font-weight: 700;"><i class="ph ph-heartbeat"></i> Recovery Reset (4 weeks)</div>
+                    <p style="color: var(--color-gray-600); margin: 0;">Contrast therapy + guided mobility + sleep hygiene coaching to lower inflammation and pain.</p>
+                    <ul style="color: var(--color-gray-600); margin: 0; padding-left: 1.25rem;">
+                        <li>8 Regen Suite visits</li>
+                        <li>Weekly HRV + sleep review</li>
+                        <li>1:1 breathwork sessions</li>
+                    </ul>
+                    <div class="flex justify-between items-center" style="margin-top: 0.5rem;">
+                        <strong style="color: var(--color-primary);">$899</strong>
+                        <a href="book-appointment.html" class="btn btn-primary" style="padding: 0.6rem 1rem;">Start Plan</a>
+                    </div>
+                </div>
+
+                <div class="premium-card hover-lift animate-fade-up delay-100" style="padding: 1.75rem; display: grid; gap: 0.75rem;">
+                    <div class="flex items-center gap-2" style="color: var(--color-coral); font-weight: 700;"><i class="ph ph-flame"></i> Metabolic Momentum (6 weeks)</div>
+                    <p style="color: var(--color-gray-600); margin: 0;">Nutrition mapping + AI pacing + strength to improve body composition sustainably.</p>
+                    <ul style="color: var(--color-gray-600); margin: 0; padding-left: 1.25rem;">
+                        <li>Biweekly Engine + Power labs</li>
+                        <li>CGM + macro blueprint</li>
+                        <li>Coach chat + habit nudges</li>
+                    </ul>
+                    <div class="flex justify-between items-center" style="margin-top: 0.5rem;">
+                        <strong style="color: var(--color-coral);">$1,240</strong>
+                        <a href="book-appointment.html" class="btn btn-secondary" style="padding: 0.6rem 1rem;">Join Track</a>
+                    </div>
+                </div>
+
+                <div class="premium-card hover-lift animate-fade-up delay-200" style="padding: 1.75rem; display: grid; gap: 0.75rem;">
+                    <div class="flex items-center gap-2" style="color: var(--color-sage); font-weight: 700;"><i class="ph ph-brain"></i> Executive Performance (8 weeks)</div>
+                    <p style="color: var(--color-gray-600); margin: 0;">Cognitive, sleep, and energy program for high-performers with white-glove scheduling.</p>
+                    <ul style="color: var(--color-gray-600); margin: 0; padding-left: 1.25rem;">
+                        <li>AI diagnostics + labs upfront</li>
+                        <li>Weekly red light + cryo blocks</li>
+                        <li>Dietitian + strength concierge</li>
+                    </ul>
+                    <div class="flex justify-between items-center" style="margin-top: 0.5rem;">
+                        <strong style="color: var(--color-sage);">$2,480</strong>
+                        <a href="book-appointment.html" class="btn btn-outline" style="padding: 0.6rem 1rem;">Talk to Concierge</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diagnostics & Add-ons -->
+    <section style="background: white; padding: 4rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge animate-fade-up"><i class="ph ph-flask"></i> Add-Ons</span>
+                <h2 class="section-title animate-fade-up delay-100">Precision Diagnostics & Extras</h2>
+                <p class="section-subtitle animate-fade-up delay-200">Layer specialty testing and recovery boosts into any visit.</p>
+            </div>
+
+            <div class="grid grid-3 stagger-container" style="gap: 1rem;">
+                <div class="premium-card hover-lift animate-fade-up" style="padding: 1.5rem;">
+                    <div class="flex items-center gap-2" style="font-weight: 700; color: var(--color-lavender);"><i class="ph ph-drop"></i> Micronutrient Panel</div>
+                    <p style="color: var(--color-gray-600); margin: 0.5rem 0 1rem;">Deficiency mapping with dietitian review and supplement protocol.</p>
+                    <span style="font-weight: 700; color: var(--color-lavender);">$180</span>
+                </div>
+                <div class="premium-card hover-lift animate-fade-up delay-100" style="padding: 1.5rem;">
+                    <div class="flex items-center gap-2" style="font-weight: 700; color: var(--color-info);"><i class="ph ph-scan"></i> DEXA + VO2 Combo</div>
+                    <p style="color: var(--color-gray-600); margin: 0.5rem 0 1rem;">Body comp plus engine testing to tune training zones and fuel.</p>
+                    <span style="font-weight: 700; color: var(--color-info);">$260</span>
+                </div>
+                <div class="premium-card hover-lift animate-fade-up delay-200" style="padding: 1.5rem;">
+                    <div class="flex items-center gap-2" style="font-weight: 700; color: var(--color-coral);"><i class="ph ph-sparkle"></i> Red Light + IV Boost</div>
+                    <p style="color: var(--color-gray-600); margin: 0.5rem 0 1rem;">Stack mitochondrial support with targeted hydration blends.</p>
+                    <span style="font-weight: 700; color: var(--color-coral);">$220</span>
+                </div>
+            </div>
+
+            <div class="premium-card hover-lift animate-fade-up" style="padding: 2rem; margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between;">
+                <div>
+                    <h3 style="margin: 0;">Need a custom stack?</h3>
+                    <p style="margin: 0.35rem 0 0; color: var(--color-gray-600);">Book a 15-minute concierge call to assemble the exact services you need.</p>
+                </div>
+                <a href="contact.html" class="btn btn-primary" style="padding: 0.9rem 1.6rem;">Talk to Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Categories -->
+    <section style="background: white; padding: 2rem 0; border-bottom: 1px solid var(--color-gray-200);">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="#diagnostics" class="premium-card hover-lift" style="padding: 1rem 2rem; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--color-gray-700);">
+                    <i class="ph ph-brain" style="font-size: 1.5rem; color: var(--color-primary);"></i>
+                    <span>AI Diagnostics</span>
+                </a>
+                <a href="#therapy" class="premium-card hover-lift" style="padding: 1rem 2rem; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--color-gray-700);">
+                    <i class="ph ph-snowflake" style="font-size: 1.5rem; color: var(--color-info);"></i>
+                    <span>Cryotherapy</span>
+                </a>
+                <a href="#wellness" class="premium-card hover-lift" style="padding: 1rem 2rem; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--color-gray-700);">
+                    <i class="ph ph-sparkle" style="font-size: 1.5rem; color: var(--color-accent);"></i>
+                    <span>Wellness Spa</span>
+                </a>
+                <a href="#fitness" class="premium-card hover-lift" style="padding: 1rem 2rem; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--color-gray-700);">
+                    <i class="ph ph-barbell" style="font-size: 1.5rem; color: var(--color-success);"></i>
+                    <span>Fitness</span>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Services Accordion -->
-    <section>
+    <section style="padding: 4rem 0;">
         <div class="container">
             <!-- Cryotherapy -->
-            <div class="service-accordion animate-on-scroll">
+            <div class="service-accordion premium-card hover-lift animate-fade-up" id="therapy">
                 <div class="service-header" onclick="toggleService(this)">
                     <div class="flex items-center gap-3">
-                        <i class="ph ph-snowflake" style="font-size: 2rem;"></i>
+                        <div class="animate-glow" style="display: inline-block;">
+                            <i class="ph ph-snowflake" style="font-size: 2rem; color: var(--color-info);"></i>
+                        </div>
                         <div>
                             <h3 style="margin: 0;">Cryotherapy</h3>
                             <p style="margin: 0; font-size: 0.9rem; color: var(--color-gray-600);">Whole-body cold therapy</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <span style="font-weight: 600; font-size: 1.25rem;">$150</span>
+                        <span style="font-weight: 600; font-size: 1.25rem; color: var(--color-primary);">$150</span>
                         <i class="ph ph-caret-down" style="font-size: 1.5rem; transition: transform 0.3s;"></i>
                     </div>
                 </div>
@@ -464,12 +604,66 @@
         </div>
     </section>
 
-    <!-- CTA -->
-    <section style="background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-mint) 100%); color: white; text-align: center;">
+    <!-- Why Choose Our Services -->
+    <section style="background: var(--color-white); padding: 5rem 0;">
         <div class="container">
-            <h2 style="color: white;">Not Sure Which Service Is Right for You?</h2>
-            <p style="color: white; font-size: 1.25rem; margin-bottom: 2rem;">Schedule a free consultation with our wellness experts</p>
-            <a href="contact.html" class="btn btn-accent" style="background: white; color: var(--color-sage);">Schedule Free Consultation</a>
+            <div class="section-header">
+                <span class="section-badge animate-fade-up"><i class="ph ph-star"></i> Why Choose Us</span>
+                <h2 class="section-title animate-fade-up delay-100">The Vitality.AI Difference</h2>
+                <p class="section-subtitle animate-fade-up delay-200">What makes our services stand out from the rest</p>
+            </div>
+            <div class="grid grid-4 stagger-container" style="margin-top: 3rem;">
+                <div class="premium-card hover-lift animate-fade-up" style="padding: 2rem; text-align: center;">
+                    <div class="animate-float" style="display: inline-block; margin-bottom: 1rem;">
+                        <i class="ph ph-shield-check" style="font-size: 2.5rem; color: var(--color-primary);"></i>
+                    </div>
+                    <h4 style="color: var(--color-gray-900); margin-bottom: 0.5rem;">Certified Experts</h4>
+                    <p style="color: var(--color-gray-600); font-size: 0.95rem;">Board-certified specialists with years of experience</p>
+                </div>
+                <div class="premium-card hover-lift animate-fade-up delay-100" style="padding: 2rem; text-align: center;">
+                    <div class="animate-float" style="display: inline-block; margin-bottom: 1rem; animation-delay: 0.3s;">
+                        <i class="ph ph-robot" style="font-size: 2.5rem; color: var(--color-accent);"></i>
+                    </div>
+                    <h4 style="color: var(--color-gray-900); margin-bottom: 0.5rem;">Latest Technology</h4>
+                    <p style="color: var(--color-gray-600); font-size: 0.95rem;">State-of-the-art equipment and AI-powered solutions</p>
+                </div>
+                <div class="premium-card hover-lift animate-fade-up delay-200" style="padding: 2rem; text-align: center;">
+                    <div class="animate-float" style="display: inline-block; margin-bottom: 1rem; animation-delay: 0.6s;">
+                        <i class="ph ph-heart" style="font-size: 2.5rem; color: var(--color-coral);"></i>
+                    </div>
+                    <h4 style="color: var(--color-gray-900); margin-bottom: 0.5rem;">Personalized Care</h4>
+                    <p style="color: var(--color-gray-600); font-size: 0.95rem;">Custom treatment plans tailored to your needs</p>
+                </div>
+                <div class="premium-card hover-lift animate-fade-up delay-300" style="padding: 2rem; text-align: center;">
+                    <div class="animate-float" style="display: inline-block; margin-bottom: 1rem; animation-delay: 0.9s;">
+                        <i class="ph ph-clock" style="font-size: 2.5rem; color: var(--color-success);"></i>
+                    </div>
+                    <h4 style="color: var(--color-gray-900); margin-bottom: 0.5rem;">Flexible Scheduling</h4>
+                    <p style="color: var(--color-gray-600); font-size: 0.95rem;">Extended hours and easy online booking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%); text-align: center; padding: 5rem 0; position: relative; overflow: hidden;">
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 1.5s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 0.5s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 2s;"></div>
+        </div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="animate-float" style="display: inline-block; margin-bottom: 1rem;">
+                <i class="ph ph-question" style="font-size: 3rem; color: white; opacity: 0.8;"></i>
+            </div>
+            <h2 class="animate-fade-up" style="color: white;">Not Sure Which Service Is Right for You?</h2>
+            <p class="animate-fade-up delay-100" style="color: rgba(255,255,255,0.9); font-size: 1.25rem; margin-bottom: 2rem;">Schedule a free consultation with our wellness experts</p>
+            <a href="contact.html" class="btn btn-accent hover-scale animate-fade-up delay-200" style="background: white; color: var(--color-primary);">
+                <i class="ph ph-calendar-check"></i> Schedule Free Consultation
+            </a>
         </div>
     </section>
 

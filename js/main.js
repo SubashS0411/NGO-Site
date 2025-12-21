@@ -423,3 +423,52 @@ window.VitalityAI = {
   debounce,
   throttle
 };
+
+// FAQ Accordion Toggle
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize FAQ accordions
+  const faqCards = document.querySelectorAll('.premium-card[onclick*="expanded"]');
+  faqCards.forEach(card => {
+    card.addEventListener('click', function() {
+      this.classList.toggle('expanded');
+    });
+  });
+});
+
+// Staggered Animation on Scroll
+function initStaggerAnimations() {
+  const staggerContainers = document.querySelectorAll('.stagger-container');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const children = entry.target.children;
+        Array.from(children).forEach((child, index) => {
+          child.style.animationDelay = `${index * 0.1}s`;
+          child.classList.add('animate-fade-up');
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  
+  staggerContainers.forEach(container => observer.observe(container));
+}
+
+// Initialize staggered animations
+document.addEventListener('DOMContentLoaded', initStaggerAnimations);
+
+// Parallax effect for floating particles
+document.addEventListener('mousemove', (e) => {
+  const particles = document.querySelectorAll('.particle');
+  const mouseX = e.clientX / window.innerWidth;
+  const mouseY = e.clientY / window.innerHeight;
+  
+  particles.forEach((particle, index) => {
+    const speed = (index % 3 + 1) * 10;
+    const x = (mouseX - 0.5) * speed;
+    const y = (mouseY - 0.5) * speed;
+    particle.style.transform = `translate(${x}px, ${y}px)`;
+  });
+});
+

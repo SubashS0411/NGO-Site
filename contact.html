@@ -50,19 +50,51 @@
         </div>
     </nav>
 
-    <section class="hero" style="min-height: 50vh; background: linear-gradient(135deg, var(--color-mint) 0%, var(--color-sage) 100%);">
-        <div class="container hero-content">
-            <h1 class="hero-title" style="color: white;">Get in Touch</h1>
-            <p class="hero-subtitle" style="color: white;">We're here to help you on your wellness journey</p>
+    <section class="hero" style="min-height: 50vh; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); position: relative; overflow: hidden;">
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+        </div>
+        <div class="container hero-content" style="position: relative; z-index: 2;">
+            <span class="animate-fade-up" style="display: inline-block; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 50px; color: white; font-size: 0.9rem; margin-bottom: 1rem;">
+                <i class="ph ph-chat-dots"></i> We'd Love to Hear From You
+            </span>
+            <h1 class="hero-title animate-fade-up delay-100" style="color: white;">Get in Touch</h1>
+            <p class="hero-subtitle animate-fade-up delay-200" style="color: rgba(255,255,255,0.9);">We're here to help you on your wellness journey</p>
         </div>
     </section>
 
-    <section>
+    <!-- Quick Contact Options -->
+    <section style="background: white; padding: 2rem 0; border-bottom: 1px solid var(--color-gray-200);">
+        <div class="container">
+            <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+                <a href="tel:+15551234567" class="premium-card hover-lift animate-fade-up" style="padding: 1rem 2rem; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--color-gray-700);">
+                    <i class="ph ph-phone" style="font-size: 1.5rem; color: var(--color-success);"></i>
+                    <span>Call Us</span>
+                </a>
+                <a href="mailto:hello@vitalityai.com" class="premium-card hover-lift animate-fade-up delay-100" style="padding: 1rem 2rem; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--color-gray-700);">
+                    <i class="ph ph-envelope" style="font-size: 1.5rem; color: var(--color-coral);"></i>
+                    <span>Email Us</span>
+                </a>
+                <a href="#live-chat" class="premium-card hover-lift animate-fade-up delay-200" style="padding: 1rem 2rem; display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--color-gray-700);">
+                    <i class="ph ph-chat-circle-dots" style="font-size: 1.5rem; color: var(--color-primary);"></i>
+                    <span>Live Chat (9AM-6PM)</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 4rem 0;">
         <div class="container">
             <div class="grid grid-2" style="gap: 4rem; align-items: start;">
-                <div class="glass-card" style="padding: 3rem;">
+                <div class="premium-card hover-lift animate-fade-up" style="padding: 3rem; position: relative; overflow: hidden;">
+                    <div class="shimmer"></div>
                     <h2 style="margin-bottom: 2rem;">Send Us a Message</h2>
-                    <form data-validate>
+                    <form id="contact-form" data-validate>
                         <div class="float-label form-group">
                             <input type="text" class="form-input" id="name" placeholder=" " required>
                             <label for="name">Your Name</label>
@@ -89,18 +121,19 @@
                             <textarea class="form-textarea" id="message" placeholder=" " required></textarea>
                             <label for="message">Your Message</label>
                         </div>
-                        <button type="submit" class="btn btn-primary w-full">
+                        <button type="submit" class="btn btn-primary w-full hover-scale">
                             <i class="ph ph-paper-plane-tilt"></i> Send Message
                         </button>
+                        <p id="contact-status" style="margin: 0.75rem 0 0; color: var(--color-sage); display: none;">Message sent! We reply within 1 business hour.</p>
                     </form>
                 </div>
 
                 <div>
-                    <div class="clay-card" style="padding: 2rem; margin-bottom: 2rem;">
+                    <div class="premium-card hover-lift animate-fade-up delay-200" style="padding: 2rem; margin-bottom: 2rem;" id="live-chat">
                         <h3 style="margin-bottom: 1.5rem;">Contact Information</h3>
                         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
                             <div class="flex gap-3">
-                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-sage), var(--color-mint)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
                                     <i class="ph ph-map-pin" style="font-size: 1.5rem; color: white;"></i>
                                 </div>
                                 <div>
@@ -109,7 +142,7 @@
                                 </div>
                             </div>
                             <div class="flex gap-3">
-                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-lavender), #D4A5F3); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
                                     <i class="ph ph-phone" style="font-size: 1.5rem; color: white;"></i>
                                 </div>
                                 <div>
@@ -133,6 +166,7 @@
                                 <div>
                                     <h4 style="margin: 0 0 0.5rem 0;">Hours</h4>
                                     <p style="margin: 0; color: var(--color-gray-600);">Mon-Fri: 8:00 AM - 8:00 PM<br>Sat-Sun: 9:00 AM - 6:00 PM</p>
+                                    <small style="color: var(--color-gray-500);">Live chat: 9:00 AM - 6:00 PM local time</small>
                                 </div>
                             </div>
                         </div>
@@ -176,5 +210,18 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+    // Lightweight success feedback without backend wiring
+    const contactForm = document.getElementById('contact-form');
+    const contactStatus = document.getElementById('contact-status');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            contactStatus.style.display = 'block';
+            contactStatus.textContent = 'Message sent! We reply within 1 business hour.';
+            this.querySelector('button[type="submit"]').disabled = true;
+        });
+    }
+    </script>
 </body>
 </html>

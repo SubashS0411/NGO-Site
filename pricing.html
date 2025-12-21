@@ -125,19 +125,72 @@
         </div>
     </nav>
 
-    <section class="hero" style="min-height: 50vh; background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-lavender) 100%);">
-        <div class="container hero-content">
-            <h1 class="hero-title" style="color: var(--color-gray-900);">Wellness Plans</h1>
-            <p class="hero-subtitle" style="color: var(--color-gray-700);">Choose the perfect plan for your health journey</p>
+    <section class="hero" style="min-height: 60vh; background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); position: relative; overflow: hidden;">
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+            <div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+            <div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+            <div class="particle" style="left: 80%; animation-delay: 1.5s;"></div>
+            <div class="particle" style="left: 90%; animation-delay: 4.5s;"></div>
+        </div>
+        <div class="container hero-content" style="position: relative; z-index: 2;">
+            <span class="animate-fade-up" style="display: inline-block; background: rgba(255,255,255,0.2); padding: 0.5rem 1.5rem; border-radius: 50px; color: white; font-size: 0.9rem; margin-bottom: 1rem;">
+                <i class="ph ph-sparkle"></i> Flexible Plans for Every Journey
+            </span>
+            <h1 class="hero-title animate-fade-up delay-100" style="color: white;">Wellness Plans</h1>
+            <p class="hero-subtitle animate-fade-up delay-200" style="color: rgba(255,255,255,0.9);">Choose the perfect plan for your health journey</p>
+            <div class="animate-fade-up delay-300" style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9);">
+                    <i class="ph ph-check-circle" style="color: var(--color-success);"></i> Cancel anytime
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9);">
+                    <i class="ph ph-check-circle" style="color: var(--color-success);"></i> 30-day money back
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9);">
+                    <i class="ph ph-check-circle" style="color: var(--color-success);"></i> No hidden fees
+                </div>
+            </div>
         </div>
     </section>
 
-    <section>
+    <!-- Trust Badges Section -->
+    <section style="background: white; padding: 2rem 0; border-bottom: 1px solid var(--color-gray-200);">
         <div class="container">
-            <div class="grid grid-3">
-                <div class="pricing-card glass-card animate-on-scroll" style="padding: 3rem;">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; opacity: 0.7;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-600);">
+                    <i class="ph ph-shield-check" style="font-size: 1.5rem;"></i>
+                    <span>HIPAA Compliant</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-600);">
+                    <i class="ph ph-certificate" style="font-size: 1.5rem;"></i>
+                    <span>Board Certified</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-600);">
+                    <i class="ph ph-star" style="font-size: 1.5rem;"></i>
+                    <span>4.9/5 Rating</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-600);">
+                    <i class="ph ph-users" style="font-size: 1.5rem;"></i>
+                    <span>10,000+ Members</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 5rem 0;">
+        <div class="container">
+            <div class="grid grid-3 stagger-container">
+                <div class="pricing-card premium-card hover-lift animate-fade-up" style="padding: 3rem; position: relative; overflow: hidden;">
+                    <div class="shimmer"></div>
                     <div style="text-align: center; margin-bottom: 2rem;">
-                        <i class="ph ph-leaf" style="font-size: 3rem; color: var(--color-mint);"></i>
+                        <div class="animate-float" style="display: inline-block;">
+                            <i class="ph ph-leaf" style="font-size: 3rem; color: var(--color-mint);"></i>
+                        </div>
                         <h3 style="margin: 1rem 0;">Recovery</h3>
                         <div style="font-size: 3rem; font-weight: 700; color: var(--color-sage); margin: 1rem 0;">$199</div>
                         <p style="color: var(--color-gray-600);">per month</p>
@@ -150,12 +203,16 @@
                         <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-x-circle cross-icon"></i> Cryotherapy</li>
                         <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-x-circle cross-icon"></i> AI Diagnostics</li>
                     </ul>
-                    <a href="book-appointment.html" class="btn btn-primary w-full">Get Started</a>
+                    <a href="book-appointment.html" class="btn btn-primary w-full hover-scale">Get Started</a>
                 </div>
 
-                <div class="pricing-card glass-card featured animate-on-scroll" style="padding: 3rem;">
+                <div class="pricing-card premium-card featured hover-lift animate-fade-up delay-200" style="padding: 3rem; position: relative; overflow: hidden; transform: scale(1.05); border: 2px solid var(--color-coral);">
+                    <div class="shimmer"></div>
+                    <div style="position: absolute; top: 0; right: 0; background: var(--color-coral); color: white; padding: 0.5rem 1.5rem; font-size: 0.8rem; font-weight: 600; border-radius: 0 0.5rem 0 0.5rem;">MOST POPULAR</div>
                     <div style="text-align: center; margin-bottom: 2rem;">
-                        <i class="ph ph-lightning" style="font-size: 3rem; color: var(--color-coral);"></i>
+                        <div class="animate-pulse" style="display: inline-block;">
+                            <i class="ph ph-lightning" style="font-size: 3rem; color: var(--color-coral);"></i>
+                        </div>
                         <h3 style="margin: 1rem 0;">Performance</h3>
                         <div style="font-size: 3rem; font-weight: 700; color: var(--color-coral); margin: 1rem 0;">$399</div>
                         <p style="color: var(--color-gray-600);">per month</p>
@@ -168,12 +225,15 @@
                         <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Monthly AI Diagnostics</li>
                         <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Priority Booking</li>
                     </ul>
-                    <a href="book-appointment.html" class="btn btn-accent w-full">Get Started</a>
+                    <a href="book-appointment.html" class="btn btn-accent w-full hover-scale">Get Started</a>
                 </div>
 
-                <div class="pricing-card glass-card animate-on-scroll" style="padding: 3rem;">
+                <div class="pricing-card premium-card hover-lift animate-fade-up delay-400" style="padding: 3rem; position: relative; overflow: hidden;">
+                    <div class="shimmer"></div>
                     <div style="text-align: center; margin-bottom: 2rem;">
-                        <i class="ph ph-crown" style="font-size: 3rem; color: var(--color-lavender);"></i>
+                        <div class="animate-glow" style="display: inline-block;">
+                            <i class="ph ph-crown" style="font-size: 3rem; color: var(--color-lavender);"></i>
+                        </div>
                         <h3 style="margin: 1rem 0;">Ultimate</h3>
                         <div style="font-size: 3rem; font-weight: 700; color: var(--color-lavender); margin: 1rem 0;">$699</div>
                         <p style="color: var(--color-gray-600);">per month</p>
@@ -186,7 +246,7 @@
                         <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Bio-Hacking Program</li>
                         <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> 24/7 Concierge Support</li>
                     </ul>
-                    <a href="book-appointment.html" class="btn btn-secondary w-full">Get Started</a>
+                    <a href="book-appointment.html" class="btn btn-secondary w-full hover-scale">Get Started</a>
                 </div>
             </div>
         </div>
@@ -266,11 +326,183 @@
         </div>
     </section>
 
-    <section style="background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-mint) 100%); color: white; text-align: center;">
+    <section style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); text-align: center; position: relative; overflow: hidden;">
+        <div class="floating-particles">
+            <div class="particle" style="left: 15%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 45%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 75%; animation-delay: 4s;"></div>
+        </div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <h2 class="animate-fade-up" style="color: white;">Not Sure Which Plan Is Right?</h2>
+            <p class="animate-fade-up delay-100" style="color: rgba(255,255,255,0.9); font-size: 1.25rem; margin-bottom: 2rem;">Schedule a free consultation and we'll help you choose</p>
+            <a href="contact.html" class="btn btn-accent hover-scale animate-fade-up delay-200">Schedule Consultation</a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section style="background: var(--color-white); padding: 5rem 0;">
         <div class="container">
-            <h2 style="color: white;">Not Sure Which Plan Is Right?</h2>
-            <p style="color: white; font-size: 1.25rem; margin-bottom: 2rem;">Schedule a free consultation and we'll help you choose</p>
-            <a href="contact.html" class="btn btn-accent" style="background: white; color: var(--color-sage);">Schedule Consultation</a>
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <span class="animate-fade-up" style="display: inline-block; background: var(--color-primary-light); color: var(--color-primary); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.9rem; margin-bottom: 1rem;">
+                    <i class="ph ph-star"></i> What Our Members Say
+                </span>
+                <h2 class="section-title animate-fade-up delay-100">Success Stories</h2>
+            </div>
+            <div class="grid grid-3 stagger-container">
+                <div class="premium-card hover-lift animate-fade-up" style="padding: 2rem; position: relative;">
+                    <div style="position: absolute; top: 1rem; right: 1rem; color: var(--color-coral); font-size: 2rem; opacity: 0.3;">
+                        <i class="ph ph-quotes"></i>
+                    </div>
+                    <div style="display: flex; gap: 0.25rem; color: var(--color-warning); margin-bottom: 1rem;">
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                    </div>
+                    <p style="color: var(--color-gray-700); margin-bottom: 1.5rem; font-style: italic;">"The Performance plan transformed my health completely. Lost 30lbs and gained so much energy. The AI diagnostics caught health issues before they became serious."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-sage)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">MJ</div>
+                        <div>
+                            <div style="font-weight: 600; color: var(--color-gray-900);">Michael Johnson</div>
+                            <div style="font-size: 0.9rem; color: var(--color-gray-600);">Performance Plan Member</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="premium-card hover-lift animate-fade-up delay-200" style="padding: 2rem; position: relative;">
+                    <div style="position: absolute; top: 1rem; right: 1rem; color: var(--color-coral); font-size: 2rem; opacity: 0.3;">
+                        <i class="ph ph-quotes"></i>
+                    </div>
+                    <div style="display: flex; gap: 0.25rem; color: var(--color-warning); margin-bottom: 1rem;">
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                    </div>
+                    <p style="color: var(--color-gray-700); margin-bottom: 1.5rem; font-style: italic;">"Worth every penny! The Ultimate plan's 24/7 concierge support is incredible. They've become like my personal health guardians. Highly recommended!"</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--color-coral), var(--color-lavender)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">SC</div>
+                        <div>
+                            <div style="font-weight: 600; color: var(--color-gray-900);">Sarah Chen</div>
+                            <div style="font-size: 0.9rem; color: var(--color-gray-600);">Ultimate Plan Member</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="premium-card hover-lift animate-fade-up delay-400" style="padding: 2rem; position: relative;">
+                    <div style="position: absolute; top: 1rem; right: 1rem; color: var(--color-coral); font-size: 2rem; opacity: 0.3;">
+                        <i class="ph ph-quotes"></i>
+                    </div>
+                    <div style="display: flex; gap: 0.25rem; color: var(--color-warning); margin-bottom: 1rem;">
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                    </div>
+                    <p style="color: var(--color-gray-700); margin-bottom: 1.5rem; font-style: italic;">"Started with Recovery plan to test it out. Within 2 months, I upgraded to Performance. The personalized approach and cutting-edge technology is unmatched."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--color-sage), var(--color-mint)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">DP</div>
+                        <div>
+                            <div style="font-weight: 600; color: var(--color-gray-900);">David Patel</div>
+                            <div style="font-size: 0.9rem; color: var(--color-gray-600);">Performance Plan Member</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="background: var(--color-porcelain); padding: 5rem 0;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <span class="animate-fade-up" style="display: inline-block; background: var(--color-mint); color: var(--color-primary-dark); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.9rem; margin-bottom: 1rem;">
+                    <i class="ph ph-question"></i> Got Questions?
+                </span>
+                <h2 class="section-title animate-fade-up delay-100">Frequently Asked Questions</h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="premium-card hover-lift animate-fade-up" style="padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;" onclick="this.classList.toggle('expanded')">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="color: var(--color-gray-900); margin: 0;"><i class="ph ph-calendar-check" style="color: var(--color-primary); margin-right: 0.5rem;"></i> Can I switch plans anytime?</h4>
+                        <i class="ph ph-caret-down" style="color: var(--color-gray-600); transition: transform 0.3s;"></i>
+                    </div>
+                    <div style="margin-top: 1rem; color: var(--color-gray-700); display: none;" class="faq-answer">
+                        Yes! You can upgrade or downgrade your plan at any time. Upgrades take effect immediately, while downgrades will apply at your next billing cycle. No penalties or hidden fees.
+                    </div>
+                </div>
+
+                <div class="premium-card hover-lift animate-fade-up delay-100" style="padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;" onclick="this.classList.toggle('expanded')">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="color: var(--color-gray-900); margin: 0;"><i class="ph ph-arrow-counter-clockwise" style="color: var(--color-primary); margin-right: 0.5rem;"></i> What's your refund policy?</h4>
+                        <i class="ph ph-caret-down" style="color: var(--color-gray-600); transition: transform 0.3s;"></i>
+                    </div>
+                    <div style="margin-top: 1rem; color: var(--color-gray-700); display: none;" class="faq-answer">
+                        We offer a 30-day money-back guarantee for all new members. If you're not satisfied with our services within the first 30 days, we'll provide a full refund, no questions asked.
+                    </div>
+                </div>
+
+                <div class="premium-card hover-lift animate-fade-up delay-200" style="padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;" onclick="this.classList.toggle('expanded')">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="color: var(--color-gray-900); margin: 0;"><i class="ph ph-users-three" style="color: var(--color-primary); margin-right: 0.5rem;"></i> Do you offer family plans?</h4>
+                        <i class="ph ph-caret-down" style="color: var(--color-gray-600); transition: transform 0.3s;"></i>
+                    </div>
+                    <div style="margin-top: 1rem; color: var(--color-gray-700); display: none;" class="faq-answer">
+                        Absolutely! We offer family plans with up to 20% discount for additional family members. Contact our team for custom family package options tailored to your needs.
+                    </div>
+                </div>
+
+                <div class="premium-card hover-lift animate-fade-up delay-300" style="padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;" onclick="this.classList.toggle('expanded')">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="color: var(--color-gray-900); margin: 0;"><i class="ph ph-first-aid-kit" style="color: var(--color-primary); margin-right: 0.5rem;"></i> Is insurance accepted?</h4>
+                        <i class="ph ph-caret-down" style="color: var(--color-gray-600); transition: transform 0.3s;"></i>
+                    </div>
+                    <div style="margin-top: 1rem; color: var(--color-gray-700); display: none;" class="faq-answer">
+                        We work with most major insurance providers. Many of our services may be partially or fully covered. Our billing team will help you understand your coverage and maximize your benefits.
+                    </div>
+                </div>
+
+                <div class="premium-card hover-lift animate-fade-up delay-400" style="padding: 1.5rem; margin-bottom: 1rem; cursor: pointer;" onclick="this.classList.toggle('expanded')">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="color: var(--color-gray-900); margin: 0;"><i class="ph ph-pause-circle" style="color: var(--color-primary); margin-right: 0.5rem;"></i> Can I pause my membership?</h4>
+                        <i class="ph ph-caret-down" style="color: var(--color-gray-600); transition: transform 0.3s;"></i>
+                    </div>
+                    <div style="margin-top: 1rem; color: var(--color-gray-700); display: none;" class="faq-answer">
+                        Yes, you can pause your membership for up to 3 months per year. Perfect for vacations, medical situations, or life changes. Your plan benefits will resume when you return.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Money-Back Guarantee Section -->
+    <section style="background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-mint) 100%); padding: 4rem 0;">
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+                <div class="animate-float" style="text-align: center;">
+                    <div style="width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+                        <i class="ph ph-shield-check" style="font-size: 3.5rem; color: var(--color-primary);"></i>
+                    </div>
+                </div>
+                <div style="max-width: 500px;">
+                    <h3 class="animate-fade-up" style="color: var(--color-gray-900); font-size: 1.75rem; margin-bottom: 1rem;">30-Day Money-Back Guarantee</h3>
+                    <p class="animate-fade-up delay-100" style="color: var(--color-gray-700); font-size: 1.1rem;">Try any plan risk-free. If you're not completely satisfied within your first 30 days, we'll refund your payment in full. No questions asked, no strings attached.</p>
+                    <div class="animate-fade-up delay-200" style="display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-800);">
+                            <i class="ph ph-check-circle" style="color: var(--color-success);"></i> No risk
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-800);">
+                            <i class="ph ph-check-circle" style="color: var(--color-success);"></i> Full refund
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-800);">
+                            <i class="ph ph-check-circle" style="color: var(--color-success);"></i> Easy process
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

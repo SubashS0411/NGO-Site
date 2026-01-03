@@ -196,6 +196,8 @@
     <span class="blob blob-3"></span>
   </div>
 
+  <div class="page-shell">
+
   <nav class="navbar">
     <div class="container nav-container">
       <a href="#home" class="logo">
@@ -255,18 +257,14 @@
       <div class="container" style="position: relative; z-index: 2;">
         <div class="hero-grid">
           <div class="hero-content">
-            <span class="hero-badge animate-fade-up">
-              <i class="ph ph-sparkle"></i>
-              Premium Healthcare Experience
-            </span>
-            <h1 class="hero-title animate-fade-up delay-100"><em>Rejuvenate</em> Your Life with AI-Powered Wellness</h1>
+            <h1 class="hero-title animate-fade-up"><em>Rejuvenate</em> Your Life with AI-Powered Wellness</h1>
             <p class="hero-subtitle animate-fade-up delay-200">
               Experience the future of health and wellness with premium medical and spa services. Personalized care powered by cutting-edge technology.
             </p>
 
             <div class="hero-cta animate-fade-up delay-300">
               <a href="#book" class="btn btn-primary btn-lg hover-scale">
-                <i class="ph ph-calendar-check"></i>
+                <i class="ph ph-stethoscope"></i>
                 Book Appointment
               </a>
               <a href="#services" class="btn btn-outline btn-lg hover-lift">
@@ -277,16 +275,36 @@
 
             <div class="hero-stats animate-fade-up delay-400">
               <div class="hero-stat">
-                <span class="hero-stat-number">5000+</span>
+                <span class="hero-stat-number">15,000+</span>
                 <span class="hero-stat-label">Happy Patients</span>
               </div>
               <div class="hero-stat">
-                <span class="hero-stat-number">50+</span>
+                <span class="hero-stat-number">120+</span>
                 <span class="hero-stat-label">Expert Doctors</span>
               </div>
               <div class="hero-stat">
                 <span class="hero-stat-number">4.9</span>
                 <span class="hero-stat-label">Patient Rating</span>
+              </div>
+              <div class="hero-stat">
+                <span class="hero-stat-number">98%</span>
+                <span class="hero-stat-label">Success Rate</span>
+              </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="hero-trust-badges animate-fade-up delay-500" style="display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-full); border: 1px solid rgba(16, 185, 129, 0.2);">
+                <i class="ph ph-shield-check" style="color: var(--color-success); font-size: 1.25rem;"></i>
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-gray-700);">HIPAA Compliant</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(99, 102, 241, 0.1); border-radius: var(--radius-full); border: 1px solid rgba(99, 102, 241, 0.2);">
+                <i class="ph ph-certificate" style="color: var(--color-primary); font-size: 1.25rem;"></i>
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-gray-700);">JCI Accredited</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(236, 72, 153, 0.1); border-radius: var(--radius-full); border: 1px solid rgba(236, 72, 153, 0.2);">
+                <i class="ph ph-star" style="color: var(--color-accent); font-size: 1.25rem;"></i>
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-gray-700);">Award Winning</span>
               </div>
             </div>
           </div>
@@ -298,30 +316,111 @@
                 <i class="ph-fill ph-play"></i>
               </button>
             </div>
+            <!-- Floating Stats Card -->
+            <div class="floating-card animate-float" style="position: absolute; bottom: 2rem; left: -2rem; background: white; padding: 1.25rem 1.5rem; border-radius: var(--radius-lg); box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 10;">
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-success), var(--color-teal)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                  <i class="ph ph-trend-up" style="color: white; font-size: 1.5rem;"></i>
+                </div>
+                <div>
+                  <p style="margin: 0; font-size: 0.8rem; color: var(--color-gray-500);">Patient Satisfaction</p>
+                  <p style="margin: 0; font-size: 1.5rem; font-weight: 800; color: var(--color-gray-900);">98.7%</p>
+                </div>
+              </div>
+            </div>
+            <!-- Floating Appointment Card -->
+            <div class="floating-card animate-float" style="position: absolute; top: 2rem; right: -1.5rem; background: white; padding: 1rem 1.25rem; border-radius: var(--radius-lg); box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 10; animation-delay: 1s;">
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                  <i class="ph ph-clock-countdown" style="color: white; font-size: 1.1rem;"></i>
+                </div>
+                <div>
+                  <p style="margin: 0; font-size: 0.75rem; color: var(--color-success); font-weight: 600;">Available Today</p>
+                  <p style="margin: 0; font-size: 0.9rem; font-weight: 700; color: var(--color-gray-900);">Book Now!</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="trust-section" style="background: transparent;">
+    <section class="trust-section" style="background: white; padding: 3rem 0;">
       <div class="container">
-        <p class="trust-label">Trusted By Leading Organizations</p>
-        <div class="trust-logos">
+        <p class="trust-label">Trusted By Leading Healthcare Organizations Worldwide</p>
+        <div class="trust-logos" style="margin-bottom: 2rem;">
           <div class="trust-logo"><i class="ph ph-hospital"></i></div>
           <div class="trust-logo"><i class="ph ph-shield-checkered"></i></div>
           <div class="trust-logo"><i class="ph ph-brain"></i></div>
           <div class="trust-logo"><i class="ph ph-heartbeat"></i></div>
           <div class="trust-logo"><i class="ph ph-certificate"></i></div>
+          <div class="trust-logo"><i class="ph ph-first-aid-kit"></i></div>
+          <div class="trust-logo"><i class="ph ph-dna"></i></div>
+        </div>
+        <!-- Quick Stats Bar -->
+        <div class="quick-stats-bar" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; padding: 2rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05)); border-radius: var(--radius-xl); border: 1px solid rgba(99, 102, 241, 0.1);">
+          <div style="text-align: center;">
+            <i class="ph ph-users-three" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="margin: 0; font-size: 1.75rem; font-weight: 800; color: var(--color-gray-900);">50K+</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Patients Treated</p>
+          </div>
+          <div style="text-align: center;">
+            <i class="ph ph-buildings" style="font-size: 2rem; color: var(--color-accent); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="margin: 0; font-size: 1.75rem; font-weight: 800; color: var(--color-gray-900);">25+</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Locations</p>
+          </div>
+          <div style="text-align: center;">
+            <i class="ph ph-trophy" style="font-size: 2rem; color: var(--color-warning); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="margin: 0; font-size: 1.75rem; font-weight: 800; color: var(--color-gray-900);">45+</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Awards Won</p>
+          </div>
+          <div style="text-align: center;">
+            <i class="ph ph-clock" style="font-size: 2rem; color: var(--color-success); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="margin: 0; font-size: 1.75rem; font-weight: 800; color: var(--color-gray-900);">24/7</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Support Available</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="services-section" style="background: transparent;">
+    <section class="services-section" style="background: linear-gradient(180deg, #F8FAFC 0%, white 100%); padding: 5rem 0;">
       <div class="container">
         <div class="section-header">
           <span class="section-badge animate-fade-up">Our Services</span>
           <h2 class="section-title animate-fade-up delay-100">Premium Healthcare Services</h2>
-          <p class="section-subtitle animate-fade-up delay-200">Discover personalized treatments designed for your optimal wellness</p>
+          <p class="section-subtitle animate-fade-up delay-200">Discover personalized treatments designed for your optimal wellness. Our comprehensive suite of services combines cutting-edge technology with compassionate care.</p>
+        </div>
+
+        <!-- Why Choose Us Cards -->
+        <div class="why-choose-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem;">
+          <div class="premium-card hover-lift animate-fade-up" style="padding: 1.5rem; text-align: center;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+              <i class="ph ph-robot" style="font-size: 1.75rem; color: white;"></i>
+            </div>
+            <h4 style="margin-bottom: 0.5rem;">AI-Powered</h4>
+            <p style="color: var(--color-gray-600); font-size: 0.9rem; margin: 0;">Advanced diagnostics powered by machine learning</p>
+          </div>
+          <div class="premium-card hover-lift animate-fade-up delay-100" style="padding: 1.5rem; text-align: center;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-accent), var(--color-rose)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+              <i class="ph ph-clock-countdown" style="font-size: 1.75rem; color: white;"></i>
+            </div>
+            <h4 style="margin-bottom: 0.5rem;">Quick Results</h4>
+            <p style="color: var(--color-gray-600); font-size: 0.9rem; margin: 0;">Get your health reports within 24 hours</p>
+          </div>
+          <div class="premium-card hover-lift animate-fade-up delay-200" style="padding: 1.5rem; text-align: center;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-success), var(--color-teal)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+              <i class="ph ph-user-focus" style="font-size: 1.75rem; color: white;"></i>
+            </div>
+            <h4 style="margin-bottom: 0.5rem;">Personalized</h4>
+            <p style="color: var(--color-gray-600); font-size: 0.9rem; margin: 0;">Treatment plans tailored to your needs</p>
+          </div>
+          <div class="premium-card hover-lift animate-fade-up delay-300" style="padding: 1.5rem; text-align: center;">
+            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-warning), var(--color-orange)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+              <i class="ph ph-headset" style="font-size: 1.75rem; color: white;"></i>
+            </div>
+            <h4 style="margin-bottom: 0.5rem;">24/7 Support</h4>
+            <p style="color: var(--color-gray-600); font-size: 0.9rem; margin: 0;">Round-the-clock patient care assistance</p>
+          </div>
         </div>
 
         <div class="services-grid stagger-container">
@@ -388,6 +487,86 @@
 
         <div class="text-center animate-fade-up" style="margin-top: 2.75rem;">
           <a href="#services" class="btn btn-primary btn-lg hover-scale">View All Services</a>
+        </div>
+
+        <!-- Health Analytics Section -->
+        <div class="health-analytics" style="margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, var(--color-dark), #1E293B); border-radius: var(--radius-xl); color: white;">
+          <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;">
+            <div>
+              <span style="display: inline-block; padding: 0.5rem 1rem; background: rgba(99, 102, 241, 0.2); border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">📊 Real-Time Analytics</span>
+              <h3 style="color: white; margin-bottom: 1rem;">Track Your Health Progress</h3>
+              <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">Our advanced AI system monitors your health metrics in real-time, providing actionable insights and personalized recommendations.</p>
+              <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0;">
+                <li style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; color: rgba(255,255,255,0.9);"><i class="ph ph-check-circle" style="color: var(--color-success);"></i> Real-time health monitoring</li>
+                <li style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; color: rgba(255,255,255,0.9);"><i class="ph ph-check-circle" style="color: var(--color-success);"></i> Predictive health alerts</li>
+                <li style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; color: rgba(255,255,255,0.9);"><i class="ph ph-check-circle" style="color: var(--color-success);"></i> Personalized recommendations</li>
+                <li style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; color: rgba(255,255,255,0.9);"><i class="ph ph-check-circle" style="color: var(--color-success);"></i> Progress tracking dashboard</li>
+              </ul>
+              <a href="#book" class="btn btn-primary hover-scale">Start Tracking <i class="ph ph-arrow-right"></i></a>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: 2rem; border: 1px solid rgba(255,255,255,0.1);">
+              <!-- Mock Chart/Graph Display -->
+              <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem;">
+                <div>
+                  <p style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.6);">Health Score</p>
+                  <p style="margin: 0; font-size: 2.5rem; font-weight: 800; color: var(--color-success);">94<span style="font-size: 1rem; color: rgba(255,255,255,0.6);"> / 100</span></p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(16, 185, 129, 0.2); border-radius: var(--radius-full);">
+                  <i class="ph ph-trend-up" style="color: var(--color-success);"></i>
+                  <span style="color: var(--color-success); font-weight: 600;">+12%</span>
+                </div>
+              </div>
+              <!-- Bar Chart Visualization -->
+              <div style="display: flex; align-items: flex-end; gap: 0.75rem; height: 150px; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <div style="width: 100%; height: 60%; background: linear-gradient(180deg, var(--color-primary), var(--color-primary-light)); border-radius: 4px;"></div>
+                  <span style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Mon</span>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <div style="width: 100%; height: 75%; background: linear-gradient(180deg, var(--color-primary), var(--color-primary-light)); border-radius: 4px;"></div>
+                  <span style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Tue</span>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <div style="width: 100%; height: 55%; background: linear-gradient(180deg, var(--color-primary), var(--color-primary-light)); border-radius: 4px;"></div>
+                  <span style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Wed</span>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <div style="width: 100%; height: 90%; background: linear-gradient(180deg, var(--color-success), var(--color-teal)); border-radius: 4px;"></div>
+                  <span style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Thu</span>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <div style="width: 100%; height: 80%; background: linear-gradient(180deg, var(--color-primary), var(--color-primary-light)); border-radius: 4px;"></div>
+                  <span style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Fri</span>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <div style="width: 100%; height: 95%; background: linear-gradient(180deg, var(--color-accent), var(--color-rose)); border-radius: 4px;"></div>
+                  <span style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Sat</span>
+                </div>
+                <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                  <div style="width: 100%; height: 85%; background: linear-gradient(180deg, var(--color-primary), var(--color-primary-light)); border-radius: 4px;"></div>
+                  <span style="font-size: 0.7rem; color: rgba(255,255,255,0.5);">Sun</span>
+                </div>
+              </div>
+              <!-- Metrics Grid -->
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <div style="text-align: center;">
+                  <i class="ph ph-heartbeat" style="font-size: 1.5rem; color: var(--color-accent); margin-bottom: 0.25rem; display: block;"></i>
+                  <p style="margin: 0; font-size: 1.25rem; font-weight: 700; color: white;">72 bpm</p>
+                  <p style="margin: 0; font-size: 0.75rem; color: rgba(255,255,255,0.5);">Heart Rate</p>
+                </div>
+                <div style="text-align: center;">
+                  <i class="ph ph-drop" style="font-size: 1.5rem; color: var(--color-info); margin-bottom: 0.25rem; display: block;"></i>
+                  <p style="margin: 0; font-size: 1.25rem; font-weight: 700; color: white;">120/80</p>
+                  <p style="margin: 0; font-size: 0.75rem; color: rgba(255,255,255,0.5);">Blood Pressure</p>
+                </div>
+                <div style="text-align: center;">
+                  <i class="ph ph-flame" style="font-size: 1.5rem; color: var(--color-orange); margin-bottom: 0.25rem; display: block;"></i>
+                  <p style="margin: 0; font-size: 1.25rem; font-weight: 700; color: white;">2,450</p>
+                  <p style="margin: 0; font-size: 0.75rem; color: rgba(255,255,255,0.5);">Calories</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -556,12 +735,12 @@
       </div>
     </section>
 
-    <section id="about" style="padding: 3rem 0;">
+    <section id="about" style="padding: 5rem 0;">
       <div class="container">
         <div class="section-header">
           <span class="section-badge animate-fade-up"><i class="ph ph-info"></i> Our Story</span>
           <h2 class="section-title animate-fade-up delay-100">About Vitality.AI</h2>
-          <p class="section-subtitle animate-fade-up delay-200">Pioneering the future of healthcare with AI-powered wellness solutions</p>
+          <p class="section-subtitle animate-fade-up delay-200">Pioneering the future of healthcare with AI-powered wellness solutions since 2018</p>
         </div>
 
         <div class="grid grid-2" style="align-items: center; gap: 3rem; margin-top: 2.25rem;">
@@ -570,7 +749,10 @@
             <h3 style="margin-top: 0.75rem;">Transforming Healthcare Through Innovation</h3>
             <p style="color: var(--color-gray-600); font-size: 1.05rem; line-height: 1.85;">
               We blend AI insights, advanced diagnostics, and concierge-level care to help you take control of your health journey.
-              Expect clarity, speed, and a personalized roadmap.
+              Expect clarity, speed, and a personalized roadmap designed specifically for your unique health profile.
+            </p>
+            <p style="color: var(--color-gray-600); font-size: 1.05rem; line-height: 1.85;">
+              Founded by a team of leading physicians and AI researchers, Vitality.AI has grown from a small clinic to a network of 25+ wellness centers serving over 50,000 patients annually.
             </p>
             <div style="display: flex; gap: 1.25rem; margin-top: 1.25rem; flex-wrap: wrap;">
               <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-700);">
@@ -581,7 +763,16 @@
                 <i class="ph ph-check-circle" style="color: var(--color-success); font-size: 1.25rem;"></i>
                 <span>Patient-First Approach</span>
               </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-700);">
+                <i class="ph ph-check-circle" style="color: var(--color-success); font-size: 1.25rem;"></i>
+                <span>Cutting-Edge Technology</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-gray-700);">
+                <i class="ph ph-check-circle" style="color: var(--color-success); font-size: 1.25rem;"></i>
+                <span>Holistic Wellness</span>
+              </div>
             </div>
+            <a href="#book" class="btn btn-primary hover-scale" style="margin-top: 1.5rem;">Schedule Consultation <i class="ph ph-arrow-right"></i></a>
           </div>
 
           <div class="premium-card hover-lift animate-fade-up" style="padding: 2.5rem; position: relative; overflow: hidden; background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&h=800&fit=crop') center/cover;">
@@ -589,7 +780,213 @@
             <div class="animate-float" style="text-align: center;">
               <i class="ph ph-target" style="font-size: 4.5rem; color: var(--color-primary);"></i>
               <h3 style="margin-top: 1rem;">Our Vision</h3>
-              <p style="color: var(--color-gray-600); margin-bottom: 0;">Premium, proactive wellness—personalized for every patient.</p>
+              <p style="color: var(--color-gray-600); margin-bottom: 1.5rem;">Premium, proactive wellness—personalized for every patient. We envision a world where healthcare is predictive, preventive, and personalized.</p>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                <div style="padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: var(--radius-md);">
+                  <p style="margin: 0; font-size: 1.5rem; font-weight: 800; color: var(--color-primary);">98%</p>
+                  <p style="margin: 0; font-size: 0.8rem; color: var(--color-gray-600);">Patient Satisfaction</p>
+                </div>
+                <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: var(--radius-md);">
+                  <p style="margin: 0; font-size: 1.5rem; font-weight: 800; color: var(--color-success);">45+</p>
+                  <p style="margin: 0; font-size: 0.8rem; color: var(--color-gray-600);">Industry Awards</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="testimonials-section" style="margin-top: 4rem;">
+          <h3 style="text-align: center; margin-bottom: 2rem;">What Our Patients Say</h3>
+          <div class="grid grid-3" style="gap: 1.5rem;">
+            <div class="premium-card hover-lift animate-fade-up" style="padding: 2rem;">
+              <div style="display: flex; gap: 0.25rem; margin-bottom: 1rem;">
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+              </div>
+              <p style="color: var(--color-gray-600); font-style: italic; margin-bottom: 1.5rem;">"The AI diagnostics detected a health issue early that traditional tests missed. Vitality.AI literally saved my life. The care here is unmatched."</p>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Patient" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" />
+                <div>
+                  <p style="margin: 0; font-weight: 700; color: var(--color-gray-900);">Michael Roberts</p>
+                  <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Executive, Tech Industry</p>
+                </div>
+              </div>
+            </div>
+            <div class="premium-card hover-lift animate-fade-up delay-100" style="padding: 2rem;">
+              <div style="display: flex; gap: 0.25rem; margin-bottom: 1rem;">
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+              </div>
+              <p style="color: var(--color-gray-600); font-style: italic; margin-bottom: 1.5rem;">"From booking to treatment, everything is seamless. The personalized wellness plan helped me lose 30lbs and regain my energy."</p>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Patient" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" />
+                <div>
+                  <p style="margin: 0; font-weight: 700; color: var(--color-gray-900);">Sarah Johnson</p>
+                  <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Fitness Enthusiast</p>
+                </div>
+              </div>
+            </div>
+            <div class="premium-card hover-lift animate-fade-up delay-200" style="padding: 2rem;">
+              <div style="display: flex; gap: 0.25rem; margin-bottom: 1rem;">
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+                <i class="ph-fill ph-star" style="color: var(--color-warning);"></i>
+              </div>
+              <p style="color: var(--color-gray-600); font-style: italic; margin-bottom: 1.5rem;">"Best healthcare experience I've ever had. The doctors are knowledgeable, the facilities are world-class, and the results speak for themselves."</p>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Patient" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" />
+                <div>
+                  <p style="margin: 0; font-weight: 700; color: var(--color-gray-900);">David Chen</p>
+                  <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Professional Athlete</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Metrics & Graphs Section -->
+        <div class="performance-graphs" style="margin-top: 4rem;">
+          <h3 style="text-align: center; margin-bottom: 2rem;">Our Performance Metrics</h3>
+          <div class="graphs-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+            
+            <!-- Circular Progress Chart - Patient Satisfaction -->
+            <div class="premium-card hover-lift" style="padding: 2rem; text-align: center;">
+              <h4 style="margin-bottom: 1.5rem; color: var(--color-gray-700);">Patient Satisfaction</h4>
+              <div class="circular-progress" style="position: relative; width: 150px; height: 150px; margin: 0 auto 1rem;">
+                <svg viewBox="0 0 36 36" style="transform: rotate(-90deg);">
+                  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="var(--color-gray-200)" stroke-width="3"/>
+                  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="url(#gradient1)" stroke-width="3" stroke-dasharray="98, 100" stroke-linecap="round"/>
+                  <defs>
+                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" style="stop-color:var(--color-success)"/>
+                      <stop offset="100%" style="stop-color:var(--color-teal)"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 2rem; font-weight: 800; color: var(--color-success);">98%</span>
+                </div>
+              </div>
+              <p style="color: var(--color-gray-600); font-size: 0.9rem; margin: 0;">Based on 15,000+ patient reviews</p>
+            </div>
+
+            <!-- Line Chart - Recovery Rate -->
+            <div class="premium-card hover-lift" style="padding: 2rem;">
+              <h4 style="margin-bottom: 1rem; color: var(--color-gray-700);">Recovery Progress Rate</h4>
+              <div style="position: relative; height: 160px; padding: 1rem 0;">
+                <!-- Y-axis labels -->
+                <div style="position: absolute; left: 0; top: 0; bottom: 20px; width: 30px; display: flex; flex-direction: column; justify-content: space-between; font-size: 0.65rem; color: var(--color-gray-400);">
+                  <span>100%</span>
+                  <span>75%</span>
+                  <span>50%</span>
+                  <span>25%</span>
+                </div>
+                <!-- Chart area -->
+                <div style="margin-left: 35px; height: 120px; position: relative; border-left: 1px solid var(--color-gray-200); border-bottom: 1px solid var(--color-gray-200);">
+                  <!-- Grid lines -->
+                  <div style="position: absolute; width: 100%; height: 25%; top: 0; border-bottom: 1px dashed var(--color-gray-100);"></div>
+                  <div style="position: absolute; width: 100%; height: 50%; top: 0; border-bottom: 1px dashed var(--color-gray-100);"></div>
+                  <div style="position: absolute; width: 100%; height: 75%; top: 0; border-bottom: 1px dashed var(--color-gray-100);"></div>
+                  <!-- Line chart path -->
+                  <svg style="position: absolute; inset: 0; width: 100%; height: 100%;" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:var(--color-primary)"/>
+                        <stop offset="100%" style="stop-color:var(--color-accent)"/>
+                      </linearGradient>
+                      <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:var(--color-primary); stop-opacity: 0.3"/>
+                        <stop offset="100%" style="stop-color:var(--color-primary); stop-opacity: 0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,90 Q15,80 30,70 T60,50 T90,35 T120,25 T150,15 T180,10 T210,5" fill="none" stroke="url(#lineGradient)" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M0,90 Q15,80 30,70 T60,50 T90,35 T120,25 T150,15 T180,10 T210,5 L210,120 L0,120 Z" fill="url(#areaGradient)"/>
+                  </svg>
+                  <!-- Data points -->
+                  <div style="position: absolute; width: 8px; height: 8px; background: var(--color-primary); border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 8px rgba(99,102,241,0.4); left: 0%; top: 75%; transform: translate(-50%, -50%);"></div>
+                  <div style="position: absolute; width: 8px; height: 8px; background: var(--color-primary); border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 8px rgba(99,102,241,0.4); left: 30%; top: 42%; transform: translate(-50%, -50%);"></div>
+                  <div style="position: absolute; width: 8px; height: 8px; background: var(--color-primary); border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 8px rgba(99,102,241,0.4); left: 60%; top: 21%; transform: translate(-50%, -50%);"></div>
+                  <div style="position: absolute; width: 8px; height: 8px; background: var(--color-accent); border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 8px rgba(236,72,153,0.4); left: 100%; top: 4%; transform: translate(-50%, -50%);"></div>
+                </div>
+                <!-- X-axis labels -->
+                <div style="margin-left: 35px; display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.65rem; color: var(--color-gray-400);">
+                  <span>Week 1</span>
+                  <span>Week 4</span>
+                  <span>Week 8</span>
+                  <span>Week 12</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 0.5rem;">
+                <i class="ph ph-trend-up" style="color: var(--color-success);"></i>
+                <span style="font-size: 0.85rem; color: var(--color-success); font-weight: 600;">+94% average improvement</span>
+              </div>
+            </div>
+
+            <!-- Donut Chart - Treatment Success -->
+            <div class="premium-card hover-lift" style="padding: 2rem; text-align: center;">
+              <h4 style="margin-bottom: 1rem; color: var(--color-gray-700);">Treatment Success Rate</h4>
+              <div style="position: relative; width: 150px; height: 150px; margin: 0 auto;">
+                <svg viewBox="0 0 36 36">
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="var(--color-gray-100)" stroke-width="4"/>
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="var(--color-success)" stroke-width="4" stroke-dasharray="75 25" stroke-dashoffset="25" stroke-linecap="round"/>
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="var(--color-primary)" stroke-width="4" stroke-dasharray="15 85" stroke-dashoffset="50" stroke-linecap="round"/>
+                  <circle cx="18" cy="18" r="14" fill="none" stroke="var(--color-accent)" stroke-width="4" stroke-dasharray="7 93" stroke-dashoffset="65" stroke-linecap="round"/>
+                </svg>
+                <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                  <span style="font-size: 1.5rem; font-weight: 800; color: var(--color-gray-800);">97%</span>
+                  <span style="font-size: 0.7rem; color: var(--color-gray-500);">Success</span>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem;">
+                  <span style="width: 10px; height: 10px; background: var(--color-success); border-radius: 50%;"></span>
+                  <span style="color: var(--color-gray-600);">Full Recovery 75%</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem;">
+                  <span style="width: 10px; height: 10px; background: var(--color-primary); border-radius: 50%;"></span>
+                  <span style="color: var(--color-gray-600);">Improved 15%</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem;">
+                  <span style="width: 10px; height: 10px; background: var(--color-accent); border-radius: 50%;"></span>
+                  <span style="color: var(--color-gray-600);">Ongoing 7%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Awards & Certifications -->
+        <div class="awards-section" style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05)); border-radius: var(--radius-xl); border: 1px solid rgba(99, 102, 241, 0.1);">
+          <h4 style="text-align: center; margin-bottom: 1.5rem; color: var(--color-gray-700);">Awards & Certifications</h4>
+          <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+            <div style="text-align: center;">
+              <i class="ph ph-medal" style="font-size: 2.5rem; color: var(--color-warning);"></i>
+              <p style="margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--color-gray-600);">Best Healthcare 2025</p>
+            </div>
+            <div style="text-align: center;">
+              <i class="ph ph-seal-check" style="font-size: 2.5rem; color: var(--color-primary);"></i>
+              <p style="margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--color-gray-600);">JCI Accredited</p>
+            </div>
+            <div style="text-align: center;">
+              <i class="ph ph-shield-check" style="font-size: 2.5rem; color: var(--color-success);"></i>
+              <p style="margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--color-gray-600);">HIPAA Certified</p>
+            </div>
+            <div style="text-align: center;">
+              <i class="ph ph-star" style="font-size: 2.5rem; color: var(--color-accent);"></i>
+              <p style="margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--color-gray-600);">Top Rated Clinic</p>
+            </div>
+            <div style="text-align: center;">
+              <i class="ph ph-trophy" style="font-size: 2.5rem; color: var(--color-orange);"></i>
+              <p style="margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--color-gray-600);">Innovation Award</p>
             </div>
           </div>
         </div>
@@ -659,12 +1056,20 @@
       </div>
     </section>
 
-    <section id="pricing" style="padding: 3rem 0;">
+    <section id="pricing" style="padding: 5rem 0; background: linear-gradient(180deg, #F8FAFC 0%, white 100%);">
       <div class="container">
         <div class="section-header">
           <span class="section-badge animate-fade-up"><i class="ph ph-sparkle"></i> Plans</span>
           <h2 class="section-title animate-fade-up delay-100">Wellness Plans</h2>
-          <p class="section-subtitle animate-fade-up delay-200">Choose the perfect plan for your health journey</p>
+          <p class="section-subtitle animate-fade-up delay-200">Choose the perfect plan for your health journey. All plans include access to our mobile app, 24/7 support, and personalized health insights.</p>
+        </div>
+
+        <!-- Plan Comparison Toggle -->
+        <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+          <div style="display: inline-flex; background: var(--color-gray-100); padding: 0.25rem; border-radius: var(--radius-full);">
+            <button class="btn" style="background: var(--color-primary); color: white; padding: 0.75rem 1.5rem;">Monthly</button>
+            <button class="btn btn-glass" style="padding: 0.75rem 1.5rem;">Annual <span style="background: var(--color-success); color: white; padding: 0.15rem 0.5rem; border-radius: var(--radius-full); font-size: 0.7rem; margin-left: 0.5rem;">Save 20%</span></button>
+          </div>
         </div>
 
         <div class="grid grid-3 stagger-container" style="margin-top: 2.5rem;">
@@ -673,6 +1078,7 @@
             <div style="text-align: center; margin-bottom: 2rem;">
               <div class="animate-float" style="display: inline-block;"><i class="ph ph-leaf" style="font-size: 3rem; color: var(--color-mint);"></i></div>
               <h3 style="margin: 1rem 0;">Recovery</h3>
+              <p style="color: var(--color-gray-500); font-size: 0.9rem; margin-bottom: 0.5rem;">Perfect for getting started</p>
               <div style="font-size: 3rem; font-weight: 800; color: var(--color-sage); margin: 1rem 0;">$199</div>
               <p style="color: var(--color-gray-600);">per month</p>
             </div>
@@ -681,6 +1087,9 @@
               <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Basic Health Screening</li>
               <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Nutrition Consultation</li>
               <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Wellness App Access</li>
+              <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Email Support</li>
+              <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Monthly Health Reports</li>
+              <li style="padding: 0.75rem 0; color: var(--color-gray-400);"><i class="ph ph-x-circle" style="color: var(--color-gray-400);"></i> Priority Booking</li>
             </ul>
             <a href="#book" class="btn btn-primary w-full hover-scale">Get Started</a>
           </div>
@@ -691,6 +1100,7 @@
             <div style="text-align: center; margin-bottom: 2rem;">
               <div class="animate-pulse" style="display: inline-block;"><i class="ph ph-lightning" style="font-size: 3rem; color: var(--color-coral);"></i></div>
               <h3 style="margin: 1rem 0;">Performance</h3>
+              <p style="color: var(--color-gray-500); font-size: 0.9rem; margin-bottom: 0.5rem;">Best value for active individuals</p>
               <div style="font-size: 3rem; font-weight: 800; color: var(--color-coral); margin: 1rem 0;">$399</div>
               <p style="color: var(--color-gray-600);">per month</p>
             </div>
@@ -699,6 +1109,9 @@
               <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Advanced Health Screening</li>
               <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Personalized Nutrition Plan</li>
               <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> 4 Cryotherapy Sessions</li>
+              <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Priority Support</li>
+              <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Weekly Health Reports</li>
+              <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Priority Booking</li>
             </ul>
             <a href="#book" class="btn btn-accent w-full hover-scale">Get Started</a>
           </div>
@@ -708,6 +1121,7 @@
             <div style="text-align: center; margin-bottom: 2rem;">
               <div class="animate-glow" style="display: inline-block;"><i class="ph ph-crown" style="font-size: 3rem; color: var(--color-lavender);"></i></div>
               <h3 style="margin: 1rem 0;">Ultimate</h3>
+              <p style="color: var(--color-gray-500); font-size: 0.9rem; margin-bottom: 0.5rem;">For serious wellness enthusiasts</p>
               <div style="font-size: 3rem; font-weight: 800; color: var(--color-lavender); margin: 1rem 0;">$699</div>
               <p style="color: var(--color-gray-600);">per month</p>
             </div>
@@ -716,8 +1130,41 @@
               <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Comprehensive AI Diagnostics</li>
               <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Custom Meal Planning</li>
               <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Unlimited Cryotherapy</li>
+              <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Dedicated Concierge</li>
+              <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> Daily Health Reports</li>
+              <li style="padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-200);"><i class="ph ph-check-circle check-icon"></i> VIP Access & Events</li>
             </ul>
             <a href="#book" class="btn btn-secondary w-full hover-scale">Get Started</a>
+          </div>
+        </div>
+
+        <!-- Money Back Guarantee -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(20, 184, 166, 0.1)); border-radius: var(--radius-xl); border: 1px solid rgba(16, 185, 129, 0.2);">
+          <i class="ph ph-shield-check" style="font-size: 3rem; color: var(--color-success); margin-bottom: 1rem; display: block;"></i>
+          <h4 style="margin-bottom: 0.5rem;">30-Day Money-Back Guarantee</h4>
+          <p style="color: var(--color-gray-600); max-width: 600px; margin: 0 auto;">Try any plan risk-free. If you're not completely satisfied within the first 30 days, we'll give you a full refund—no questions asked.</p>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section" style="margin-top: 4rem;">
+          <h3 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h3>
+          <div class="grid grid-2" style="gap: 1.5rem;">
+            <div class="premium-card hover-lift" style="padding: 1.5rem;">
+              <h4 style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-question" style="color: var(--color-primary);"></i> Can I change my plan later?</h4>
+              <p style="color: var(--color-gray-600); margin: 0; font-size: 0.95rem;">Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle.</p>
+            </div>
+            <div class="premium-card hover-lift" style="padding: 1.5rem;">
+              <h4 style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-question" style="color: var(--color-primary);"></i> Are consultations included?</h4>
+              <p style="color: var(--color-gray-600); margin: 0; font-size: 0.95rem;">All plans include an initial consultation. Performance and Ultimate plans include ongoing consultations as needed.</p>
+            </div>
+            <div class="premium-card hover-lift" style="padding: 1.5rem;">
+              <h4 style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-question" style="color: var(--color-primary);"></i> Do you accept insurance?</h4>
+              <p style="color: var(--color-gray-600); margin: 0; font-size: 0.95rem;">We work with most major insurance providers. Contact us for a free benefits check before your first visit.</p>
+            </div>
+            <div class="premium-card hover-lift" style="padding: 1.5rem;">
+              <h4 style="margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-question" style="color: var(--color-primary);"></i> What's included in health screening?</h4>
+              <p style="color: var(--color-gray-600); margin: 0; font-size: 0.95rem;">Screenings include blood work, body composition, cardiovascular assessment, and AI-powered health analysis.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -762,9 +1209,6 @@
                 <textarea class="form-textarea" id="contactMessage" placeholder=" " required></textarea>
                 <label for="contactMessage">Your Message</label>
               </div>
-              <button type="submit" class="btn btn-primary w-full hover-scale">
-                <i class="ph ph-paper-plane-tilt"></i> Send Message
-              </button>
               <p id="contact-status" style="margin: 0.75rem 0 0; color: var(--color-sage); display: none;">Message sent! We reply within 1 business hour.</p>
             </form>
           </div>
@@ -802,13 +1246,37 @@
             </div>
           </div>
         </div>
+
+        <!-- Quick Contact Actions -->
+        <div class="quick-contact-grid" style="margin-top: 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
+          <a href="tel:+15551234567" class="premium-card hover-lift" style="padding: 1.5rem; text-align: center; text-decoration: none;">
+            <i class="ph ph-phone" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="margin: 0; font-weight: 600; color: var(--color-gray-800);">Call Us</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Speak directly</p>
+          </a>
+          <a href="mailto:hello@vitalityai.com" class="premium-card hover-lift" style="padding: 1.5rem; text-align: center; text-decoration: none;">
+            <i class="ph ph-envelope" style="font-size: 2rem; color: var(--color-accent); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="margin: 0; font-weight: 600; color: var(--color-gray-800);">Email Us</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Get a response fast</p>
+          </a>
+          <a href="#book" class="premium-card hover-lift" style="padding: 1.5rem; text-align: center; text-decoration: none;">
+            <i class="ph ph-cursor-click" style="font-size: 2rem; color: var(--color-success); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="margin: 0; font-weight: 600; color: var(--color-gray-800);">Book Online</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Schedule anytime</p>
+          </a>
+          <a href="#" class="premium-card hover-lift" style="padding: 1.5rem; text-align: center; text-decoration: none;">
+            <i class="ph ph-chat-circle-dots" style="font-size: 2rem; color: var(--color-warning); margin-bottom: 0.5rem; display: block;"></i>
+            <p style="margin: 0; font-weight: 600; color: var(--color-gray-800);">Live Chat</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-500);">Chat with us now</p>
+          </a>
+        </div>
       </div>
     </section>
 
     <section id="book" style="padding: 3rem 0;">
       <div class="container wizard-container">
         <div class="section-header">
-          <span class="section-badge animate-fade-up"><i class="ph ph-calendar-check"></i> Booking</span>
+          <span class="section-badge animate-fade-up"><i class="ph ph-note-pencil"></i> Booking</span>
           <h2 class="section-title animate-fade-up delay-100">Book Your Appointment</h2>
           <p class="section-subtitle animate-fade-up delay-200">Follow these steps to schedule your visit</p>
         </div>
@@ -1015,11 +1483,11 @@
         <div class="footer-section">
           <h4><i class="ph ph-leaf"></i> Vitality.AI</h4>
           <p style="color: var(--color-gray-400);">Experience the future of health and wellness with cutting-edge technology and personalized care.</p>
-          <div class="flex gap-2 mt-3">
-            <a href="#" class="btn btn-glass" style="padding: 0.75rem; border-radius: 50%;"><i class="ph ph-facebook-logo"></i></a>
-            <a href="#" class="btn btn-glass" style="padding: 0.75rem; border-radius: 50%;"><i class="ph ph-twitter-logo"></i></a>
-            <a href="#" class="btn btn-glass" style="padding: 0.75rem; border-radius: 50%;"><i class="ph ph-instagram-logo"></i></a>
-            <a href="#" class="btn btn-glass" style="padding: 0.75rem; border-radius: 50%;"><i class="ph ph-linkedin-logo"></i></a>
+          <div class="footer-social gap-2 mt-3">
+            <a href="#" class="footer-social-link" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Twitter"><i class="ph ph-twitter-logo"></i></a>
+            <a href="#" class="footer-social-link" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+            <a href="#" class="footer-social-link" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
           </div>
         </div>
 
@@ -1059,6 +1527,8 @@
       </div>
     </div>
   </footer>
+
+  </div>
 
   <button class="scroll-top" type="button" aria-label="Back to top">
     <i class="ph ph-arrow-up"></i>

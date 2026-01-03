@@ -79,10 +79,15 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 main {
   padding-top: 88px;
+  flex: 1;
+  width: 100%;
 }
 
 @media (max-width: 1024px) {
@@ -93,12 +98,25 @@ main {
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
-  background: var(--color-porcelain);
+  background: var(--color-dark);
   color: var(--color-gray-800);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  background: var(--color-porcelain);
+  width: 100%;
 }
 
 /* Typography */
@@ -128,6 +146,12 @@ a {
   max-width: 1280px;
   margin-inline: auto;
   padding-inline: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-inline: 1rem;
+  }
 }
 
 /* Utility Classes */
@@ -260,22 +284,31 @@ a {
    PREMIUM NAVIGATION - Clean Modern Style
    ======================================== */
 .navbar {
-  position: fixed;
-  top: 0;
+  position: fixed !important;
+  top: 0 !important;
   left: 0;
   right: 0;
-  z-index: 1000;
+  width: 100%;
+  z-index: 9999 !important;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   padding: 0.75rem 0;
   transition: all 0.3s ease;
+  transform: translateZ(0) !important;
+  will-change: auto;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-
-
-.navbar.scrolled {
+/* Ensure navbar never hides on scroll */
+.navbar.scrolled,
+.navbar.scroll-up,
+.navbar.scroll-down {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 }
 
@@ -628,6 +661,51 @@ a {
   padding-bottom: 2rem;
   overflow: hidden;
   background: linear-gradient(180deg, #F8FAFC 0%, #EEF2FF 100%);
+}
+
+/* Hero title should start closer to top when no badge */
+.hero-title {
+  margin-top: 0;
+}
+
+/* Floating cards animation */
+.floating-card {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Quick stats bar responsive */
+@media (max-width: 768px) {
+  .quick-stats-bar {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .health-analytics > div {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .why-choose-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .hero-trust-badges {
+    justify-content: center !important;
+  }
+  
+  .floating-card {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-stats-bar,
+  .why-choose-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Images inside service accordion placeholders */
@@ -1551,7 +1629,9 @@ section:first-of-type {
 .footer {
   background: var(--color-dark);
   color: white;
-  padding: var(--spacing-2xl) 0 0;
+  padding: var(--spacing-2xl) 0 var(--spacing-sm);
+  margin-top: auto;
+  width: 100%;
 }
 
 .footer-content {
@@ -1575,6 +1655,36 @@ section:first-of-type {
   font-size: 1.05rem;
 }
 
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.footer-social-link {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-mint);
+  transition: all 0.3s ease;
+}
+
+.footer-social-link i {
+  font-size: 1.1rem;
+}
+
+.footer-social-link:hover {
+  background: var(--color-mint);
+  border-color: var(--color-mint);
+  color: var(--color-dark);
+  transform: translateY(-2px);
+}
+
 .footer-links { list-style: none; }
 .footer-links li { margin-block-end: var(--spacing-xs); }
 
@@ -1596,7 +1706,7 @@ section:first-of-type {
 
 .footer-bottom p {
   margin: 0;
-  padding-bottom: var(--spacing-lg);
+  padding-bottom: 0;
 }
 
 /* ========================================
@@ -2652,11 +2762,515 @@ section[id] {
   .wizard-step .step-label {
     display: none;
   }
+  
+  /* Quick contact grid responsive */
+  .quick-contact-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Testimonials grid responsive */
+  .testimonials-section .grid-3 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* FAQ grid responsive */
+  .faq-section .grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Health analytics responsive */
+  .health-analytics > div {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-contact-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 /* Active nav clarity */
 .nav-link.active {
   box-shadow: 0 10px 25px rgba(99, 102, 241, 0.18);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  .btn {
+    min-height: 44px;
+    padding: 0.875rem 1.75rem;
+  }
+  
+  /* Better mobile typography */
+  body {
+    font-size: 16px;
+  }
+  
+  /* Optimize spacing */
+  section {
+    padding-block: 2rem;
+  }
+  
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Better mobile cards */
+  .premium-card,
+  .glass-card,
+  .service-card {
+    padding: 1.25rem;
+  }
+  
+  /* Improve mobile navbar */
+  .navbar {
+    padding: 0.5rem 0;
+  }
+  
+  /* Better mobile hero */
+  .hero {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  /* Stack buttons on mobile */
+  .hero-cta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .hero-cta .btn {
+    width: 100%;
+  }
+  
+  /* Mobile footer */
+  .footer {
+    padding: 2rem 0 0;
+  }
+  
+  /* Remove excessive margins on mobile */
+  h1, h2, h3, h4, h5, h6 {
+    margin-block-end: 1rem;
+  }
+}
+
+/* ==========================================
+   COMPREHENSIVE RESPONSIVE OPTIMIZATION
+   ========================================== */
+
+/* Desktop - Large screens (1400px+) */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+  
+  .hero-title {
+    font-size: 4rem;
+  }
+  
+  .graphs-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 2rem !important;
+  }
+  
+  .quick-stats-bar {
+    gap: 3rem;
+  }
+}
+
+/* Desktop - Standard (1024px - 1399px) */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .graphs-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* Tablet - Large (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .graphs-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.25rem !important;
+  }
+  
+  .graphs-grid > div:last-child {
+    grid-column: span 2;
+    max-width: 60%;
+    margin: 0 auto;
+  }
+  
+  .quick-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .why-choose-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .health-analytics {
+    padding: 1.5rem;
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .testimonials-grid > div:last-child {
+    grid-column: span 2;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+  
+  .quick-contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Hero floating cards on tablet */
+  .floating-card {
+    transform: scale(0.85);
+  }
+  
+  .floating-card.health-score {
+    right: -50px;
+    top: 15%;
+  }
+  
+  .floating-card.appointment-card {
+    left: -30px;
+    bottom: 25%;
+  }
+  
+  .floating-card.doctor-available {
+    right: 5%;
+    bottom: 5%;
+  }
+}
+
+/* Mobile - Large (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .graphs-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .graphs-grid > div {
+    max-width: 100%;
+  }
+  
+  .circular-progress {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  .circular-progress + p {
+    font-size: 0.8rem !important;
+  }
+  
+  .quick-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .why-choose-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Hero floating cards - reposition for mobile */
+  .floating-card {
+    transform: scale(0.7);
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+  }
+  
+  .awards-section > div {
+    gap: 1.5rem !important;
+  }
+}
+
+/* Mobile - Small (max 575px) */
+@media (max-width: 575px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding-inline: 1rem;
+  }
+  
+  .hero-title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  /* Graphs responsive */
+  .graphs-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .graphs-grid > div {
+    padding: 1.25rem !important;
+  }
+  
+  .graphs-grid h4 {
+    font-size: 0.95rem !important;
+  }
+  
+  .circular-progress {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  
+  .circular-progress span {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Performance graphs legends */
+  .graphs-grid > div:last-child > div:last-child {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* Quick stats bar */
+  .quick-stats-bar {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  
+  .quick-stats-bar > div {
+    padding: 0.75rem;
+  }
+  
+  .quick-stats-bar h3 {
+    font-size: 1.25rem !important;
+  }
+  
+  .quick-stats-bar p {
+    font-size: 0.7rem !important;
+  }
+  
+  /* Why choose grid */
+  .why-choose-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  /* Health analytics */
+  .health-analytics {
+    padding: 1rem;
+  }
+  
+  .chart-container > div:first-child {
+    gap: 0.5rem !important;
+  }
+  
+  /* Testimonials */
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .testimonials-grid > div {
+    padding: 1rem !important;
+  }
+  
+  /* Awards section */
+  .awards-section {
+    padding: 1.25rem !important;
+  }
+  
+  .awards-section > div {
+    gap: 1rem !important;
+  }
+  
+  .awards-section i {
+    font-size: 1.75rem !important;
+  }
+  
+  .awards-section p {
+    font-size: 0.7rem !important;
+  }
+  
+  /* FAQ grid */
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .faq-grid > div {
+    padding: 1rem;
+  }
+  
+  /* Quick contact grid */
+  .quick-contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .quick-contact-grid > a {
+    padding: 0.75rem;
+  }
+  
+  .quick-contact-grid i {
+    font-size: 1.25rem !important;
+  }
+  
+  .quick-contact-grid span {
+    font-size: 0.75rem !important;
+  }
+  
+  /* Business hours */
+  .contact-section .premium-card {
+    padding: 1.25rem;
+  }
+  
+  /* Map placeholder */
+  .map-placeholder {
+    height: 180px !important;
+  }
+  
+  /* Floating cards - hide on very small screens */
+  .floating-card {
+    display: none !important;
+  }
+  
+  /* Trust badges - make scrollable */
+  .trust-badges {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .trust-badges > div {
+    flex-shrink: 0;
+    min-width: 130px;
+  }
+  
+  /* Pricing cards */
+  .pricing-card {
+    padding: 1.5rem;
+  }
+  
+  /* CTA buttons */
+  .btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Section spacing */
+  section {
+    padding: 3rem 0;
+  }
+  
+  /* Money-back guarantee */
+  .money-back-badge {
+    padding: 1rem !important;
+  }
+  
+  .money-back-badge i {
+    font-size: 2rem !important;
+  }
+}
+
+/* Ultra-small screens (max 359px) */
+@media (max-width: 359px) {
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  
+  .quick-stats-bar {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-contact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .graphs-grid > div {
+    padding: 1rem !important;
+  }
+  
+  .circular-progress {
+    width: 80px !important;
+    height: 80px !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .nav-links a {
+    padding: 0.75rem 1rem;
+  }
+  
+  .quick-contact-grid > a {
+    min-height: 70px;
+  }
+  
+  .faq-grid > div {
+    cursor: default;
+  }
+  
+  /* Remove hover effects that don't work well on touch */
+  .premium-card:hover {
+    transform: none;
+  }
+  
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .circular-progress svg,
+  .graphs-grid svg {
+    shape-rendering: geometricPrecision;
+  }
 }
 
 /* Reduce motion preference */

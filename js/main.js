@@ -196,9 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
               <i class="fas fa-sun hidden dark:inline"></i>
               <span class="font-sans text-base">Theme</span>
             </button>
-            <button id="mobile-rtl-toggle" class="flex-1 flex items-center justify-center gap-3 p-4 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-all duration-300">
+            <button id="mobile-rtl-toggle" class="flex items-center justify-center p-4 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-all duration-300">
               <i class="fas fa-globe"></i>
-              <span class="font-sans text-base">RTL/LTR</span>
             </button>
           </div>
         </div>

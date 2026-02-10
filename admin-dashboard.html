@@ -91,116 +91,25 @@
 
 <body class="bg-bg text-gray-800 font-sans transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
 
-    <!-- Emergency Banner -->
-    <div id="emergency-banner"
-        class="bg-gradient-to-r from-red-600 to-red-500 text-white text-sm py-2 px-4 flex justify-between items-center relative z-50 shadow-md">
-        <div class="container mx-auto flex items-center justify-center animate-pulse">
-            <span class="font-bold mr-2"><i class="fas fa-exclamation-triangle"></i> URGENT:</span>
-            <span>Floods in South Asia: 50,000 families need shelter.</span>
-            <a href="cause-details.html" class="ml-4 underline hover:text-gray-200 font-bold">Help Now</a>
-        </div>
-        <button onclick="document.getElementById('emergency-banner').style.display='none'"
-            class="absolute right-4 focus:outline-none opacity-80 hover:opacity-100">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
+    <!-- Mobile Menu Toggle Button -->
+    <button id="mobile-sidebar-toggle" 
+        class="md:hidden fixed top-4 left-4 z-[60] w-12 h-12 bg-secondary text-white rounded-xl shadow-lg flex items-center justify-center hover:bg-secondary/90 transition-all">
+        <i class="fas fa-bars text-xl" id="menu-icon"></i>
+    </button>
 
-    <!-- Navigation -->
-    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-premium fixed top-0 left-0 w-full z-40 transition-all duration-300 border-b border-white/20 dark:border-gray-700"
-        id="navbar">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="index.html" class="flex items-center gap-2 group">
-                <div
-                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    H
-                </div>
-                <span
-                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
-            </a>
+    <!-- Mobile Overlay -->
+    <div id="sidebar-overlay" class="md:hidden fixed inset-0 bg-black/50 z-40 hidden" onclick="toggleSidebar()"></div>
 
-            <!-- Desktop Menu -->
-            <div
-                class="hidden md:flex items-center space-x-1 rtl:space-x-reverse font-medium text-secondary dark:text-gray-200">
-                <!-- Home Dropdown -->
-                <div class="nav-item group">
-                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1 text-sm">
-                        Home <i class="fas fa-chevron-down text-xs opacity-50 ms-1"></i>
-                    </button>
-                    <div
-                        class="dropdown-menu rtl:left-auto rtl:right-1/2 rtl:translate-x-1/2 dark:bg-gray-800 dark:border-gray-700">
-                        <a href="index.html"
-                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
-                            <i class="fas fa-home me-2 text-primary"></i> Home Version 1
-                        </a>
-                        <a href="index2.html"
-                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
-                            <i class="fas fa-layer-group me-2 text-primary"></i> Home Version 2
-                        </a>
-                    </div>
-                </div>
-
-                <a href="causes-grid.html" class="px-4 py-2 hover:text-primary transition text-sm">Causes</a>
-                <a href="about.html" class="px-4 py-2 hover:text-primary transition text-sm">About Us</a>
-                <a href="volunteer.html" class="px-4 py-2 hover:text-primary transition text-sm">Volunteer</a>
-
-                <!-- Dashboard Dropdown -->
-                <div class="nav-item group">
-                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1 text-sm font-bold">
-                        Dashboards <i class="fas fa-chevron-down text-xs opacity-50 ms-1"></i>
-                    </button>
-                    <div
-                        class="dropdown-menu rtl:left-auto rtl:right-1/2 rtl:translate-x-1/2 dark:bg-gray-800 dark:border-gray-700">
-                        <a href="admin-dashboard.html"
-                            class="dropdown-item flex items-center font-bold dark:text-gray-200 dark:hover:bg-gray-700">
-                            <i class="fas fa-tachometer-alt me-2 text-primary"></i> Admin Dashboard
-                        </a>
-                        <a href="donor-dashboard.html"
-                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
-                            <i class="fas fa-user me-2 text-primary"></i> User Dashboard
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA Buttons -->
-            <div class="hidden md:flex items-center gap-4 rtl:space-x-reverse">
-                <!-- Theme Toggle -->
-                <button onclick="toggleTheme()"
-                    class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
-                    <i class="fas fa-moon" id="theme-icon"></i>
-                </button>
-
-                <!-- RTL Toggle -->
-                <button onclick="toggleRTL()"
-                    class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
-                    <i class="fas fa-globe"></i>
-                </button>
-
-                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
-
-                <a href="login.html"
-                    class="text-xs font-semibold text-secondary hover:text-primary dark:text-white transition">Log
-                    In</a>
-
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button id="navbar-sidebar-toggle" class="md:hidden text-2xl text-secondary dark:text-white focus:outline-none hover:text-primary transition-colors duration-300">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
-
-    <div class="flex h-[calc(100vh-64px)] overflow-hidden mt-16">
+    <div class="flex min-h-screen overflow-hidden">
 
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="w-64 bg-secondary dark:bg-gray-800 text-white fixed inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 flex flex-col border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out pt-16 md:pt-0 md:relative md:z-auto">
-            <div
-                class="h-16 flex items-center justify-center border-b border-white/10 font-serif font-bold text-xl uppercase tracking-wider">
+            class="w-64 bg-secondary dark:bg-gray-800 text-white fixed inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 flex flex-col border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out md:relative md:z-auto">
+            <a href="index.html"
+                class="h-16 flex items-center justify-center border-b border-white/10 font-serif font-bold text-xl uppercase tracking-wider hover:bg-white/10 transition group">
+                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-bold mr-2 group-hover:scale-110 transition-transform">H</div>
                 HopeBridge <span class="text-primary text-xs ml-2">Admin</span>
-            </div>
+            </a>
 
             <nav class="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
                 <!-- Category: Overview -->
@@ -1124,124 +1033,6 @@
 
                         </div>
                     </div>
-                    <!-- Global Footer -->
-                    <footer class="bg-secondary text-white pt-12 pb-8 rounded-t-[3rem] mt-0">
-                        <div class="container mx-auto px-6">
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                                <!-- Brand -->
-                                <div class="col-span-1 md:col-span-1">
-                                    <div class="flex items-center gap-2 mb-6">
-                                        <div
-                                            class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg">
-                                            H</div>
-                                        <span class="text-2xl font-serif font-bold">HopeBridge</span>
-                                    </div>
-                                    <p class="text-gray-300 mb-8 leading-loose text-sm">
-                                        We are on a mission to bring radical transparency to charity. Every
-                                        dollar you
-                                        give
-                                        is
-                                        tracked,
-                                        ensuring it changes a life.
-                                    </p>
-                                    <div class="flex space-x-4">
-                                        <a href="#"
-                                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition hover:scale-110"><i
-                                                class="fab fa-facebook-f"></i></a>
-                                        <a href="#"
-                                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition hover:scale-110"><i
-                                                class="fab fa-twitter"></i></a>
-                                        <a href="#"
-                                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition hover:scale-110"><i
-                                                class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-
-                                <!-- Links -->
-                                <div>
-                                    <h4 class="font-bold text-lg mb-8 relative inline-block">About Us <span
-                                            class="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
-                                    </h4>
-                                    <ul class="space-y-4 text-gray-400 text-sm">
-                                        <li><a href="about.html"
-                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
-                                                    class="fas fa-chevron-right text-xs text-primary"></i>
-                                                Mission &
-                                                Vision</a></li>
-                                        <li><a href="about.html#transparency"
-                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
-                                                    class="fas fa-chevron-right text-xs text-primary"></i>
-                                                Financial
-                                                Reports</a>
-                                        </li>
-                                        <li><a href="#"
-                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
-                                                    class="fas fa-chevron-right text-xs text-primary"></i> Our
-                                                Team</a>
-                                        </li>
-                                        <li><a href="#"
-                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
-                                                    class="fas fa-chevron-right text-xs text-primary"></i>
-                                                Careers</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <!-- Links -->
-                                <div>
-                                    <h4 class="font-bold text-lg mb-8 relative inline-block">Get Involved <span
-                                            class="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
-                                    </h4>
-                                    <ul class="space-y-4 text-gray-400 text-sm">
-
-                                        <li><a href="volunteer.html"
-                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
-                                                    class="fas fa-chevron-right text-xs text-primary"></i>
-                                                Volunteer</a>
-                                        </li>
-                                        <li><a href="#"
-                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
-                                                    class="fas fa-chevron-right text-xs text-primary"></i>
-                                                Fundraise for
-                                                Us</a></li>
-                                        <li><a href="#"
-                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
-                                                    class="fas fa-chevron-right text-xs text-primary"></i>
-                                                Corporate
-                                                Partners</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <!-- Newsletter -->
-                                <div>
-                                    <h4 class="font-bold text-lg mb-8 relative inline-block">Stay Updated <span
-                                            class="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
-                                    </h4>
-                                    <p class="text-gray-400 mb-6 text-sm">See the impact of your work in your
-                                        inbox. No
-                                        spam, just
-                                        hope.
-                                    </p>
-                                    <form class="flex flex-col gap-3">
-                                        <input type="email" placeholder="Your email address"
-                                            class="px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:bg-white/10 transition">
-                                        <button
-                                            class="bg-primary hover:bg-red-500 text-white px-5 py-3 rounded-xl font-bold transition shadow-lg">Subscribe</button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div
-                                class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-                                <p>&copy; 2026 HopeBridge International. All rights reserved.</p>
-                                <div class="flex space-x-6 mt-4 md:mt-0">
-                                    <a href="#" class="hover:text-white">Privacy Policy</a>
-                                    <a href="#" class="hover:text-white">Terms of Service</a>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
                 </div>
         </main>
     </div>
@@ -1626,38 +1417,34 @@
 
         // Sidebar Toggle Logic
         const sidebar = document.getElementById('sidebar');
-        const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
-        const navbarSidebarToggle = document.getElementById('navbar-sidebar-toggle');
+        const mobileSidebarToggle = document.getElementById('mobile-sidebar-toggle');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const menuIcon = document.getElementById('menu-icon');
 
-        // Create overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'fixed inset-0 bg-black/50 z-40 hidden md:hidden backdrop-blur-sm';
-        document.body.appendChild(overlay);
-
-        const toggleSidebar = () => {
+        function toggleSidebar() {
             sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        };
-
-        if (sidebarToggleBtn) {
-            sidebarToggleBtn.addEventListener('click', toggleSidebar);
+            if (sidebarOverlay) sidebarOverlay.classList.toggle('hidden');
+            // Toggle icon between bars and times
+            if (menuIcon) {
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    menuIcon.className = 'fas fa-bars text-xl';
+                } else {
+                    menuIcon.className = 'fas fa-times text-xl';
+                }
+            }
         }
 
-        if (navbarSidebarToggle) {
-            navbarSidebarToggle.addEventListener('click', toggleSidebar);
+        if (mobileSidebarToggle) {
+            mobileSidebarToggle.addEventListener('click', toggleSidebar);
         }
-
-        overlay.addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
-            overlay.classList.add('hidden');
-        });
 
         // Close sidebar when clicking a nav link on mobile
         sidebar.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth < 768) {
                     sidebar.classList.add('-translate-x-full');
-                    overlay.classList.add('hidden');
+                    if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
+                    if (menuIcon) menuIcon.className = 'fas fa-bars text-xl';
                 }
             });
         });

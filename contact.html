@@ -139,18 +139,18 @@
     <!-- Navigation (Same as V1) -->
     <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-premium fixed top-0 left-0 w-full z-50 transition-all duration-300 rounded-none mx-0 border-b border-white/20 dark:border-gray-700"
         id="navbar">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2 group">
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group flex-shrink-0">
                 <div
-                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    class="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
                     H
                 </div>
                 <span
-                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
+                    class="text-xl sm:text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
             </a>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center space-x-1 font-medium text-secondary dark:text-gray-200">
+            <div class="hidden lg:flex items-center space-x-1 font-medium text-secondary dark:text-gray-200">
                 <!-- Home Dropdown -->
                 <div class="nav-item group">
                     <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
@@ -187,7 +187,7 @@
             </div>
 
             <!-- CTA Buttons -->
-            <div class="hidden md:flex items-center gap-4">
+            <div class="hidden lg:flex items-center gap-4">
                 <!-- Theme Toggle -->
                 <button onclick="toggleTheme()"
                     class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
@@ -209,14 +209,14 @@
             </div>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-2xl text-secondary dark:text-white focus:outline-none">
+            <button id="mobile-menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center text-2xl text-secondary dark:text-white focus:outline-none flex-shrink-0">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
 
     <!-- Header -->
-    <header class="bg-secondary text-white py-16 sm:py-24 md:py-32 text-center relative overflow-hidden">
+    <header class="bg-secondary text-white pt-20 sm:pt-24 pb-16 sm:pb-24 md:pb-32 text-center relative overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
             <img src="assets/smile.webp" alt="Volunteers united" class="w-full h-full object-cover">

@@ -61,14 +61,19 @@
         }
 
         function toggleTheme() {
+            const themeIcon = document.getElementById('theme-icon');
+            const desktopThemeIcon = document.getElementById('desktop-theme-icon');
+            
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
                 localStorage.theme = 'light';
-                document.getElementById('theme-icon').className = 'fas fa-moon';
+                if (themeIcon) themeIcon.className = 'fas fa-moon';
+                if (desktopThemeIcon) desktopThemeIcon.className = 'fas fa-moon';
             } else {
                 document.documentElement.classList.add('dark');
                 localStorage.theme = 'dark';
-                document.getElementById('theme-icon').className = 'fas fa-sun';
+                if (themeIcon) themeIcon.className = 'fas fa-sun';
+                if (desktopThemeIcon) desktopThemeIcon.className = 'fas fa-sun';
             }
         }
 
@@ -88,7 +93,9 @@
         window.onload = function () {
             if (document.documentElement.classList.contains('dark')) {
                 const icon = document.getElementById('theme-icon');
+                const desktopIcon = document.getElementById('desktop-theme-icon');
                 if (icon) icon.className = 'fas fa-sun';
+                if (desktopIcon) desktopIcon.className = 'fas fa-sun';
             }
         };
     </script>
@@ -96,14 +103,31 @@
 
 <body class="bg-bg text-gray-800 font-sans transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
 
-    <!-- Mobile Menu Toggle Button -->
-    <button id="mobile-sidebar-toggle" 
-        class="lg:hidden fixed top-4 left-4 z-[60] w-12 h-12 bg-secondary text-white rounded-xl shadow-lg flex items-center justify-center hover:bg-secondary/90 transition-all">
-        <i class="fas fa-bars text-xl" id="menu-icon"></i>
-    </button>
+    <!-- Mobile Top Bar -->
+    <div class="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm px-4 py-3 flex items-center justify-between shadow-lg border-b border-gray-100 dark:border-gray-700">
+        <!-- Menu Toggle -->
+        <button id="mobile-sidebar-toggle" 
+            class="w-10 h-10 bg-secondary text-white rounded-lg flex items-center justify-center hover:bg-secondary/90 transition-all">
+            <i class="fas fa-bars text-lg" id="menu-icon"></i>
+        </button>
+        
+        <!-- Title with RTL Toggle -->
+        <div class="flex items-center gap-3">
+            <span class="text-secondary dark:text-white font-serif font-bold text-lg">Dashboard</span>
+            <button onclick="toggleRTL()"
+                class="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition text-secondary dark:text-white">
+                <i class="fas fa-globe text-sm"></i>
+            </button>
+        </div>
+        
+        <!-- User Avatar -->
+        <div class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center overflow-hidden">
+            <img src="assets/avatar-1.jpg" class="w-full h-full object-cover" alt="User">
+        </div>
+    </div>
 
     <!-- Mobile Overlay -->
-    <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-black/50 z-40 hidden"></div>
+    <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-black/50 z-40 hidden mt-14"></div>
 
     <!-- Sidebar Layout Container -->
     <div class="flex min-h-screen">
@@ -151,10 +175,22 @@
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 lg:ml-72 px-4 sm:px-6 pb-12 w-full max-w-7xl mx-auto">
+        <main class="flex-1 lg:ml-72 px-4 sm:px-6 pb-12 w-full max-w-7xl mx-auto pt-16 lg:pt-0">
+
+            <!-- Desktop Theme & RTL Toggles -->
+            <div class="hidden lg:flex items-center justify-end gap-3 py-4">
+                <button onclick="toggleTheme()"
+                    class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition text-secondary dark:text-white">
+                    <i class="fas fa-moon" id="desktop-theme-icon"></i>
+                </button>
+                <button onclick="toggleRTL()"
+                    class="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition text-secondary dark:text-white">
+                    <i class="fas fa-globe"></i>
+                </button>
+            </div>
 
             <!-- Large Welcome Message -->
-            <div class="mb-6 sm:mb-10 animate-fadeInUp">
+            <div class="mb-6 sm:mb-10 animate-fadeInUp lg:-mt-6">
                 <span class="text-primary font-bold uppercase tracking-wider text-xs sm:text-sm block mb-2">User</span>
                 <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-serif font-bold text-secondary mb-2 sm:mb-3 leading-tight">
                     Welcome back, <span class="text-primary">Alex!</span>

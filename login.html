@@ -37,6 +37,18 @@
         <span class="text-xl sm:text-2xl font-serif font-bold text-white tracking-tight">HopeBridge</span>
     </a>
 
+    <!-- Theme & RTL Toggles -->
+    <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center gap-2">
+        <button onclick="toggleTheme()"
+            class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition text-white border border-white/20">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <button onclick="toggleRTL()"
+            class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition text-white border border-white/20">
+            <i class="fas fa-globe"></i>
+        </button>
+    </div>
+
     <!-- Abstract Background -->
     <div class="absolute inset-0 z-0 overflow-hidden">
         <!-- Colorful Gradients -->
@@ -121,6 +133,36 @@
     </div>
 
     <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // RTL Toggle
+        function toggleRTL() {
+            const html = document.documentElement;
+            const isRTL = html.getAttribute('dir') === 'rtl';
+            html.setAttribute('dir', isRTL ? 'ltr' : 'rtl');
+            localStorage.setItem('dir', isRTL ? 'ltr' : 'rtl');
+        }
+
+        // Init on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            }
+        });
+
         document.addEventListener('mousemove', (e) => {
             const card = document.getElementById('glass-card');
             const blobs = document.querySelectorAll('.rounded-full.mix-blend-screen');

@@ -147,18 +147,18 @@
     <!-- Navigation (Same as V1) -->
     <nav class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-premium fixed top-0 left-0 w-full z-50 transition-all duration-500 rounded-none mx-0 border-b border-white/30 dark:border-gray-700/50"
         id="navbar">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-3 group">
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
                 <div
-                    class="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center text-white text-xl font-bold shadow-glow group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                    class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary to-primary-dark rounded-xl sm:rounded-2xl flex items-center justify-center text-white text-lg sm:text-xl font-bold shadow-glow group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
                     H
                 </div>
                 <span
-                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight group-hover:text-primary transition-colors duration-300">HopeBridge</span>
+                    class="text-xl sm:text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight group-hover:text-primary transition-colors duration-300">HopeBridge</span>
             </a>
 
             <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-x-1 font-medium text-secondary dark:text-gray-200">
+            <div class="hidden lg:flex items-center gap-x-1 font-medium text-secondary dark:text-gray-200">
                 <!-- Home Dropdown -->
                 <div class="nav-item group">
                     <button
@@ -207,7 +207,7 @@
             </div>
 
             <!-- CTA Buttons -->
-            <div class="hidden md:flex items-center gap-4">
+            <div class="hidden lg:flex items-center gap-4">
                 <!-- Theme Toggle -->
                 <button onclick="toggleTheme()"
                     class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition-all duration-300 focus:outline-none text-secondary dark:text-white hover:scale-110 hover:rotate-12">
@@ -230,7 +230,7 @@
 
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-btn"
-                class="md:hidden text-2xl text-secondary dark:text-white focus:outline-none hover:text-primary transition-colors duration-300">
+                class="lg:hidden w-10 h-10 flex items-center justify-center text-2xl text-secondary dark:text-white focus:outline-none hover:text-primary transition-colors duration-300 flex-shrink-0">
                 <i class="fas fa-bars"></i>
             </button>
         </div>

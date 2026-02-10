@@ -26,7 +26,19 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-bg text-gray-800">
+<body class="bg-bg text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Fixed Top Toolbar -->
+    <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <button onclick="toggleTheme()"
+            class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl flex items-center justify-center transition text-secondary dark:text-white border border-gray-200 dark:border-gray-700">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <button onclick="toggleRTL()"
+            class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl flex items-center justify-center transition text-secondary dark:text-white border border-gray-200 dark:border-gray-700">
+            <i class="fas fa-globe"></i>
+        </button>
+    </div>
 
     <!-- Section 1: Hero & 404 Message -->
     <section class="min-h-screen flex items-center justify-center p-6 bg-cover bg-center relative overflow-hidden"
@@ -107,6 +119,42 @@
                 not lost.</p>
         </div>
     </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // RTL Toggle
+        function toggleRTL() {
+            const html = document.documentElement;
+            const isRTL = html.getAttribute('dir') === 'rtl';
+            html.setAttribute('dir', isRTL ? 'ltr' : 'rtl');
+            localStorage.setItem('dir', isRTL ? 'ltr' : 'rtl');
+        }
+
+        // Init on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon')?.classList.replace('fa-moon', 'fa-sun');
+            }
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            }
+        });
+    </script>
 </body>
 
 </html>

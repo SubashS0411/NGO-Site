@@ -26,7 +26,19 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-secondary text-white font-sans">
+<body class="bg-secondary text-white font-sans dark:bg-gray-900 transition-colors duration-300">
+
+    <!-- Fixed Top Toolbar -->
+    <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <button onclick="toggleTheme()"
+            class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition text-white border border-white/20">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <button onclick="toggleRTL()"
+            class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition text-white border border-white/20">
+            <i class="fas fa-globe"></i>
+        </button>
+    </div>
 
     <!-- Section 1: Hero & Countdown -->
     <section class="min-h-screen flex items-center justify-center p-4 sm:p-6 overflow-hidden relative">
@@ -125,6 +137,29 @@
     </footer>
 
     <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // RTL Toggle
+        function toggleRTL() {
+            const html = document.documentElement;
+            const isRTL = html.getAttribute('dir') === 'rtl';
+            html.setAttribute('dir', isRTL ? 'ltr' : 'rtl');
+            localStorage.setItem('dir', isRTL ? 'ltr' : 'rtl');
+        }
+
         // Simple countdown logic
         function updateCountdown() {
             const target = new Date();
@@ -146,6 +181,17 @@
             }, 1000);
         }
         updateCountdown();
+
+        // Init on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon')?.classList.replace('fa-moon', 'fa-sun');
+            }
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            }
+        });
     </script>
 </body>
 

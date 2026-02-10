@@ -4,24 +4,27 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===============================
      Premium Page Loader
      =============================== */
-  // Initialize Lenis Smooth Scroll
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    mouseMultiplier: 1,
-    smoothTouch: false,
-    touchMultiplier: 2,
-  });
+  // Initialize Lenis Smooth Scroll (if available)
+  let lenis = null;
+  if (typeof Lenis !== 'undefined') {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+    });
 
-  function raf(time) {
-    lenis.raf(time);
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
     requestAnimationFrame(raf);
   }
-
-  requestAnimationFrame(raf);
 
   const createPageLoader = () => {
     const loader = document.createElement('div');
@@ -127,29 +130,31 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ===============================
      Advanced Scroll Motion (Skew & Velocity)
      =============================== */
-  // Use Lenis velocity to skew elements
-  function updateScrollSkew(time) {
-    const velocity = lenis.velocity;
-    const skewAmount = velocity * 0.05; // Adjust sensitivity
+  // Use Lenis velocity to skew elements (if Lenis is available)
+  if (lenis) {
+    function updateScrollSkew(time) {
+      const velocity = lenis.velocity;
+      const skewAmount = velocity * 0.05; // Adjust sensitivity
 
-    // Apply skew to images or specific sections
-    const skewElements = document.querySelectorAll('.skew-on-scroll');
-    skewElements.forEach(el => {
-      el.style.transform = `skewY(${Math.max(Math.min(skewAmount, 5), -5)}deg) scale(1.02)`; // Clamp skew
-      el.style.transition = 'transform 0.1s ease-out';
-    });
+      // Apply skew to images or specific sections
+      const skewElements = document.querySelectorAll('.skew-on-scroll');
+      skewElements.forEach(el => {
+        el.style.transform = `skewY(${Math.max(Math.min(skewAmount, 5), -5)}deg) scale(1.02)`; // Clamp skew
+        el.style.transition = 'transform 0.1s ease-out';
+      });
 
-    // Parallax for marked elements
-    const parallaxElements = document.querySelectorAll('[data-speed]');
-    parallaxElements.forEach(el => {
-      const speed = parseFloat(el.getAttribute('data-speed'));
-      const yPos = -(window.scrollY * speed);
-      el.style.transform = `translateY(${yPos}px)`;
-    });
+      // Parallax for marked elements
+      const parallaxElements = document.querySelectorAll('[data-speed]');
+      parallaxElements.forEach(el => {
+        const speed = parseFloat(el.getAttribute('data-speed'));
+        const yPos = -(window.scrollY * speed);
+        el.style.transform = `translateY(${yPos}px)`;
+      });
+    }
+
+    // Hook into Lenis raf
+    lenis.on('scroll', updateScrollSkew);
   }
-
-  // Hook into Lenis raf
-  lenis.on('scroll', updateScrollSkew);
 
   /* ===============================
      Mobile Menu with Premium Animation

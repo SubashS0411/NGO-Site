@@ -54,10 +54,8 @@
         // Check for saved direction preference
         if (localStorage.dir === 'rtl') {
             document.documentElement.setAttribute('dir', 'rtl');
-            document.body.classList.add('rtl');
         } else {
             document.documentElement.setAttribute('dir', 'ltr');
-            document.body.classList.remove('rtl');
         }
 
         function toggleTheme() {

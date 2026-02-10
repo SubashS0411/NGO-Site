@@ -38,10 +38,8 @@
         // Check for saved direction preference
         if (localStorage.dir === 'rtl') {
             document.documentElement.setAttribute('dir', 'rtl');
-            document.body.classList.add('rtl');
         } else {
             document.documentElement.setAttribute('dir', 'ltr');
-            document.body.classList.remove('rtl');
         }
 
         function toggleTheme() {
@@ -99,7 +97,7 @@
 <body class="bg-bg text-gray-800 font-sans transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
 
     <!-- Mobile Top Bar -->
-    <div class="md:hidden fixed top-0 left-0 right-0 z-[60] bg-secondary/95 backdrop-blur-sm px-4 py-3 flex items-center justify-between shadow-lg">
+    <div class="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-secondary/95 backdrop-blur-sm px-4 py-3 flex items-center justify-between shadow-lg">
         <!-- Menu Toggle -->
         <button id="mobile-sidebar-toggle" 
             class="w-10 h-10 bg-white/10 text-white rounded-lg flex items-center justify-center hover:bg-white/20 transition-all">
@@ -122,13 +120,13 @@
     </div>
 
     <!-- Mobile Overlay -->
-    <div id="sidebar-overlay" class="md:hidden fixed inset-0 bg-black/50 z-40 hidden mt-14" onclick="toggleSidebar()"></div>
+    <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-black/50 z-40 hidden mt-14" onclick="toggleSidebar()"></div>
 
     <div class="flex min-h-screen overflow-hidden">
 
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="w-64 bg-secondary dark:bg-gray-800 text-white fixed inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 flex flex-col border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out md:relative md:z-auto">
+            class="w-64 bg-secondary dark:bg-gray-800 text-white fixed inset-y-0 left-0 z-50 transform -translate-x-full lg:translate-x-0 flex flex-col border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out lg:relative lg:z-auto">
             <a href="index.html"
                 class="h-16 flex items-center justify-center border-b border-white/10 font-serif font-bold text-xl uppercase tracking-wider hover:bg-white/10 transition group">
                 <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-bold mr-2 group-hover:scale-110 transition-transform">H</div>

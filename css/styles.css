@@ -1761,6 +1761,94 @@ input[type=range]:focus {
   }
 }
 
+/* Extra small mobile devices (376px and below) */
+@media (max-width: 376px) {
+  h1 {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: 1.25rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Container padding */
+  .container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  /* Fix stats counter size for tiny screens */
+  .counter {
+    font-size: 2rem !important;
+  }
+
+  /* Reduce card padding */
+  .p-10, .p-8, .p-6 {
+    padding: 1rem;
+  }
+
+  /* Back-to-top button adjustment */
+  #back-to-top {
+    bottom: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  /* Hero section adjustments */
+  header.min-h-\[600px\] {
+    min-height: 450px;
+  }
+
+  /* Decorative blob overflow prevention */
+  .w-72, .w-96 {
+    max-width: 200px;
+  }
+  .h-72, .h-96 {
+    max-height: 200px;
+  }
+
+  /* Improve text readability */
+  .text-xl {
+    font-size: 1rem !important;
+  }
+
+  .text-2xl {
+    font-size: 1.125rem !important;
+  }
+
+  /* Button adjustments */
+  .px-12 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .py-5 {
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+  }
+
+  /* Timeline adjustments */
+  .timeline-content {
+    max-width: 100% !important;
+  }
+
+  /* Gap adjustments */
+  .gap-10 {
+    gap: 1.5rem;
+  }
+
+  .gap-6 {
+    gap: 1rem;
+  }
+}
+
 /* Tablet adjustments */
 @media (min-width: 768px) and (max-width: 1024px) {
   .container {

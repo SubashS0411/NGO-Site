@@ -117,9 +117,9 @@
 
     <!-- Decorative Background Elements -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div class="absolute top-20 start-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute top-1/2 end-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float-slow"></div>
-        <div class="absolute bottom-20 start-1/3 w-64 h-64 bg-secondary/5 rounded-full blur-3xl animate-float"
+        <div class="absolute top-20 start-10 w-48 sm:w-64 md:w-72 h-48 sm:h-64 md:h-72 bg-primary/5 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute top-1/2 end-10 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 bg-accent/5 rounded-full blur-3xl animate-float-slow"></div>
+        <div class="absolute bottom-20 start-1/3 w-48 sm:w-56 md:w-64 h-48 sm:h-56 md:h-64 bg-secondary/5 rounded-full blur-3xl animate-float"
             style="animation-delay: -3s;"></div>
     </div>
 
@@ -237,7 +237,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+    <header class="relative h-[90vh] min-h-[450px] sm:min-h-[500px] md:min-h-[600px] flex items-center justify-center overflow-hidden">
         <!-- Background Image with Ken Burns Effect -->
         <div class="absolute inset-0 z-0">
             <img src="assets/hero-v1.jpg" alt="Hope background"
@@ -267,16 +267,16 @@
                 data-aos="fade-down" data-aos-delay="100">
                 <i class="fas fa-shield-alt me-2 text-accent"></i>Transparency First
             </span>
-            <h1 class="text-4xl md:text-7xl lg:text-8xl font-serif font-black leading-[1.05] mb-8 drop-shadow-2xl"
+            <h1 class="text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-black leading-[1.1] sm:leading-[1.05] mb-6 sm:mb-8 drop-shadow-2xl"
                 data-aos="fade-up" data-aos-delay="200">
                 Turn Compassion <br> Into <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary relative inline-block group cursor-default animate-gradient bg-[length:200%_auto]">Action
-                    <svg class="absolute w-full h-5 -bottom-3 start-0 text-primary opacity-80 transform group-hover:scale-x-110 transition-transform duration-500"
+                    <svg class="absolute w-full h-3 sm:h-5 -bottom-2 sm:-bottom-3 start-0 text-primary opacity-80 transform group-hover:scale-x-110 transition-transform duration-500"
                         viewBox="0 0 100 10" preserveAspectRatio="none">
                         <path d="M0 5 Q 25 0 50 5 Q 75 10 100 5 L 100 10 L 0 10 Z" fill="currentColor" />
                     </svg></span>
             </h1>
-            <p class="text-xl md:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto drop-shadow-md leading-relaxed"
+            <p class="text-base sm:text-xl md:text-2xl text-gray-200 mb-8 sm:mb-12 max-w-2xl mx-auto drop-shadow-md leading-relaxed px-2 sm:px-0"
                 data-aos="fade-up" data-aos-delay="300">
                 Join a community of changemakers. <strong class="text-white font-black">100%</strong> of public
                 donations fund
@@ -308,14 +308,6 @@
             </div>
         </div>
 
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 start-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
-            <span class="text-white/50 text-xs uppercase tracking-widest">Scroll</span>
-            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-2">
-                <div class="w-1.5 h-3 bg-white/80 rounded-full animate-bounce"></div>
-            </div>
-        </div>
-
 
     </header>
 
@@ -330,27 +322,27 @@
         <div class="container mx-auto px-6 relative">
             <div
                 class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center divide-y md:divide-y-0 md:divide-x divide-gray-100">
-                <div class="p-8 group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-secondary to-secondary-light mb-4 counter drop-shadow-sm group-hover:scale-110 transition-all duration-500"
+                <div class="p-4 sm:p-6 md:p-8 group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-secondary to-secondary-light mb-2 sm:mb-4 counter drop-shadow-sm group-hover:scale-110 transition-all duration-500"
                         data-target="12500">0
                     </div>
                     <p
-                        class="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm group-hover:text-primary transition-colors duration-300">
+                        class="text-gray-500 font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm group-hover:text-primary transition-colors duration-300">
                         Lives Changed</p>
                 </div>
-                <div class="p-8 group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-light mb-4 counter drop-shadow-sm group-hover:scale-110 transition-all duration-500"
+                <div class="p-4 sm:p-6 md:p-8 group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-light mb-2 sm:mb-4 counter drop-shadow-sm group-hover:scale-110 transition-all duration-500"
                         data-target="450">0</div>
                     <p
-                        class="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm group-hover:text-secondary transition-colors duration-300">
+                        class="text-gray-500 font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm group-hover:text-secondary transition-colors duration-300">
                         Projects Built</p>
                 </div>
-                <div class="p-8 group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-secondary to-secondary-light mb-4 counter drop-shadow-sm group-hover:scale-110 transition-all duration-500"
+                <div class="p-4 sm:p-6 md:p-8 group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-secondary to-secondary-light mb-2 sm:mb-4 counter drop-shadow-sm group-hover:scale-110 transition-all duration-500"
                         data-target="3200">0
                     </div>
                     <p
-                        class="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm group-hover:text-primary transition-colors duration-300">
+                        class="text-gray-500 font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-xs sm:text-sm group-hover:text-primary transition-colors duration-300">
                         Volunteers Mobilized</p>
                 </div>
             </div>
@@ -413,63 +405,63 @@
     </section>
 
     <!-- Section 2: Success Spotlight -->
-    <section class="py-28 bg-gradient-to-br from-bg via-white to-bg-cream overflow-hidden">
-        <div class="container mx-auto px-6">
-            <div class="bg-white rounded-[4rem] shadow-premium-lg overflow-hidden flex flex-col lg:flex-row items-center transition-all duration-700 hover:shadow-2xl border border-gray-100/50"
+    <section class="py-12 sm:py-20 md:py-28 bg-gradient-to-br from-bg via-white to-bg-cream overflow-hidden">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="bg-white rounded-2xl sm:rounded-3xl md:rounded-[4rem] shadow-premium-lg overflow-hidden flex flex-col lg:flex-row items-center transition-all duration-700 hover:shadow-2xl border border-gray-100/50"
                 data-aos="fade-up">
-                <div class="lg:w-1/2 relative h-[600px] w-full group overflow-hidden img-zoom">
+                <div class="lg:w-1/2 relative h-[280px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full group overflow-hidden img-zoom">
                     <img src="assets/success-story.jpg" alt="Success Story"
                         class="w-full h-full object-cover transition duration-1000">
                     <div class="absolute inset-0 bg-gradient-to-r from-secondary/70 via-secondary/30 to-transparent">
                     </div>
                     <!-- Stats Overlay -->
-                    <div class="absolute bottom-10 start-10 text-white z-20" data-aos="fade-right" data-aos-delay="300">
-                        <div class="flex items-center gap-4 mb-2">
-                            <i class="fas fa-quote-left text-primary text-3xl animate-pulse-glow"></i>
+                    <div class="absolute bottom-4 sm:bottom-6 md:bottom-10 start-4 sm:start-6 md:start-10 text-white z-20" data-aos="fade-right" data-aos-delay="300">
+                        <div class="flex items-center gap-2 sm:gap-4 mb-2">
+                            <i class="fas fa-quote-left text-primary text-xl sm:text-2xl md:text-3xl animate-pulse-glow"></i>
                             <span
-                                class="font-bold tracking-[0.2em] uppercase text-xs bg-white/10 backdrop-blur-md px-4 py-2 rounded-full">Maria's
+                                class="font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[10px] sm:text-xs bg-white/10 backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">Maria's
                                 Journey</span>
                         </div>
                     </div>
                     <!-- Floating Badge -->
                     <div
-                        class="absolute top-10 end-10 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg animate-float">
-                        <div class="text-3xl font-black text-primary">100%</div>
-                        <div class="text-xs text-gray-500 font-bold uppercase">Success</div>
+                        class="absolute top-4 sm:top-6 md:top-10 end-4 sm:end-6 md:end-10 bg-white/90 backdrop-blur-md p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl shadow-lg animate-float">
+                        <div class="text-xl sm:text-2xl md:text-3xl font-black text-primary">100%</div>
+                        <div class="text-[10px] sm:text-xs text-gray-500 font-bold uppercase">Success</div>
                     </div>
                 </div>
-                <div class="lg:w-1/2 p-12 lg:p-20" data-aos="fade-left" data-aos-delay="200">
+                <div class="lg:w-1/2 p-6 sm:p-8 md:p-12 lg:p-20" data-aos="fade-left" data-aos-delay="200">
                     <span
-                        class="bg-gradient-to-r from-primary/20 to-primary/5 text-primary text-xs font-bold px-6 py-3 rounded-full uppercase tracking-[0.2em] mb-8 inline-block border border-primary/10">Success
+                        class="bg-gradient-to-r from-primary/20 to-primary/5 text-primary text-[10px] sm:text-xs font-bold px-4 sm:px-6 py-2 sm:py-3 rounded-full uppercase tracking-[0.15em] sm:tracking-[0.2em] mb-4 sm:mb-6 md:mb-8 inline-block border border-primary/10">Success
                         Spotlight</span>
                     <h2
-                        class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-secondary mb-8 italic leading-[1.1]">
+                        class="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-secondary mb-4 sm:mb-6 md:mb-8 italic leading-[1.15] sm:leading-[1.1]">
                         "HopeBridge didn't just give me water; they gave me a <span
                             class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">future</span>."
                     </h2>
-                    <p class="text-gray-600 text-xl mb-10 leading-relaxed opacity-80">Meet Maria. Two years ago, she
+                    <p class="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 md:mb-10 leading-relaxed opacity-80">Meet Maria. Two years ago, she
                         spent 6 hours
                         daily fetching water. Today, she runs a small greenhouse, her children are in school, and she's
                         a leader in her village's water committee.</p>
-                    <div class="flex items-center gap-10 mb-12">
+                    <div class="flex items-center gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8 md:mb-12">
                         <div
-                            class="group cursor-default p-4 rounded-2xl hover:bg-primary/5 transition-all duration-300">
+                            class="group cursor-default p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl hover:bg-primary/5 transition-all duration-300">
                             <span
-                                class="block text-5xl font-black text-primary group-hover:scale-110 transition-transform duration-300">2.4k+</span>
-                            <span class="text-[11px] text-gray-400 uppercase font-black tracking-[0.1em]">Liters
+                                class="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary group-hover:scale-110 transition-transform duration-300">2.4k+</span>
+                            <span class="text-[9px] sm:text-[10px] md:text-[11px] text-gray-400 uppercase font-black tracking-[0.1em]">Liters
                                 Daily</span>
                         </div>
-                        <div class="w-px h-16 bg-gradient-to-b from-transparent via-gray-200 to-transparent"></div>
+                        <div class="w-px h-10 sm:h-12 md:h-16 bg-gradient-to-b from-transparent via-gray-200 to-transparent"></div>
                         <div
-                            class="group cursor-default p-4 rounded-2xl hover:bg-secondary/5 transition-all duration-300">
+                            class="group cursor-default p-2 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl hover:bg-secondary/5 transition-all duration-300">
                             <span
-                                class="block text-5xl font-black text-secondary group-hover:scale-110 transition-transform duration-300">100%</span>
-                            <span class="text-[11px] text-gray-400 uppercase font-black tracking-[0.1em]">Success
+                                class="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-secondary group-hover:scale-110 transition-transform duration-300">100%</span>
+                            <span class="text-[9px] sm:text-[10px] md:text-[11px] text-gray-400 uppercase font-black tracking-[0.1em]">Success
                                 Rate</span>
                         </div>
                     </div>
                     <a href="cause-details.html"
-                        class="inline-flex items-center gap-4 text-secondary text-lg font-bold hover:text-primary transition-all duration-300 group bg-secondary/5 hover:bg-primary/10 px-8 py-4 rounded-2xl">
+                        class="inline-flex items-center gap-2 sm:gap-3 md:gap-4 text-secondary text-sm sm:text-base md:text-lg font-bold hover:text-primary transition-all duration-300 group bg-secondary/5 hover:bg-primary/10 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl">
                         Read Maria's Full Story <i
                             class="fas fa-arrow-right group-hover:translate-x-3 transition-transform duration-300"></i>
                     </a>
@@ -2083,8 +2075,8 @@
 
         <!-- Back to Top Button -->
         <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-            class="fixed bottom-20 end-6 z-50 w-14 h-14 bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl shadow-glow flex items-center justify-center opacity-0 invisible transition-all duration-500 hover:scale-110 hover:shadow-xl">
-            <i class="fas fa-arrow-up"></i>
+            class="fixed bottom-6 end-4 sm:bottom-10 sm:end-6 md:bottom-20 md:end-6 z-50 w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-primary to-primary-dark text-white rounded-xl sm:rounded-2xl shadow-glow flex items-center justify-center opacity-0 invisible transition-all duration-500 hover:scale-110 hover:shadow-xl">
+            <i class="fas fa-arrow-up text-sm sm:text-base"></i>
         </button>
 
         <script>

@@ -1,0 +1,2105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HopeBridge - Turn Compassion into Action</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B', // Coral Orange
+                        'primary-dark': '#E85555',
+                        'primary-light': '#FF8A8A',
+                        secondary: '#0F4C5C', // Deep Ocean Teal
+                        'secondary-dark': '#0A3540',
+                        'secondary-light': '#1A6B7F',
+                        accent: '#FFD166',
+                        'accent-dark': '#E6BC5C',
+                        bg: '#FAFAFA', // Warm White
+                        'bg-cream': '#FFF9F5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 25px 80px -12px rgba(0, 0, 0, 0.15)',
+                        'premium-lg': '0 50px 100px -20px rgba(0, 0, 0, 0.18)',
+                        'glow': '0 0 40px rgba(255, 107, 107, 0.4)',
+                        'glow-accent': '0 0 40px rgba(255, 209, 102, 0.4)',
+                        'inner-glow': 'inset 0 0 30px rgba(255, 107, 107, 0.2)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-slow': 'floatSlow 8s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'gradient': 'gradientShift 3s ease infinite',
+                        'morph': 'morphBlob 8s ease-in-out infinite',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                        'mesh-gradient': 'radial-gradient(at 40% 20%, rgba(255, 107, 107, 0.1) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(15, 76, 92, 0.08) 0px, transparent 50%), radial-gradient(at 0% 50%, rgba(255, 209, 102, 0.08) 0px, transparent 50%)',
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Check for saved direction preference
+        if (localStorage.dir === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        function toggleRTL() {
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('rtl');
+                localStorage.dir = 'ltr';
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('rtl');
+                localStorage.dir = 'rtl';
+            }
+        }
+
+        // Initialize icon state on load
+        window.onload = function () {
+            if (document.documentElement.classList.contains('dark')) {
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 50,
+            });
+        };
+    </script>
+</head>
+
+<body
+    class="bg-gradient-premium text-gray-800 transition-colors duration-500 dark:bg-gray-900 dark:text-gray-100 page-transition">
+
+    <!-- Decorative Background Elements -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="absolute top-20 start-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute top-1/2 end-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl animate-float-slow"></div>
+        <div class="absolute bottom-20 start-1/3 w-64 h-64 bg-secondary/5 rounded-full blur-3xl animate-float"
+            style="animation-delay: -3s;"></div>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div id="emergency-banner"
+        class="bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white text-sm py-3 px-4 flex justify-between items-center relative z-50 shadow-lg overflow-hidden">
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 animate-[shimmer_3s_infinite]">
+        </div>
+        <div class="container mx-auto flex items-center justify-center relative">
+            <span class="font-bold me-2 flex items-center gap-2"><i
+                    class="fas fa-exclamation-triangle animate-pulse"></i> URGENT:</span>
+            <span>Floods in South Asia: 50,000 families need shelter.</span>
+            <a href="cause-details.html"
+                class="ms-4 underline hover:text-accent font-bold transition-colors duration-300 flex items-center gap-1">Help
+                Now <i class="fas fa-arrow-right text-xs"></i></a>
+        </div>
+        <button onclick="document.getElementById('emergency-banner').style.display='none'"
+            class="absolute end-4 focus:outline-none opacity-80 hover:opacity-100 hover:rotate-90 transition-all duration-300">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <!-- Navigation (Same as V1) -->
+    <nav class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-premium fixed top-0 left-0 w-full z-50 transition-all duration-500 rounded-none mx-0 border-b border-white/30 dark:border-gray-700/50"
+        id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div
+                    class="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center text-white text-xl font-bold shadow-glow group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                    H
+                </div>
+                <span
+                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight group-hover:text-primary transition-colors duration-300">HopeBridge</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-x-1 font-medium text-secondary dark:text-gray-200">
+                <!-- Home Dropdown -->
+                <div class="nav-item group">
+                    <button
+                        class="px-4 py-2 hover:text-primary transition-all duration-300 flex items-center gap-1 rounded-xl hover:bg-primary/5">
+                        Home <i
+                            class="fas fa-chevron-down text-xs opacity-50 group-hover:rotate-180 transition-transform duration-300"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="index.html"
+                            class="dropdown-item dark:text-gray-200 hover:bg-gray-50 hover:text-primary dark:hover:bg-gray-700 dark:hover:text-white transition-colors">
+                            <i class="fas fa-home me-2 text-primary"></i> Home Version 1
+                        </a>
+                        <a href="index2.html"
+                            class="dropdown-item dark:text-gray-200 hover:bg-gray-50 hover:text-primary dark:hover:bg-gray-700 dark:hover:text-white transition-colors">
+                            <i class="fas fa-layer-group me-2 text-primary"></i> Home Version 2
+                        </a>
+                    </div>
+                </div>
+
+                <a href="causes-grid.html"
+                    class="px-4 py-2 hover:text-primary transition-all duration-300 rounded-xl hover:bg-primary/5">Causes</a>
+                <a href="about.html"
+                    class="px-4 py-2 hover:text-primary transition-all duration-300 rounded-xl hover:bg-primary/5">About
+                    Us</a>
+                <a href="contact.html"
+                    class="px-4 py-2 hover:text-primary transition-all duration-300 rounded-xl hover:bg-primary/5">Contact</a>
+
+                <!-- Dashboard Dropdown -->
+                <div class="nav-item group">
+                    <button
+                        class="px-4 py-2 hover:text-primary transition-all duration-300 flex items-center gap-1 rounded-xl hover:bg-primary/5">
+                        Dashboards <i
+                            class="fas fa-chevron-down text-xs opacity-50 group-hover:rotate-180 transition-transform duration-300"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="admin-dashboard.html"
+                            class="dropdown-item dark:text-gray-200 hover:bg-gray-50 hover:text-primary dark:hover:bg-gray-700 dark:hover:text-white transition-colors">
+                            <i class="fas fa-tachometer-alt me-2 text-primary"></i> Admin Dashboard
+                        </a>
+                        <a href="donor-dashboard.html"
+                            class="dropdown-item dark:text-gray-200 hover:bg-gray-50 hover:text-primary dark:hover:bg-gray-700 dark:hover:text-white transition-colors">
+                            <i class="fas fa-user me-2 text-primary"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hidden md:flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition-all duration-300 focus:outline-none text-secondary dark:text-white hover:scale-110 hover:rotate-12">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                <!-- RTL Toggle -->
+                <button onclick="toggleRTL()"
+                    class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition-all duration-300 focus:outline-none text-secondary dark:text-white hover:scale-110">
+                    <i class="fas fa-globe"></i>
+                </button>
+
+                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+                <a href="login.html"
+                    class="text-sm font-semibold text-secondary hover:text-primary dark:text-white transition-all duration-300 underline-animation">Log
+                    In</a>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn"
+                class="md:hidden text-2xl text-secondary dark:text-white focus:outline-none hover:text-primary transition-colors duration-300">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Ken Burns Effect -->
+        <div class="absolute inset-0 z-0">
+            <img src="assets/hero-v1.jpg" alt="Hope background"
+                class="w-full h-full object-cover scale-110 animate-[zoom-in_20s_ease-out_infinite_alternate]"
+                data-speed="0.5">
+        </div>
+
+        <!-- Animated Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-secondary/80 via-secondary/40 to-secondary/70 z-10"></div>
+
+        <!-- Animated Particles/Shapes -->
+        <div class="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 start-1/4 w-4 h-4 bg-white/20 rounded-full animate-float"
+                style="animation-delay: 0s;" data-speed="0.2"></div>
+            <div class="absolute top-1/3 end-1/4 w-6 h-6 bg-primary/30 rounded-full animate-float"
+                style="animation-delay: -2s;" data-speed="0.3"></div>
+            <div class="absolute bottom-1/3 start-1/3 w-3 h-3 bg-accent/40 rounded-full animate-float"
+                style="animation-delay: -4s;" data-speed="0.4"></div>
+            <div class="absolute top-1/2 end-1/3 w-5 h-5 bg-white/10 rounded-full animate-float-slow"
+                style="animation-delay: -1s;" data-speed="0.1"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-20 text-center text-white px-6 max-w-5xl mx-auto mt-10">
+            <span
+                class="bg-white/10 backdrop-blur-xl border border-white/30 px-6 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase mb-10 inline-block animate-fadeInDown shadow-lg"
+                data-aos="fade-down" data-aos-delay="100">
+                <i class="fas fa-shield-alt me-2 text-accent"></i>Transparency First
+            </span>
+            <h1 class="text-4xl md:text-7xl lg:text-8xl font-serif font-black leading-[1.05] mb-8 drop-shadow-2xl"
+                data-aos="fade-up" data-aos-delay="200">
+                Turn Compassion <br> Into <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary relative inline-block group cursor-default animate-gradient bg-[length:200%_auto]">Action
+                    <svg class="absolute w-full h-5 -bottom-3 start-0 text-primary opacity-80 transform group-hover:scale-x-110 transition-transform duration-500"
+                        viewBox="0 0 100 10" preserveAspectRatio="none">
+                        <path d="M0 5 Q 25 0 50 5 Q 75 10 100 5 L 100 10 L 0 10 Z" fill="currentColor" />
+                    </svg></span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-12 max-w-2xl mx-auto drop-shadow-md leading-relaxed"
+                data-aos="fade-up" data-aos-delay="300">
+                Join a community of changemakers. <strong class="text-white font-black">100%</strong> of public
+                donations fund
+                life-changing projects worldwide.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-5 justify-center" data-aos="fade-up" data-aos-delay="400">
+
+                <a href="#impact"
+                    class="bg-white/10 hover:bg-white/20 backdrop-blur-xl border-2 border-white/30 text-white text-lg px-12 py-5 rounded-2xl font-bold transition-all duration-500 flex items-center justify-center gap-3 group hover:border-white/50">
+                    See Our Impact <i
+                        class="fas fa-arrow-down group-hover:translate-y-2 transition-transform duration-300"></i>
+                </a>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="mt-16 flex flex-wrap justify-center gap-8 opacity-70" data-aos="fade-up" data-aos-delay="500">
+                <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-check-circle text-accent"></i>
+                    <span>501(c)(3) Certified</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-star text-accent"></i>
+                    <span>4.9/5 Rating</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-users text-accent"></i>
+                    <span>50k+ Donors</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 start-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
+            <span class="text-white/50 text-xs uppercase tracking-widest">Scroll</span>
+            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-2">
+                <div class="w-1.5 h-3 bg-white/80 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+
+
+    </header>
+
+    <!-- Impact Stats -->
+    <section id="impact"
+        class="py-16 bg-white relative -mt-16 z-30 rounded-t-[4rem] shadow-premium-lg mx-2 md:mx-10 border-b border-gray-100/50 overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-secondary"></div>
+        <div class="absolute -top-32 -right-32 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-32 -left-32 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto px-6 relative">
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                <div class="p-8 group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-secondary to-secondary-light mb-4 counter drop-shadow-sm group-hover:scale-110 transition-all duration-500"
+                        data-target="12500">0
+                    </div>
+                    <p
+                        class="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm group-hover:text-primary transition-colors duration-300">
+                        Lives Changed</p>
+                </div>
+                <div class="p-8 group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-light mb-4 counter drop-shadow-sm group-hover:scale-110 transition-all duration-500"
+                        data-target="450">0</div>
+                    <p
+                        class="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm group-hover:text-secondary transition-colors duration-300">
+                        Projects Built</p>
+                </div>
+                <div class="p-8 group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-secondary to-secondary-light mb-4 counter drop-shadow-sm group-hover:scale-110 transition-all duration-500"
+                        data-target="3200">0
+                    </div>
+                    <p
+                        class="text-gray-500 font-bold uppercase tracking-[0.2em] text-sm group-hover:text-primary transition-colors duration-300">
+                        Volunteers Mobilized</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Core Values -->
+    <section class="py-16 bg-white overflow-hidden relative">
+        <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
+        <div class="container mx-auto px-6 relative">
+            <div class="text-center mb-24" data-aos="fade-up">
+                <span class="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Our Foundation</span>
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-secondary mb-8 leading-tight">
+                    Built on <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Values</span></h2>
+                <div class="w-24 h-2 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="p-10 rounded-[3rem] bg-gradient-to-br from-white to-bg border border-gray-100/50 premium-card card-shine shadow-lg group"
+                    data-aos="fade-right" data-aos-delay="100" data-tilt>
+                    <div
+                        class="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-[2rem] flex items-center justify-center text-primary text-4xl mb-10 group-hover:rotate-12 group-hover:scale-110 transition-all duration-500">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3
+                        class="text-3xl font-bold text-secondary mb-6 font-serif tracking-tight group-hover:text-primary transition-colors duration-300">
+                        Radical Empathy</h3>
+                    <p class="text-gray-600 leading-relaxed text-lg">We don't just provide aid; we walk alongside
+                        communities to
+                        understand their deepest needs and aspirations.</p>
+                </div>
+                <div class="p-10 rounded-[3rem] bg-gradient-to-br from-secondary to-secondary-dark text-white premium-card card-shine shadow-xl group relative overflow-hidden"
+                    data-aos="fade-up" data-aos-delay="200" data-tilt>
+                    <div class="absolute -top-20 -right-20 w-40 h-40 bg-white/5 rounded-full blur-xl"></div>
+                    <div
+                        class="w-24 h-24 bg-white/10 rounded-[2rem] flex items-center justify-center text-accent text-4xl mb-10 group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 relative">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-6 font-serif tracking-tight text-white">Total Transparency</h3>
+                    <p class="text-blue-100 leading-relaxed text-lg opacity-90">Every cent is tracked and every outcome
+                        is shared. We
+                        believe trust is earned through open books and open hearts.</p>
+                </div>
+                <div class="p-10 rounded-[3rem] bg-gradient-to-br from-white to-bg border border-gray-100/50 premium-card card-shine shadow-lg group"
+                    data-aos="fade-left" data-aos-delay="300" data-tilt>
+                    <div
+                        class="w-24 h-24 bg-gradient-to-br from-accent/30 to-accent/5 rounded-[2rem] flex items-center justify-center text-secondary text-4xl mb-10 group-hover:rotate-12 group-hover:scale-110 transition-all duration-500">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3
+                        class="text-3xl font-bold text-secondary mb-6 font-serif tracking-tight group-hover:text-primary transition-colors duration-300">
+                        Enduring Resilience
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed text-lg">Our projects are designed for the long haul,
+                        creating
+                        sustainable systems that thrive long after we leave.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Success Spotlight -->
+    <section class="py-28 bg-gradient-to-br from-bg via-white to-bg-cream overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="bg-white rounded-[4rem] shadow-premium-lg overflow-hidden flex flex-col lg:flex-row items-center transition-all duration-700 hover:shadow-2xl border border-gray-100/50"
+                data-aos="fade-up">
+                <div class="lg:w-1/2 relative h-[600px] w-full group overflow-hidden img-zoom">
+                    <img src="assets/success-story.jpg" alt="Success Story"
+                        class="w-full h-full object-cover transition duration-1000">
+                    <div class="absolute inset-0 bg-gradient-to-r from-secondary/70 via-secondary/30 to-transparent">
+                    </div>
+                    <!-- Stats Overlay -->
+                    <div class="absolute bottom-10 start-10 text-white z-20" data-aos="fade-right" data-aos-delay="300">
+                        <div class="flex items-center gap-4 mb-2">
+                            <i class="fas fa-quote-left text-primary text-3xl animate-pulse-glow"></i>
+                            <span
+                                class="font-bold tracking-[0.2em] uppercase text-xs bg-white/10 backdrop-blur-md px-4 py-2 rounded-full">Maria's
+                                Journey</span>
+                        </div>
+                    </div>
+                    <!-- Floating Badge -->
+                    <div
+                        class="absolute top-10 end-10 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg animate-float">
+                        <div class="text-3xl font-black text-primary">100%</div>
+                        <div class="text-xs text-gray-500 font-bold uppercase">Success</div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 p-12 lg:p-20" data-aos="fade-left" data-aos-delay="200">
+                    <span
+                        class="bg-gradient-to-r from-primary/20 to-primary/5 text-primary text-xs font-bold px-6 py-3 rounded-full uppercase tracking-[0.2em] mb-8 inline-block border border-primary/10">Success
+                        Spotlight</span>
+                    <h2
+                        class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-secondary mb-8 italic leading-[1.1]">
+                        "HopeBridge didn't just give me water; they gave me a <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">future</span>."
+                    </h2>
+                    <p class="text-gray-600 text-xl mb-10 leading-relaxed opacity-80">Meet Maria. Two years ago, she
+                        spent 6 hours
+                        daily fetching water. Today, she runs a small greenhouse, her children are in school, and she's
+                        a leader in her village's water committee.</p>
+                    <div class="flex items-center gap-10 mb-12">
+                        <div
+                            class="group cursor-default p-4 rounded-2xl hover:bg-primary/5 transition-all duration-300">
+                            <span
+                                class="block text-5xl font-black text-primary group-hover:scale-110 transition-transform duration-300">2.4k+</span>
+                            <span class="text-[11px] text-gray-400 uppercase font-black tracking-[0.1em]">Liters
+                                Daily</span>
+                        </div>
+                        <div class="w-px h-16 bg-gradient-to-b from-transparent via-gray-200 to-transparent"></div>
+                        <div
+                            class="group cursor-default p-4 rounded-2xl hover:bg-secondary/5 transition-all duration-300">
+                            <span
+                                class="block text-5xl font-black text-secondary group-hover:scale-110 transition-transform duration-300">100%</span>
+                            <span class="text-[11px] text-gray-400 uppercase font-black tracking-[0.1em]">Success
+                                Rate</span>
+                        </div>
+                    </div>
+                    <a href="cause-details.html"
+                        class="inline-flex items-center gap-4 text-secondary text-lg font-bold hover:text-primary transition-all duration-300 group bg-secondary/5 hover:bg-primary/10 px-8 py-4 rounded-2xl">
+                        Read Maria's Full Story <i
+                            class="fas fa-arrow-right group-hover:translate-x-3 transition-transform duration-300"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Upcoming Events -->
+    <section class="py-16 bg-white overflow-hidden relative">
+        <div
+            class="absolute top-0 start-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(255,107,107,0.03)_0%,transparent_50%)] pointer-events-none">
+        </div>
+        <div class="container mx-auto px-6 relative">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20" data-aos="fade-up">
+                <div class="mb-8 md:mb-0">
+                    <span class="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Join Us</span>
+                    <h2 class="text-4xl md:text-6xl font-serif font-bold text-secondary tracking-tight">Events <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Calendar</span>
+                    </h2>
+                </div>
+                <a href="#"
+                    class="bg-gradient-to-r from-secondary to-secondary-dark text-white px-10 py-4 rounded-2xl font-bold hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 hover:scale-105">View
+                    All Events</a>
+            </div>
+            <div class="space-y-8">
+                <!-- Event 1 -->
+                <div class="flex flex-col md:flex-row items-center bg-gradient-to-br from-white to-bg p-8 md:p-10 rounded-[3rem] border border-gray-100/50 premium-card shadow-lg overflow-hidden group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="w-32 h-32 bg-white rounded-[2rem] shadow-lg flex flex-col items-center justify-center border border-gray-100/50 mb-8 md:mb-0 md:me-12 shrink-0 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                        <span class="text-primary font-black text-5xl leading-none mb-1">15</span>
+                        <span class="text-secondary font-black uppercase text-[10px] tracking-[0.2em]">March</span>
+                    </div>
+                    <div class="grow text-center md:text-start">
+                        <h3
+                            class="text-3xl font-bold text-secondary mb-4 group-hover:text-primary transition duration-300 font-serif">
+                            Annual Charity Gala 2026</h3>
+                        <p class="text-gray-500 text-lg flex items-center justify-center md:justify-start gap-3"><i
+                                class="fas fa-map-marker-alt text-primary"></i> Grand Ballroom, New York
+                            City & Live Stream</p>
+                    </div>
+                    <div class="mt-8 md:mt-0">
+                        <button
+                            class="bg-white text-secondary border-2 border-secondary px-10 py-4 rounded-2xl font-bold hover:bg-secondary hover:text-white transition-all duration-500 shadow-lg hover:shadow-xl transform hover:scale-105">Register
+                            Now</button>
+                    </div>
+                </div>
+                <!-- Event 2 -->
+                <div class="flex flex-col md:flex-row items-center bg-gradient-to-br from-white to-bg p-8 md:p-10 rounded-[3rem] border border-gray-100/50 premium-card shadow-lg overflow-hidden group"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="w-32 h-32 bg-white rounded-[2rem] shadow-lg flex flex-col items-center justify-center border border-gray-100/50 mb-8 md:mb-0 md:me-12 shrink-0 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                        <span class="text-primary font-black text-5xl leading-none mb-1">22</span>
+                        <span class="text-secondary font-black uppercase text-[10px] tracking-[0.2em]">April</span>
+                    </div>
+                    <div class="grow text-center md:text-start">
+                        <h3
+                            class="text-3xl font-bold text-secondary mb-4 group-hover:text-primary transition duration-300 font-serif">
+                            Earth Day Reforestation Drive</h3>
+                        <p class="text-gray-500 text-lg flex items-center justify-center md:justify-start gap-3"><i
+                                class="fas fa-map-marker-alt text-primary"></i> Multiple Locations Globally
+                        </p>
+                    </div>
+                    <div class="mt-8 md:mt-0">
+                        <button
+                            class="bg-gradient-to-r from-primary to-primary-dark text-white px-10 py-4 rounded-2xl font-bold hover:shadow-glow transition-all duration-500 shadow-lg transform hover:scale-105">Volunteer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Transparency Breakdown -->
+    <section
+        class="py-32 bg-gradient-to-br from-secondary via-secondary-dark to-[#0a3a47] text-white relative overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div
+                class="absolute top-1/4 start-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px] animate-pulse-glow">
+            </div>
+            <div class="absolute bottom-1/4 end-1/4 w-80 h-80 bg-accent/10 rounded-full blur-[100px] animate-pulse-glow"
+                style="animation-delay: 1s;"></div>
+            <div class="absolute top-0 start-0 w-full h-full"
+                style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.02&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); opacity: 0.5;">
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center mb-24" data-aos="fade-up">
+                <span
+                    class="inline-flex items-center gap-3 text-accent font-bold tracking-[0.2em] uppercase text-sm mb-6">
+                    <span class="w-12 h-px bg-gradient-to-r from-transparent to-accent"></span>
+                    Our Accountability
+                    <span class="w-12 h-px bg-gradient-to-l from-transparent to-accent"></span>
+                </span>
+                <h2 class="text-4xl md:text-7xl font-serif font-bold mb-8 leading-tight">Where Your <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient-x">Money
+                        Goes</span></h2>
+                <p class="text-blue-100 text-xl leading-relaxed opacity-90 max-w-2xl mx-auto">We operate on a 100%
+                    model. Private donors
+                    cover our overhead, so every
+                    cent of your public donation goes to the field.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="relative w-40 h-40 mx-auto mb-8 group-hover:scale-110 transition-transform duration-700">
+                        <!-- Glow Effect -->
+                        <div
+                            class="absolute inset-0 bg-primary/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_20px_rgba(255,107,107,0.3)]"
+                            viewBox="0 0 36 36">
+                            <path class="text-white/10" stroke-dasharray="100, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none" stroke="currentColor" stroke-width="2"></path>
+                            <path class="text-primary progress-ring" stroke-dasharray="75, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                style="filter: drop-shadow(0 0 8px rgba(255,107,107,0.8));"></path>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span
+                                class="text-4xl font-black bg-gradient-to-br from-white to-white/80 bg-clip-text text-transparent">75%</span>
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-2xl mb-4 tracking-tight font-serif">Programs</h4>
+                    <p class="text-blue-200/80 text-sm leading-relaxed max-w-[200px] mx-auto">Direct field
+                        implementation
+                        and project costs.</p>
+                </div>
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="relative w-40 h-40 mx-auto mb-8 group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-accent/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_20px_rgba(255,209,102,0.3)]"
+                            viewBox="0 0 36 36">
+                            <path class="text-white/10" stroke-dasharray="100, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none" stroke="currentColor" stroke-width="2"></path>
+                            <path class="text-accent progress-ring" stroke-dasharray="15, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                style="filter: drop-shadow(0 0 8px rgba(255,209,102,0.8));"></path>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span
+                                class="text-4xl font-black bg-gradient-to-br from-white to-white/80 bg-clip-text text-transparent">15%</span>
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-2xl mb-4 tracking-tight font-serif">Community</h4>
+                    <p class="text-blue-200/80 text-sm leading-relaxed max-w-[200px] mx-auto">Local empowerment and
+                        long-term training.</p>
+                </div>
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="300">
+                    <div
+                        class="relative w-40 h-40 mx-auto mb-8 group-hover:scale-110 transition-transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-blue-400/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_20px_rgba(96,165,250,0.3)]"
+                            viewBox="0 0 36 36">
+                            <path class="text-white/10" stroke-dasharray="100, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none" stroke="currentColor" stroke-width="2"></path>
+                            <path class="text-blue-400 progress-ring" stroke-dasharray="10, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                                style="filter: drop-shadow(0 0 8px rgba(96,165,250,0.8));"></path>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span
+                                class="text-4xl font-black bg-gradient-to-br from-white to-white/80 bg-clip-text text-transparent">10%</span>
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-2xl mb-4 tracking-tight font-serif">Monitoring</h4>
+                    <p class="text-blue-200/80 text-sm leading-relaxed max-w-[200px] mx-auto">Continuous evaluation and
+                        data collection.</p>
+                </div>
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="400">
+                    <div
+                        class="relative w-40 h-40 mx-auto mb-8 group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-primary/30 rounded-full blur-2xl animate-pulse-glow"></div>
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                            <path class="text-primary" stroke-dasharray="100, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none" stroke="currentColor" stroke-width="3"
+                                style="filter: drop-shadow(0 0 15px rgba(255,107,107,0.9));"></path>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-4xl font-black text-primary animate-pulse-glow">100%</span>
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-2xl mb-4 tracking-tight font-serif">Your Impact</h4>
+                    <p class="text-blue-200/80 text-sm leading-relaxed max-w-[200px] mx-auto">Zero taken for admin from
+                        public funds.</p>
+                </div>
+            </div>
+
+            <!-- Trust Badge -->
+            <div class="mt-20 flex justify-center" data-aos="fade-up" data-aos-delay="500">
+                <div
+                    class="inline-flex items-center gap-4 bg-white/5 backdrop-blur-md px-8 py-4 rounded-full border border-white/10">
+                    <i class="fas fa-shield-alt text-accent text-2xl"></i>
+                    <span class="text-white/90 font-medium">Independently Audited & Verified</span>
+                    <i class="fas fa-check-circle text-green-400 text-xl"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative Background Elements -->
+        <div class="absolute -bottom-20 -left-20 text-[20rem] text-white/[0.02] pointer-events-none">
+            <i class="fas fa-hand-holding-heart -rotate-12"></i>
+        </div>
+        <div class="absolute -top-20 -right-20 text-[20rem] text-white/[0.02] pointer-events-none">
+            <i class="fas fa-shield-alt rotate-12"></i>
+        </div>
+    </section>
+
+    <!-- Section 5: Volunteer Milestone System -->
+    <section class="py-32 bg-gradient-to-b from-white via-bg/30 to-white relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-20 start-10 w-72 h-72 bg-primary/5 rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div class="absolute bottom-20 end-10 w-72 h-72 bg-secondary/5 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <span class="inline-flex items-center gap-3 text-primary font-bold tracking-[0.2em] uppercase text-sm mb-6"
+                data-aos="fade-up">
+                <span class="w-12 h-px bg-gradient-to-r from-transparent to-primary"></span>
+                Grow with Us
+                <span class="w-12 h-px bg-gradient-to-l from-transparent to-primary"></span>
+            </span>
+            <h2 class="text-4xl md:text-6xl font-serif font-bold text-secondary mb-20" data-aos="fade-up"
+                data-aos-delay="100">The Volunteer <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Journey</span></h2>
+
+            <div class="relative max-w-6xl mx-auto">
+                <!-- Animated Line Connector -->
+                <div
+                    class="hidden lg:block absolute top-[4.5rem] start-[12%] end-[12%] h-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-full overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-accent animate-shimmer"
+                        style="background-size: 200% 100%;"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+                    <div class="relative group" data-aos="fade-up" data-aos-delay="150">
+                        <div class="relative z-10">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-xl mx-auto mb-8 group-hover:scale-110 group-hover:shadow-glow transition-all duration-500 relative overflow-hidden">
+                                <span class="relative z-10">1</span>
+                                <div
+                                    class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100/50 group-hover:shadow-xl group-hover:-translate-y-2 transition-all duration-500">
+                            <h4 class="text-xl font-bold text-secondary mb-3 font-serif">Onboard</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed">Training and initial project assignment.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative group" data-aos="fade-up" data-aos-delay="250">
+                        <div class="relative z-10">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-secondary to-secondary-dark rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-xl mx-auto mb-8 group-hover:scale-110 group-hover:shadow-xl transition-all duration-500 relative overflow-hidden">
+                                <span class="relative z-10">2</span>
+                                <div
+                                    class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100/50 group-hover:shadow-xl group-hover:-translate-y-2 transition-all duration-500">
+                            <h4 class="text-xl font-bold text-secondary mb-3 font-serif">Impact Creator</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed">Completing 50 hours of active field work.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative group" data-aos="fade-up" data-aos-delay="350">
+                        <div class="relative z-10">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-accent to-yellow-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-xl mx-auto mb-8 group-hover:scale-110 group-hover:shadow-xl transition-all duration-500 relative overflow-hidden">
+                                <span class="relative z-10">3</span>
+                                <div
+                                    class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100/50 group-hover:shadow-xl group-hover:-translate-y-2 transition-all duration-500">
+                            <h4 class="text-xl font-bold text-secondary mb-3 font-serif">Lead Mentor</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed">Guiding new recruits in their first
+                                projects.</p>
+                        </div>
+                    </div>
+                    <div class="relative group" data-aos="fade-up" data-aos-delay="450">
+                        <div class="relative z-10">
+                            <div
+                                class="w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-xl mx-auto mb-8 group-hover:scale-110 group-hover:shadow-xl transition-all duration-500 relative overflow-hidden">
+                                <span class="relative z-10">4</span>
+                                <div
+                                    class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white rounded-3xl p-8 shadow-lg border border-gray-100/50 group-hover:shadow-xl group-hover:-translate-y-2 transition-all duration-500">
+                            <h4 class="text-xl font-bold text-secondary mb-3 font-serif">Global Delegate</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed">Representing HopeBridge at international
+                                summits.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20" data-aos="fade-up" data-aos-delay="500">
+                <a href="volunteer.html"
+                    class="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-primary-dark text-white px-12 py-5 rounded-full font-bold shadow-glow hover:shadow-xl hover:scale-105 transition-all duration-500 group">
+                    <i class="fas fa-hand-holding-heart text-xl group-hover:animate-heartbeat"></i>
+                    Apply to be a Volunteer
+                    <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Latest News -->
+    <section class="py-32 bg-gradient-to-b from-white via-bg/20 to-white overflow-hidden relative">
+        <!-- Decorative Elements -->
+        <div class="absolute top-40 end-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-40 start-0 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20" data-aos="fade-up">
+                <div class="mb-8 md:mb-0">
+                    <span
+                        class="inline-flex items-center gap-3 text-primary font-bold tracking-[0.2em] uppercase text-sm mb-6">
+                        <span class="w-12 h-px bg-gradient-to-r from-transparent to-primary"></span>
+                        From the Field
+                    </span>
+                    <h2 class="text-4xl md:text-7xl font-serif font-bold text-secondary tracking-tight">
+                        Latest <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Stories</span>
+                    </h2>
+                </div>
+                <a href="#"
+                    class="inline-flex items-center gap-3 bg-secondary/5 hover:bg-secondary text-secondary hover:text-white px-8 py-4 rounded-full font-bold transition-all duration-500 group">
+                    View All News
+                    <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Article 1 -->
+                <article
+                    class="premium-card bg-white rounded-[2.5rem] border border-gray-100/50 overflow-hidden group shadow-lg hover:shadow-2xl transition-all duration-700"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="assets/tech-good-1.jpg" alt="Article 1"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <!-- Gradient Overlay -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <span
+                            class="absolute top-6 start-6 bg-white/95 backdrop-blur-md px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-primary shadow-lg">
+                            <i class="fas fa-microchip me-2"></i>Tech for Good
+                        </span>
+                        <!-- Read time badge -->
+                        <span
+                            class="absolute bottom-6 end-6 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-gray-600 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                            <i class="fas fa-clock me-2"></i>5 min read
+                        </span>
+                    </div>
+                    <div class="p-8">
+                        <time
+                            class="text-primary/70 text-xs font-bold uppercase tracking-wider block mb-4 flex items-center gap-2">
+                            <i class="fas fa-calendar-alt"></i>Jan 28, 2026
+                        </time>
+                        <h3
+                            class="text-2xl font-bold text-secondary mb-4 group-hover:text-primary transition-colors duration-300 leading-snug font-serif">
+                            How AI is Helping Us Predict Drought Cycles in East Africa</h3>
+                        <p class="text-gray-500 mb-8 line-clamp-3 text-base leading-relaxed">
+                            Leveraging satellite data and machine learning to pre-position resources
+                            before a crisis strikes...</p>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-secondary font-bold text-sm uppercase tracking-wider hover:text-primary transition-colors duration-300 group/link">
+                            Read More
+                            <i
+                                class="fas fa-arrow-right text-xs group-hover/link:translate-x-2 transition-transform duration-300"></i>
+                        </a>
+                    </div>
+                </article>
+                <!-- Article 2 -->
+                <article
+                    class="premium-card bg-white rounded-[2.5rem] border border-gray-100/50 overflow-hidden group shadow-lg hover:shadow-2xl transition-all duration-700"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="assets/impact-bg.jpg" alt="Article 2"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <span
+                            class="absolute top-6 start-6 bg-white/95 backdrop-blur-md px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-secondary shadow-lg">
+                            <i class="fas fa-chart-line me-2"></i>Impact
+                        </span>
+                        <span
+                            class="absolute bottom-6 end-6 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-gray-600 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                            <i class="fas fa-clock me-2"></i>7 min read
+                        </span>
+                    </div>
+                    <div class="p-8">
+                        <time
+                            class="text-primary/70 text-xs font-bold uppercase tracking-wider block mb-4 flex items-center gap-2">
+                            <i class="fas fa-calendar-alt"></i>Feb 2, 2026
+                        </time>
+                        <h3
+                            class="text-2xl font-bold text-secondary mb-4 group-hover:text-primary transition-colors duration-300 leading-snug font-serif">
+                            The 100% Model: How We've Maintained Radical Transparency</h3>
+                        <p class="text-gray-500 mb-8 line-clamp-3 text-base leading-relaxed">
+                            Reflecting on five years of zero overhead on public donations and the donors
+                            who make it possible...</p>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-secondary font-bold text-sm uppercase tracking-wider hover:text-primary transition-colors duration-300 group/link">
+                            Read More
+                            <i
+                                class="fas fa-arrow-right text-xs group-hover/link:translate-x-2 transition-transform duration-300"></i>
+                        </a>
+                    </div>
+                </article>
+                <!-- Article 3 -->
+                <article
+                    class="premium-card bg-white rounded-[2.5rem] border border-gray-100/50 overflow-hidden group shadow-lg hover:shadow-2xl transition-all duration-700"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="assets/monthly-giving.jpg" alt="Article 3"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <span
+                            class="absolute top-6 start-6 bg-white/95 backdrop-blur-md px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-accent shadow-lg">
+                            <i class="fas fa-users me-2"></i>Community
+                        </span>
+                        <span
+                            class="absolute bottom-6 end-6 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-gray-600 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                            <i class="fas fa-clock me-2"></i>4 min read
+                        </span>
+                    </div>
+                    <div class="p-8">
+                        <time
+                            class="text-primary/70 text-xs font-bold uppercase tracking-wider block mb-4 flex items-center gap-2">
+                            <i class="fas fa-calendar-alt"></i>Feb 5, 2026
+                        </time>
+                        <h3
+                            class="text-2xl font-bold text-secondary mb-4 group-hover:text-primary transition-colors duration-300 leading-snug font-serif">
+                            Beyond Giving: Why Monthly Sustaining is the Future</h3>
+                        <p class="text-gray-500 mb-8 line-clamp-3 text-base leading-relaxed">
+                            Understanding why consistent, smaller gifts allow our field teams to plan
+                            more effectively for the long term...</p>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-secondary font-bold text-sm uppercase tracking-wider hover:text-primary transition-colors duration-300 group/link">
+                            Read More
+                            <i
+                                class="fas fa-arrow-right text-xs group-hover/link:translate-x-2 transition-transform duration-300"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Corporate Partnerships -->
+    <section
+        class="py-32 bg-gradient-to-br from-secondary via-secondary-dark to-[#0a3a47] text-white relative overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div
+                class="absolute top-0 start-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] animate-pulse-glow">
+            </div>
+            <div class="absolute bottom-0 end-1/4 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[150px] animate-pulse-glow"
+                style="animation-delay: 2s;"></div>
+        </div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <span class="inline-flex items-center gap-3 text-accent font-bold tracking-[0.2em] uppercase text-sm mb-6"
+                data-aos="fade-up">
+                <span class="w-12 h-px bg-gradient-to-r from-transparent to-accent"></span>
+                Collaborate with Us
+                <span class="w-12 h-px bg-gradient-to-l from-transparent to-accent"></span>
+            </span>
+            <h2 class="text-4xl md:text-7xl font-serif font-bold mb-8" data-aos="fade-up" data-aos-delay="100">Corporate
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient-x">Action</span>
+                for Good
+            </h2>
+            <p class="text-blue-100/80 text-xl max-w-2xl mx-auto mb-20 leading-relaxed" data-aos="fade-up"
+                data-aos-delay="200">We partner with forward-thinking
+                companies to
+                create large-scale impact. From ESG initiatives to employee giving, let's build a better
+                world together.
+            </p>
+
+            <!-- Partner Logos with Premium Hover -->
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 mb-20" data-aos="fade-up" data-aos-delay="300">
+                <div class="group relative">
+                    <div
+                        class="w-24 h-24 md:w-32 md:h-32 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-2">
+                        <i
+                            class="fab fa-apple text-4xl md:text-5xl opacity-40 group-hover:opacity-100 transition-opacity duration-500"></i>
+                    </div>
+                </div>
+                <div class="group relative">
+                    <div
+                        class="w-24 h-24 md:w-32 md:h-32 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-2">
+                        <i
+                            class="fab fa-google text-4xl md:text-5xl opacity-40 group-hover:opacity-100 transition-opacity duration-500"></i>
+                    </div>
+                </div>
+                <div class="group relative">
+                    <div
+                        class="w-24 h-24 md:w-32 md:h-32 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-2">
+                        <i
+                            class="fab fa-microsoft text-4xl md:text-5xl opacity-40 group-hover:opacity-100 transition-opacity duration-500"></i>
+                    </div>
+                </div>
+                <div class="group relative">
+                    <div
+                        class="w-24 h-24 md:w-32 md:h-32 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-2">
+                        <i
+                            class="fab fa-amazon text-4xl md:text-5xl opacity-40 group-hover:opacity-100 transition-opacity duration-500"></i>
+                    </div>
+                </div>
+                <div class="group relative">
+                    <div
+                        class="w-24 h-24 md:w-32 md:h-32 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-2">
+                        <i
+                            class="fab fa-salesforce text-4xl md:text-5xl opacity-40 group-hover:opacity-100 transition-opacity duration-500"></i>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#"
+                class="inline-flex items-center gap-3 border-2 border-white/80 text-white px-12 py-5 rounded-full font-bold hover:bg-white hover:text-secondary transition-all duration-500 group"
+                data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-handshake text-xl"></i>
+                Become a Partner
+                <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Section 6: Interactive Impact Calculator -->
+    <section class="py-32 bg-gradient-to-b from-bg via-white to-bg overflow-hidden relative">
+        <!-- Decorative Elements -->
+        <div class="absolute top-20 start-0 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-20 end-0 w-80 h-80 bg-secondary/5 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="bg-white rounded-[3.5rem] shadow-2xl overflow-hidden flex flex-col lg:flex-row border border-gray-100/50"
+                data-aos="fade-up">
+                <!-- Calculator Side -->
+                <div class="lg:w-1/2 p-10 md:p-16">
+                    <span
+                        class="inline-flex items-center gap-2 bg-gradient-to-r from-secondary/10 to-secondary/5 text-secondary text-xs font-bold px-6 py-3 rounded-full uppercase tracking-widest mb-10 border border-secondary/10">
+                        <i class="fas fa-calculator"></i>
+                        Impact Estimator
+                    </span>
+                    <h2 class="text-4xl md:text-6xl font-serif font-bold text-secondary mb-8 leading-tight">Every <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Dollar</span>
+                        Counts
+                    </h2>
+                    <p class="text-gray-500 text-lg mb-12 leading-relaxed">Drag the slider to see how your monthly
+                        contribution
+                        transforms lives in real-time.</p>
+
+                    <div class="space-y-12">
+                        <div class="relative pt-10">
+                            <div class="flex justify-between items-end mb-8">
+                                <span class="text-gray-400 font-bold uppercase tracking-widest text-xs">Your
+                                    Monthly Gift</span>
+                                <span
+                                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent text-6xl font-black">$<span
+                                        id="donation-amount">100</span></span>
+                            </div>
+                            <!-- Custom Range Slider -->
+                            <div class="relative h-16 flex items-center mb-10 group/slider">
+                                <div class="w-full h-3 bg-gray-100 rounded-full relative overflow-hidden">
+                                    <div id="slider-track"
+                                        class="absolute h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-300"
+                                        style="width: 20%;"></div>
+                                </div>
+                                <input type="range" id="impact-slider" min="0" max="500" value="100" step="10"
+                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20">
+                                <div id="slider-thumb"
+                                    class="absolute top-1/2 -translate-y-1/2 w-10 h-10 bg-white border-4 border-primary rounded-full shadow-glow pointer-events-none transition-all duration-300 transform -translate-x-1/2 z-10 flex items-center justify-center"
+                                    style="left: 20%;">
+                                    <div class="w-3 h-3 bg-primary rounded-full"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-sm font-bold text-gray-400">
+                                <span>$0</span>
+                                <span class="text-primary">$500+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization Side -->
+                <div
+                    class="lg:w-1/2 bg-gradient-to-br from-secondary via-secondary-dark to-[#0a3a47] p-10 md:p-16 text-white relative overflow-hidden group">
+                    <!-- Animated Particles -->
+                    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                        <div class="absolute top-10 end-10 w-20 h-20 bg-primary/20 rounded-full blur-2xl animate-float">
+                        </div>
+                        <div class="absolute bottom-10 start-10 w-16 h-16 bg-accent/20 rounded-full blur-2xl animate-float"
+                            style="animation-delay: 1s;"></div>
+                    </div>
+
+                    <div
+                        class="relative z-10 h-full flex flex-col items-center justify-center text-center min-h-[400px]">
+                        <div id="impact-icon" class="text-8xl mb-10 animate-bounce filter drop-shadow-lg">💧</div>
+                        <h3 id="impact-title" class="text-4xl md:text-5xl font-serif font-bold mb-6">Clean Water (1 mo)
+                        </h3>
+                        <p id="impact-desc" class="text-blue-100/80 text-xl leading-relaxed mb-12 max-w-md">Provides
+                            safe
+                            drinking
+                            water for a family of 4 for a full month.</p>
+
+                    </div>
+                    <!-- Background Visual hint -->
+                    <img id="impact-image" src="assets/clean-water.jpg" alt="Impact"
+                        class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-20 transition duration-1000 group-hover:scale-110">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: In-Kind Donations Guide -->
+    <section class="py-24 bg-bg">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-20">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">More
+                    Ways to
+                    Give</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-6">Non-Monetary
+                    Support</h2>
+                <p class="text-gray-600 text-lg">Your gently used items or professional skills can make
+                    a world of
+                    difference. Here's what we currently need:</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div
+                    class="bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-premium transition-all duration-500 text-center border border-gray-100 group">
+                    <div
+                        class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-primary text-3xl mx-auto mb-6 group-hover:rotate-12 transition">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-secondary mb-3">Educational Kits</h4>
+                    <p class="text-gray-500 text-sm">New or gently used textbooks and stationery for
+                        school hub
+                        projects.</p>
+                </div>
+                <div
+                    class="bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-premium transition-all duration-500 text-center border border-gray-100 group">
+                    <div
+                        class="w-20 h-20 bg-secondary/10 rounded-full flex items-center justify-center text-secondary text-3xl mx-auto mb-6 group-hover:rotate-12 transition">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-secondary mb-3">Clothing & Textiles</h4>
+                    <p class="text-gray-500 text-sm">Sustainable distribution of blankets and clothing
+                        for disaster
+                        relief.</p>
+                </div>
+                <div
+                    class="bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-premium transition-all duration-500 text-center border border-gray-100 group">
+                    <div
+                        class="w-20 h-20 bg-accent/20 rounded-full flex items-center justify-center text-secondary text-3xl mx-auto mb-6 group-hover:rotate-12 transition">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-secondary mb-3">Tech Tools</h4>
+                    <p class="text-gray-500 text-sm">Functioning laptops and tablets to power our
+                        digital literacy
+                        centers.</p>
+                </div>
+                <div
+                    class="bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-premium transition-all duration-500 text-center border border-gray-100 group">
+                    <div
+                        class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-3xl mx-auto mb-6 group-hover:rotate-12 transition">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-secondary mb-3">Professional Skills</h4>
+                    <p class="text-gray-500 text-sm">Volunteer your expertise in legal, tech, or design
+                        for our
+                        operations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Global Mission Map -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Where
+                        We
+                        Work</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">Our Global
+                        Footprint</h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed">HopeBridge operates in 12
+                        countries across 4
+                        continents. We focus on regions where the gap between resources and results is
+                        the largest.</p>
+
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary shrink-0">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary">East Africa</h4>
+                                <p class="text-gray-500 text-sm">Water and sanitation projects in Kenya
+                                    and Tanzania.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 bg-secondary/10 rounded-full flex items-center justify-center text-secondary shrink-0">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary">Southeast Asia</h4>
+                                <p class="text-gray-500 text-sm">Mobile health clinics and disaster
+                                    relief in Vietnam
+                                    and Cambodia.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center text-secondary shrink-0">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary">South America</h4>
+                                <p class="text-gray-500 text-sm">Sustainable farming and micro-loans in
+                                    Peru and
+                                    Colombia.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <img src="assets/global-reach.jpg" alt="World Map"
+                        class="rounded-[3rem] shadow-premium grayscale hover:grayscale-0 transition duration-700">
+                    <div
+                        class="absolute -bottom-10 -right-10 bg-white p-8 rounded-3xl shadow-premium hidden md:block border border-gray-100">
+                        <div class="text-3xl font-black text-primary mb-1">12</div>
+                        <div class="text-gray-500 text-xs font-bold uppercase tracking-widest">Countries
+                            Reached</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: Awards & Recognition -->
+    <section class="py-16 bg-bg border-y border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-70">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-award text-4xl text-accent"></i>
+                    <div>
+                        <div class="font-bold text-secondary">NGO of the Year</div>
+                        <div class="text-xs text-gray-500 font-bold uppercase">2025 Winner</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-certificate text-4xl text-primary"></i>
+                    <div>
+                        <div class="font-bold text-secondary">Top Rated Charity</div>
+                        <div class="text-xs text-gray-500 font-bold uppercase">Charity Navigator</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-shield-virus text-4xl text-secondary"></i>
+                    <div>
+                        <div class="font-bold text-secondary">Verified Impact</div>
+                        <div class="text-xs text-gray-500 font-bold uppercase">SGS Certified</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-star text-4xl text-yellow-500"></i>
+                    <div>
+                        <div class="font-bold text-secondary">Platinum Seal</div>
+                        <div class="text-xs text-gray-500 font-bold uppercase">GuideStar 2026</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cause Carousel -->
+    <section class="py-16 bg-white relative overflow-hidden">
+        <!-- Background Decorations -->
+        <div class="absolute top-0 end-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+        </div>
+        <div
+            class="absolute bottom-0 start-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2">
+        </div>
+
+        <div class="container mx-auto px-6 relative">
+            <div class="flex justify-between items-end mb-20" data-aos="fade-up">
+                <div>
+                    <span class="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Take
+                        Action</span>
+                    <h2 class="text-4xl md:text-6xl font-serif font-bold text-secondary mb-6">Urgent <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Causes</span>
+                    </h2>
+                    <p class="text-gray-500 max-w-lg text-lg">Support the campaigns that need your help
+                        the most right now.</p>
+                </div>
+                <a href="causes-grid.html"
+                    class="hidden md:flex items-center gap-3 text-primary font-bold hover:gap-5 transition-all duration-300 bg-primary/5 hover:bg-primary/10 px-6 py-3 rounded-xl">View
+                    All Causes <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Card 1 -->
+                <div class="group bg-white rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-premium-lg transition-all duration-700 border border-gray-100/50 flex flex-col h-full card-shine premium-card"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative h-72 overflow-hidden img-zoom premium-img">
+                        <img src="assets/clean-water.jpg" alt="Clean Water"
+                            class="w-full h-full object-cover transition transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                        </div>
+                        <span
+                            class="absolute top-6 start-6 bg-white/95 backdrop-blur-md text-secondary text-xs font-bold px-5 py-2 rounded-xl shadow-lg uppercase tracking-wider flex items-center gap-2">
+                            <i class="fas fa-tint text-primary"></i> Water
+                        </span>
+                        <!-- Urgency Badge -->
+                        <span
+                            class="absolute top-6 end-6 bg-gradient-to-r from-red-500 to-primary text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg uppercase tracking-wider animate-pulse">
+                            Urgent
+                        </span>
+                    </div>
+                    <div class="p-10 flex-1 flex flex-col">
+                        <h3
+                            class="text-2xl font-bold text-secondary mb-4 font-serif group-hover:text-primary transition-colors duration-300">
+                            Clean Water for Kenya</h3>
+                        <p class="text-gray-600 mb-8 line-clamp-2 leading-relaxed">Help us build 10 new
+                            solar-powered wells to provide safe drinking water to 5,000 villagers.</p>
+
+                        <div class="mt-auto">
+                            <!-- Progress Bar -->
+                            <div class="mb-8">
+                                <div class="flex justify-between text-sm font-bold mb-3">
+                                    <span class="text-primary">75% Raised</span>
+                                    <span class="text-gray-500">$15,000 / $20,000</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-4 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-primary via-red-400 to-accent h-4 rounded-full progress-animated relative"
+                                        style="width: 75%"></div>
+                                </div>
+                            </div>
+
+                            <a href="cause-details.html"
+                                class="block w-full text-center bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-4 rounded-2xl hover:shadow-glow transition-all duration-500 transform hover:scale-105">
+                                <i class="fas fa-heart me-2"></i> Donate Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group bg-white rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-premium-lg transition-all duration-700 border border-gray-100/50 flex flex-col h-full card-shine premium-card"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative h-72 overflow-hidden img-zoom premium-img">
+                        <img src="assets/uganda-school.jpg" alt="Education"
+                            class="w-full h-full object-cover transition transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                        </div>
+                        <span
+                            class="absolute top-6 start-6 bg-white/95 backdrop-blur-md text-secondary text-xs font-bold px-5 py-2 rounded-xl shadow-lg uppercase tracking-wider flex items-center gap-2">
+                            <i class="fas fa-graduation-cap text-accent"></i> Education
+                        </span>
+                    </div>
+                    <div class="p-10 flex-1 flex flex-col">
+                        <h3
+                            class="text-2xl font-bold text-secondary mb-4 font-serif group-hover:text-primary transition-colors duration-300">
+                            School Supplies for All</h3>
+                        <p class="text-gray-600 mb-8 line-clamp-2 leading-relaxed">Thousands of children
+                            lack basic books and pens. Your donation kits a classroom.</p>
+
+                        <div class="mt-auto">
+                            <!-- Progress Bar -->
+                            <div class="mb-8">
+                                <div class="flex justify-between text-sm font-bold mb-3">
+                                    <span class="text-primary">45% Raised</span>
+                                    <span class="text-gray-400">$4,500 / $10,000</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-4 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-primary via-red-400 to-accent h-4 rounded-full progress-animated"
+                                        style="width: 45%"></div>
+                                </div>
+                            </div>
+
+                            <a href="cause-details.html"
+                                class="block w-full text-center bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-4 rounded-2xl hover:shadow-glow transition-all duration-500 transform hover:scale-105">
+                                <i class="fas fa-heart me-2"></i> Donate Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group bg-white rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-premium-lg transition-all duration-700 hover:-translate-y-4 border border-gray-100/50 flex flex-col h-full card-shine"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative h-72 overflow-hidden img-zoom">
+                        <img src="assets/yemen-clinic.jpg" alt="Health"
+                            class="w-full h-full object-cover transition transform duration-700">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent group-hover:opacity-0 transition-opacity duration-500">
+                        </div>
+                        <span
+                            class="absolute top-6 start-6 bg-white/95 backdrop-blur-md text-secondary text-xs font-bold px-5 py-2 rounded-xl shadow-lg uppercase tracking-wider flex items-center gap-2">
+                            <i class="fas fa-heartbeat text-red-500"></i> Medical
+                        </span>
+                        <!-- Almost There Badge -->
+                        <span
+                            class="absolute top-6 end-6 bg-gradient-to-r from-green-500 to-green-400 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg uppercase tracking-wider">
+                            Almost There!
+                        </span>
+                    </div>
+                    <div class="p-10 flex-1 flex flex-col">
+                        <h3
+                            class="text-2xl font-bold text-secondary mb-4 font-serif group-hover:text-primary transition-colors duration-300">
+                            Mobile Clinics</h3>
+                        <p class="text-gray-600 mb-8 line-clamp-2 leading-relaxed">Bringing doctors and
+                            medicine to remote villages that have no access to healthcare.</p>
+
+                        <div class="mt-auto">
+                            <!-- Progress Bar -->
+                            <div class="mb-8">
+                                <div class="flex justify-between text-sm font-bold mb-3">
+                                    <span class="text-green-500">90% Raised</span>
+                                    <span class="text-gray-400">$45,000 / $50,000</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-4 overflow-hidden">
+                                    <div class="bg-gradient-to-r from-green-500 via-green-400 to-accent h-4 rounded-full progress-animated"
+                                        style="width: 90%"></div>
+                                </div>
+                            </div>
+
+                            <a href="cause-details.html"
+                                class="block w-full text-center bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-4 rounded-2xl hover:shadow-glow transition-all duration-500 transform hover:scale-105">
+                                <i class="fas fa-heart me-2"></i> Donate Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="causes-grid.html"
+                class="md:hidden mt-12 flex justify-center items-center gap-3 text-primary font-bold bg-primary/5 hover:bg-primary/10 px-8 py-4 rounded-xl transition-all duration-300">View
+                All Causes <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!-- Trusted Partners -->
+        <section class="py-16 bg-gray-50 border-y border-gray-200">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-10">Trusted by
+                    Global
+                    Organizations</p>
+                <div
+                    class="flex flex-wrap justify-center gap-12 md:gap-20 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="flex items-center gap-2 text-2xl font-bold text-gray-600"><i
+                            class="fas fa-globe-americas text-3xl"></i> UN Watch</div>
+                    <div class="flex items-center gap-2 text-2xl font-bold text-gray-600"><i
+                            class="fas fa-hand-holding-heart text-3xl"></i> CareIntl</div>
+                    <div class="flex items-center gap-2 text-2xl font-bold text-gray-600"><i
+                            class="fas fa-heartbeat text-3xl"></i> MedLife</div>
+                    <div class="flex items-center gap-2 text-2xl font-bold text-gray-600"><i
+                            class="fas fa-seedling text-3xl"></i> EarthSave</div>
+                    <div class="flex items-center gap-2 text-2xl font-bold text-gray-600"><i
+                            class="fas fa-graduation-cap text-3xl"></i> EduFirst</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Voices from the Field (Testimonials) -->
+        <section class="py-32 bg-gradient-to-b from-white via-bg/30 to-white overflow-hidden relative">
+            <!-- Decorative Elements -->
+            <div class="absolute top-20 start-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-20 end-0 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none">
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-24" data-aos="fade-up">
+                    <span
+                        class="inline-flex items-center gap-3 text-primary font-bold tracking-[0.2em] uppercase text-sm mb-6">
+                        <span class="w-12 h-px bg-gradient-to-r from-transparent to-primary"></span>
+                        Real Stories
+                        <span class="w-12 h-px bg-gradient-to-l from-transparent to-primary"></span>
+                    </span>
+                    <h2 class="text-4xl md:text-7xl font-serif font-bold text-secondary mb-8 leading-tight">
+                        Voices from the <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Field</span>
+                    </h2>
+                    <div class="w-32 h-1.5 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl relative group premium-card transition-all duration-500 hover:-translate-y-3 border border-gray-100/50"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <!-- Floating Quote Icon -->
+                        <div
+                            class="absolute -top-7 start-8 bg-gradient-to-br from-primary to-primary-dark text-white w-14 h-14 flex items-center justify-center rounded-2xl text-2xl shadow-glow transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <!-- Star Rating -->
+                        <div class="flex gap-1 mb-6 mt-4">
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-8 font-medium">
+                            "Because of the solar well HopeBridge built, I no longer walk 5 miles for
+                            water. My daughters can finally go to school instead of carrying buckets all
+                            day."
+                        </p>
+                        <div class="flex items-center gap-4 pt-6 border-t border-gray-100">
+                            <div class="relative">
+                                <img src="assets/avatar-1.jpg" alt="Amina K."
+                                    class="w-16 h-16 rounded-full border-3 border-primary object-cover shadow-lg">
+                                <div
+                                    class="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary text-lg">Amina K.</h4>
+                                <p
+                                    class="text-xs text-primary font-bold uppercase tracking-widest flex items-center gap-2">
+                                    <i class="fas fa-map-marker-alt"></i> Turkana, Kenya
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl relative group premium-card transition-all duration-500 hover:-translate-y-3 border border-gray-100/50 md:-translate-y-6"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="absolute -top-7 start-8 bg-gradient-to-br from-secondary to-secondary-dark text-white w-14 h-14 flex items-center justify-center rounded-2xl text-2xl shadow-lg transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <div class="flex gap-1 mb-6 mt-4">
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-8 font-medium">
+                            "The micro-loan I received helped me start a weaving business. Now I employ
+                            5 other women in my village. We are building our future together."
+                        </p>
+                        <div class="flex items-center gap-4 pt-6 border-t border-gray-100">
+                            <div class="relative">
+                                <img src="assets/avatar-2.jpg" alt="Isabella M."
+                                    class="w-16 h-16 rounded-full border-3 border-secondary object-cover shadow-lg">
+                                <div
+                                    class="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary text-lg">Isabella M.</h4>
+                                <p
+                                    class="text-xs text-secondary font-bold uppercase tracking-widest flex items-center gap-2">
+                                    <i class="fas fa-map-marker-alt"></i> Cusco, Peru
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white p-10 rounded-[2.5rem] shadow-xl hover:shadow-2xl relative group premium-card transition-all duration-500 hover:-translate-y-3 border border-gray-100/50"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div
+                            class="absolute -top-7 start-8 bg-gradient-to-br from-accent to-yellow-600 text-white w-14 h-14 flex items-center justify-center rounded-2xl text-2xl shadow-lg transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <div class="flex gap-1 mb-6 mt-4">
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                            <i class="fas fa-star text-accent text-sm"></i>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-8 font-medium">
+                            "The transparency of HopeBridge is unlike any other. Knowing exactly where
+                            my donation went gave me the confidence to become a monthly donor."
+                        </p>
+                        <div class="flex items-center gap-4 pt-6 border-t border-gray-100">
+                            <div class="relative">
+                                <img src="assets/avatar-3.jpg" alt="David R."
+                                    class="w-16 h-16 rounded-full border-3 border-accent object-cover shadow-lg">
+                                <div
+                                    class="absolute -bottom-1 -right-1 w-6 h-6 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
+                                    <i class="fas fa-heart text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary text-lg">David R.</h4>
+                                <p
+                                    class="text-xs text-accent font-bold uppercase tracking-widest flex items-center gap-2">
+                                    <i class="fas fa-calendar"></i> Donor since 2024
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 11: Circle of Hope (Monthly Giving) -->
+        <section
+            class="py-32 bg-gradient-to-br from-primary via-red-500 to-primary-dark text-white overflow-hidden relative">
+            <!-- Animated Background -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div
+                    class="absolute top-0 end-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-[100px] animate-pulse-glow">
+                </div>
+                <div class="absolute bottom-0 start-0 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] animate-pulse-glow"
+                    style="animation-delay: 2s;"></div>
+            </div>
+            <div class="absolute top-0 end-0 w-1/2 h-full bg-white/5 skew-x-12 translate-x-32"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center gap-20">
+                    <div class="lg:w-1/2 text-start" data-aos="fade-right">
+                        <span
+                            class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md text-white text-xs font-bold px-6 py-3 rounded-full uppercase tracking-widest mb-8 border border-white/20">
+                            <i class="fas fa-heart animate-heartbeat"></i>
+                            Join the Circle
+                        </span>
+                        <h2 class="text-4xl md:text-6xl font-serif font-bold mb-8 leading-tight">Radical Reliance
+                            Through <span class="text-accent">Monthly Giving</span></h2>
+                        <p class="text-white/80 text-xl mb-12 leading-relaxed">By giving monthly, you
+                            provide the
+                            consistent support we need to plan long-term projects and respond instantly
+                            to emergencies.
+                            Be the heartbeat of our mission.</p>
+
+                        <div class="grid grid-cols-2 gap-6 mb-14">
+                            <div
+                                class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/10 group hover:bg-white/20 transition-all duration-500">
+                                <i
+                                    class="fas fa-infinity text-3xl mb-4 block group-hover:scale-110 transition-transform duration-300"></i>
+                                <h4 class="font-bold text-xl mb-2">Sustainable</h4>
+                                <p class="text-sm text-white/70">Long-term project security.</p>
+                            </div>
+                            <div
+                                class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/10 group hover:bg-white/20 transition-all duration-500">
+                                <i
+                                    class="fas fa-bolt text-3xl mb-4 block group-hover:scale-110 transition-transform duration-300"></i>
+                                <h4 class="font-bold text-xl mb-2">Immediate</h4>
+                                <p class="text-sm text-white/70">Ready when crisis strikes.</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="lg:w-1/2" data-aos="fade-left">
+                        <div class="relative">
+                            <img src="assets/monthly-giving.jpg" alt="Monthly Giving"
+                                class="rounded-[3rem] shadow-premium">
+                            <div
+                                class="absolute -top-10 -left-10 bg-accent text-secondary p-8 rounded-3xl shadow-premium animate-bounce duration-[3000ms]">
+                                <div class="text-sm font-bold uppercase tracking-widest">Growing Circle
+                                </div>
+                                <div class="text-3xl font-black">5,430+</div>
+                                <div class="text-xs">Active Monthly Donors</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 12: Gallery of Hope -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Visual
+                    Impact</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-16">Capturing the
+                    Change</h2>
+
+                <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                    <div class="break-inside-avoid rounded-[2rem] overflow-hidden group">
+                        <img src="assets/hero-v1.jpg" alt="Gallery"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="break-inside-avoid rounded-[2rem] overflow-hidden group">
+                        <img src="assets/success-story.jpg" alt="Gallery"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="break-inside-avoid rounded-[2rem] overflow-hidden group">
+                        <img src="assets/clean-water.jpg" alt="Gallery"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="break-inside-avoid rounded-[2rem] overflow-hidden group">
+                        <img src="assets/environment.jpg" alt="Gallery"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="break-inside-avoid rounded-[2rem] overflow-hidden group">
+                        <img src="assets/yemen-clinic.jpg" alt="Gallery"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="break-inside-avoid rounded-[2rem] overflow-hidden group">
+                        <img src="assets/clean-water.jpg" alt="Gallery"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                </div>
+
+                <div class="mt-16">
+                    <a href="#"
+                        class="inline-flex items-center gap-2 text-secondary font-bold hover:text-primary transition group">
+                        Explore Our Full Flickr Archive <i
+                            class="fas fa-external-link-alt group-hover:rotate-12 transition"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 13: Founder's Message -->
+        <section class="py-24 bg-bg reveal">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16">
+                    <div class="md:w-1/3 reveal-left">
+                        <div class="relative">
+                            <div class="absolute -inset-4 bg-primary/20 rounded-full blur-2xl"></div>
+                            <img src="assets/avatar-4.jpg" alt="Founder"
+                                class="relative rounded-[2rem] shadow-premium grayscale hover:grayscale-0 transition duration-500">
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 reveal-right">
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">A
+                            Word from our
+                            Founder</span>
+                        <h2 class="text-4xl font-serif font-bold text-secondary mb-6 italic leading-snug">
+                            "We don't just
+                            solve problems; we empower people to rewrite their own stories."</h2>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">"When I started
+                            HopeBridge, the goal
+                            wasn't just to be another charity. It was to create a bridge between the
+                            capacity to help
+                            and the specific, urgent needs of the world's most resilient communities.
+                            Transparency isn't
+                            a feature—it's our foundation."</p>
+                        <div>
+                            <h4 class="font-bold text-xl text-secondary">Jonathan Sinclair</h4>
+                            <p class="text-gray-500 font-bold uppercase text-xs tracking-widest">Founder
+                                & Chairman</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 14: Eco-Impact / Sustainability -->
+        <section class="py-24 bg-white reveal">
+            <div class="container mx-auto px-6">
+                <div class="bg-secondary text-white rounded-[4rem] p-12 md:p-24 relative overflow-hidden">
+                    <div
+                        class="absolute top-0 end-0 w-64 h-64 bg-green-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+                    </div>
+                    <div class="relative z-10 flex flex-col lg:flex-row items-center gap-16">
+                        <div class="lg:w-1/2 text-start reveal-left">
+                            <span
+                                class="bg-green-500/20 text-green-400 text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-6 inline-block">Sustainable
+                                Future</span>
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8 italic">Every
+                                Project Is a Green
+                                Project</h2>
+                            <p class="text-blue-100 text-lg mb-10 leading-relaxed">We believe in healing
+                                the planet
+                                while we help its people. 100% of our new builds use solar power, and
+                                our supply chains
+                                are carbon-neutral.</p>
+
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4">
+                                    <i class="fas fa-sun text-accent text-2xl"></i>
+                                    <span class="font-medium">Solar-First Infrastructure</span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <i class="fas fa-recycle text-green-400 text-2xl"></i>
+                                    <span class="font-medium">Zero-Waste Material Policy</span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <i class="fas fa-cloud-moon text-blue-300 text-2xl"></i>
+                                    <span class="font-medium">Carbon Handprint Tracking</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 grid grid-cols-2 gap-6 reveal-right">
+                            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center">
+                                <div class="text-3xl font-black mb-1">94%</div>
+                                <div class="text-xs text-blue-200">Waste Diverted</div>
+                            </div>
+                            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center">
+                                <div class="text-3xl font-black mb-1">45k</div>
+                                <div class="text-xs text-blue-200">Tons CO2 Offset</div>
+                            </div>
+                            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center">
+                                <div class="text-3xl font-black mb-1">100%</div>
+                                <div class="text-xs text-blue-200">Ethical Sourcing</div>
+                            </div>
+                            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center">
+                                <div class="text-3xl font-black mb-1">5k</div>
+                                <div class="text-xs text-blue-200">Trees Replanted</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 15: Mobile App Teaser -->
+        <section class="py-24 bg-bg overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-16">
+                    <div class="lg:w-1/2 text-start">
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Track
+                            Your
+                            Legacy</span>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">
+                            HopeBridge in Your
+                            Pocket</h2>
+                        <p class="text-gray-600 text-lg mb-10 leading-relaxed">Follow your donation's
+                            journey from your
+                            wallet to the field. Get real-time notifications when your funded projects
+                            hit major
+                            milestones.</p>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#"
+                                class="bg-secondary text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-4 hover:bg-black transition shadow-lg">
+                                <i class="fab fa-apple text-3xl"></i>
+                                <div class="text-start leading-tight">
+                                    <span class="text-[10px] uppercase block opacity-60">Download on
+                                        the</span>
+                                    <span class="text-lg">App Store</span>
+                                </div>
+                            </a>
+                            <a href="#"
+                                class="bg-secondary text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-4 hover:bg-black transition shadow-lg">
+                                <i class="fab fa-google-play text-3xl"></i>
+                                <div class="text-start leading-tight">
+                                    <span class="text-[10px] uppercase block opacity-60">Get it
+                                        on</span>
+                                    <span class="text-lg">Google Play</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 relative">
+                        <div class="absolute inset-0 bg-primary/10 rounded-full blur-3xl scale-125 -z-10">
+                        </div>
+                        <!-- Mockup (Simple Representational) -->
+                        <div
+                            class="bg-secondary p-4 rounded-[3rem] shadow- premium w-72 mx-auto border-4 border-gray-800">
+                            <div
+                                class="bg-white h-[500px] rounded-[2.5rem] overflow-hidden flex flex-col p-6 text-center">
+                                <div class="w-12 h-1 bg-gray-200 mx-auto rounded-full mb-8"></div>
+                                <div
+                                    class="w-16 h-16 bg-primary rounded-full mx-auto mb-6 flex items-center justify-center text-white text-3xl">
+                                    H</div>
+                                <h4 class="font-bold text-secondary mb-2">Project Update</h4>
+                                <p class="text-xs text-gray-500 mb-8 lowercase uppercase">5 minutes ago
+                                </p>
+                                <img src="assets/clean-water.jpg" class="rounded-2xl mb-6 shadow-sm">
+                                <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                                    <div class="bg-primary h-full w-3/4"></div>
+                                </div>
+                                <p class="text-[10px] text-gray-500 mt-2 font-bold uppercase">Well
+                                    Construction
+                                    Complete!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-24 bg-secondary text-white relative overflow-hidden">
+            <!-- Decor -->
+            <div
+                class="absolute top-0 end-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+            </div>
+            <div
+                class="absolute bottom-0 start-0 w-64 h-64 bg-white/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2">
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10 max-w-4xl">
+                <div class="text-center mb-16">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Common
+                        Questions</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Transparency FAQ</h2>
+                    <p class="text-blue-100 text-lg">We believe you deserve to know exactly how we work.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div
+                        class="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 faq-item transition-all duration-300 hover:bg-white/10">
+                        <button class="w-full px-8 py-6 text-start flex justify-between items-center focus:outline-none"
+                            onclick="toggleFAQ(this)">
+                            <span class="font-bold text-lg">How much of my donation actually goes to the
+                                field?</span>
+                            <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="max-h-0 overflow-hidden transition-all duration-300 bg-black/20">
+                            <div class="p-8 pt-0 text-blue-100 leading-relaxed">
+                                <p><strong>100%.</strong> We have private donors who cover all our
+                                    operating costs,
+                                    salaries, and office rent. This means every penny you give online
+                                    goes directly to
+                                    funding projects in the field.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div
+                        class="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 faq-item transition-all duration-300 hover:bg-white/10">
+                        <button class="w-full px-8 py-6 text-start flex justify-between items-center focus:outline-none"
+                            onclick="toggleFAQ(this)">
+                            <span class="font-bold text-lg">Is my donation tax-deductible?</span>
+                            <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="max-h-0 overflow-hidden transition-all duration-300 bg-black/20">
+                            <div class="p-8 pt-0 text-blue-100 leading-relaxed">
+                                <p>Yes. HopeBridge is a registered 501(c)(3) nonprofit organization. You
+                                    will receive an
+                                    instant email receipt for every donation, and a consolidated tax
+                                    summary at the end
+                                    of the year.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div
+                        class="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 faq-item transition-all duration-300 hover:bg-white/10">
+                        <button class="w-full px-8 py-6 text-start flex justify-between items-center focus:outline-none"
+                            onclick="toggleFAQ(this)">
+                            <span class="font-bold text-lg">Can I choose which project to fund?</span>
+                            <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="max-h-0 overflow-hidden transition-all duration-300 bg-black/20">
+                            <div class="p-8 pt-0 text-blue-100 leading-relaxed">
+                                <p>Absolutely. You can browse our "Causes" page and select specific
+                                    campaigns like
+                                    "Clean Water" or "Education". If you give to the "General Fund," we
+                                    allocate it to
+                                    where it's needed most urgently.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer
+            class="bg-gradient-to-br from-secondary via-secondary-dark to-secondary text-white pt-28 pb-6 border-t border-white/10 relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 start-0 w-full h-1 bg-gradient-to-r from-primary via-accent to-primary"></div>
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
+
+            <div class="container mx-auto px-6 relative">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+                    <!-- Brand -->
+                    <div class="space-y-8" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center gap-3 group">
+                            <div
+                                class="w-14 h-14 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-glow group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                                H</div>
+                            <span class="text-3xl font-serif font-bold tracking-tight">HopeBridge</span>
+                        </div>
+                        <p class="text-blue-200/70 leading-relaxed text-sm">
+                            Connecting compassionate hearts with communities in need. Transparent, impactful, and
+                            human-centric giving.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#"
+                                class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="#"
+                                class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="#"
+                                class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div data-aos="fade-up" data-aos-delay="200">
+                        <h4 class="font-bold text-xl mb-8 text-white">Explore</h4>
+                        <ul class="space-y-4 text-blue-200/70 text-sm">
+                            <li><a href="about.html"
+                                    class="hover:text-white transition-all duration-300 flex items-center gap-2 group"><i
+                                        class="fas fa-chevron-right text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
+                                    Our Mission</a></li>
+                            <li><a href="causes-grid.html"
+                                    class="hover:text-white transition-all duration-300 flex items-center gap-2 group"><i
+                                        class="fas fa-chevron-right text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
+                                    Active Causes</a></li>
+                            <li><a href="contact.html"
+                                    class="hover:text-white transition-all duration-300 flex items-center gap-2 group"><i
+                                        class="fas fa-chevron-right text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
+                                    Contact</a></li>
+                            <li><a href="#"
+                                    class="hover:text-white transition-all duration-300 flex items-center gap-2 group"><i
+                                        class="fas fa-chevron-right text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
+                                    Impact Reports</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Support -->
+                    <div data-aos="fade-up" data-aos-delay="300">
+                        <h4 class="font-bold text-xl mb-8 text-white">Support</h4>
+                        <ul class="space-y-4 text-blue-200/70 text-sm">
+                            <li><a href="contact.html"
+                                    class="hover:text-white transition-all duration-300 flex items-center gap-2 group"><i
+                                        class="fas fa-chevron-right text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
+                                    Contact Us</a></li>
+                            <li><a href="#"
+                                    class="hover:text-white transition-all duration-300 flex items-center gap-2 group"><i
+                                        class="fas fa-chevron-right text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
+                                    Donor FAQ</a></li>
+                            <li><a href="#"
+                                    class="hover:text-white transition-all duration-300 flex items-center gap-2 group"><i
+                                        class="fas fa-chevron-right text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
+                                    Corporate Partners</a></li>
+                            <li><a href="#"
+                                    class="hover:text-white transition-all duration-300 flex items-center gap-2 group"><i
+                                        class="fas fa-chevron-right text-xs text-primary opacity-0 group-hover:opacity-100 transition-all duration-300"></i>
+                                    Gift Cards</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div data-aos="fade-up" data-aos-delay="400">
+                        <h4 class="font-bold text-xl mb-8 text-white">Stay Connected</h4>
+                        <p class="text-blue-200/70 text-sm mb-6">Receive inspirational stories and impact updates.</p>
+                        <form class="space-y-4">
+                            <input type="email" placeholder="Your Email Address"
+                                class="w-full bg-white/10 border border-white/20 rounded-xl px-5 py-4 focus:outline-none focus:border-primary focus:bg-white/15 transition-all duration-300 text-sm text-white placeholder-white/40">
+                            <button
+                                class="w-full bg-gradient-to-r from-primary to-primary-dark hover:from-primary-dark hover:to-primary text-white font-bold py-4 rounded-xl transition-all duration-500 text-sm shadow-glow hover:shadow-lg transform hover:scale-105">
+                                <i class="fas fa-paper-plane me-2"></i> Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div
+                    class="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center text-xs text-blue-200/50">
+                    <p>&copy; 2026 HopeBridge NGO. All rights reserved. Made with <i
+                            class="fas fa-heart text-primary mx-1"></i> for humanity.</p>
+                    <div class="flex gap-8 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition-colors duration-300">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="js/main.js"></script>
+
+
+
+        <!-- Back to Top Button -->
+        <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+            class="fixed bottom-20 end-6 z-50 w-14 h-14 bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl shadow-glow flex items-center justify-center opacity-0 invisible transition-all duration-500 hover:scale-110 hover:shadow-xl">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <script>
+            // Back to top button visibility
+            window.addEventListener('scroll', () => {
+                const btn = document.getElementById('back-to-top');
+                if (window.scrollY > 500) {
+                    btn.classList.remove('opacity-0', 'invisible');
+                    btn.classList.add('opacity-100', 'visible');
+                } else {
+                    btn.classList.add('opacity-0', 'invisible');
+                    btn.classList.remove('opacity-100', 'visible');
+                }
+            });
+        </script>
+</body>
+
+</html>

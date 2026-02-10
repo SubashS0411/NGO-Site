@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Impact - HopeBridge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B', // Coral Orange
+                        secondary: '#0F4C5C', // Deep Ocean Teal
+                        bg: '#F8F9FA', // Sharper White/Grey
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hide scrollbar for clean horizontal scroll if needed */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Sidebar Transition */
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Check for saved direction preference
+        if (localStorage.dir === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.body.classList.add('rtl');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.body.classList.remove('rtl');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        function toggleRTL() {
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('rtl');
+                localStorage.dir = 'ltr';
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('rtl');
+                localStorage.dir = 'rtl';
+            }
+        }
+
+        // Initialize icon state on load
+        window.onload = function () {
+            if (document.documentElement.classList.contains('dark')) {
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-bg text-gray-800 font-sans transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Global Floating Navbar (Top - Full Width) -->
+    <!-- Navigation -->
+    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-premium fixed top-0 left-0 w-full z-50 transition-all duration-300 rounded-none mx-0 border-b border-white/20 dark:border-gray-700"
+        id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    H
+                </div>
+                <span
+                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div
+                class="hidden md:flex items-center space-x-1 rtl:space-x-reverse font-medium text-secondary dark:text-gray-200">
+                <!-- Home Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Home <i class="fas fa-chevron-down text-xs opacity-50 ms-1"></i>
+                    </button>
+                    <div
+                        class="dropdown-menu rtl:left-auto rtl:right-1/2 rtl:translate-x-1/2 dark:bg-gray-800 dark:border-gray-700">
+                        <a href="index.html"
+                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-home me-2 text-primary"></i> Home Version 1
+                        </a>
+                        <a href="index2.html"
+                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-layer-group me-2 text-primary"></i> Home Version 2
+                        </a>
+                    </div>
+                </div>
+
+                <a href="causes-grid.html" class="px-4 py-2 hover:text-primary transition">Causes</a>
+                <a href="about.html" class="px-4 py-2 hover:text-primary transition">About Us</a>
+                <a href="contact.html" class="px-4 py-2 hover:text-primary transition">Contact</a>
+
+                <!-- Dashboard Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Dashboards <i class="fas fa-chevron-down text-xs opacity-50 ms-1"></i>
+                    </button>
+                    <div
+                        class="dropdown-menu rtl:left-auto rtl:right-1/2 rtl:translate-x-1/2 dark:bg-gray-800 dark:border-gray-700">
+                        <a href="admin-dashboard.html"
+                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-tachometer-alt me-2 text-primary"></i> Admin Dashboard
+                        </a>
+                        <a href="donor-dashboard.html"
+                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-user me-2 text-primary"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hidden md:flex items-center gap-4 rtl:space-x-reverse">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                <!-- RTL Toggle -->
+                <button onclick="toggleRTL()"
+                    class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-globe"></i>
+                </button>
+
+                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+                <a href="login.html"
+                    class="text-sm font-semibold text-secondary hover:text-primary dark:text-white transition">Log
+                    In</a>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="sidebar-toggle-btn" class="md:hidden text-2xl text-secondary focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar Layout Container -->
+    <div class="flex pt-28 min-h-screen">
+
+        <!-- Sidebar (Fixed Left) -->
+        <aside id="sidebar"
+            class="sidebar fixed inset-y-0 left-0 lg:left-4 lg:top-28 lg:bottom-4 w-64 bg-white dark:bg-gray-800 lg:rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 flex flex-col z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 overflow-hidden">
+            <div class="p-6 border-b border-gray-50 dark:border-gray-700">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Dashboard</p>
+            </div>
+            <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                <a href="#overview"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl bg-secondary text-white shadow-md transition group">
+                    <i class="fas fa-th-large w-5 group-hover:scale-110 transition"></i>
+                    <span class="font-bold text-sm">Overview</span>
+                </a>
+                <a href="#donations"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-secondary transition group">
+                    <i class="fas fa-hand-holding-heart w-5 group-hover:scale-110 transition"></i>
+                    <span class="font-medium text-sm">My Donations</span>
+                </a>
+                <a href="#impact"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-secondary transition group">
+                    <i class="fas fa-chart-line w-5 group-hover:scale-110 transition"></i>
+                    <span class="font-medium text-sm">Impact Metrics</span>
+                </a>
+                <a href="#settings"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-secondary transition group">
+                    <i class="fas fa-cog w-5 group-hover:scale-110 transition"></i>
+                    <span class="font-medium text-sm">Settings</span>
+                </a>
+                <a href="#hours"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-secondary transition group">
+                    <i class="fas fa-clock w-5 group-hover:scale-110 transition"></i>
+                    <span class="font-medium text-sm">Hours & Engagement</span>
+                </a>
+            </nav>
+            <div class="p-4 bg-gray-50 border-t border-gray-100">
+                <a href="#"
+                    class="flex items-center gap-3 px-4 py-2 text-red-500 hover:bg-red-50 rounded-xl transition text-sm font-bold">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 lg:ml-72 px-6 pb-12 w-full max-w-7xl mx-auto">
+
+            <!-- Large Welcome Message -->
+            <div class="mb-10 animate-fadeInUp">
+                <span class="text-primary font-bold uppercase tracking-wider text-sm block mb-2">User</span>
+                <h1 class="text-4xl md:text-6xl font-serif font-bold text-secondary mb-3 leading-tight">
+                    Welcome back, <span class="text-primary">Alex!</span>
+                </h1>
+                <p class="text-gray-500 text-lg">Here's what your kindness has achieved today.</p>
+            </div>
+
+            <div class="space-y-16">
+
+                <!-- Section 1: Overview (Charts) -->
+                <section id="overview" class="scroll-mt-32">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-10 h-10 bg-blue-100/50 rounded-xl flex items-center justify-center text-secondary">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-secondary">Impact Overview</h2>
+                    </div>
+
+                    <!-- 6 Chart Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Chart 1: Distribution -->
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col">
+                            <h3 class="font-bold text-secondary mb-4 text-sm">Fund Distribution</h3>
+                            <div class="flex-1 min-h-[250px] relative">
+                                <canvas id="chartDistribution"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 2: Monthly Trends -->
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col">
+                            <h3 class="font-bold text-secondary mb-4 text-sm">Donation Trends (2025-26)</h3>
+                            <div class="flex-1 min-h-[250px] relative">
+                                <canvas id="chartTrends"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 3: Lives Impacted -->
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col">
+                            <h3 class="font-bold text-secondary mb-4 text-sm">Lives Impacted</h3>
+                            <div class="flex-1 min-h-[250px] relative">
+                                <canvas id="chartLives"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 4: Cause Support -->
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col">
+                            <h3 class="font-bold text-secondary mb-4 text-sm">Causes Supported</h3>
+                            <div class="flex-1 min-h-[250px] relative">
+                                <canvas id="chartCauses"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 5: Peer Comparison -->
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col">
+                            <h3 class="font-bold text-secondary mb-4 text-sm">Your Impact vs Avg</h3>
+                            <div class="flex-1 min-h-[250px] relative">
+                                <canvas id="chartPeer"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 6: Tree Growth -->
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex flex-col">
+                            <h3 class="font-bold text-secondary mb-4 text-sm">Carbon Offset (Trees)</h3>
+                            <div class="flex-1 min-h-[250px] relative">
+                                <canvas id="chartTrees"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: My Donations -->
+                <section id="donations" class="scroll-mt-32">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-10 h-10 bg-green-100/50 rounded-xl flex items-center justify-center text-green-700">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-secondary">My Donations</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2 bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold text-secondary">Recent Transactions</h3>
+                                <button class="text-primary text-sm font-bold hover:underline">Download CSV</button>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between border-b border-gray-50 pb-4">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-xl">
+                                            💧</div>
+                                        <div>
+                                            <p class="font-bold text-gray-800">Clean Water Fund</p>
+                                            <p class="text-xs text-gray-400">Monthly • Jan 15, 2026</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-bold text-secondary">$50.00</span>
+                                </div>
+                                <div class="flex items-center justify-between border-b border-gray-50 pb-4">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 bg-gray-50 rounded-2xl flex items-center justify-center text-xl">
+                                            🎒</div>
+                                        <div>
+                                            <p class="font-bold text-gray-800">School Supplies</p>
+                                            <p class="text-xs text-gray-400">One-time • Dec 20, 2025</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-bold text-secondary">$25.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-900 text-white p-8 rounded-[2rem] shadow-lg relative overflow-hidden">
+                            <div class="relative z-10">
+                                <div
+                                    class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-6 backdrop-blur-md">
+                                    <i class="fas fa-file-invoice mb-1"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Tax Documents</h3>
+                                <button
+                                    class="w-full py-3 bg-white text-gray-900 rounded-xl font-bold hover:bg-gray-100 transition mt-4">Download
+                                    2025 PDF</button>
+                            </div>
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Impact Metrics -->
+                <section id="impact" class="scroll-mt-32">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-10 h-10 bg-purple-100/50 rounded-xl flex items-center justify-center text-purple-700">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-secondary">Impact Metrics</h2>
+                    </div>
+                    <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-secondary mb-8">Live Field Updates</h3>
+                        <div class="flex flex-col gap-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-2 h-full bg-gray-100 rounded-full relative">
+                                    <div class="absolute top-0 w-full h-1/2 bg-green-500 rounded-full"></div>
+                                </div>
+                                <div class="flex-1 space-y-6">
+                                    <div class="bg-gray-50 p-4 rounded-xl">
+                                        <p class="font-bold text-secondary">Well Construction Started</p>
+                                        <p class="text-sm text-gray-500">Turkana Region • 2 days ago</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-4 rounded-xl opacity-60">
+                                        <p class="font-bold text-secondary">Community Training</p>
+                                        <p class="text-sm text-gray-500">Scheduled for Mar 1</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Settings -->
+                <section id="settings" class="scroll-mt-32">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center text-gray-600"><i
+                                class="fas fa-cog"></i></div>
+                        <h2 class="text-2xl font-bold text-secondary">Settings</h2>
+                    </div>
+                    <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-secondary mb-6">Profile & Security</h3>
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl mb-4">
+                            <div class="flex items-center gap-4">
+                                <img src="https://ui-avatars.com/api/?name=Alex+M&background=FF6B6B&color=fff"
+                                    class="w-10 h-10 rounded-full">
+                                <div>
+                                    <p class="font-bold text-gray-800">Alex M.</p>
+                                    <p class="text-xs text-gray-500">alex@example.com</p>
+                                </div>
+                            </div>
+                            <button
+                                class="text-sm font-bold text-secondary border border-gray-200 px-3 py-1 rounded-lg hover:bg-white transition">Edit</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Hours & Engagement -->
+                <section id="hours" class="scroll-mt-32">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div
+                            class="w-10 h-10 bg-orange-100/50 rounded-xl flex items-center justify-center text-orange-600">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-secondary">Hours & Engagement</h2>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div
+                            class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 text-xl">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 font-bold">Total Hours</p>
+                                <p class="text-2xl font-bold text-secondary">124 Hrs</p>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-xl">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 font-bold">Events Attended</p>
+                                <p class="text-2xl font-bold text-secondary">15 Events</p>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-500 text-xl">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 font-bold">Status</p>
+                                <p class="text-2xl font-bold text-secondary">Gold Volunteer</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Chart: Monthly Hours -->
+                        <div class="lg:col-span-2 bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
+                            <h3 class="font-bold text-secondary mb-6">Monthly Volunteer Hours</h3>
+                            <div class="h-[300px]">
+                                <canvas id="chartHours"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
+                            <h3 class="font-bold text-secondary mb-6">Recent Activity</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-primary"></div>
+                                    <div>
+                                        <p class="font-bold text-gray-800 text-sm">Food Drive Logic...</p>
+                                        <p class="text-xs text-gray-400">Feb 2, 2026 • 4 Hrs</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-secondary"></div>
+                                    <div>
+                                        <p class="font-bold text-gray-800 text-sm">Beach Cleanup</p>
+                                        <p class="text-xs text-gray-400">Jan 28, 2026 • 3 Hrs</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-gray-300"></div>
+                                    <div>
+                                        <p class="font-bold text-gray-800 text-sm">Mentorship Ses...</p>
+                                        <p class="text-xs text-gray-400">Jan 15, 2026 • 2 Hrs</p>
+                                    </div>
+                                </div>
+                                <button
+                                    class="w-full py-2 text-primary text-sm font-bold border border-primary/20 rounded-xl hover:bg-primary/5 transition">
+                                    View Full History
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Standard Footer (Adapted for Dashboard) -->
+            <footer class="bg-secondary text-white pt-16 pb-8 rounded-t-[3rem] mt-20">
+                <div class="container mx-auto px-6">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                        <div class="col-span-1 md:col-span-1">
+                            <div class="flex items-center gap-2 mb-4">
+                                <div
+                                    class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold">
+                                    H</div>
+                                <span class="text-xl font-serif font-bold">HopeBridge</span>
+                            </div>
+                            <p class="text-gray-300 text-xs leading-relaxed">
+                                Empowering change through transparency and action.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-4">Quick Links</h4>
+                            <ul class="space-y-2 text-gray-400 text-xs">
+                                <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                                <li><a href="causes-grid.html" class="hover:text-white transition">Causes</a></li>
+                                <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-4">Support</h4>
+                            <ul class="space-y-2 text-gray-400 text-xs">
+                                <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+                                <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                                <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm mb-4">Newsletter</h4>
+                            <form class="flex flex-col gap-2">
+                                <input type="email" placeholder="Email"
+                                    class="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-xs placeholder-gray-500 focus:outline-none focus:border-primary">
+                                <button
+                                    class="bg-primary hover:bg-red-500 text-white px-4 py-2 rounded-lg font-bold text-xs transition">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="border-t border-white/5 pt-6 text-center text-xs text-gray-500">
+                        <p>&copy; 2026 HopeBridge International.</p>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Chart Configuration -->
+    <script>
+        // Common Options for Clean Look
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#64748b';
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8 } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#f1f5f9' }, border: { display: false } },
+                x: { grid: { display: false }, border: { display: false } }
+            }
+        };
+
+        const noScaleOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { usePointStyle: true, boxWidth: 8 } }
+            },
+            scales: { x: { display: false }, y: { display: false } }
+        };
+
+        // 1. Distribution (Doughnut) - No grid lines
+        new Chart(document.getElementById('chartDistribution'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Water', 'Education', 'Health', 'Emergency'],
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: ['#0F4C5C', '#FF6B6B', '#F7B731', '#26de81'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: { ...noScaleOptions, cutout: '70%' }
+        });
+
+        // 2. Trends (Bar)
+        new Chart(document.getElementById('chartTrends'), {
+            type: 'bar',
+            data: {
+                labels: ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                datasets: [{
+                    label: 'Donations ($)',
+                    data: [20, 35, 40, 45, 100, 50],
+                    backgroundColor: '#FF6B6B',
+                    borderRadius: 6,
+                    barThickness: 12
+                }]
+            },
+            options: commonOptions
+        });
+
+        // 3. Lives Impacted (Line)
+        new Chart(document.getElementById('chartLives'), {
+            type: 'line',
+            data: {
+                labels: ['W1', 'W2', 'W3', 'W4'],
+                datasets: [{
+                    label: 'Families Reached',
+                    data: [3, 5, 8, 12],
+                    borderColor: '#0F4C5C',
+                    backgroundColor: 'rgba(15, 76, 92, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: commonOptions
+        });
+
+        // 4. Causes (Polar Area)
+        new Chart(document.getElementById('chartCauses'), {
+            type: 'polarArea',
+            data: {
+                labels: ['Wells', 'Schools', 'Clinics'],
+                datasets: [{
+                    data: [11, 16, 7],
+                    backgroundColor: ['rgba(255, 107, 107, 0.8)', 'rgba(15, 76, 92, 0.8)', 'rgba(247, 183, 49, 0.8)'],
+                    borderWidth: 0
+                }]
+            },
+            options: { ...noScaleOptions, scales: { r: { grid: { display: false }, ticks: { display: false } } } }
+        });
+
+        // 5. Peer Comparison (Radar)
+        new Chart(document.getElementById('chartPeer'), {
+            type: 'radar',
+            data: {
+                labels: ['Consistency', 'Volume', 'Referrals', 'Social'],
+                datasets: [{
+                    label: 'You',
+                    data: [90, 70, 40, 85],
+                    borderColor: '#FF6B6B',
+                    backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                }, {
+                    label: 'Avg Donor',
+                    data: [60, 50, 20, 50],
+                    borderColor: '#cbd5e1',
+                    backgroundColor: 'transparent',
+                    borderDash: [5, 5]
+                }]
+            },
+            options: { ...noScaleOptions, scales: { r: { grid: { color: '#f1f5f9' }, ticks: { display: false }, pointLabels: { font: { size: 10 } } } } }
+        });
+
+        // 6. Tree Growth (Line)
+        new Chart(document.getElementById('chartTrees'), {
+            type: 'line',
+            data: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [{
+                    label: 'Trees Planted',
+                    data: [2, 5, 9, 15],
+                    borderColor: '#26de81',
+                    pointBackgroundColor: '#fff',
+                    pointBorderWidth: 2,
+                    tension: 0
+                }]
+            },
+            options: commonOptions
+        });
+
+        // 7. Volunteer Hours (Bar)
+        new Chart(document.getElementById('chartHours'), {
+            type: 'bar',
+            data: {
+                labels: ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                datasets: [{
+                    label: 'Hours Volunteered',
+                    data: [12, 19, 15, 22, 30, 26],
+                    backgroundColor: '#F7B731',
+                    borderRadius: 6,
+                    barThickness: 20
+                }]
+            },
+            options: commonOptions
+        });
+
+        // Scroll Spy Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.sidebar nav a');
+
+            const highlightLink = (id) => {
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href').substring(1);
+                    if (href === id) {
+                        link.classList.remove('text-gray-500', 'hover:bg-gray-50', 'hover:text-secondary');
+                        link.classList.add('bg-secondary', 'text-white', 'shadow-md');
+                        // Ensure icon scales if group hover isn't triggered
+                        const icon = link.querySelector('i');
+                        if (icon) icon.classList.add('scale-110');
+                    } else {
+                        link.classList.add('text-gray-500', 'hover:bg-gray-50', 'hover:text-secondary');
+                        link.classList.remove('bg-secondary', 'text-white', 'shadow-md');
+                        const icon = link.querySelector('i');
+                        if (icon) icon.classList.remove('scale-110');
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        highlightLink(entry.target.id);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // Trigger when section is near top
+                threshold: 0
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Sidebar Toggle Logic
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black/50 z-40 hidden lg:hidden backdrop-blur-sm';
+        document.body.appendChild(overlay);
+
+        if (sidebarToggleBtn) {
+            sidebarToggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+            });
+        }
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+
+
+</html>

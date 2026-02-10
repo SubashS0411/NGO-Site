@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - HopeBridge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B', // Coral Orange
+                        secondary: '#0F4C5C', // Deep Ocean Teal
+                        bg: '#FAFAFA', // Warm White
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 50;
+            border: 1px solid #f3f4f6;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: #0F4C5C;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            background: #FAFAFA;
+            color: #FF6B6B;
+            padding-left: 1.25rem;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Check for saved direction preference
+        if (localStorage.dir === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.body.classList.add('rtl'); // Optional: for specific CSS targeting if needed
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.body.classList.remove('rtl');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        function toggleRTL() {
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('rtl');
+                localStorage.dir = 'ltr';
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('rtl');
+                localStorage.dir = 'rtl';
+            }
+        }
+
+        // Initialize icon state on load
+        window.onload = function () {
+            if (document.documentElement.classList.contains('dark')) {
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-bg text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Navigation -->
+    <!-- Navigation (Same as V1) -->
+    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-premium fixed top-0 left-0 w-full z-50 transition-all duration-300 rounded-none mx-0 border-b border-white/20 dark:border-gray-700"
+        id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    H
+                </div>
+                <span
+                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-1 font-medium text-secondary dark:text-gray-200">
+                <!-- Home Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Home <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="index.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-home mr-2 text-primary"></i> Home Version 1
+                        </a>
+                        <a href="index2.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-layer-group mr-2 text-primary"></i> Home Version 2
+                        </a>
+                    </div>
+                </div>
+
+                <a href="causes-grid.html" class="px-4 py-2 hover:text-primary transition">Causes</a>
+                <a href="about.html" class="px-4 py-2 hover:text-primary transition">About Us</a>
+                <a href="contact.html" class="px-4 py-2 hover:text-primary transition">Contact</a>
+
+                <!-- Dashboard Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Dashboards <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="admin-dashboard.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Admin Dashboard
+                        </a>
+                        <a href="donor-dashboard.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-user mr-2 text-primary"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hidden md:flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                <!-- RTL Toggle -->
+                <button onclick="toggleRTL()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-globe"></i>
+                </button>
+
+                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+                <a href="login.html"
+                    class="text-sm font-semibold text-secondary hover:text-primary dark:text-white transition">Log
+                    In</a>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-secondary dark:text-white focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-secondary text-white py-32 text-center relative overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="assets/smile.webp" alt="Volunteers united" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/80 to-primary/80 z-10"></div>
+
+        <!-- Floating Icons (Effects) -->
+        <div class="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+            <i class="fas fa-heart absolute top-10 left-[10%] text-white/10 text-6xl animate-float"></i>
+            <i class="fas fa-globe-africa absolute bottom-10 right-[15%] text-white/10 text-8xl animate-float"
+                style="animation-delay: 1.5s;"></i>
+            <i class="fas fa-hands-helping absolute top-1/2 right-[5%] text-white/5 text-9xl animate-float"
+                style="animation-delay: 2.5s;"></i>
+            <i class="fas fa-dove absolute top-20 right-[30%] text-white/10 text-4xl animate-float"
+                style="animation-delay: 0.5s;"></i>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-20">
+            <span
+                class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-xs font-bold tracking-widest uppercase mb-6 animate-fadeInUp">24/7
+                Support</span>
+            <h1 class="text-4xl md:text-7xl font-serif font-black mb-6 drop-shadow-lg animate-fadeInUp delay-100">
+                Connect & <span class="text-accent italic">Volunteer</span></h1>
+            <p
+                class="text-xl md:text-2xl text-blue-50 max-w-3xl mx-auto font-light leading-relaxed drop-shadow-md animate-fadeInUp delay-200">
+                Whether you have a question about donations or want to join our mission on the ground, we are here to
+                listen.
+            </p>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-20">
+        <div class="flex flex-col lg:flex-row gap-16">
+
+            <!-- Contact Info & Map -->
+            <div class="lg:w-1/2">
+                <h2 class="text-2xl font-serif font-bold text-secondary mb-8">Our Offices</h2>
+
+                <div class="space-y-8 mb-12">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xl shrink-0">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-secondary">Headquarters</h3>
+                            <p class="text-gray-500">123 Impact Way, Suite 400<br>New York, NY 10012</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xl shrink-0">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-secondary">Email Us</h3>
+                            <p class="text-gray-500">hello@hopebridge.org<br>donors@hopebridge.org</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xl shrink-0">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-secondary">Call Us</h3>
+                            <p class="text-gray-500">+1 (555) 123-4567<br>Mon-Fri, 9am - 5pm EST</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <!-- Inquiry Form -->
+            <div class="lg:w-1/2">
+                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-lg border border-gray-100">
+                    <h2 class="text-2xl font-serif font-bold text-secondary mb-6">Send a Message</h2>
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Name</label>
+                                <input type="text"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary bg-gray-50">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Email</label>
+                                <input type="email"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary bg-gray-50">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Subject</label>
+                            <select
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary bg-gray-50">
+                                <option>General Inquiry</option>
+                                <option>Donation Issue</option>
+                                <option>Partnership Proposal</option>
+                                <option>Media/Press</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Message</label>
+                            <textarea rows="5"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-primary bg-gray-50"></textarea>
+                        </div>
+
+                        <button type="button"
+                            class="w-full bg-primary hover:bg-red-500 text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:-translate-y-1">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- New Section: Live Map -->
+        <section class="py-0 relative h-[500px] w-full">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d35500984.0950346!2d18.397072549999996!3d6.864380950000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1689624536214!5m2!1sen!2sus"
+                width="100%" height="100%" style="border:0; filter: grayscale(100%) invert(90%) contrast(120%);"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <!-- Map Overlay Card -->
+            <div class="absolute bottom-10 left-10 bg-white p-6 rounded-2xl shadow-premium max-w-xs hidden md:block">
+                <div class="flex items-center gap-4 mb-2">
+                    <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Live Operations</span>
+                </div>
+                <h4 class="font-bold text-secondary">Active Relief Zones</h4>
+                <p class="text-sm text-gray-400 mt-1">Currently coordinating logistics in 12 regions across Africa &
+                    Southeast Asia.</p>
+            </div>
+        </section>
+
+
+
+        <!-- Volunteer Register CTA (Replaces Global Presence) -->
+        <!-- Volunteer Register CTA (Replaces Global Presence) -->
+        <section class="py-20 bg-white relative overflow-hidden">
+            <!-- Image 3 Background -->
+            <div class="absolute inset-x-0 bottom-0 h-1/2 opacity-5 pointer-events-none">
+                <img src="assets/OIP (1).jpg" class="w-full h-full object-cover grayscale">
+            </div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <div
+                    class="inline-block border-4 border-primary p-10 rounded-[3rem] shadow-premium transform hover:scale-105 transition duration-500 bg-white">
+                    <h2 class="text-4xl md:text-6xl font-serif font-black text-secondary tracking-tight">
+                        Volunteer <span class="text-primary italic">Register</span>
+                    </h2>
+                    <p class="text-gray-400 mt-4 text-xl font-medium tracking-wide">Join the movement. Make an impact.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: A Day in the Life (Video Hub) -->
+        <section class="py-24 bg-secondary text-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-16">
+                    <div class="md:w-1/2">
+                        <div class="relative group rounded-[3rem] overflow-hidden shadow-glow">
+                            <!-- Image 4 -->
+                            <img src="assets/OIP (2).jpg" class="w-full h-[400px] object-cover">
+                            <div
+                                class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition cursor-pointer">
+                                <div
+                                    class="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-2xl shadow-glow">
+                                    <i class="fas fa-play ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 space-y-8">
+                        <span class="text-primary font-bold uppercase tracking-[0.2em] text-xs">Perspective</span>
+                        <h2 class="text-4xl md:text-5xl font-serif font-black leading-tight">Beyond the <span
+                                class="text-primary italic">Office.</span></h2>
+                        <p class="text-blue-100/60 text-lg leading-relaxed">Meet Marco, an infrastructure engineer who
+                            spent
+                            3 months in Kenya building solar wells. See what a typical Tuesday looks like in the Turkana
+                            desert.</p>
+                        <div class="flex gap-8">
+                            <div>
+                                <p class="text-2xl font-black">100%</p>
+                                <p class="text-xs text-gray-400">Travel Covered</p>
+                            </div>
+                            <div class="w-px h-10 bg-white/10"></div>
+                            <div>
+                                <p class="text-2xl font-black">5.0</p>
+                                <p class="text-xs text-gray-400">Safety Rating</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Opportunities & Form -->
+        <div class="bg-gray-50 py-24" id="positions">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-12">
+
+                    <!-- Position List -->
+                    <div class="lg:w-1/2">
+                        <div class="mb-4 rounded-xl overflow-hidden h-40 shadow-sm relative group">
+                            <!-- Image 5 -->
+                            <img src="assets/OIP (3).jpg" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition"></div>
+                        </div>
+                        <h2 class="text-2xl font-serif font-bold text-secondary mb-8">Current Opportunities</h2>
+                        <div class="space-y-6">
+
+                            <!-- Card 1 -->
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-primary transition group cursor-pointer">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg text-secondary group-hover:text-primary transition">
+                                        Event
+                                        Coordinator</h3>
+                                    <span
+                                        class="bg-blue-100 text-blue-600 text-xs font-bold px-2 py-1 rounded">Remote</span>
+                                </div>
+                                <p class="text-gray-500 text-sm mb-4">Help organize our upcoming fundraising gala.
+                                    Experience
+                                    with scheduling and vendor management needed.</p>
+                                <div class="flex items-center gap-4 text-xs font-bold text-gray-400">
+                                    <span><i class="far fa-clock"></i> 5 hrs/week</span>
+                                    <span><i class="fas fa-calendar-alt"></i> 3 Months</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-primary transition group cursor-pointer">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg text-secondary group-hover:text-primary transition">
+                                        Field
+                                        Photographer</h3>
+                                    <span
+                                        class="bg-orange-100 text-orange-600 text-xs font-bold px-2 py-1 rounded">On-site</span>
+                                </div>
+                                <p class="text-gray-500 text-sm mb-4">Travel to our project sites in Kenya to document
+                                    progress.
+                                    Portfolio required.</p>
+                                <div class="flex items-center gap-4 text-xs font-bold text-gray-400">
+                                    <span><i class="far fa-clock"></i> 2 weeks</span>
+                                    <span><i class="fas fa-plane"></i> Travel Covered</span>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-primary transition group cursor-pointer">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-bold text-lg text-secondary group-hover:text-primary transition">
+                                        Social
+                                        Media Advocate</h3>
+                                    <span
+                                        class="bg-blue-100 text-blue-600 text-xs font-bold px-2 py-1 rounded">Remote</span>
+                                </div>
+                                <p class="text-gray-500 text-sm mb-4">Amplify our message. Create content and engage
+                                    with our
+                                    community online.</p>
+                                <div class="flex items-center gap-4 text-xs font-bold text-gray-400">
+                                    <span><i class="far fa-clock"></i> Flexible</span>
+                                    <span><i class="fas fa-wifi"></i> Online</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Application Form -->
+                    <div class="lg:w-1/2">
+                        <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 sticky top-24">
+                            <h2 class="text-2xl font-serif font-bold text-secondary mb-6">Volunteer Application</h2>
+                            <form class="space-y-4">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-bold text-gray-700 mb-1">First Name</label>
+                                        <input type="text"
+                                            class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary bg-gray-50">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-bold text-gray-700 mb-1">Last Name</label>
+                                        <input type="text"
+                                            class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary bg-gray-50">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-1">Email</label>
+                                    <input type="email"
+                                        class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary bg-gray-50">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-1">Which role interests
+                                        you?</label>
+                                    <select
+                                        class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary bg-gray-50">
+                                        <option>Event Coordinator</option>
+                                        <option>Field Photographer</option>
+                                        <option>Social Media Advocate</option>
+                                        <option>General Volunteer</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-1">Why do you want to
+                                        join?</label>
+                                    <textarea rows="4"
+                                        class="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:border-primary bg-gray-50"></textarea>
+                                </div>
+
+                                <button type="button"
+                                    class="w-full bg-secondary hover:bg-primary text-white font-bold py-3 rounded-lg transition shadow-lg mt-2 btn-premium">Submit
+                                    Application</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 10: Why Volunteer? (Perks) -->
+        <section class="py-24 bg-white overflow-hidden relative">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-serif font-black text-secondary">The <span
+                            class="text-primary italic">Return</span> on Investment</h2>
+                    <p class="text-gray-400 mt-4">You give your time, we give you the world.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="bg-white p-12 rounded-[3.5rem] shadow-sm border border-gray-100 hover:shadow-premium transition group overflow-hidden relative">
+                        <!-- Image 6 Background -->
+                        <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                            <img src="assets/OIP (4).jpg" class="w-full h-full object-cover rounded-bl-[3rem]">
+                        </div>
+                        <div class="text-4xl mb-8 group-hover:scale-110 transition">🌱</div>
+                        <h4 class="text-xl font-bold text-secondary mb-4">Radical Growth</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed">Solve real-world problems that no classroom or
+                            office job can simulate. Build resilience and agency.</p>
+                    </div>
+                    <div
+                        class="bg-white p-12 rounded-[3.5rem] shadow-sm border border-gray-100 hover:shadow-premium transition group">
+                        <div class="text-4xl mb-8 group-hover:scale-110 transition">🌍</div>
+                        <h4 class="text-xl font-bold text-secondary mb-4">Global Network</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed">Join a community of elite engineers, designers,
+                            and
+                            logisticians from top global firms.</p>
+                    </div>
+                    <div
+                        class="bg-white p-12 rounded-[3.5rem] shadow-sm border border-gray-100 hover:shadow-premium transition group">
+                        <div class="text-4xl mb-8 group-hover:scale-110 transition">📜</div>
+                        <h4 class="text-xl font-bold text-secondary mb-4">Certification</h4>
+                        <p class="text-gray-500 text-sm leading-relaxed">Receive formal accreditation and letters of
+                            recommendation from our executive directors.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 12: Training & Onboarding -->
+        <section class="py-24 bg-gray-50 border-y border-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto">
+                    <!-- Title at Top -->
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-serif font-black text-secondary leading-tight">Equipped to <span
+                                class="text-primary italic">Succeed.</span></h2>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-12 items-start">
+                        <!-- Left Side: Square Image & Quote -->
+                        <div class="md:w-1/3 sticky top-24">
+                            <div class="aspect-square rounded-[2rem] overflow-hidden shadow-premium mb-6">
+                                <img src="assets/OIP (5).jpg" class="w-full h-full object-cover">
+                            </div>
+                            <div
+                                class="bg-blue-50 p-6 rounded-2xl text-sm text-blue-900 italic leading-relaxed border border-blue-100">
+                                "Training was intense but completely prepared me for the reality of field work in South
+                                Sudan."
+                            </div>
+                        </div>
+
+                        <!-- Right Side: Steps -->
+                        <div class="md:w-2/3 space-y-12">
+                            <div class="flex gap-6 group">
+                                <div
+                                    class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center font-black text-secondary text-xl shrink-0 shadow-sm border border-gray-100 group-hover:bg-primary group-hover:text-white transition">
+                                    1</div>
+                                <div>
+                                    <h5 class="font-bold text-xl text-secondary mb-3">Pre-Field Training</h5>
+                                    <p class="text-gray-500 leading-relaxed">2 weeks of cultural immersion, logistics
+                                        safety, and
+                                        specialized tool training happening at our regional hubs.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-6 group">
+                                <div
+                                    class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center font-black text-secondary text-xl shrink-0 shadow-sm border border-gray-100 group-hover:bg-primary group-hover:text-white transition">
+                                    2</div>
+                                <div>
+                                    <h5 class="font-bold text-xl text-secondary mb-3">Mentor Match</h5>
+                                    <p class="text-gray-500 leading-relaxed">You'll be paired with a 'Senior Field
+                                        Officer' who has
+                                        5+
+                                        years of experience in your region to guide your first 30 days.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-6 group">
+                                <div
+                                    class="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center font-black text-xl shrink-0 shadow-glow">
+                                    3</div>
+                                <div>
+                                    <h5 class="font-bold text-secondary mb-3">Deployment</h5>
+                                    <p class="text-gray-500 leading-relaxed">Fully managed logistics including visa
+                                        assistance,
+                                        insurance, and comfortable on-site housing accommodation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Media & Partnership Hub -->
+        <section class="py-24 bg-white border-y border-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <!-- Media -->
+                    <div
+                        class="bg-gray-50 p-12 rounded-[3rem] border border-gray-100 group hover:shadow-premium transition duration-500 relative overflow-hidden">
+                        <!-- Image 8 -->
+                        <div class="absolute inset-0 opacity-0 group-hover:opacity-10 transition duration-700">
+                            <img src="assets/OIP (6).jpg" class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-primary text-3xl mb-8 shadow-sm group-hover:rotate-6 transition relative z-10">
+                            <i class="fas fa-camera-retro"></i>
+                        </div>
+                        <h3 class="text-3xl font-serif font-black text-secondary mb-6 relative z-10">Media & Press</h3>
+                        <p class="text-gray-500 mb-8 leading-relaxed relative z-10">Journalists and media outlets:
+                            Access our high-res
+                            field assets, press kits, and direct lines to our global program directors.</p>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all relative z-10">Download
+                            Press Kit <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                    <!-- Partnerships -->
+                    <div
+                        class="bg-secondary p-12 rounded-[3rem] text-white group hover:shadow-[0_40px_80px_-20px_rgba(15,76,92,0.4)] transition duration-500">
+                        <div
+                            class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-accent text-3xl mb-8 border border-white/10 group-hover:rotate-6 transition">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="text-3xl font-serif font-black mb-6">Partner With Us</h3>
+                        <p class="text-blue-100/70 mb-8 leading-relaxed">Corporations and Foundations: Join our '100%
+                            Impact Club' and help us scale our logistics to the world's most vulnerable regions.</p>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-accent font-bold hover:gap-4 transition-all">Corporate
+                            Deck <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Report an Incident (Transparency Hub) -->
+        <section class="py-24 bg-bg overflow-hidden relative">
+            <div class="container mx-auto px-6">
+                <div
+                    class="max-w-5xl mx-auto bg-white p-12 md:p-20 rounded-[4rem] shadow-premium flex flex-col md:flex-row items-center gap-16 border border-gray-100 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-full blur-3xl"></div>
+                    <div class="md:w-1/3 text-center md:text-left">
+                        <div
+                            class="w-24 h-24 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-4xl mx-auto md:mx-0 mb-8 animate-pulse">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-serif font-black text-secondary leading-tight">Transparency
+                            <br>Whistleblower
+                        </h3>
+                    </div>
+                    <div class="md:w-2/3 space-y-6">
+                        <h4 class="text-xl font-bold text-secondary">Integrity is our Lifeblood</h4>
+                        <p class="text-gray-500 leading-relaxed italic">"If you observe any misuse of funds, ethical
+                            breaches, or field compliance issues, please report them immediately. We maintain a
+                            zero-tolerance policy for corruption."</p>
+                        <div class="pt-4">
+                            <button
+                                class="bg-secondary text-white px-8 py-4 rounded-2xl font-bold hover:bg-gray-800 transition shadow-lg flex items-center gap-3">
+                                Submit Secure Report <i class="fas fa-lock text-xs opacity-50"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Careers at HopeBridge -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-20">
+                    <div class="lg:w-1/2">
+                        <span
+                            class="text-primary font-bold uppercase tracking-widest text-[10px] mb-4 block underline decoration-accent underline-offset-8">Join
+                            the engine</span>
+                        <h2 class="text-4xl md:text-5xl font-serif font-black text-secondary mb-10 leading-tight">Work
+                            that <span class="text-primary italic">Matters.</span></h2>
+                        <p class="text-gray-500 text-lg leading-relaxed mb-8">We aren't just looking for volunteers. We
+                            are looking for engineers, logisticians, designers, and storytellers who want to spend their
+                            lives solving the 'unsolvable'.</p>
+
+                        <!-- Image 9 (Reused) -->
+                        <div class="mb-8 rounded-2xl overflow-hidden shadow-lg h-48">
+                            <img src="assets/OIP (1).jpg" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="bg-bg p-4 rounded-2xl border border-gray-100 flex-1">
+                                <span class="block text-2xl font-black text-secondary">15+</span>
+                                <span class="text-[10px] font-bold text-gray-400 uppercase">Open Positions</span>
+                            </div>
+                            <div class="bg-bg p-4 rounded-2xl border border-gray-100 flex-1">
+                                <span class="block text-2xl font-black text-secondary">4</span>
+                                <span class="text-[10px] font-bold text-gray-400 uppercase">Field Hubs</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 w-full">
+                        <div class="space-y-4">
+                            <div
+                                class="bg-white p-6 rounded-2xl border border-gray-100 flex items-center justify-between hover:border-primary hover:shadow-md transition cursor-pointer group">
+                                <div>
+                                    <h4 class="font-bold text-secondary">Field Logistics Director</h4>
+                                    <p class="text-xs text-gray-400">Nairobi, Kenya • Full-Time</p>
+                                </div>
+                                <i class="fas fa-arrow-right text-gray-200 group-hover:text-primary transition"></i>
+                            </div>
+                            <div
+                                class="bg-white p-6 rounded-2xl border border-gray-100 flex items-center justify-between hover:border-primary hover:shadow-md transition cursor-pointer group">
+                                <div>
+                                    <h4 class="font-bold text-secondary">Frontend Engineer (React)</h4>
+                                    <p class="text-xs text-gray-400">Remote • Full-Time</p>
+                                </div>
+                                <i class="fas fa-arrow-right text-gray-200 group-hover:text-primary transition"></i>
+                            </div>
+                            <div
+                                class="bg-white p-6 rounded-2xl border border-gray-100 flex items-center justify-between hover:border-primary hover:shadow-md transition cursor-pointer group">
+                                <div>
+                                    <h4 class="font-bold text-secondary">Transparency Auditor</h4>
+                                    <p class="text-xs text-gray-400">New York, NY • Full-Time</p>
+                                </div>
+                                <i class="fas fa-arrow-right text-gray-200 group-hover:text-primary transition"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Headquarters / Campus Tour -->
+        <section class="py-24 bg-secondary text-white overflow-hidden relative">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl font-serif font-black mb-4">Our Innovation Hub</h2>
+                    <p class="text-blue-100 opacity-60">Where global strategies are mapped and field logistics are
+                        coordinated.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="rounded-[3rem] overflow-hidden h-96 group relative cursor-pointer shadow-2xl">
+                        <!-- Image 10 (Reused) -->
+                        <img src="assets/OIP (2).jpg"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition duration-500"></div>
+                    </div>
+                    <div
+                        class="rounded-[3rem] overflow-hidden h-96 group relative cursor-pointer shadow-2xl md:translate-y-12">
+                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition duration-500"></div>
+                    </div>
+                    <div class="rounded-[3rem] overflow-hidden h-96 group relative cursor-pointer shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition duration-500"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl font-serif font-bold text-secondary text-center mb-12">Frequently Asked Questions
+                </h2>
+
+                <div class="space-y-4">
+                    <!-- FAQ Item -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm cursor-pointer border border-gray-100 group">
+                        <h3 onclick="toggleFAQ(this)"
+                            class="font-bold text-lg text-secondary group-hover:text-primary transition flex justify-between items-center select-none">
+                            Is my donation tax-deductible?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </h3>
+                        <p class="text-gray-600 mt-2 text-sm overflow-hidden transition-all duration-300"
+                            style="max-height: 0;">Yes, HopeBridge is a registered 501(c)(3) nonprofit
+                            organization. All donations are tax-deductible to the extent allowed by law.</p>
+                    </div>
+
+                    <!-- FAQ Item -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm cursor-pointer border border-gray-100 group">
+                        <h3 onclick="toggleFAQ(this)"
+                            class="font-bold text-lg text-secondary group-hover:text-primary transition flex justify-between items-center select-none">
+                            Can I cancel my monthly donation?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </h3>
+                        <p class="text-gray-600 mt-2 text-sm overflow-hidden transition-all duration-300"
+                            style="max-height: 0;">Yes, you can pause, edit, or cancel your recurring
+                            donation at any time from your Donor Dashboard.</p>
+                    </div>
+
+                    <!-- FAQ Item -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm cursor-pointer border border-gray-100 group">
+                        <h3 onclick="toggleFAQ(this)"
+                            class="font-bold text-lg text-secondary group-hover:text-primary transition flex justify-between items-center select-none">
+                            How do I know my money is being used correctly?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </h3>
+                        <p class="text-gray-600 mt-2 text-sm overflow-hidden transition-all duration-300"
+                            style="max-height: 0;">We post proof for every completed project,
+                            including
+                            photos, GPS coordinates, and cost breakdowns.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 10: Social Wall -->
+        <section class="py-24 bg-white border-y border-gray-100">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-serif font-black text-secondary mb-12 italic">Join the Conversation</h2>
+                <div class="flex flex-wrap justify-center gap-6 mb-16">
+                    <div
+                        class="bg-bg p-8 rounded-[2.5rem] border border-gray-100 w-48 hover:-translate-y-2 transition cursor-pointer">
+                        <i class="fab fa-instagram text-4xl text-primary mb-4 block"></i>
+                        <span class="block font-black text-secondary">250k+</span>
+                        <span
+                            class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Instagram</span>
+                    </div>
+                    <div
+                        class="bg-bg p-8 rounded-[2.5rem] border border-gray-100 w-48 hover:-translate-y-2 transition cursor-pointer">
+                        <i class="fab fa-twitter text-4xl text-blue-400 mb-4 block"></i>
+                        <span class="block font-black text-secondary">100k+</span>
+                        <span
+                            class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">Twitter</span>
+                    </div>
+                    <div
+                        class="bg-bg p-8 rounded-[2.5rem] border border-gray-100 w-48 hover:-translate-y-2 transition cursor-pointer">
+                        <i class="fab fa-youtube text-4xl text-red-600 mb-4 block"></i>
+                        <span class="block font-black text-secondary">500k+</span>
+                        <span
+                            class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">YouTube</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-12 opacity-20 hover:opacity-100 transition duration-700">
+                    <span class="font-bold text-xs uppercase tracking-[0.3em] text-secondary">#HopeBridgeVibe</span>
+                    <span class="font-bold text-xs uppercase tracking-[0.3em] text-secondary">#DirectImpact</span>
+                    <span class="font-bold text-xs uppercase tracking-[0.3em] text-secondary">#100PercentNGO</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 14: Final Contact CTA -->
+        <section class="py-24 bg-bg overflow-hidden relative">
+            <div class="container mx-auto px-6">
+                <div
+                    class="bg-primary rounded-[5rem] p-12 md:p-24 text-white text-center relative overflow-hidden shadow-glow">
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2">
+                    </div>
+                    <div class="relative z-10">
+                        <h2 class="text-5xl md:text-7xl font-serif font-black mb-10 leading-tight">No question is <br>
+                            too <span class="text-secondary italic">small.</span></h2>
+                        <p class="text-xl md:text-2xl text-white/80 mb-16 font-light max-w-3xl mx-auto">We are here to
+                            bridge the gap between your passion and the field's urgent needs. Let's talk.</p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-secondary text-white pt-24 pb-6 border-t border-white/10">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <!-- Brand -->
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                                H</div>
+                            <span class="text-2xl font-serif font-bold tracking-tight">HopeBridge</span>
+                        </div>
+                        <p class="text-blue-200/70 leading-relaxed text-sm">
+                            Connecting compassionate hearts with communities in need. Transparent, impactful, and
+                            human-centric.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="#"
+                                class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                    class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h4 class="font-bold text-lg mb-6">Explore</h4>
+                        <ul class="space-y-4 text-blue-200/70 text-sm">
+                            <li><a href="about.html" class="hover:text-white transition">Our Mission</a></li>
+                            <li><a href="causes-grid.html" class="hover:text-white transition">Active Causes</a></li>
+                            <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                            <li><a href="#" class="hover:text-white transition">Impact Reports</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Support -->
+                    <div>
+                        <h4 class="font-bold text-lg mb-6">Support</h4>
+                        <ul class="space-y-4 text-blue-200/70 text-sm">
+                            <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
+                            <li><a href="#" class="hover:text-white transition">Donor FAQ</a></li>
+                            <li><a href="#" class="hover:text-white transition">Corporate Partners</a></li>
+                            <li><a href="#" class="hover:text-white transition">Gift Cards</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div>
+                        <h4 class="font-bold text-lg mb-6">Stay Connected</h4>
+                        <p class="text-blue-200/70 text-sm mb-4">Receive inspirational stories and impact updates.</p>
+                        <form class="space-y-3">
+                            <input type="email" placeholder="Your Email Address"
+                                class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-primary text-sm text-white placeholder-white/30">
+                            <button
+                                class="w-full bg-primary hover:bg-red-500 text-white font-bold py-3 rounded-lg transition text-sm">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div
+                    class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-blue-200/50">
+                    <p>&copy; 2026 HopeBridge NGO. All rights reserved.</p>
+                    <div class="flex gap-6 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-white">Privacy Policy</a>
+                        <a href="#" class="hover:text-white">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="js/main.js"></script>
+</body>
+
+</html>

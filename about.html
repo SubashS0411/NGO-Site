@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Mission - HopeBridge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B', // Coral Orange
+                        secondary: '#0F4C5C', // Deep Ocean Teal
+                        bg: '#FAFAFA', // Warm White
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Check for saved direction preference
+        if (localStorage.dir === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.body.classList.add('rtl'); // Optional: for specific CSS targeting if needed
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.body.classList.remove('rtl');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        function toggleRTL() {
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('rtl');
+                localStorage.dir = 'ltr';
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('rtl');
+                localStorage.dir = 'rtl';
+            }
+        }
+
+        // Initialize icon state on load
+        window.onload = function () {
+            if (document.documentElement.classList.contains('dark')) {
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-bg text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Emergency Banner -->
+    <div id="emergency-banner"
+        class="bg-gradient-to-r from-red-600 to-red-500 text-white text-sm py-2 px-4 flex justify-between items-center relative z-50 shadow-md">
+        <div class="container mx-auto flex items-center justify-center animate-pulse">
+            <span class="font-bold mr-2"><i class="fas fa-exclamation-triangle"></i> URGENT:</span>
+            <span>Floods in South Asia: 50,000 families need shelter.</span>
+            <a href="cause-details.html" class="ml-4 underline hover:text-gray-200 font-bold">Help Now</a>
+        </div>
+        <button onclick="document.getElementById('emergency-banner').style.display='none'"
+            class="absolute right-4 focus:outline-none opacity-80 hover:opacity-100">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <!-- Navigation (Same as V1) -->
+    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-premium fixed top-0 left-0 w-full z-50 transition-all duration-300 rounded-none mx-0 border-b border-white/20 dark:border-gray-700"
+        id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    H
+                </div>
+                <span
+                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-1 font-medium text-secondary dark:text-gray-200">
+                <!-- Home Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Home <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="index.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-home mr-2 text-primary"></i> Home Version 1
+                        </a>
+                        <a href="index2.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-layer-group mr-2 text-primary"></i> Home Version 2
+                        </a>
+                    </div>
+                </div>
+
+                <a href="causes-grid.html" class="px-4 py-2 hover:text-primary transition">Causes</a>
+                <a href="about.html" class="px-4 py-2 hover:text-primary transition">About Us</a>
+                <a href="contact.html" class="px-4 py-2 hover:text-primary transition">Contact</a>
+
+                <!-- Dashboard Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Dashboards <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="admin-dashboard.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Admin Dashboard
+                        </a>
+                        <a href="donor-dashboard.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-user mr-2 text-primary"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hidden md:flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                <!-- RTL Toggle -->
+                <button onclick="toggleRTL()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-globe"></i>
+                </button>
+
+                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+                <a href="login.html"
+                    class="text-sm font-semibold text-secondary hover:text-primary dark:text-white transition">Log
+                    In</a>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-secondary dark:text-white focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="bg-secondary text-white py-20 md:py-32 text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2">
+        </div>
+        <div
+            class="absolute bottom-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 animate-fadeInUp">radical transparency.</h1>
+            <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fadeInUp delay-200">
+                We believe you should know exactly where your money goes. Not roughly. Not generally. <span
+                    class="text-primary font-bold">Exactly.</span>
+            </p>
+        </div>
+    </header>
+
+    <!-- Mission -->
+    <section class="py-24 bg-bg overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal-left">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Our Roots</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">It Started with a Single
+                        Well.</h2>
+                    <div class="space-y-8 relative">
+                        <!-- Timeline Line -->
+                        <div class="absolute left-4 top-0 w-0.5 h-full bg-primary/20 -z-10"></div>
+
+                        <div class="pl-12 relative reveal delay-100">
+                            <div class="absolute left-0 top-1 w-8 h-8 bg-white border-4 border-primary rounded-full">
+                            </div>
+                            <h4 class="font-bold text-secondary text-xl mb-1">2015: The Catalyst</h4>
+                            <p class="text-gray-600">Our founder, Jonathan, witnessed the water crisis in Turkana
+                                firsthand. HopeBridge was born in a kitchen with $5,000.</p>
+                        </div>
+                        <div class="pl-12 relative reveal delay-200">
+                            <div class="absolute left-0 top-1 w-8 h-8 bg-white border-4 border-secondary rounded-full">
+                            </div>
+                            <h4 class="font-bold text-secondary text-xl mb-1">2018: The 100% Model</h4>
+                            <p class="text-gray-600">We transitioned to our radical 100% model, securing private donors
+                                to cover all overhead costs forever.</p>
+                        </div>
+                        <div class="pl-12 relative reveal delay-300">
+                            <div class="absolute left-0 top-1 w-8 h-8 bg-white border-4 border-accent rounded-full">
+                            </div>
+                            <h4 class="font-bold text-secondary text-xl mb-1">2022: Global Expansion</h4>
+                            <p class="text-gray-600">Reached our 1,000th completed project milestone, expanding across
+                                10 countries in Africa and Asia.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative reveal-right">
+                    <img src="assets/hero-v1.jpg" alt="Founding"
+                        class="rounded-[3rem] shadow-premium rotate-2 hover:rotate-0 transition duration-700">
+                    <div
+                        class="absolute -bottom-10 -left-10 bg-white p-8 rounded-3xl shadow-premium border border-gray-100 hidden md:block reveal delay-500">
+                        <div class="text-primary font-bold text-sm uppercase mb-1">Est. 2015</div>
+                        <div class="text-secondary text-2xl font-black italic">"Against all odds."</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Core Philosophy -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16 reveal">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Why We Exist</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-6">The Radical Transparency
+                    Philosophy</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">Most NGOs are black boxes. We are a greenhouse. We
+                    believe that by showing every detail, we build the trust necessary for true global change.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="p-12 rounded-[3rem] bg-secondary text-white relative h-full reveal-left">
+                    <h3 class="text-3xl font-serif font-bold mb-6 italic">01. The Donor's Eye</h3>
+                    <p class="text-blue-100 leading-relaxed mb-8">You shouldn't need a magnifying glass to see your
+                        impact. We provide GPS coordinates, satellite imagery, and live project updates for every
+                        donation.</p>
+                    <i class="fas fa-satellite text-6xl text-white/5 absolute bottom-8 right-8"></i>
+                </div>
+                <div class="p-12 rounded-[3rem] bg-bg border border-gray-100 h-full reveal-right">
+                    <h3 class="text-3xl font-serif font-bold text-secondary mb-6 italic">02. Accountability First</h3>
+                    <p class="text-gray-600 leading-relaxed mb-8">We don't just report successes; we report challenges.
+                        If a well breaks, we tell you, and then we show you exactly how we're fixing it.</p>
+                    <i class="fas fa-clipboard-check text-6xl text-secondary/5 absolute bottom-8 right-8"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Global Mission Map -->
+    <section class="py-24 bg-secondary text-white relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2 reveal-left">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8">A Global Movement.</h2>
+                    <p class="text-blue-100 text-lg mb-10 leading-relaxed">We operate where the need is greatest,
+                        partnering with local leaders to ensure that every project is culturally relevant and
+                        community-owned.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 group reveal delay-100">
+                            <div
+                                class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center group-hover:bg-primary transition duration-300">
+                                <i class="fas fa-map-pin"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">12 Countries Active</h4>
+                                <p class="text-xs text-blue-200 uppercase font-bold">Africa, SE Asia, South America</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 group reveal delay-200">
+                            <div
+                                class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center group-hover:bg-accent transition duration-300">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">2,500 Local Partners</h4>
+                                <p class="text-xs text-blue-200 uppercase font-bold">Community-led implementation</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 group reveal delay-300">
+                            <div
+                                class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center group-hover:bg-primary transition duration-300">
+                                <i class="fas fa-globe-africa"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">No Border Policy</h4>
+                                <p class="text-xs text-blue-200 uppercase font-bold">Aid where boundaries disappear</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="lg:w-1/2 relative grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition duration-700 reveal-right">
+                    <img src="assets/global-reach.jpg" alt="World Map" class="rounded-[4rem] shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent flex items-end p-12">
+                        <div class="bg-white text-secondary p-6 rounded-3xl shadow-lg reveal delay-500">
+                            <div class="text-4xl font-black text-primary">1M+</div>
+                            <div class="text-xs font-bold uppercase tracking-widest">Lives Impacted</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Operational Excellence -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
+                <div class="md:max-w-xl">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Proven
+                        Methods</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary">The Science of Stewardship.
+                    </h2>
+                </div>
+                <p class="text-gray-500 md:max-w-sm mt-8 md:mt-0">We use advanced remote sensing and field verification
+                    to ensure quality and longevity.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div
+                    class="bg-bg p-12 rounded-[3.5rem] border border-gray-100 hover:shadow-premium transition duration-500 group reveal premium-card">
+                    <div
+                        class="text-6xl font-black text-primary/10 mb-8 group-hover:text-primary transition duration-500">
+                        01</div>
+                    <h3 class="text-2xl font-bold text-secondary mb-4">Remote Sensing</h3>
+                    <p class="text-gray-600">Daily satellite checks verify that our infrastructure (like solar pumps) is
+                        operational.</p>
+                </div>
+                <div
+                    class="bg-bg p-12 rounded-[3.5rem] border border-gray-100 hover:shadow-premium transition duration-500 group lg:translate-y-12 reveal delay-200">
+                    <div
+                        class="text-6xl font-black text-secondary/10 mb-8 group-hover:text-secondary transition duration-500">
+                        02</div>
+                    <h3 class="text-2xl font-bold text-secondary mb-4">Bi-annual Audits</h3>
+                    <p class="text-gray-600">Independent third-party organizations audit 100% of our project
+                        expenditures.</p>
+                </div>
+                <div
+                    class="bg-bg p-12 rounded-[3.5rem] border border-gray-100 hover:shadow-premium transition duration-500 group reveal delay-400">
+                    <div
+                        class="text-6xl font-black text-accent/20 mb-8 group-hover:text-accent font-bold transition duration-500">
+                        03</div>
+                    <h3 class="text-2xl font-bold text-secondary mb-4">Impact Proof</h3>
+                    <p class="text-gray-600">Post-completion monitoring for 15 years ensures projects don't just start,
+                        but last.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Advisory Board -->
+    <section class="py-24 bg-bg overflow-hidden relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Guidance &
+                    Governance</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-6">Our Advisory Board</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div
+                    class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-premium transition-all duration-300 text-center group reveal premium-card">
+                    <img src="assets/avatar-7.jpg" alt="Elena Vos"
+                        class="w-24 h-24 rounded-full mx-auto mb-6 grayscale group-hover:grayscale-0 transition duration-500">
+                    <h4 class="font-bold text-secondary text-lg">Dr. Elena Vos</h4>
+                    <p class="text-xs text-gray-400 font-bold uppercase mb-4">Public Health Guru</p>
+                    <p class="text-gray-500 text-sm italic">"HopeBridge sets the standard for field health
+                        transparency."</p>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-premium transition-all duration-300 text-center group reveal delay-100">
+                    <img src="assets/avatar-8.jpg" alt="Marcus Thorne"
+                        class="w-24 h-24 rounded-full mx-auto mb-6 grayscale group-hover:grayscale-0 transition duration-500">
+                    <h4 class="font-bold text-secondary text-lg">Marcus Thorne</h4>
+                    <p class="text-xs text-gray-400 font-bold uppercase mb-4">Tech Strategist</p>
+                    <p class="text-gray-500 text-sm italic">"Implementing blockchain for zero-loss aid tracking."</p>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-premium transition-all duration-300 text-center group reveal delay-200">
+                    <img src="assets/avatar-9.jpg" alt="Aisha B."
+                        class="w-24 h-24 rounded-full mx-auto mb-6 grayscale group-hover:grayscale-0 transition duration-500">
+                    <h4 class="font-bold text-secondary text-lg">Aisha B.</h4>
+                    <p class="text-xs text-gray-400 font-bold uppercase mb-4">Sustainability Lead</p>
+                    <p class="text-gray-500 text-sm italic">"Ensuring every well is powered by 100% renewable energy."
+                    </p>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-premium transition-all duration-300 text-center group reveal delay-300">
+                    <img src="assets/avatar-10.jpg" alt="Robert Chen"
+                        class="w-24 h-24 rounded-full mx-auto mb-6 grayscale group-hover:grayscale-0 transition duration-500">
+                    <h4 class="font-bold text-secondary text-lg">Robert Chen</h4>
+                    <p class="text-xs text-gray-400 font-bold uppercase mb-4">Financial Ethics</p>
+                    <p class="text-gray-500 text-sm italic">"Guarding the 100% model with rigorous fiscal policy."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Partner NGO Network -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 order-2 lg:order-1 reveal-left">
+                    <img src="assets/partners.jpg" alt="Partners" class="rounded-[3rem] shadow-premium">
+                </div>
+                <div class="lg:w-1/2 order-1 lg:order-2 reveal-right">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Strength in
+                        Unity</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">Empowering Local
+                        Expertise.</h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed">We don't parachute in. we partner with over
+                        40 local NGOs who understand the unique cultural and logistical landscape of their own
+                        communities.</p>
+
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="reveal delay-200">
+                            <div class="text-3xl font-black text-primary mb-2">40+</div>
+                            <div class="text-xs font-bold uppercase text-gray-400 tracking-widest">Local NGO Partners
+                            </div>
+                        </div>
+                        <div class="reveal delay-300">
+                            <div class="text-3xl font-black text-secondary mb-2">100%</div>
+                            <div class="text-xs font-bold uppercase text-gray-400 tracking-widest">Community Co-Owned
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Financial Integrity -->
+    <section class="py-24 bg-bg">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-6">Uncompromising Integrity</h2>
+                <p class="text-gray-600 text-lg leading-relaxed">Financial transparency is not just about showing the
+                    numbers; it's about making them bulletproof.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-white p-10 rounded-3xl border border-gray-100 shadow-sm hover:shadow-premium transition reveal">
+                    <div
+                        class="w-16 h-16 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-secondary mb-4">Independent Audits</h4>
+                    <p class="text-gray-500 text-sm">Every single dollar is tracked and audited annually by world-class
+                        third-party firms.</p>
+                </div>
+                <div
+                    class="bg-white p-10 rounded-3xl border border-gray-100 shadow-sm hover:shadow-premium transition reveal delay-200">
+                    <div
+                        class="w-16 h-16 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-secondary mb-4">Anti-Corruption</h4>
+                    <p class="text-gray-500 text-sm">Rigorous zero-tolerance policies and digital payment trails
+                        minimize any risk of leakage.</p>
+                </div>
+                <div
+                    class="bg-white p-10 rounded-3xl border border-gray-100 shadow-sm hover:shadow-premium transition reveal delay-400">
+                    <div
+                        class="w-16 h-16 bg-accent/20 text-secondary rounded-2xl flex items-center justify-center text-3xl mb-6">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="font-bold text-xl text-secondary mb-4">Real-time Data</h4>
+                    <p class="text-gray-500 text-sm">Our internal ledger is shared with stakeholders in real-time,
+                        ensuring absolute visibility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: The 100% Model Flow -->
+    <section class="py-24 bg-secondary text-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20 reveal">
+                <span class="text-accent font-bold tracking-wider uppercase text-sm mb-4 block">How it Works</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">The 100% Model Journey</h2>
+                <p class="text-blue-100 text-lg max-w-2xl mx-auto">See exactly how your donation transforms from a
+                    digital transaction into a tangible life-saving project.</p>
+            </div>
+
+            <div class="relative flex flex-col md:flex-row justify-between items-center gap-12">
+                <!-- Connector Line (Desktop) -->
+                <div
+                    class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-white/10 -translate-y-1/2 z-0 reveal delay-700">
+                </div>
+
+                <div
+                    class="relative z-10 bg-white/5 border border-white/10 backdrop-blur p-8 rounded-3xl text-center w-full md:w-1/4 reveal">
+                    <div
+                        class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold mx-auto mb-6">
+                        1</div>
+                    <h4 class="font-bold mb-2">You Give</h4>
+                    <p class="text-xs text-blue-200">100% of your gift is earmarked for project costs.</p>
+                </div>
+                <div
+                    class="relative z-10 bg-white/5 border border-white/10 backdrop-blur p-8 rounded-3xl text-center w-full md:w-1/4 reveal delay-100">
+                    <div
+                        class="w-12 h-12 bg-accent text-secondary rounded-full flex items-center justify-center font-bold mx-auto mb-6">
+                        2</div>
+                    <h4 class="font-bold mb-2">Private Donors</h4>
+                    <p class="text-xs text-blue-200">Our founders and private donors cover all overhead.</p>
+                </div>
+                <div
+                    class="relative z-10 bg-white/5 border border-white/10 backdrop-blur p-8 rounded-3xl text-center w-full md:w-1/4 reveal delay-200">
+                    <div
+                        class="w-12 h-12 bg-white text-secondary rounded-full flex items-center justify-center font-bold mx-auto mb-6">
+                        3</div>
+                    <h4 class="font-bold mb-2">Project Starts</h4>
+                    <p class="text-xs text-blue-200">Materials are purchased and local staff are deployed.</p>
+                </div>
+                <div
+                    class="relative z-10 bg-white/5 border border-white/10 backdrop-blur p-8 rounded-3xl text-center w-full md:w-1/4 reveal delay-300">
+                    <div
+                        class="w-12 h-12 bg-green-400 text-secondary rounded-full flex items-center justify-center font-bold mx-auto mb-6">
+                        4</div>
+                    <h4 class="font-bold mb-2">Life Changes</h4>
+                    <p class="text-xs text-blue-200">Proof of completion is sent directly to you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Transparency Technology -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2 reveal-left">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Tech for
+                        Good</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">The Tools of Trust.</h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed">We leverage cutting-edge technology to shrink
+                        the distance between the donor and the recipient.</p>
+
+                    <ul class="space-y-6">
+                        <li class="flex items-center gap-4 reveal delay-100">
+                            <i class="fas fa-satellite text-primary text-2xl"></i>
+                            <span class="font-medium text-secondary">Satellite Verification for Assets</span>
+                        </li>
+                        <li class="flex items-center gap-4 reveal delay-200">
+                            <i class="fas fa-qrcode text-primary text-2xl"></i>
+                            <span class="font-medium text-secondary">Unique Tracking IDs for Every Dollar</span>
+                        </li>
+                        <li class="fas fa-mobile-alt text-primary text-2xl flex items-center gap-4 reveal delay-300">
+                            <span class="font-medium text-secondary ml-4">Real-time SMS Updates from the Field</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lg:w-1/2 relative reveal-right">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="assets/tech-good-1.jpg" alt="Tech"
+                            class="rounded-3xl mt-12 shadow-premium hover:rotate-1 transition duration-500">
+                        <img src="assets/tech-good-2.jpg" alt="Tech"
+                            class="rounded-3xl shadow-premium hover:-rotate-1 transition duration-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: SDG Alignment -->
+    <section class="py-16 bg-bg border-y border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="md:max-w-xs text-center md:text-left reveal">
+                    <h4 class="text-2xl font-serif font-bold text-secondary mb-2">Global Alignment</h4>
+                    <p class="text-gray-500 text-sm">Our projects contribute to 7 UN Sustainable Development Goals.</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-6 opacity-60">
+                    <div
+                        class="w-16 h-16 bg-blue-600 text-white flex items-center justify-center font-bold text-xs p-2 text-center rounded-lg reveal">
+                        Goal 6: Clean Water</div>
+                    <div
+                        class="w-16 h-16 bg-red-600 text-white flex items-center justify-center font-bold text-xs p-2 text-center rounded-lg reveal delay-100">
+                        Goal 1: No Poverty</div>
+                    <div
+                        class="w-16 h-16 bg-green-600 text-white flex items-center justify-center font-bold text-xs p-2 text-center rounded-lg reveal delay-200">
+                        Goal 3: Health</div>
+                    <div
+                        class="w-16 h-16 bg-orange-600 text-white flex items-center justify-center font-bold text-xs p-2 text-center rounded-lg reveal delay-300">
+                        Goal 4: Education</div>
+                    <div
+                        class="w-16 h-16 bg-blue-400 text-white flex items-center justify-center font-bold text-xs p-2 text-center rounded-lg reveal delay-400">
+                        Goal 13: Climate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Financials -->
+    <section class="py-20 bg-gray-50" id="transparency">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-primary font-bold uppercase tracking-wider text-sm">Financials</span>
+                <h2 class="text-3xl font-serif font-bold text-secondary mt-2">Where the money goes</h2>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+                <!-- Pie Chart Visual (Pure CSS) -->
+                <div class="relative w-64 h-64 rounded-full bg-secondary reveal"
+                    style="background: conic-gradient(#FF6B6B 0% 85%, #0F4C5C 85% 100%);">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div
+                            class="w-48 h-48 bg-gray-50 rounded-full flex flex-col items-center justify-center shadow-inner">
+                            <span class="text-5xl font-bold text-primary">85%</span>
+                            <span class="text-gray-500 text-xs font-bold uppercase">Program Costs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="space-y-6 reveal-right">
+                    <div class="flex items-start gap-4">
+                        <div class="w-4 h-4 bg-primary rounded mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-lg text-secondary">Program Services (85%)</h4>
+                            <p class="text-gray-500 text-sm max-w-xs">Direct aid, construction materials, medical
+                                supplies, and local staff wages.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-4 h-4 bg-secondary rounded mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-lg text-secondary">Management & Growth (15%)</h4>
+                            <p class="text-gray-500 text-sm max-w-xs">Fundraising to grow our impact, admin, and global
+                                operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    </section>
+
+    <!-- Section 11: Volunteer Spotlight -->
+    <section class="py-24 bg-bg overflow-hidden relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal-left">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Our Heroes</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">Volunteers are the
+                        Vanguard.</h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed">Our global network of 5,000+ volunteers is
+                        the secret sauce to our low overhead. They don't just give time; they give their passion and
+                        skills.</p>
+
+                    <div
+                        class="bg-white p-8 rounded-3xl shadow-premium border border-gray-100 relative group transition-transform hover:-rotate-1">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="assets/avatar-11.jpg" class="w-16 h-16 rounded-full border-2 border-primary">
+                            <div>
+                                <h4 class="font-bold text-secondary text-lg">Sarah Jenkins</h4>
+                                <p class="text-xs text-gray-500 font-bold uppercase tracking-widest">Tech Volunteer
+                                    since 2021</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"Volunteering with HopeBridge isn't just about 'doing good'—it's
+                            about using my specific skills in data analysis to track project success. It's incredibly
+                            fulfilling to see the data point directly to lives saved."</p>
+                        <i class="fas fa-quote-right text-4xl text-primary/10 absolute bottom-8 right-8"></i>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 reveal-right">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="assets/monthly-giving.jpg" alt="Volunteer"
+                            class="rounded-[2.5rem] shadow-premium hover:scale-105 transition-transform">
+                        <img src="assets/volunteers-2.jpg" alt="Volunteer"
+                            class="rounded-[2.5rem] mt-12 shadow-premium hover:scale-105 transition-transform">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 12: Sustainability Promise -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="bg-secondary text-white rounded-[4rem] p-12 md:p-24 relative overflow-hidden reveal">
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-green-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div class="relative z-10 flex flex-col lg:flex-row items-center gap-16">
+                    <div class="lg:w-1/2 reveal-left">
+                        <span class="text-green-400 font-bold tracking-wider uppercase text-sm mb-4 block">Ethical
+                            Aid</span>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8 italic">Heal People, Heal the Planet.
+                        </h2>
+                        <p class="text-blue-100 text-lg mb-10 leading-relaxed">We believe in healing the planet while we
+                            help its people. 100% of our new builds use solar power, and our supply chains are
+                            carbon-neutral.</p>
+
+                        <div class="flex flex-wrap gap-4">
+                            <div
+                                class="bg-white/10 px-6 py-3 rounded-full flex items-center gap-2 border border-white/10 reveal delay-100">
+                                <i class="fas fa-leaf text-green-400"></i>
+                                <span class="text-sm font-medium">Eco-Safe Materials</span>
+                            </div>
+                            <div
+                                class="bg-white/10 px-6 py-3 rounded-full flex items-center gap-2 border border-white/10 reveal delay-200">
+                                <i class="fas fa-sun text-accent"></i>
+                                <span class="text-sm font-medium">Solar Infrastructure</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 reveal-right">
+                        <img src="assets/sustainability.jpg" alt="Sustainability"
+                            class="rounded-[3rem] shadow-premium brightness-90">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 13: Archive of Impact -->
+    <section class="py-24 bg-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Full
+                    Accountability</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-16 px-4">The Archive of Impact
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <a href="#"
+                    class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-premium transition flex flex-col items-center group reveal">
+                    <i class="far fa-file-pdf text-4xl text-primary mb-4 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-secondary mb-1">2025 Impact Report</h4>
+                    <p class="text-xs text-gray-400 uppercase font-bold tracking-widest">Released Jan 2026</p>
+                </a>
+                <a href="#"
+                    class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-premium transition flex flex-col items-center group reveal delay-100">
+                    <i class="far fa-file-pdf text-4xl text-primary mb-4 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-secondary mb-1">2024 Audit Summary</h4>
+                    <p class="text-xs text-gray-400 uppercase font-bold tracking-widest">Third-Party Verification</p>
+                </a>
+                <a href="#"
+                    class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-premium transition flex flex-col items-center group reveal delay-200">
+                    <i class="far fa-file-pdf text-4xl text-primary mb-4 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-secondary mb-1">Strategy Map 2030</h4>
+                    <p class="text-xs text-gray-400 uppercase font-bold tracking-widest">Our Future Vision</p>
+                </a>
+                <a href="#"
+                    class="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-premium transition flex flex-col items-center group reveal delay-300">
+                    <i class="far fa-file-pdf text-4xl text-primary mb-4 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-secondary mb-1">Bylaws & Policies</h4>
+                    <p class="text-xs text-gray-400 uppercase font-bold tracking-widest">Updated Q4 2025</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 14: Diversity & Equity -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2 order-2 lg:order-1 relative reveal-left">
+                    <img src="assets/diversity.jpg" alt="Diversity" class="rounded-[3rem] shadow-premium">
+                </div>
+                <div class="lg:w-1/2 order-1 lg:order-2 reveal-right">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Inclusive
+                        Progress</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">Equity is Our North Star.
+                    </h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed">We don't just provide aid; we ensure that aid
+                        reaches the most marginalized—regardless of gender, religion, or ethnicity. Our field staff is
+                        90% local and 50% female.</p>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 reveal delay-100">
+                            <i class="fas fa-check-circle text-primary"></i>
+                            <span class="font-bold text-secondary">90% Local Leadership in Fields</span>
+                        </li>
+                        <li class="flex items-center gap-3 reveal delay-200">
+                            <i class="fas fa-check-circle text-primary"></i>
+                            <span class="font-bold text-secondary">Balanced Gender Representation</span>
+                        </li>
+                        <li class="flex items-center gap-3 reveal delay-300">
+                            <i class="fas fa-check-circle text-primary"></i>
+                            <span class="font-bold text-secondary">Cultural Competency Certification</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 15: 2030 Roadmap -->
+    <section class="py-24 bg-primary text-white overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-black/5 -skew-x-12 translate-x-1/2"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center reveal">
+                <span
+                    class="bg-white/20 text-white text-xs font-bold px-4 py-2 rounded-full uppercase tracking-widest mb-6 inline-block">The
+                    Next Decade</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8">The 2030 Vision: 10 Million Lives.</h2>
+                <p class="text-white/80 text-xl mb-12 leading-relaxed">Our 2030 roadmap focused on scaling our
+                    high-trust model through technology and deep community partnerships. We aren't stopping until
+                    extreme poverty is a history lesson.</p>
+
+                <div class="flex flex-col md:flex-row gap-8 text-left">
+                    <div class="bg-white/10 p-8 rounded-3xl border border-white/10 flex-1 reveal delay-100">
+                        <h4 class="font-bold text-xl mb-4 text-accent">Phase 1: Scale</h4>
+                        <p class="text-sm text-white/70 italic">Expansion into 15 new regions by 2027.</p>
+                    </div>
+                    <div class="bg-white/10 p-8 rounded-3xl border border-white/10 flex-1 reveal delay-200">
+                        <h4 class="font-bold text-xl mb-4 text-accent">Phase 2: Tech</h4>
+                        <p class="text-sm text-white/70 italic">AI-driven field monitoring systems by 2028.</p>
+                    </div>
+                    <div class="bg-white/10 p-8 rounded-3xl border border-white/10 flex-1 reveal delay-300">
+                        <h4 class="font-bold text-xl mb-4 text-accent">Phase 3: Impact</h4>
+                        <p class="text-sm text-white/70 italic">Reaching our 10M lives milestone by Dec 2030.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-secondary text-white pt-24 pb-6 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="space-y-6">
+                    <div class="flex items-center gap-2">
+                        <div
+                            class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                            H</div>
+                        <span class="text-2xl font-serif font-bold tracking-tight">HopeBridge</span>
+                    </div>
+                    <p class="text-blue-200/70 leading-relaxed text-sm">
+                        Connecting compassionate hearts with communities in need. Transparent, impactful, and
+                        human-centric.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Explore</h4>
+                    <ul class="space-y-4 text-blue-200/70 text-sm">
+                        <li><a href="about.html" class="hover:text-white transition">Our Mission</a></li>
+                        <li><a href="causes-grid.html" class="hover:text-white transition">Active Causes</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Impact Reports</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Support</h4>
+                    <ul class="space-y-4 text-blue-200/70 text-sm">
+                        <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Donor FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition">Corporate Partners</a></li>
+                        <li><a href="#" class="hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Stay Connected</h4>
+                    <p class="text-blue-200/70 text-sm mb-4">Receive inspirational stories and impact updates.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your Email Address"
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-primary text-sm text-white placeholder-white/30">
+                        <button
+                            class="w-full bg-primary hover:bg-red-500 text-white font-bold py-3 rounded-lg transition text-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-blue-200/50">
+                <p>&copy; 2026 HopeBridge NGO. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

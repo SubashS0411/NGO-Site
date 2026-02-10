@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HopeBridge - Empower Change</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B', // Coral Orange
+                        secondary: '#0F4C5C', // Deep Ocean Teal
+                        accent: '#FFD166',
+                        bg: '#FAFAFA', // Warm White
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 20px 50px -12px rgba(0, 0, 0, 0.1)',
+                        'glow': '0 0 20px rgba(255, 107, 107, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        @keyframes marquee-slow {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee-slow {
+            animation: marquee-slow 40s linear infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 50;
+            border: 1px border-gray-100;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: #0F4C5C;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            padding-left: 1.25rem;
+        }
+
+        .hotspot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #FF6B6B;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 0 rgba(255, 107, 107, 0.4);
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(255, 107, 107, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+            }
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: #FF6B6B;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 1.5rem 0;
+        }
+
+        .timeline-time {
+            position: absolute;
+            top: 0;
+            right: 100%;
+            margin-right: 1rem;
+            font-weight: bold;
+            color: #0F4C5C;
+        }
+
+        .timeline-content {
+            padding: 1rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            max-width: 400px;
+        }
+
+        .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 100%;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent #fff transparent transparent;
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Check for saved direction preference
+        if (localStorage.dir === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.body.classList.add('rtl'); // Optional: for specific CSS targeting if needed
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.body.classList.remove('rtl');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        function toggleRTL() {
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('rtl');
+                localStorage.dir = 'ltr';
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('rtl');
+                localStorage.dir = 'rtl';
+            }
+        }
+
+        // Initialize icon state on load
+        window.onload = function () {
+            if (document.documentElement.classList.contains('dark')) {
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Navigation (Same as V1) -->
+    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-premium fixed top-0 left-0 w-full z-50 transition-all duration-300 rounded-none mx-0 border-b border-white/20 dark:border-gray-700"
+        id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    H
+                </div>
+                <span
+                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-1 font-medium text-secondary dark:text-gray-200">
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Home <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="index.html"
+                            class="dropdown-item dark:text-gray-200 hover:bg-gray-50 hover:text-primary dark:hover:bg-gray-700 dark:hover:text-white transition-colors">
+                            <i class="fas fa-home mr-2 text-primary"></i> Home Version 1
+                        </a>
+                        <a href="index2.html"
+                            class="dropdown-item dark:text-gray-200 hover:bg-gray-50 hover:text-primary dark:hover:bg-gray-700 dark:hover:text-white transition-colors">
+                            <i class="fas fa-layer-group mr-2 text-primary"></i> Home Version 2
+                        </a>
+                    </div>
+                </div>
+
+                <a href="causes-grid.html" class="px-4 py-2 hover:text-primary transition">Causes</a>
+                <a href="about.html" class="px-4 py-2 hover:text-primary transition">About Us</a>
+                <a href="contact.html" class="px-4 py-2 hover:text-primary transition">Contact</a>
+
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Dashboards <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="admin-dashboard.html"
+                            class="dropdown-item dark:text-gray-200 hover:bg-gray-50 hover:text-primary dark:hover:bg-gray-700 dark:hover:text-white transition-colors">
+                            <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Admin Dashboard
+                        </a>
+                        <a href="donor-dashboard.html"
+                            class="dropdown-item dark:text-gray-200 hover:bg-gray-50 hover:text-primary dark:hover:bg-gray-700 dark:hover:text-white transition-colors">
+                            <i class="fas fa-user mr-2 text-primary"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                <!-- RTL Toggle -->
+                <button onclick="toggleRTL()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-globe"></i>
+                </button>
+
+                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+                <a href="login.html"
+                    class="text-sm font-semibold text-secondary hover:text-primary dark:text-white transition">Log
+                    In</a>
+
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-secondary dark:text-white focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Story Introduction -->
+    <!-- 1. Hero Story Introduction (Split Layout) -->
+    <!-- 1. Hero Story Introduction (Full Width Background) -->
+    <header class="relative min-h-[600px] md:min-h-[850px] flex items-center overflow-hidden bg-[#0F172A]">
+        <!-- Ambient Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-secondary via-gray-900 to-black opacity-90"></div>
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-pulse"></div>
+        <div class="absolute top-40 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px]"></div>
+
+        <div
+            class="container mx-auto px-6 relative z-20 flex flex-col md:flex-row items-center justify-center pt-20 gap-16">
+
+            <!-- Left: Text Content (Overlapping) -->
+            <div class="w-full md:w-1/2 relative z-20 order-2 md:order-1">
+                <div
+                    class="p-10 md:p-16 rounded-[3rem] bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl animate-fadeInUp">
+                    <div
+                        class="inline-block bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg border border-white/5 mb-8">
+                        <span class="text-primary text-sm font-bold tracking-[0.2em] uppercase">Change Yourself To
+                            Change The World</span>
+                    </div>
+
+                    <h1 class="text-4xl md:text-7xl font-serif font-bold text-white leading-tight mb-6 drop-shadow-lg">
+                        Save a <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-yellow-400">Child's</span>
+                        Life
+                    </h1>
+
+                    <p class="text-lg md:text-xl text-blue-100/70 max-w-lg leading-relaxed font-light mb-10">
+                        You can transform a world of poverty to sustainability. Over 70% of infant deaths occur within
+                        the first year of life.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+
+                        <a href="about.html"
+                            class="px-10 py-5 bg-white/5 hover:bg-white/10 text-white border border-white/20 font-bold rounded-2xl transition transform hover:-translate-y-1 backdrop-blur-md">
+                            Watch Video <i class="fas fa-play ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Image -->
+            <div class="w-full md:w-1/2 h-[500px] md:h-[750px] relative z-10 order-1 md:order-2">
+                <div
+                    class="relative w-full h-full rounded-[3.5rem] overflow-hidden shadow-2xl border-4 border-white/5 group">
+                    <img src="assets/smile.webp"
+                        class="w-full h-full object-cover transform group-hover:scale-105 transition duration-1000">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                    <!-- Floating Badge on Image -->
+                    <div
+                        class="absolute bottom-10 right-10 bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl hidden md:block animate-bounce-slow">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-bold text-lg">Verified Impact</p>
+                                <p class="text-blue-200 text-xs">Audited Monthly</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- 1.5 Circular Ecosystem Section (Shield Style) -->
+    <section class="py-16 bg-[#1A1A2E] text-white relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#16213E] to-[#0F3460]"></div>
+        <div
+            class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-50">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-16">
+
+            <!-- Text Content -->
+            <div class="md:w-1/2 space-y-6">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-blue-400 text-xl"></i>
+                    </div>
+                    <span class="font-bold text-blue-300 tracking-wider uppercase text-sm">Our Commitment</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold leading-tight">
+                    Your Support, <br>
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 text-glow">Our
+                        Protection</span>
+                </h2>
+                <p class="text-blue-100/70 text-lg leading-relaxed max-w-lg">
+                    HopeBridge leads the strategic and unified work to strengthen the security, resilience, and future
+                    of the child ecosystem to protect critical needs.
+                </p>
+                <a href="about.html"
+                    class="inline-block mt-4 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-bold shadow-lg hover:shadow-blue-500/30 transition transform hover:-translate-y-1">
+                    Learn More
+                </a>
+            </div>
+
+            <!-- Circular Interactive Graphic -->
+            <div class="md:w-1/2 relative h-[500px] w-full flex items-center justify-center">
+                <!-- Orbit Rings -->
+                <div class="absolute w-[400px] h-[400px] rounded-full border border-blue-500/30 animate-spin-slow">
+                </div>
+                <div class="absolute w-[300px] h-[300px] rounded-full border border-purple-500/30 animate-reverse-spin">
+                </div>
+
+                <!-- Central Icon -->
+                <div
+                    class="relative z-10 w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-[0_0_50px_rgba(59,130,246,0.5)] transform hover:scale-110 transition duration-500 group cursor-pointer">
+                    <i class="fas fa-heart text-5xl text-white drop-shadow-md group-hover:animate-pulse"></i>
+                </div>
+
+                <!-- Orbiting Icons (Static Placement with Hover Zoom) -->
+                <!-- Icon 1: Education -->
+                <div
+                    class="absolute top-0 right-10 bg-[#1A1A2E] p-4 rounded-xl border border-blue-500/50 shadow-lg hover:scale-125 transition duration-300 cursor-pointer group">
+                    <i class="fas fa-graduation-cap text-2xl text-blue-400 group-hover:text-white"></i>
+                </div>
+
+                <!-- Icon 2: Water -->
+                <div
+                    class="absolute bottom-10 right-20 bg-[#1A1A2E] p-4 rounded-xl border border-blue-500/50 shadow-lg hover:scale-125 transition duration-300 cursor-pointer group">
+                    <i class="fas fa-tint text-2xl text-cyan-400 group-hover:text-white"></i>
+                </div>
+
+                <!-- Icon 3: Nutrition -->
+                <div
+                    class="absolute bottom-0 left-20 bg-[#1A1A2E] p-4 rounded-xl border border-purple-500/50 shadow-lg hover:scale-125 transition duration-300 cursor-pointer group">
+                    <i class="fas fa-apple-alt text-2xl text-red-400 group-hover:text-white"></i>
+                </div>
+
+                <!-- Icon 4: Shelter -->
+                <div
+                    class="absolute top-20 left-0 bg-[#1A1A2E] p-4 rounded-xl border border-purple-500/50 shadow-lg hover:scale-125 transition duration-300 cursor-pointer group">
+                    <i class="fas fa-home text-2xl text-yellow-400 group-hover:text-white"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Meet the Child – Personal Profile -->
+    <section class="py-16 bg-white dark:bg-gray-900 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <!-- Photo/Avatar -->
+                <div class="w-full md:w-1/2 relative group">
+                    <div
+                        class="absolute inset-0 bg-primary/10 rounded-full transform translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition duration-500 rounded-[3rem]">
+                    </div>
+                    <img src="assets/home2pic.jpg" alt="Amina Profile"
+                        class="relative rounded-[3rem] shadow-2xl w-full h-[500px] object-cover z-10">
+
+                    <div
+                        class="absolute bottom-10 -right-6 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl z-20 max-w-xs animate-float border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center gap-4">
+                            <div class="text-center">
+                                <span class="block text-3xl font-bold text-primary">10</span>
+                                <span class="text-xs text-gray-500 uppercase font-bold">Years Old</span>
+                            </div>
+                            <div class="h-10 w-px bg-gray-200"></div>
+                            <div class="text-center">
+                                <span class="block text-3xl font-bold text-secondary dark:text-white">KE</span>
+                                <span class="text-xs text-gray-500 uppercase font-bold">Kenya</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 space-y-8">
+                    <span class="text-primary font-bold uppercase tracking-wider text-sm">The Protagonist</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary dark:text-white">Hello, I'm
+                        Amina.</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        I live in Turkana with my grandmother and three siblings. Before HopeBridge, I used to spend my
+                        mornings fetching water instead of reading books.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6 pt-4">
+                        <div class="bg-bg dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700">
+                            <i class="fas fa-palette text-3xl text-accent mb-3"></i>
+                            <h4 class="font-bold text-secondary dark:text-white">Hobbies</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Painting, Singing</p>
+                        </div>
+                        <div class="bg-bg dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700">
+                            <i class="fas fa-book-open text-3xl text-primary mb-3"></i>
+                            <h4 class="font-bold text-secondary dark:text-white">Favorite Subject</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Science & Biology</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="p-6 bg-yellow-50 dark:bg-yellow-900/10 rounded-2xl border border-yellow-100 dark:border-yellow-900/30 flex gap-4 items-start">
+                        <i class="fas fa-quote-left text-yellow-400 text-2xl"></i>
+                        <p class="text-gray-700 dark:text-gray-300 italic">"I want to be a doctor so I can help my
+                            grandmother when her
+                            knees hurt."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Impact Flip Cards (Moved) -->
+    <section class="py-16 bg-gray-50 relative overflow-hidden">
+        <!-- Organic Shape Divider (Top) -->
+        <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none" class="relative block w-[calc(113%+1.3px)] h-[60px]">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="fill-white"></path>
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-primary font-bold uppercase tracking-wider text-sm">Real Change</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary dark:text-white mt-2">See The
+                    Difference</h2>
+                <p class="text-gray-500 dark:text-gray-400 mt-4 text-lg">Hover over the cards to see how your
+                    contribution transforms
+                    lives.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Flip Card 1 -->
+                <div class="group h-[400px] perspective-1000">
+                    <div
+                        class="relative h-full w-full shadow-xl transition-all duration-700 transform-style-3d group-hover:rotate-y-180 rounded-3xl">
+                        <!-- Front -->
+                        <div
+                            class="absolute inset-0 backface-hidden rounded-3xl overflow-hidden bg-white border border-gray-100">
+                            <div class="h-1/2 overflow-hidden">
+                                <img src="assets/OIP (2).jpg" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-8 text-center flex flex-col items-center justify-center h-1/2 bg-gray-50">
+                                <div
+                                    class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 text-red-500 text-2xl">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-secondary">The Problem</h3>
+                                <p class="text-gray-500 text-sm mt-2">Limited access to clean water sources leading to
+                                    illness.</p>
+                            </div>
+                        </div>
+
+                        <!-- Back -->
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 rounded-3xl overflow-hidden bg-gradient-to-br from-secondary to-blue-900 text-white">
+                            <div
+                                class="h-full p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
+                                <div
+                                    class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+                                </div>
+                                <div
+                                    class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6 text-white text-2xl shadow-glow z-10">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-2 z-10">The Solution</h3>
+                                <p class="text-blue-100 text-sm mb-6 z-10">New solar-powered wells providing 500L of
+                                    clean water daily.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flip Card 2 -->
+                <div class="group h-[400px] perspective-1000">
+                    <div
+                        class="relative h-full w-full shadow-xl transition-all duration-700 transform-style-3d group-hover:rotate-y-180 rounded-3xl">
+                        <!-- Front -->
+                        <div
+                            class="absolute inset-0 backface-hidden rounded-3xl overflow-hidden bg-white border border-gray-100">
+                            <div class="h-1/2 overflow-hidden">
+                                <img src="assets/OIP (1).jpg" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-8 text-center flex flex-col items-center justify-center h-1/2 bg-gray-50">
+                                <div
+                                    class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4 text-orange-500 text-2xl">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-secondary">The Challenge</h3>
+                                <p class="text-gray-500 text-sm mt-2">Malnutrition affecting 40% of children in the
+                                    region.</p>
+                            </div>
+                        </div>
+
+                        <!-- Back -->
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 rounded-3xl overflow-hidden bg-gradient-to-br from-orange-500 to-red-600 text-white">
+                            <div
+                                class="h-full p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
+                                <div
+                                    class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+                                </div>
+                                <div
+                                    class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-6 text-white text-2xl shadow-lg z-10">
+                                    <i class="fas fa-apple-alt"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-2 z-10">Nutritious Meals</h3>
+                                <p class="text-white/90 text-sm mb-6 z-10">Daily fortified school lunches for 200+
+                                    students.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flip Card 3 -->
+                <div class="group h-[400px] perspective-1000">
+                    <div
+                        class="relative h-full w-full shadow-xl transition-all duration-700 transform-style-3d group-hover:rotate-y-180 rounded-3xl">
+                        <!-- Front -->
+                        <div
+                            class="absolute inset-0 backface-hidden rounded-3xl overflow-hidden bg-white border border-gray-100">
+                            <div class="h-1/2 overflow-hidden">
+                                <img src="assets/OIP (3).jpg" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-8 text-center flex flex-col items-center justify-center h-1/2 bg-gray-50">
+                                <div
+                                    class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 text-blue-500 text-2xl">
+                                    <i class="fas fa-book-dead"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-secondary">The Gap</h3>
+                                <p class="text-gray-500 text-sm mt-2">Lack of books and supplies hindering basic
+                                    literacy.</p>
+                            </div>
+                        </div>
+
+                        <!-- Back -->
+                        <div
+                            class="absolute inset-0 backface-hidden rotate-y-180 rounded-3xl overflow-hidden bg-gradient-to-br from-primary to-pink-600 text-white">
+                            <div
+                                class="h-full p-8 flex flex-col items-center justify-center text-center relative overflow-hidden">
+                                <div
+                                    class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+                                </div>
+                                <div
+                                    class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-6 text-white text-2xl shadow-lg z-10">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-2 z-10">Education First</h3>
+                                <p class="text-white/90 text-sm mb-6 z-10">Full scholarship kits: uniforms, books, and
+                                    bags.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .perspective-1000 {
+                perspective: 1000px;
+            }
+
+            .transform-style-3d {
+                transform-style: preserve-3d;
+            }
+
+            .backface-hidden {
+                backface-visibility: hidden;
+            }
+
+            .rotate-y-180 {
+                transform: rotateY(180deg);
+            }
+        </style>
+    </section>
+
+    <!-- 3. The Challenge They Faced -->
+    <section class="py-16 bg-secondary relative text-white">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5">
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <span class="text-accent font-bold uppercase tracking-wider text-sm">The Struggle</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mt-4 mb-6">Why Amina Needed Help</h2>
+                <p class="text-blue-100 text-lg font-light leading-relaxed">In her region, severe drought and poverty
+                    created barriers that no child should have to face alone.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition duration-500">
+                    <div
+                        class="w-16 h-16 bg-red-500/20 rounded-2xl flex items-center justify-center text-red-400 text-3xl mb-6">
+                        <i class="fas fa-tint-slash"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Water Scarcity</h3>
+                    <p class="text-blue-200/80 leading-relaxed">Walking 10km daily for unclean water meant missing 3
+                        days of school every week.</p>
+                </div>
+                <div
+                    class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition duration-500">
+                    <div
+                        class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center text-orange-400 text-3xl mb-6">
+                        <i class="fas fa-book-dead"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Education Gap</h3>
+                    <p class="text-blue-200/80 leading-relaxed">Her local school lacked books, desks, and electricity,
+                        making learning nearly impossible.</p>
+                </div>
+                <div
+                    class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition duration-500">
+                    <div
+                        class="w-16 h-16 bg-yellow-500/20 rounded-2xl flex items-center justify-center text-yellow-400 text-3xl mb-6">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Malnutrition</h3>
+                    <p class="text-blue-200/80 leading-relaxed">Without reliable meals, Amina often lacked the energy to
+                        focus or play.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. A Day Before Support -->
+    <section class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6 text-center mb-16">
+            <h2 class="text-4xl font-serif font-bold text-secondary">A Day in Amina's Life (Before)</h2>
+            <p class="text-gray-500 mt-4">The reality of her routine before intervention.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative">
+            <!-- Central Line -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200 rounded-full"></div>
+
+            <!-- Time 1 -->
+            <div class="flex items-center justify-between mb-12 w-full group">
+                <div class="w-5/12 text-right pr-8">
+                    <h3 class="text-2xl font-bold text-secondary">5:00 AM</h3>
+                    <p class="text-gray-500">Waking up before dawn to start the long trek to the river.</p>
+                </div>
+                <div class="w-2/12 flex justify-center relative">
+                    <div
+                        class="w-8 h-8 bg-gray-300 rounded-full border-4 border-white shadow group-hover:bg-primary transition duration-500 z-10">
+                    </div>
+                </div>
+                <div
+                    class="w-5/12 pl-8 opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500">
+                    <img src="assets/clean-water.jpg" class="rounded-xl shadow-md w-48">
+                </div>
+            </div>
+
+            <!-- Time 2 -->
+            <div class="flex items-center justify-between mb-12 w-full flex-row-reverse group">
+                <div class="w-5/12 text-left pl-8">
+                    <h3 class="text-2xl font-bold text-secondary">11:00 AM</h3>
+                    <p class="text-gray-500">Arriving late to school, tired and hungry.</p>
+                </div>
+                <div class="w-2/12 flex justify-center relative">
+                    <div
+                        class="w-8 h-8 bg-gray-300 rounded-full border-4 border-white shadow group-hover:bg-primary transition duration-500 z-10">
+                    </div>
+                </div>
+                <div
+                    class="w-5/12 pr-8 flex justify-end opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500">
+                    <img src="assets/education.jpg" class="rounded-xl shadow-md w-48">
+                </div>
+            </div>
+
+            <!-- Time 3 -->
+            <div class="flex items-center justify-between w-full group">
+                <div class="w-5/12 text-right pr-8">
+                    <h3 class="text-2xl font-bold text-secondary">7:00 PM</h3>
+                    <p class="text-gray-500">Studying by weak candlelight, straining her eyes.</p>
+                </div>
+                <div class="w-2/12 flex justify-center relative">
+                    <div
+                        class="w-8 h-8 bg-gray-300 rounded-full border-4 border-white shadow group-hover:bg-primary transition duration-500 z-10">
+                    </div>
+                </div>
+                <div
+                    class="w-5/12 pl-8 opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition duration-500">
+                    <img src="assets/home21.jpg" class="rounded-xl shadow-md w-48">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Turning Point – How Help Arrived -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div
+                class="bg-secondary rounded-[3rem] p-12 md:p-20 text-white relative overflow-hidden flex flex-col md:flex-row items-center gap-16 shadow-premium">
+                <!-- Decorative Blobs -->
+                <div
+                    class="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2">
+                </div>
+
+                <div class="md:w-1/2 relative z-10 space-y-8">
+                    <div
+                        class="inline-flex items-center gap-3 bg-white/10 px-4 py-2 rounded-full border border-white/10 backdrop-blur-sm">
+                        <i class="fas fa-star text-accent"></i>
+                        <span class="text-xs font-bold uppercase tracking-wider text-white">The Breakthrough</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold leading-tight">When Hope Arrived</h2>
+                    <p class="text-blue-100 text-lg leading-relaxed opacity-90">
+                        In February 2025, HopeBridge partners reached Amina's village. We didn't just bring supplies; we
+                        brought a promise of long-term partnership.
+                        <br><br>
+                        "I remember the truck pulling up. It was the first time I saw solar panels!" - Amina
+                    </p>
+                </div>
+
+                <div class="md:w-1/2 relative z-10">
+                    <div
+                        class="relative group cursor-pointer overflow-hidden rounded-2xl shadow-2xl border-4 border-white/20">
+                        <img src="assets/uganda-school.jpg" alt="Video Thumbnail"
+                            class="w-full h-80 object-cover group-hover:scale-110 transition duration-700">
+                        <div
+                            class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition">
+                            <div
+                                class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center pl-1 group-hover:scale-110 transition duration-300">
+                                <i class="fas fa-play text-white text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-4 text-sm font-bold text-blue-200">Watch: The Arrival (2:14)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 5.6 Social Connect Cards (Expanding Style) -->
+    <section id="social-cards-wrapper" class="py-24 bg-[#111] relative overflow-hidden">
+        <style>
+            #social-cards-wrapper .cards {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                height: 500px;
+                /* specific height for container */
+                width: 100%;
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            #social-cards-wrapper .card {
+                height: 400px;
+                width: 100px;
+                /* collapsed width */
+                margin: 10px;
+                box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.25);
+                border-radius: 30px;
+                background-color: #222;
+                transition: 0.8s cubic-bezier(.05, .61, .41, .95);
+                overflow: hidden;
+                position: relative;
+                cursor: pointer;
+            }
+
+            /* Expanded State */
+            #social-cards-wrapper .card.active {
+                width: 600px;
+                /* expanded width */
+                background-color: transparent;
+                box-shadow: none;
+            }
+
+            #social-cards-wrapper .card .card-toggle {
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 24px;
+                color: rgba(255, 255, 255, 0.5);
+                transition: 0.3s;
+                z-index: 20;
+            }
+
+            #social-cards-wrapper .card:hover .card-toggle {
+                color: #fff;
+                transform: translateX(-50%) scale(1.2);
+            }
+
+            #social-cards-wrapper .card.active .card-toggle {
+                bottom: auto;
+                top: 20px;
+                right: 20px;
+                left: auto;
+                transform: none;
+                opacity: 0;
+                /* Hide toggle when active if preferred, or move it */
+                pointer-events: none;
+            }
+
+            #social-cards-wrapper .card-content {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 30px;
+                background-color: #333;
+                transition: clip-path 0.8s cubic-bezier(.05, .61, .41, .95), background-color 0.5s;
+                clip-path: circle(0% at 50% 90%);
+                /* Start hidden from bottom center */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10;
+            }
+
+            #social-cards-wrapper .card.active .card-content {
+                clip-path: circle(150% at 50% 90%);
+            }
+
+            #social-cards-wrapper .row {
+                display: flex;
+                width: 100%;
+                padding: 40px;
+                color: white;
+                gap: 20px;
+            }
+
+            #social-cards-wrapper .col.left {
+                flex: 1;
+            }
+
+            #social-cards-wrapper .col.right {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+            }
+
+            #social-cards-wrapper h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                line-height: 1.2;
+            }
+
+            #social-cards-wrapper p {
+                font-size: 1rem;
+                opacity: 0.8;
+                line-height: 1.6;
+            }
+
+            #social-cards-wrapper img {
+                max-width: 100%;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                transform: rotate(3deg);
+            }
+
+            /* Individual Card Styles */
+            #social-cards-wrapper #overview .card-content {
+                background: linear-gradient(135deg, #333, #555);
+            }
+
+            #social-cards-wrapper #dribbble .card-content {
+                background: #E64082;
+            }
+
+            /* Instagram pinkish */
+            #social-cards-wrapper #behance .card-content {
+                background: #1877F2;
+            }
+
+            /* Facebook blue */
+            #social-cards-wrapper #linkedin .card-content {
+                background: #0077B5;
+            }
+
+            /* LinkedIn blue */
+            #social-cards-wrapper #twitter .card-content {
+                background: #1DA1F2;
+            }
+
+            /* Twitter blue */
+
+            /* Icons for collapsed state */
+            #social-cards-wrapper .card-icon {
+                position: absolute;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 30px;
+                color: white;
+                pointer-events: none;
+                transition: 0.3s;
+                opacity: 1;
+            }
+
+            #social-cards-wrapper .card.active .card-icon {
+                opacity: 0;
+            }
+        </style>
+
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-10">
+                <span class="text-accent font-bold uppercase tracking-wider text-sm">Stay Connected</span>
+                <h2 class="text-3xl font-serif font-bold text-white mt-2">Join Our Digital Community</h2>
+            </div>
+
+            <div class="cards">
+                <!-- Overview / Intro Card -->
+                <div class="card active" id="overview">
+                    <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="left col">
+                                <h2>Social <strong>Connect</strong></h2>
+                                <p>Tap any card to explore our channels. Follow us for real-time updates and stories.
+                                </p>
+                            </div>
+                            <div class="right col">
+                                <!-- Placeholder or illustration -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instagram -->
+                <div class="card" id="dribbble"> <!-- ID kept for legacy/user preference, representing Instagram -->
+                    <div class="card-icon"><i class="fab fa-instagram"></i></div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="left col">
+                                <h2>Our <strong>Instagram</strong></h2>
+                                <p>Visual stories from the heart of our missions. See the smiles you create.</p>
+                            </div>
+                            <div class="right col">
+                                <img src="assets/insta.jpg" alt="Instagram">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Facebook -->
+                <div class="card" id="behance"> <!-- ID kept, representing Facebook -->
+                    <div class="card-icon"><i class="fab fa-facebook-f"></i></div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="left col">
+                                <h2>Our <strong>Facebook</strong></h2>
+                                <p>Join our community discussions and event invites.</p>
+                            </div>
+                            <div class="right col">
+                                <img src="assets/fb.jpg" alt="Facebook">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="card" id="linkedin">
+                    <div class="card-icon"><i class="fab fa-linkedin-in"></i></div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="left col">
+                                <h2>Our <strong>LinkedIn</strong></h2>
+                                <p>Professional network and corporate partnership opportunities.</p>
+                            </div>
+                            <div class="right col">
+                                <img src="assets/link.jpg" alt="LinkedIn">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Twitter -->
+
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const wrapper = document.getElementById('social-cards-wrapper');
+                        if (!wrapper) return;
+
+                        const cards = wrapper.querySelectorAll('.card');
+
+                        cards.forEach(card => {
+                            card.addEventListener('click', function () {
+                                // Deactivate all
+                                cards.forEach(c => c.classList.remove('active'));
+                                // Activate clicked
+                                this.classList.add('active');
+                            });
+                        });
+                    });
+                </script>
+    </section>
+
+    <!-- 6. Learning Journey -->
+    <section class="py-24 bg-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-primary font-bold uppercase tracking-wider text-sm">Academic Growth</span>
+                <h2 class="text-4xl font-serif font-bold text-secondary mt-3">Amina's Learning Curve</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto items-center">
+                <div class="space-y-8">
+                    <!-- Skill 1 -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold text-secondary">English Literacy</span>
+                            <span class="font-bold text-primary">85%</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary w-[15%] animate-[width_1s_ease-out_forwards]"
+                                style="width: 85%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Started at: 15%</p>
+                    </div>
+                    <!-- Skill 2 -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold text-secondary">Mathematics</span>
+                            <span class="font-bold text-primary">78%</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-secondary w-[10%] animate-[width_1s_ease-out_forwards]"
+                                style="width: 78%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Started at: 10%</p>
+                    </div>
+                    <!-- Skill 3 -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-bold text-secondary">Science & Health</span>
+                            <span class="font-bold text-primary">92%</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-accent w-[20%] animate-[width_1s_ease-out_forwards]"
+                                style="width: 92%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Started at: 20%</p>
+                    </div>
+
+                    <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-100 flex items-start gap-4">
+                        <img src="assets/avatar-2.jpg" class="w-12 h-12 rounded-full border-2 border-primary">
+                        <div>
+                            <p class="font-bold text-secondary text-sm">Mr. Ochieng, Head Teacher</p>
+                            <p class="text-gray-500 text-xs italic mt-1">"Amina is now the top of her class. She devours
+                                every book we put in the library."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="assets/tech-good-1.jpg"
+                        class="rounded-2xl shadow-lg transform rotate-2 hover:rotate-0 transition">
+                    <img src="assets/tech-good-2.jpg"
+                        class="rounded-2xl shadow-lg transform -rotate-2 hover:rotate-0 transition mt-8 hidden md:block">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Talent & Dreams Section -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-16 items-center">
+                <div class="md:w-1/2">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="assets/sustainability.jpg" class="rounded-2xl shadow-lg w-full h-48 object-cover">
+                        <img src="assets/environment.jpg" class="rounded-2xl shadow-lg w-full h-48 object-cover mt-8">
+                    </div>
+                </div>
+                <div class="md:w-1/2 space-y-6">
+                    <span class="text-accent font-bold uppercase tracking-wider text-sm">Her Vision</span>
+                    <h2 class="text-4xl font-serif font-bold text-secondary">"I Want to Heal People"</h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Beyond her studies, Amina has a gift for art and observation. She draws diagrams of the human
+                        heart and local plants.
+                    </p>
+                    <div class="bg-primary/5 p-8 rounded-3xl border border-primary/10">
+                        <p class="text-xl font-serif text-primary italic text-center">"When I grow up, I will build a
+                            clinic right here in my village."</p>
+                        <p class="text-center font-bold text-secondary mt-4">- Amina's Journal Entry</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Mentor / Volunteer Story -->
+    <section class="py-24 bg-gray-50 border-y border-gray-200">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-serif font-bold text-secondary">The Human Connection</h2>
+            </div>
+            <div class="flex flex-col md:flex-row bg-white rounded-3xl shadow-lg overflow-hidden max-w-5xl mx-auto">
+                <div class="md:w-1/3 relative">
+                    <img src="assets/volunteer-hero.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="md:w-2/3 p-10 md:p-14 space-y-6">
+                    <div class="flex items-center gap-4 mb-2">
+                        <img src="assets/avatar-3.jpg" class="w-14 h-14 rounded-full border-2 border-white shadow">
+                        <div>
+                            <h4 class="font-bold text-secondary text-xl">Dr. Sarah Jensen</h4>
+                            <p class="text-primary text-xs font-bold uppercase tracking-wider">Volunteer Pediatrician
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 italic text-lg leading-relaxed">
+                        "Meeting Amina changed me more than it changed her. Her resilience is unbreakable. I came to
+                        treat patients, but I left with a new definition of hope. I've committed to visiting her village
+                        every year."
+                    </p>
+                    Become a Volunteer like Sarah <i
+                        class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </a>
+                    class="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Progress & Impact Metrics -->
+    <section class="py-24 bg-secondary text-white relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div
+                class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+                <div class="p-4">
+                    <div class="text-5xl font-bold mb-2">2x</div>
+                    <p class="text-blue-200 font-medium">Daily Meals</p>
+                    <p class="text-xs text-white/50 mt-1">Was: 0-1 per day</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-5xl font-bold mb-2">100%</div>
+                    <p class="text-blue-200 font-medium">School Attendance</p>
+                    <p class="text-xs text-white/50 mt-1">Was: 40%</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-5xl font-bold mb-2">0</div>
+                    <p class="text-blue-200 font-medium">Waterborne Illnesses</p>
+                    <p class="text-xs text-white/50 mt-1">Was: Chronic</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-5xl font-bold mb-2">A+</div>
+                    <p class="text-blue-200 font-medium">Science Grades</p>
+                    <p class="text-xs text-white/50 mt-1">Top of Class</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Family Voice -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="bg-bg p-12 rounded-[3rem] text-center border border-gray-100 relative">
+                <i class="fas fa-quote-right absolute top-10 right-10 text-6xl text-gray-200 opacity-50"></i>
+                <img src="assets/avatar-4.jpg"
+                    class="w-24 h-24 rounded-full mx-auto mb-6 border-4 border-white shadow-lg object-cover">
+                <h3 class="text-2xl font-bold text-secondary mb-1">Grandmother Nala</h3>
+                <p class="text-xs text-primary font-bold uppercase tracking-widest mb-8">Amina's Guardian</p>
+                <p class="text-xl text-gray-600 italic leading-relaxed font-serif">
+                    "You have given us more than food and water. You have given us dignity. My granddaughter now walks
+                    with her head high. She is the light of our home."
+                </p>
+                <div class="mt-8 inline-flex items-center gap-2 text-gray-400 text-sm">
+                    <i class="fas fa-microphone"></i> Dictated & translated from Swahili
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Community Transformation -->
+    <section class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-primary font-bold uppercase tracking-wider text-sm">The Bigger Picture</span>
+                <h2 class="text-4xl font-serif font-bold text-secondary mt-3">It Takes a Village</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="relative group overflow-hidden rounded-2xl h-80">
+                    <img src="assets/clean-water.jpg"
+                        class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                        <h3 class="text-white font-bold text-lg">New Solar Well</h3>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl h-80">
+                    <img src="assets/environment.jpg"
+                        class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                        <h3 class="text-white font-bold text-lg">Community Garden</h3>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl h-80">
+                    <img src="assets/education.jpg"
+                        class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                        <h3 class="text-white font-bold text-lg">Renovated Classroom</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. Story Gallery (Scrollable) -->
+    <section class="py-12 bg-white overflow-hidden">
+        <div class="container mx-auto px-6 mb-8">
+            <h2 class="text-2xl font-bold text-secondary">Moments That Changed Everything</h2>
+        </div>
+        <div class="flex gap-6 overflow-x-auto pb-8 container mx-auto px-6 no-scrollbar snap-x">
+            <div class="min-w-[300px] snap-center">
+                <img src="assets/education.jpg" class="rounded-xl shadow-md mb-3 h-48 w-full object-cover">
+                <p class="text-sm font-bold text-secondary">First Day of School</p>
+                <p class="text-xs text-gray-500">April 3, 2025</p>
+            </div>
+            <div class="min-w-[300px] snap-center">
+                <img src="assets/success-story.jpg" class="rounded-xl shadow-md mb-3 h-48 w-full object-cover">
+                <p class="text-sm font-bold text-secondary">Receiving Backpack</p>
+                <p class="text-xs text-gray-500">May 12, 2025</p>
+            </div>
+            <div class="min-w-[300px] snap-center">
+                <img src="assets/diversity.jpg" class="rounded-xl shadow-md mb-3 h-48 w-full object-cover">
+                <p class="text-sm font-bold text-secondary">Harvest Festival</p>
+                <p class="text-xs text-gray-500">July 20, 2025</p>
+            </div>
+            <div class="min-w-[300px] snap-center">
+                <img src="assets/partners.jpg" class="rounded-xl shadow-md mb-3 h-48 w-full object-cover">
+                <p class="text-sm font-bold text-secondary">Meeting Donors</p>
+                <p class="text-xs text-gray-500">Sept 5, 2025</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. Mini Documentary Section -->
+    <section class="py-24 bg-black text-white text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-serif mb-8">Watch the Full Story</h2>
+            <div class="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(255,107,107,0.3)]">
+                <img src="assets/impact-bg.jpg" class="w-full h-[500px] object-cover opacity-60">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <button
+                        class="w-24 h-24 bg-primary rounded-full text-white text-4xl pl-2 shadow-glow hover:scale-110 transition duration-300 flex items-center justify-center">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+                <div class="absolute bottom-6 left-6 text-left">
+                    <p class="text-2xl font-bold">Amina's New Dawn</p>
+                    <p class="text-sm text-gray-300">Documentary • 4m 32s</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14. What Makes This Child Unique -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row gap-16 items-center">
+            <div class="md:w-1/2">
+                <div class="relative bg-yellow-100 p-8 rotate-1 shadow-lg max-w-sm mx-auto">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-red-400 opacity-50">
+                    </div>
+                    <p class="handwritten font-serif text-2xl text-gray-800 leading-normal">
+                        "My favorite animal is the lion because it is brave. My favorite color is yellow like the sun."
+                    </p>
+                    <p class="text-right mt-4 font-bold text-gray-600">- Amina</p>
+                </div>
+            </div>
+            <div class="md:w-1/2 space-y-8">
+                <h2 class="text-4xl font-serif font-bold text-secondary">Uniquely Amina</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <i class="fas fa-laugh"></i>
+                        </div>
+                        <span class="text-lg text-gray-600">Known for her infectious laugh</span>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <span class="text-lg text-gray-600">Natural leader among her peers</span>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <span class="text-lg text-gray-600">Loves planting trees</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15. Milestones Timeline (Vertical Animated) -->
+    <section class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-serif font-bold text-center text-secondary mb-12">Growth Milestones</h2>
+            <div class="relative max-w-2xl mx-auto pl-8 border-l-2 border-gray-200 space-y-12">
+                <!-- Milestone 1 -->
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-1 w-6 h-6 rounded-full bg-primary border-4 border-white">
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <span class="text-xs font-bold text-gray-400 uppercase">March 2025</span>
+                        <h4 class="text-lg font-bold text-secondary mt-1">Enrolled in School</h4>
+                        <p class="text-gray-500 text-sm mt-2">Received full scholarship and uniform.</p>
+                    </div>
+                </div>
+                <!-- Milestone 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-1 w-6 h-6 rounded-full bg-secondary border-4 border-white">
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <span class="text-xs font-bold text-gray-400 uppercase">August 2025</span>
+                        <h4 class="text-lg font-bold text-secondary mt-1">First Health Checkup</h4>
+                        <p class="text-gray-500 text-sm mt-2">Clean bill of health after treatment for vitamin
+                            deficiency.</p>
+                    </div>
+                </div>
+                <!-- Milestone 3 -->
+                <div class="relative">
+                    <div class="absolute -left-[41px] top-1 w-6 h-6 rounded-full bg-accent border-4 border-white"></div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                        <span class="text-xs font-bold text-gray-400 uppercase">December 2025</span>
+                        <h4 class="text-lg font-bold text-secondary mt-1">Top Student Award</h4>
+                        <p class="text-gray-500 text-sm mt-2">Recognized for excellence in Science.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 16. Sponsor / Supporter Message -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 flex justify-center">
+            <div
+                class="bg-secondary text-white p-12 rounded-[3rem] max-w-4xl w-full flex flex-col md:flex-row gap-10 items-center shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[60px]"></div>
+
+                <div class="w-32 h-32 shrink-0">
+                    <img src="assets/avatar-5.jpg"
+                        class="w-full h-full rounded-full border-4 border-white/20 object-cover">
+                </div>
+                <div class="relative z-10 text-center md:text-left">
+                    <p class="text-lg italic text-blue-100 mb-6">"Dear Amina, watching you grow has been the highlight
+                        of my year. You are so brave and smart. Keep shining your light!"</p>
+                    <h4 class="font-bold text-xl">Jennifer M.</h4>
+                    <p class="text-xs font-bold uppercase tracking-widest text-primary mt-1">Monthly Sponsor since 2024
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 17. Current Life Snapshot -->
+    <section class="py-24 bg-bg">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-serif font-bold text-secondary mb-12">Life Today</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 h-[500px]">
+                <div class="col-span-2 row-span-2 rounded-3xl overflow-hidden relative group">
+                    <img src="assets/education.jpg"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    <div
+                        class="absolute bottom-4 left-4 bg-white px-4 py-2 rounded-full text-xs font-bold text-secondary shadow-lg">
+                        Studying</div>
+                </div>
+                <div class="col-span-1 row-span-1 rounded-3xl overflow-hidden relative group">
+                    <img src="assets/smile.webp"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                </div>
+                <div class="col-span-1 row-span-2 rounded-3xl overflow-hidden relative group">
+                    <img src="assets/home2pic.jpg"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    <div
+                        class="absolute bottom-4 left-4 bg-white px-4 py-2 rounded-full text-xs font-bold text-secondary shadow-lg">
+                        Smiling</div>
+                </div>
+                <div class="col-span-1 row-span-1 rounded-3xl overflow-hidden relative group">
+                    <img src="assets/global-reach.jpg"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 18. Future Goals & Vision -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 text-center">
+            <span class="text-primary font-bold uppercase tracking-wider text-sm">The Road Ahead</span>
+            <h2 class="text-4xl font-serif font-bold text-secondary mt-4 mb-12">Where She Sees Herself</h2>
+
+            <div class="flex justify-center gap-8 flex-wrap">
+                <!-- 5 Years -->
+                <div class="w-64 p-8 border border-gray-100 rounded-3xl hover:shadow-xl transition duration-300">
+                    <span class="block text-4xl font-bold text-gray-200 mb-4">2031</span>
+                    <h3 class="font-bold text-secondary text-lg">High School Grad</h3>
+                    <p class="text-gray-500 text-sm mt-2">Amina plans to attend the national boarding school in Nairobi.
+                    </p>
+                </div>
+                <!-- 10 Years -->
+                <div class="w-64 p-8 bg-secondary text-white rounded-3xl shadow-xl scale-110">
+                    <span class="block text-4xl font-bold text-white/20 mb-4">2036</span>
+                    <h3 class="font-bold text-white text-lg">Medical School</h3>
+                    <p class="text-blue-200 text-sm mt-2">Enrolling in university to begin her medical training.</p>
+                </div>
+                <!-- 15 Years -->
+                <div class="w-64 p-8 border border-gray-100 rounded-3xl hover:shadow-xl transition duration-300">
+                    <span class="block text-4xl font-bold text-gray-200 mb-4">2041</span>
+                    <h3 class="font-bold text-secondary text-lg">Doctor Amina</h3>
+                    <p class="text-gray-500 text-sm mt-2">Returning to her village to open a community clinic.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 19. Call to Action – Be Part of a Story -->
+    <section class="py-24 bg-secondary relative overflow-hidden">
+        <div class="absolute inset-0 bg-primary/10"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Rewrite a Child's Future</h2>
+            <p class="text-xl text-blue-100 mb-10 font-light">
+                There are 150 more children in Amina's village waiting for their turn. Your support can start a new
+                story today.
+            </p>
+
+            <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 mb-12">
+                <div class="flex justify-between text-white text-sm font-bold mb-2">
+                    <span>Village Goal</span>
+                    <span>75% Funded</span>
+                </div>
+                <div class="h-4 bg-black/20 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary w-[75%] shadow-[0_0_20px_rgba(255,107,107,0.8)]"></div>
+                </div>
+                <p class="text-xs text-blue-200 mt-4 text-left">Only $5,000 needed to complete the school expansion.</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+
+                <a href="contact.html"
+                    class="bg-white text-secondary hover:bg-gray-100 px-10 py-5 rounded-full font-bold transition text-lg flex items-center justify-center gap-3">
+                    Contact <i class="fas fa-hand-holding-heart"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 20. More Stories to Explore -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-primary font-bold uppercase tracking-wider text-sm">Keep Reading</span>
+                    <h2 class="text-3xl font-serif font-bold text-secondary mt-2">Other Stories</h2>
+                </div>
+                <div class="flex gap-2">
+                    <span
+                        class="px-4 py-2 bg-secondary text-white rounded-full text-xs font-bold cursor-pointer">All</span>
+                    <span
+                        class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-xs font-bold hover:bg-gray-200 cursor-pointer transition">Education</span>
+                    <span
+                        class="px-4 py-2 bg-gray-100 text-gray-600 rounded-full text-xs font-bold hover:bg-gray-200 cursor-pointer transition">Health</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Story Card 1 -->
+                <div class="group cursor-pointer">
+                    <div class="rounded-2xl overflow-hidden mb-4 relative">
+                        <img src="assets/education.jpg"
+                            class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+                        <div
+                            class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold text-secondary">
+                            Education</div>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary group-hover:text-primary transition">Samuel's First Book
+                    </h3>
+                    <p class="text-gray-500 text-sm mt-2">How a library card changed a boy's destiny in Ghana.</p>
+                </div>
+                <!-- Story Card 2 -->
+                <div class="group cursor-pointer">
+                    <div class="rounded-2xl overflow-hidden mb-4 relative">
+                        <img src="assets/yemen-clinic.jpg"
+                            class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+                        <div
+                            class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold text-secondary">
+                            Health</div>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary group-hover:text-primary transition">Lila Walks Again
+                    </h3>
+                    <p class="text-gray-500 text-sm mt-2">The surgery that gave Lila her childhood back.</p>
+                </div>
+                <!-- Story Card 3 -->
+                <div class="group cursor-pointer">
+                    <div class="rounded-2xl overflow-hidden mb-4 relative">
+                        <img src="assets/clean-water.jpg"
+                            class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
+                        <div
+                            class="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold text-secondary">
+                            Community</div>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary group-hover:text-primary transition">Water for Kofi</h3>
+                    <p class="text-gray-500 text-sm mt-2">A new well brought life back to Kofi's dry village.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-secondary text-white pt-24 pb-6 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="space-y-6">
+                    <div class="flex items-center gap-2">
+                        <div
+                            class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                            H</div>
+                        <span class="text-2xl font-serif font-bold tracking-tight">HopeBridge</span>
+                    </div>
+                    <p class="text-blue-200/70 leading-relaxed text-sm">
+                        Connecting compassionate hearts with communities in need. Transparent, impactful, and
+                        human-centric.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Explore</h4>
+                    <ul class="space-y-4 text-blue-200/70 text-sm">
+                        <li><a href="about.html" class="hover:text-white transition">Our Mission</a></li>
+                        <li><a href="causes-grid.html" class="hover:text-white transition">Active Causes</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Impact Reports</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Support</h4>
+                    <ul class="space-y-4 text-blue-200/70 text-sm">
+                        <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Donor FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition">Corporate Partners</a></li>
+                        <li><a href="#" class="hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Stay Connected</h4>
+                    <p class="text-blue-200/70 text-sm mb-4">Receive inspirational stories and impact updates.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your Email Address"
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-primary text-sm text-white placeholder-white/30">
+                        <button
+                            class="w-full bg-primary hover:bg-red-500 text-white font-bold py-3 rounded-lg transition text-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-blue-200/50">
+                <p>&copy; 2026 HopeBridge NGO. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Floating Icons Background Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const icons = ['fa-heart', 'fa-hand-holding-heart', 'fa-leaf', 'fa-tint', 'fa-dove', 'fa-globe-africa'];
+            const colors = ['#FF6B6B', '#0F4C5C', '#FFD166', '#4ECDC4', '#A368F1', '#EB459E', '#50FA7B', '#8BE9FD', '#FF79C6'];
+            const container = document.body;
+
+            function createIcon() {
+                const icon = document.createElement('i');
+                const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+                icon.className = `fas ${randomIcon} fixed opacity-0 pointer-events-none z-0`;
+                icon.style.color = randomColor;
+                icon.style.left = Math.random() * 100 + 'vw';
+                icon.style.top = Math.random() * 100 + 'vh';
+                icon.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                icon.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                container.appendChild(icon);
+
+                // Animate
+                const animation = icon.animate([
+                    { transform: `translate(0, 0) rotate(0deg)`, opacity: 0 },
+                    { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg)`, opacity: 0.15, offset: 0.5 },
+                    { transform: `translate(${Math.random() * 100 - 50}px, -100px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 10000 + 10000,
+                    easing: 'ease-in-out'
+                });
+
+                animation.onfinish = () => {
+                    icon.remove();
+                    createIcon();
+                };
+            }
+
+            // Create initial batch
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createIcon, Math.random() * 3000);
+            }
+        });
+    </script>
+</body>
+
+</html>

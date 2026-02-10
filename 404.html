@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Help Us Find the Way - HopeBridge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B',
+                        secondary: '#0F4C5C',
+                        bg: '#FAFAFA',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-bg text-gray-800">
+
+    <!-- Section 1: Hero & 404 Message -->
+    <section class="min-h-screen flex items-center justify-center p-6 bg-cover bg-center relative overflow-hidden"
+        style="background-image: url('https://images.unsplash.com/photo-1464982326199-86f32f81b211?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');">
+        <div class="absolute inset-0 bg-white/90 backdrop-blur-sm"></div>
+
+        <div class="relative z-10 text-center max-w-2xl animate-fadeInUp">
+            <div
+                class="w-32 h-32 bg-primary/10 text-primary rounded-full flex items-center justify-center text-6xl mx-auto mb-10 shadow-glow animate-bounce">
+                <i class="fas fa-search-location"></i>
+            </div>
+
+            <h1 class="text-8xl font-serif font-black mb-4 tracking-tighter">404</h1>
+            <h2 class="text-4xl font-serif font-bold mb-6">Lost? Help us find the way.</h2>
+            <p class="text-xl text-gray-500 mb-10 leading-relaxed">
+                The page you're looking for seems to have vanished, but hope hasn't.
+                There are still plenty of ways you can make an impact today.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html"
+                    class="bg-secondary text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-gray-800 transition transform hover:-translate-y-1">
+                    Back to Home
+                </a>
+
+            </div>
+
+            <div class="mt-16 pt-8 border-t border-gray-200">
+                <p class="text-gray-400 text-sm italic">"Not all those who wander are lost, but we'd love to help you
+                    find
+                    your footing."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Explore Other Paths -->
+    <section class="py-24 bg-white border-y border-gray-100">
+        <div class="container mx-auto px-6">
+            <h3 class="text-2xl font-serif font-bold text-secondary text-center mb-16">May we suggest another path?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <a href="about.html"
+                    class="p-8 bg-gray-50 rounded-3xl hover:bg-secondary hover:text-white transition group">
+                    <i class="fas fa-eye text-primary text-2xl mb-4"></i>
+                    <h5 class="font-bold mb-2">Our Vision</h5>
+                    <p class="text-xs opacity-60">See what we're building for the future.</p>
+                </a>
+                <a href="causes-grid.html"
+                    class="p-8 bg-gray-50 rounded-3xl hover:bg-secondary hover:text-white transition group">
+                    <i class="fas fa-hand-holding-heart text-primary text-2xl mb-4"></i>
+                    <h5 class="font-bold mb-2">Active Causes</h5>
+                    <p class="text-xs opacity-60">Find a mission that speaks to you.</p>
+                </a>
+                <a href="contact.html#positions"
+                    class="p-8 bg-gray-50 rounded-3xl hover:bg-secondary hover:text-white transition group">
+                    <i class="fas fa-users text-primary text-2xl mb-4"></i>
+                    <h5 class="font-bold mb-2">Join Field</h5>
+                    <p class="text-xs opacity-60">Deploy with us in the next cohort.</p>
+                </a>
+                <a href="contact.html"
+                    class="p-8 bg-gray-50 rounded-3xl hover:bg-secondary hover:text-white transition group">
+                    <i class="fas fa-headset text-primary text-2xl mb-4"></i>
+                    <h5 class="font-bold mb-2">Get Help</h5>
+                    <p class="text-xs opacity-60">Talk to our support team directly.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 15: Utility Footer -->
+    <footer class="bg-bg py-20 border-t border-gray-100">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center gap-6 mb-8 text-gray-400">
+                <a href="#" class="hover:text-primary transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-primary transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-primary transition"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">&copy; 2026 HopeBridge Hub. All is
+                not lost.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

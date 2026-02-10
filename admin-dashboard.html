@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - HopeBridge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B', // Coral Orange
+                        secondary: '#0F4C5C', // Deep Ocean Teal
+                        bg: '#F3F4F6', // Light Grey for Dashboard
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Check for saved direction preference
+        if (localStorage.dir === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.body.classList.add('rtl');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.body.classList.remove('rtl');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        function toggleRTL() {
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('rtl');
+                localStorage.dir = 'ltr';
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('rtl');
+                localStorage.dir = 'rtl';
+            }
+        }
+
+        // Initialize icon state on load
+        window.onload = function () {
+            if (document.documentElement.classList.contains('dark')) {
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        };
+    </script>
+    <style>
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 600;
+        }
+
+        .nav-link.active i {
+            color: #FF6B6B !important;
+        }
+    </style>
+</head>
+
+<body class="bg-bg text-gray-800 font-sans transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Emergency Banner -->
+    <div id="emergency-banner"
+        class="bg-gradient-to-r from-red-600 to-red-500 text-white text-sm py-2 px-4 flex justify-between items-center relative z-50 shadow-md">
+        <div class="container mx-auto flex items-center justify-center animate-pulse">
+            <span class="font-bold mr-2"><i class="fas fa-exclamation-triangle"></i> URGENT:</span>
+            <span>Floods in South Asia: 50,000 families need shelter.</span>
+            <a href="cause-details.html" class="ml-4 underline hover:text-gray-200 font-bold">Help Now</a>
+        </div>
+        <button onclick="document.getElementById('emergency-banner').style.display='none'"
+            class="absolute right-4 focus:outline-none opacity-80 hover:opacity-100">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-premium fixed top-0 left-0 w-full z-40 transition-all duration-300 border-b border-white/20 dark:border-gray-700"
+        id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    H
+                </div>
+                <span
+                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div
+                class="hidden md:flex items-center space-x-1 rtl:space-x-reverse font-medium text-secondary dark:text-gray-200">
+                <!-- Home Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1 text-sm">
+                        Home <i class="fas fa-chevron-down text-xs opacity-50 ms-1"></i>
+                    </button>
+                    <div
+                        class="dropdown-menu rtl:left-auto rtl:right-1/2 rtl:translate-x-1/2 dark:bg-gray-800 dark:border-gray-700">
+                        <a href="index.html"
+                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-home me-2 text-primary"></i> Home Version 1
+                        </a>
+                        <a href="index2.html"
+                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-layer-group me-2 text-primary"></i> Home Version 2
+                        </a>
+                    </div>
+                </div>
+
+                <a href="causes-grid.html" class="px-4 py-2 hover:text-primary transition text-sm">Causes</a>
+                <a href="about.html" class="px-4 py-2 hover:text-primary transition text-sm">About Us</a>
+                <a href="volunteer.html" class="px-4 py-2 hover:text-primary transition text-sm">Volunteer</a>
+
+                <!-- Dashboard Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1 text-sm font-bold">
+                        Dashboards <i class="fas fa-chevron-down text-xs opacity-50 ms-1"></i>
+                    </button>
+                    <div
+                        class="dropdown-menu rtl:left-auto rtl:right-1/2 rtl:translate-x-1/2 dark:bg-gray-800 dark:border-gray-700">
+                        <a href="admin-dashboard.html"
+                            class="dropdown-item flex items-center font-bold dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-tachometer-alt me-2 text-primary"></i> Admin Dashboard
+                        </a>
+                        <a href="donor-dashboard.html"
+                            class="dropdown-item flex items-center dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-user me-2 text-primary"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hidden md:flex items-center gap-4 rtl:space-x-reverse">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                <!-- RTL Toggle -->
+                <button onclick="toggleRTL()"
+                    class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-globe"></i>
+                </button>
+
+                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+                <a href="login.html"
+                    class="text-xs font-semibold text-secondary hover:text-primary dark:text-white transition">Log
+                    In</a>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex h-[calc(100vh-120px)] overflow-hidden">
+
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="w-64 bg-secondary dark:bg-gray-800 text-white fixed inset-y-0 left-0 z-50 transform -translate-x-full md:relative md:translate-x-0 md:flex flex-col border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out">
+            <div
+                class="h-16 flex items-center justify-center border-b border-white/10 font-serif font-bold text-xl uppercase tracking-wider">
+                HopeBridge <span class="text-primary text-xs ml-2">Admin</span>
+            </div>
+
+            <nav class="flex-1 px-4 py-6 space-y-6 overflow-y-auto">
+                <!-- Category: Overview -->
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-3 ml-4">System</p>
+                    <div class="space-y-1">
+                        <a href="#overview"
+                            class="nav-link flex items-center gap-3 px-4 py-2 bg-white/10 rounded-lg text-white font-medium active">
+                            <i class="fas fa-tachometer-alt w-5 text-primary text-xs"></i> Main Dashboard
+                        </a>
+                        <a href="#live-flow"
+                            class="nav-link flex items-center gap-3 px-4 py-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-lg transition text-sm">
+                            <i class="fas fa-microchip w-5 text-xs"></i> System Health
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Category: Revenue -->
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-3 ml-4">Donations</p>
+                    <div class="space-y-1">
+                        <a href="#donations"
+                            class="nav-link flex items-center gap-3 px-4 py-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-lg transition text-sm">
+                            <i class="fas fa-chart-line w-5 text-xs"></i> Revenue Trends
+                        </a>
+                        <a href="#source-analysis"
+                            class="nav-link flex items-center gap-3 px-4 py-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-lg transition text-sm">
+                            <i class="fas fa-funnel-dollar w-5 text-xs"></i> Source Analysis
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Category: Operations -->
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-3 ml-4">Campaigns</p>
+                    <div class="space-y-1">
+                        <a href="#campaigns"
+                            class="nav-link flex items-center gap-3 px-4 py-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-lg transition text-sm">
+                            <i class="fas fa-bullhorn w-5 text-xs"></i> Active Monitoring
+                        </a>
+                        <a href="#performance-roi"
+                            class="nav-link flex items-center gap-3 px-4 py-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-lg transition text-sm">
+                            <i class="fas fa-percentage w-5 text-xs"></i> Performance ROI
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Category: Community -->
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-3 ml-4">Volunteers</p>
+                    <div class="space-y-1">
+                        <a href="#volunteers"
+                            class="nav-link flex items-center gap-3 px-4 py-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-lg transition text-sm">
+                            <i class="fas fa-clock w-5 text-xs"></i> Hours & Engagement
+                        </a>
+                        <a href="#global-roster"
+                            class="nav-link flex items-center gap-3 px-4 py-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-lg transition text-sm">
+                            <i class="fas fa-globe-africa w-5 text-xs"></i> Global Roster
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Category: Financials -->
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-3 ml-4">Back Office</p>
+                    <div class="space-y-1">
+                        <a href="#expense-reports"
+                            class="nav-link flex items-center gap-3 px-4 py-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-lg transition text-sm">
+                            <i class="fas fa-file-invoice-dollar w-5 text-xs"></i> Expense Reports
+                        </a>
+                        <a href="#audit-logs"
+                            class="nav-link flex items-center gap-3 px-4 py-2 text-gray-400 hover:bg-white/5 hover:text-white rounded-lg transition text-sm">
+                            <i class="fas fa-history w-5 text-xs"></i> Audit Logs
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="p-4 border-t border-white/10">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-2 text-gray-400 hover:text-white text-sm">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10">
+                <button id="sidebar-toggle-btn" class="md:hidden text-gray-500 focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <h2 class="text-xl font-bold text-secondary">Overview</h2>
+
+                <div class="flex items-center gap-4">
+                    <button class="relative text-gray-400 hover:text-secondary">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span>
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <img src="assets/avatar-2.jpg" class="w-8 h-8 rounded-full">
+                        <span class="font-medium text-sm hidden md:block">Sarah J.</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto p-6 scroll-smooth relative" id="main-content">
+
+                <!-- Overview Section -->
+                <div id="overview" class="scroll-mt-20">
+                    <div class="mb-8">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">General</h2>
+                        <h3 class="text-3xl font-serif font-bold text-secondary italic">Dashboard Overview</h3>
+                    </div>
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                        <div
+                            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-start justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium mb-1">Total Raised</p>
+                                <h3 class="text-2xl font-bold text-secondary">$1,245,300</h3>
+                                <span class="text-green-500 text-xs font-bold flex items-center gap-1 mt-1">
+                                    <i class="fas fa-arrow-up"></i> 12% vs last month
+                                </span>
+                            </div>
+                            <div class="p-3 bg-blue-50 text-blue-500 rounded-lg">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-start justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium mb-1">Active Donors</p>
+                                <h3 class="text-2xl font-bold text-secondary">8,540</h3>
+                                <span class="text-green-500 text-xs font-bold flex items-center gap-1 mt-1">
+                                    <i class="fas fa-arrow-up"></i> 5% New
+                                </span>
+                            </div>
+                            <div class="p-3 bg-purple-50 text-purple-500 rounded-lg">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-start justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium mb-1">Campaigns Active</p>
+                                <h3 class="text-2xl font-bold text-secondary">12</h3>
+                                <span class="text-gray-400 text-xs font-bold mt-1 block">3 Ending soon</span>
+                            </div>
+                            <div class="p-3 bg-orange-50 text-orange-500 rounded-lg">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-start justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm font-medium mb-1">Avg. Donation</p>
+                                <h3 class="text-2xl font-bold text-secondary">$52.00</h3>
+                                <span class="text-red-400 text-xs font-bold flex items-center gap-1 mt-1">
+                                    <i class="fas fa-arrow-down"></i> 2% vs last month
+                                </span>
+                            </div>
+                            <div class="p-3 bg-green-50 text-green-500 rounded-lg">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div
+                        class="bg-secondary rounded-2xl p-6 mb-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-xl">
+                                <i class="fas fa-bolt text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Quick Actions</h4>
+                                <p class="text-xs text-blue-200">Common administrative tasks</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <button
+                                class="px-5 py-2.5 bg-primary hover:bg-red-500 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-glow">
+                                <i class="fas fa-plus"></i> New Campaign
+                            </button>
+                            <button
+                                class="px-5 py-2.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold transition flex items-center gap-2">
+                                <i class="fas fa-file-export"></i> Export Report
+                            </button>
+                            <button
+                                class="px-5 py-2.5 bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold transition flex items-center gap-2">
+                                <i class="fas fa-paper-plane"></i> Send Newsletter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts & Activity -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 scroll-mt-20" id="live-flow">
+                    <div class="col-span-full mb-2">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Real-Time</h2>
+                        <h3 class="text-3xl font-serif font-bold text-secondary italic">System Health & Flow</h3>
+                    </div>
+                    <!-- Live Heartbeat Chart -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 col-span-2">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-lg text-secondary">Live Donation Flow</h3>
+                            <span
+                                class="flex items-center gap-2 text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded-full animate-pulse">
+                                <span class="w-2 h-2 bg-green-600 rounded-full"></span> LIVE
+                            </span>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="donationChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Service Status & Maintenance -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-lg text-secondary mb-4">Service Status</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-gray-500">API Gateway</span>
+                                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                </div>
+                                <p class="text-xs text-gray-400">99.9% Uptime</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-gray-500">Database</span>
+                                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                </div>
+                                <p class="text-xs text-gray-400">12ms Latency</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-gray-500">Global CDN</span>
+                                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                </div>
+                                <p class="text-xs text-gray-400">Healthy</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-gray-500">Email Server</span>
+                                    <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                                </div>
+                                <p class="text-xs text-gray-400">High Load</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-orange-50 p-6 rounded-xl border border-orange-100 relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-orange-800 text-sm mb-1 uppercase tracking-wider">Maintenance
+                                Notice</h4>
+                            <p class="text-xs text-orange-700 leading-relaxed mb-4">System updates scheduled for Feb
+                                10th at 02:00 AM UTC. Expect 15 mins downtime.</p>
+                            <button
+                                class="text-orange-800 text-[10px] font-black uppercase tracking-widest hover:underline">Read
+                                Details <i class="fas fa-chevron-right ml-1"></i></button>
+                        </div>
+                        <i class="fas fa-tools absolute -right-4 -bottom-4 text-orange-200/50 text-6xl rotate-12"></i>
+                    </div>
+                </div>
+
+                <!-- Batch 1: Donation & Revenue Metrics (Charts 1-3 + Top Donors) -->
+                <div id="donations" class="scroll-mt-20">
+                    <div class="mb-8">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Financials</h2>
+                        <h3 class="text-3xl font-serif font-bold text-secondary italic">Revenue Trends</h3>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Top Donors Table -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold text-lg text-secondary">Top Donors (Q1)</h3>
+                                <button class="text-primary text-xs font-bold hover:underline">View Full Roster</button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-sm">
+                                    <thead class="text-gray-400 border-b border-gray-50">
+                                        <tr>
+                                            <th class="pb-3 font-medium">Donor</th>
+                                            <th class="pb-3 font-medium">Total Given</th>
+                                            <th class="pb-3 font-medium">Last Gift</th>
+                                            <th class="pb-3 font-medium">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-50">
+                                        <tr class="hover:bg-gray-50 transition">
+                                            <td class="py-4">
+                                                <div class="flex items-center gap-3">
+                                                    <img src="assets/avatar-3.jpg" class="w-8 h-8 rounded-full">
+                                                    <div>
+                                                        <p class="font-bold text-secondary text-xs">Michael Chen</p>
+                                                        <p class="text-[10px] text-gray-400">Platinum Partner</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="py-4 font-bold text-secondary">$45,000</td>
+                                            <td class="py-4 text-gray-500">2 days ago</td>
+                                            <td class="py-4"><span
+                                                    class="px-2 py-0.5 bg-green-100 text-green-600 rounded-full text-[10px] font-bold">Recurring</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50 transition">
+                                            <td class="py-4">
+                                                <div class="flex items-center gap-3">
+                                                    <img src="assets/avatar-12.jpg" class="w-8 h-8 rounded-full">
+                                                    <div>
+                                                        <p class="font-bold text-secondary text-xs">Sarah Miller</p>
+                                                        <p class="text-[10px] text-gray-400">Legacy Member</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="py-4 font-bold text-secondary">$32,500</td>
+                                            <td class="py-4 text-gray-500">1 week ago</td>
+                                            <td class="py-4"><span
+                                                    class="px-2 py-0.5 bg-blue-100 text-blue-600 rounded-full text-[10px] font-bold">One-time</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Chart 1: Monthly Revenue Target -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Revenue Target
+                            </h4>
+                            <div class="h-48 relative">
+                                <canvas id="chart1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="source-analysis" class="scroll-mt-20">
+                    <div class="mb-4 pt-4 border-t border-gray-100">
+                        <h4 class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">Sub-Section</h4>
+                        <h5 class="text-xl font-serif font-bold text-secondary">Source & Retention Analysis</h5>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <!-- Chart 2: Donation Source Breakdown -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Source Analysis
+                            </h4>
+                            <div class="h-48">
+                                <canvas id="chart2"></canvas>
+                            </div>
+                        </div>
+                        <!-- Chart 3: Donor Retention Trend -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Retention Rate
+                            </h4>
+                            <div class="h-48">
+                                <canvas id="chart3"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <!-- Chart 4: Donor Growth -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider text-xs">Donor
+                                Growth</h4>
+                            <div class="h-32">
+                                <canvas id="chart4"></canvas>
+                            </div>
+                        </div>
+                        <!-- Chart 5: Project ROI -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider text-xs">Impact
+                                ROI
+                            </h4>
+                            <div class="h-32">
+                                <canvas id="chart5"></canvas>
+                            </div>
+                        </div>
+                        <!-- Financial Spotlight -->
+                        <div
+                            class="bg-primary rounded-xl p-6 text-white shadow-lg relative overflow-hidden group lg:col-span-2">
+                            <div class="relative z-10">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-white/60">Campaign
+                                    Spotlight</span>
+                                <h4 class="text-xl font-bold mt-2">Clean Water Initiative</h4>
+                                <p class="text-xs text-white/80 mt-2 leading-relaxed">Exceeded Q1 target by 145%.
+                                    Radical
+                                    transparency drove 40% more donations.</p>
+                                <button
+                                    class="mt-4 px-4 py-2 bg-white text-primary rounded-lg text-xs font-bold hover:scale-105 transition">Read
+                                    Report</button>
+                            </div>
+                            <i
+                                class="fas fa-medal absolute -right-4 -bottom-4 text-white/10 text-8xl transition group-hover:rotate-12"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Batch 2: Campaign & Volunteer Metrics (Charts 6-7 + Active Projects) -->
+                <div id="campaigns" class="scroll-mt-20">
+                    <div class="mb-8">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Operations</h2>
+                        <h3 class="text-3xl font-serif font-bold text-secondary italic">Campaign Monitoring</h3>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Active Project Cards -->
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-bold text-lg text-secondary">Active Field Projects</h3>
+                                <button class="text-primary text-xs font-bold hover:underline">Global Map</button>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div
+                                    class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
+                                    <img src="assets/hero-v1.jpg" class="w-full h-32 object-cover">
+                                    <div class="p-4">
+                                        <h4 class="font-bold text-secondary text-sm">Nairobi Education Hub</h4>
+                                        <div class="flex justify-between text-[10px] text-gray-400 mt-3 mb-1">
+                                            <span>Construction</span>
+                                            <span>85% complete</span>
+                                        </div>
+                                        <div class="w-full bg-gray-100 h-1.5 rounded-full">
+                                            <div class="bg-green-500 h-1.5 rounded-full" style="width: 85%"></div>
+                                        </div>
+                                        <div class="flex justify-between items-center mt-4">
+                                            <span class="text-[10px] font-bold text-gray-500"><i
+                                                    class="fas fa-map-marker-alt text-primary mr-1"></i> Nairobi,
+                                                Kenya</span>
+                                            <button class="p-2 text-secondary hover:text-primary"><i
+                                                    class="fas fa-arrow-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition">
+                                    <img src="assets/clean-water.jpg" class="w-full h-32 object-cover">
+                                    <div class="p-4">
+                                        <h4 class="font-bold text-secondary text-sm">Solar Water Pumps</h4>
+                                        <div class="flex justify-between text-[10px] text-gray-400 mt-3 mb-1">
+                                            <span>Deployment</span>
+                                            <span>40% complete</span>
+                                        </div>
+                                        <div class="w-full bg-gray-100 h-1.5 rounded-full">
+                                            <div class="bg-primary h-1.5 rounded-full" style="width: 40%"></div>
+                                        </div>
+                                        <div class="flex justify-between items-center mt-4">
+                                            <span class="text-[10px] font-bold text-gray-500"><i
+                                                    class="fas fa-map-marker-alt text-primary mr-1"></i> Amazon
+                                                Basin</span>
+                                            <button class="p-2 text-secondary hover:text-primary"><i
+                                                    class="fas fa-arrow-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Milestone Timeline -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                            <h3 class="font-bold text-lg text-secondary mb-6">Recent Milestones</h3>
+                            <div class="relative pl-6 border-l border-gray-100 space-y-6">
+                                <div class="relative">
+                                    <div
+                                        class="absolute -left-[29px] w-4 h-4 rounded-full bg-green-500 border-2 border-white">
+                                    </div>
+                                    <p class="text-[10px] font-bold text-gray-400">TODAY</p>
+                                    <h4 class="text-xs font-bold text-secondary">Amazon Pump #42 Live</h4>
+                                    <p class="text-[10px] text-gray-500 mt-1">Providing water to 150 more families in
+                                        rural
+                                        areas.</p>
+                                </div>
+                                <div class="relative">
+                                    <div
+                                        class="absolute -left-[29px] w-4 h-4 rounded-full bg-blue-500 border-2 border-white">
+                                    </div>
+                                    <p class="text-[10px] font-bold text-gray-400">YESTERDAY</p>
+                                    <h4 class="text-xs font-bold text-secondary">Kenya Hub Roof Completed</h4>
+                                    <p class="text-[10px] text-gray-500 mt-1">Nairobi Education Hub is now
+                                        weather-proof.
+                                    </p>
+                                </div>
+                                <div class="relative">
+                                    <div
+                                        class="absolute -left-[29px] w-4 h-4 rounded-full bg-orange-500 border-2 border-white">
+                                    </div>
+                                    <p class="text-[10px] font-bold text-gray-400">3 DAYS AGO</p>
+                                    <h4 class="text-xs font-bold text-secondary">Fundraiser Goal Met</h4>
+                                    <p class="text-[10px] text-gray-500 mt-1">Medical Supplies campaign reached 100%.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="performance-roi" class="scroll-mt-20">
+                        <div class="mb-4 pt-4 border-t border-gray-100">
+                            <h4 class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">Sub-Section
+                            </h4>
+                            <h5 class="text-xl font-serif font-bold text-secondary">Conversion & Engagement Performance
+                            </h5>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <!-- Chart 6: Social Media Conversion -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Traffic
+                                    Conversion
+                                </h4>
+                                <div class="h-48">
+                                    <canvas id="chart6"></canvas>
+                                </div>
+                            </div>
+                            <!-- Chart 7: Volunteer Hours Trend -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Volunteer
+                                    Engagement
+                                </h4>
+                                <div class="h-48">
+                                    <canvas id="chart7"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <!-- Chart 8: Skill Distribution -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider text-xs">Skill
+                                    Mix
+                                </h4>
+                                <div class="h-40">
+                                    <canvas id="chart8"></canvas>
+                                </div>
+                            </div>
+                            <!-- Chart 9: Global Reach -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider text-xs">
+                                    Region
+                                    Spread</h4>
+                                <div class="h-40">
+                                    <canvas id="chart9"></canvas>
+                                </div>
+                            </div>
+                            <!-- Chart 10: Resource Allocation -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider text-xs">Fund
+                                    Usage
+                                </h4>
+                                <div class="h-40">
+                                    <canvas id="chart10"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Batch 3: Financial & Impact Metrics (Charts 11-13 + Volunteer Leaderboard) -->
+                    <div id="volunteers" class="scroll-mt-20">
+                        <div class="mb-8">
+                            <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Community
+                            </h2>
+                            <h3 class="text-3xl font-serif font-bold text-secondary italic">Hours & Engagement</h3>
+                        </div>
+
+                        <!-- Hours & Engagement Metrics -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div
+                                class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 text-xl">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Total Hours</p>
+                                    <p class="text-2xl font-bold text-secondary dark:text-gray-100">24,500</p>
+                                    <p class="text-[10px] text-green-500 font-bold"><i class="fas fa-arrow-up"></i> 12%
+                                        vs last month</p>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xl">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Active
+                                        Volunteers</p>
+                                    <p class="text-2xl font-bold text-secondary dark:text-gray-100">1,250</p>
+                                    <p class="text-[10px] text-green-500 font-bold"><i class="fas fa-arrow-up"></i> 5%
+                                        new signups</p>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-teal-100 dark:bg-teal-900/30 flex items-center justify-center text-teal-600 dark:text-teal-400 text-xl">
+                                    <i class="fas fa-project-diagram"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Projects Active
+                                    </p>
+                                    <p class="text-2xl font-bold text-secondary dark:text-gray-100">18</p>
+                                    <p class="text-[10px] text-gray-400 font-bold">Across 4 regions</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Section -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                            <!-- Volunteer Growth Chart -->
+                            <div
+                                class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                                <h4
+                                    class="font-bold text-secondary dark:text-gray-200 mb-4 text-sm uppercase tracking-wider">
+                                    Volunteer Growth</h4>
+                                <div class="h-64">
+                                    <canvas id="chartVolunteerGrowth"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Hours Distribution Chart -->
+                            <div
+                                class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                                <h4
+                                    class="font-bold text-secondary dark:text-gray-200 mb-4 text-sm uppercase tracking-wider">
+                                    Hours by Activity</h4>
+                                <div class="h-64">
+                                    <canvas id="chartHoursActivity"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="global-roster" class="scroll-mt-20">
+                            <div class="mb-4 pt-4 border-t border-gray-100">
+                                <h4 class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">
+                                    Sub-Section
+                                </h4>
+                                <h5 class="text-xl font-serif font-bold text-secondary">Global Volunteer Roster</h5>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                                <!-- Volunteer Leaderboard -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
+                                    <div class="flex justify-between items-center mb-6">
+                                        <h3 class="font-bold text-lg text-secondary">Top Volunteers (Feb)</h3>
+                                        <div class="relative">
+                                            <input type="text" placeholder="Search skills..."
+                                                class="pl-8 pr-4 py-1.5 bg-gray-50 border border-gray-100 rounded-lg text-xs focus:ring-1 focus:ring-primary outline-none">
+                                            <i
+                                                class="fas fa-search absolute left-2.5 top-2 text-gray-400 text-[10px]"></i>
+                                        </div>
+                                    </div>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left text-sm">
+                                            <thead class="text-gray-400 border-b border-gray-50">
+                                                <tr>
+                                                    <th class="pb-3 font-medium">Volunteer</th>
+                                                    <th class="pb-3 font-medium">Total Hours</th>
+                                                    <th class="pb-3 font-medium">Core Skills</th>
+                                                    <th class="pb-3 font-medium">Last Active</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-gray-50">
+                                                <tr class="hover:bg-gray-50 transition">
+                                                    <td class="py-4">
+                                                        <div class="flex items-center gap-3">
+                                                            <div
+                                                                class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold">
+                                                                AK</div>
+                                                            <div>
+                                                                <p class="font-bold text-secondary text-xs">Amara K.</p>
+                                                                <p class="text-[10px] text-gray-400">Environment Lead
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-4 font-bold text-secondary">156 hrs</td>
+                                                    <td class="py-4">
+                                                        <div class="flex gap-1">
+                                                            <span
+                                                                class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-[10px]">Logistics</span>
+                                                            <span
+                                                                class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-[10px]">Planning</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-4 text-gray-500 text-xs">Today</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 transition">
+                                                    <td class="py-4">
+                                                        <div class="flex items-center gap-3">
+                                                            <div
+                                                                class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">
+                                                                LW</div>
+                                                            <div>
+                                                                <p class="font-bold text-secondary text-xs">Liam W.</p>
+                                                                <p class="text-[10px] text-gray-400">Tech Support</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-4 font-bold text-secondary">142 hrs</td>
+                                                    <td class="py-4">
+                                                        <div class="flex gap-1">
+                                                            <span
+                                                                class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-[10px]">Coding</span>
+                                                            <span
+                                                                class="px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded text-[10px]">Mentoring</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="py-4 text-gray-500 text-xs">Yesterday</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Chart 11: App Engagement -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">App
+                                        Engagement
+                                    </h4>
+                                    <div class="h-48 relative">
+                                        <canvas id="chart11"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <!-- Chart 12: Conversion Funnel -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Channel
+                                        ROI
+                                    </h4>
+                                    <div class="h-48">
+                                        <canvas id="chart12"></canvas>
+                                    </div>
+                                </div>
+                                <!-- Chart 13: Donor Demographics -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Donor Age
+                                        Group
+                                    </h4>
+                                    <div class="h-48">
+                                        <canvas id="chart13"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Back Office Section (Charts 14-15 + Audit Logs) -->
+                        <div id="expense-reports" class="scroll-mt-20">
+                            <div class="mb-8">
+                                <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Mission
+                                    Impact</h2>
+                                <h3 class="text-3xl font-serif font-bold text-secondary italic">Expense & Impact Reports
+                                </h3>
+                            </div>
+
+                            <!-- Mission Summary Stats -->
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Total
+                                        Impact</p>
+                                    <h4 class="text-xl font-bold text-secondary">1.2M+</h4>
+                                    <p class="text-[9px] text-green-500 font-bold">Lives globally</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
+                                        Efficiency Ratio</p>
+                                    <h4 class="text-xl font-bold text-secondary">92%</h4>
+                                    <p class="text-[9px] text-blue-500 font-bold">Direct aid flow</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Cost /
+                                        Impact</p>
+                                    <h4 class="text-xl font-bold text-secondary">$14.20</h4>
+                                    <p class="text-[9px] text-gray-400">Avg per beneficiary</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
+                                        Transparency</p>
+                                    <h4 class="text-xl font-bold text-secondary">Tier A+</h4>
+                                    <p class="text-[9px] text-primary font-bold">Verified audit</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                <!-- Chart 14: Impact per Category -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Impact
+                                        Verticals</h4>
+                                    <div class="h-48">
+                                        <canvas id="chart14"></canvas>
+                                    </div>
+                                </div>
+                                <!-- Chart 15: Funding Composition -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Funding
+                                        Composition</h4>
+                                    <div class="h-48">
+                                        <canvas id="chart15"></canvas>
+                                    </div>
+                                </div>
+                                <!-- Chart 16: Expense Breakdown (New) -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Expense
+                                        Breakdown</h4>
+                                    <div class="h-48">
+                                        <canvas id="chart16"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <!-- Chart 17: People Reached Trend (New) -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Impact
+                                        Growth Trend</h4>
+                                    <div class="h-56">
+                                        <canvas id="chart17"></canvas>
+                                    </div>
+                                </div>
+                                <!-- Chart 18: Budget vs Actual (New) -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h4 class="font-bold text-secondary mb-4 text-sm uppercase tracking-wider">Budget
+                                        Utilization</h4>
+                                    <div class="h-56">
+                                        <canvas id="chart18"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="audit-logs" class="scroll-mt-20">
+                            <div class="mb-4 pt-4 border-t border-gray-100">
+                                <h4 class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">
+                                    Administrative</h4>
+                                <h5 class="text-xl font-serif font-bold text-secondary">System Audit Logs</h5>
+                            </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                                <!-- Detailed Audit Log -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
+                                    <div class="flex justify-between items-center mb-6">
+                                        <h3 class="font-bold text-lg text-secondary">Administrative Audit Log</h3>
+                                        <button
+                                            class="px-3 py-1 bg-gray-50 text-gray-500 rounded-lg text-[10px] font-bold border border-gray-100 hover:bg-gray-100 transition">Export
+                                            CSV</button>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div
+                                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100 hover:border-primary/30 transition group">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-xs">
+                                                    <i class="fas fa-user-shield"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="text-xs font-bold text-secondary">Role Updated: Editor
+                                                    </p>
+                                                    <p class="text-[9px] text-gray-400">Admin_Sarah updated
+                                                        permissions for
+                                                        Mark
+                                                        T.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <span class="text-[9px] font-medium text-gray-400">10m ago</span>
+                                        </div>
+                                        <div
+                                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-100 hover:border-primary/30 transition group">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 bg-orange-100 text-orange-600 rounded-lg flex items-center justify-center text-xs">
+                                                    <i class="fas fa-archive"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="text-xs font-bold text-secondary">Campaign Archived:
+                                                        Winter
+                                                        '25
+                                                    </p>
+                                                    <p class="text-[9px] text-gray-400">Auto-archived after reaching
+                                                        102%
+                                                        target.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <span class="text-[9px] font-medium text-gray-400">2h ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pending Approvals -->
+                                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                    <h3 class="font-bold text-lg text-secondary mb-4">Approvals</h3>
+                                    <div class="space-y-4">
+                                        <div class="p-3 border border-red-100 bg-red-50 rounded-lg">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-[10px] font-black text-red-600 uppercase">High
+                                                    Priority</span>
+                                                <span class="text-[10px] text-red-400">Req #108</span>
+                                            </div>
+                                            <p class="text-xs font-bold text-secondary mb-1">Corporate Gift: $50,000
+                                            </p>
+                                            <p class="text-[10px] text-gray-500 mb-3">From: Global Reach Corp
+                                                (Verification
+                                                Req)
+                                            </p>
+                                            <div class="flex gap-2">
+                                                <button
+                                                    class="flex-1 py-1.5 bg-secondary text-white rounded-lg text-[10px] font-bold hover:bg-black transition">Approve</button>
+                                                <button
+                                                    class="px-3 py-1.5 bg-white border border-gray-200 text-gray-400 rounded-lg text-[10px] hover:bg-gray-50 transition">Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Global Footer -->
+                    <footer class="bg-secondary text-white pt-12 pb-8 rounded-t-[3rem] mt-0">
+                        <div class="container mx-auto px-6">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                                <!-- Brand -->
+                                <div class="col-span-1 md:col-span-1">
+                                    <div class="flex items-center gap-2 mb-6">
+                                        <div
+                                            class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                                            H</div>
+                                        <span class="text-2xl font-serif font-bold">HopeBridge</span>
+                                    </div>
+                                    <p class="text-gray-300 mb-8 leading-loose text-sm">
+                                        We are on a mission to bring radical transparency to charity. Every
+                                        dollar you
+                                        give
+                                        is
+                                        tracked,
+                                        ensuring it changes a life.
+                                    </p>
+                                    <div class="flex space-x-4">
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition hover:scale-110"><i
+                                                class="fab fa-facebook-f"></i></a>
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition hover:scale-110"><i
+                                                class="fab fa-twitter"></i></a>
+                                        <a href="#"
+                                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition hover:scale-110"><i
+                                                class="fab fa-instagram"></i></a>
+                                    </div>
+                                </div>
+
+                                <!-- Links -->
+                                <div>
+                                    <h4 class="font-bold text-lg mb-8 relative inline-block">About Us <span
+                                            class="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
+                                    </h4>
+                                    <ul class="space-y-4 text-gray-400 text-sm">
+                                        <li><a href="about.html"
+                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
+                                                    class="fas fa-chevron-right text-xs text-primary"></i>
+                                                Mission &
+                                                Vision</a></li>
+                                        <li><a href="about.html#transparency"
+                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
+                                                    class="fas fa-chevron-right text-xs text-primary"></i>
+                                                Financial
+                                                Reports</a>
+                                        </li>
+                                        <li><a href="#"
+                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
+                                                    class="fas fa-chevron-right text-xs text-primary"></i> Our
+                                                Team</a>
+                                        </li>
+                                        <li><a href="#"
+                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
+                                                    class="fas fa-chevron-right text-xs text-primary"></i>
+                                                Careers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Links -->
+                                <div>
+                                    <h4 class="font-bold text-lg mb-8 relative inline-block">Get Involved <span
+                                            class="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
+                                    </h4>
+                                    <ul class="space-y-4 text-gray-400 text-sm">
+
+                                        <li><a href="volunteer.html"
+                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
+                                                    class="fas fa-chevron-right text-xs text-primary"></i>
+                                                Volunteer</a>
+                                        </li>
+                                        <li><a href="#"
+                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
+                                                    class="fas fa-chevron-right text-xs text-primary"></i>
+                                                Fundraise for
+                                                Us</a></li>
+                                        <li><a href="#"
+                                                class="hover:text-white hover:translate-x-1 transition flex items-center gap-2"><i
+                                                    class="fas fa-chevron-right text-xs text-primary"></i>
+                                                Corporate
+                                                Partners</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Newsletter -->
+                                <div>
+                                    <h4 class="font-bold text-lg mb-8 relative inline-block">Stay Updated <span
+                                            class="absolute -bottom-2 left-0 w-8 h-1 bg-primary rounded-full"></span>
+                                    </h4>
+                                    <p class="text-gray-400 mb-6 text-sm">See the impact of your work in your
+                                        inbox. No
+                                        spam, just
+                                        hope.
+                                    </p>
+                                    <form class="flex flex-col gap-3">
+                                        <input type="email" placeholder="Your email address"
+                                            class="px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:bg-white/10 transition">
+                                        <button
+                                            class="bg-primary hover:bg-red-500 text-white px-5 py-3 rounded-xl font-bold transition shadow-lg">Subscribe</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div
+                                class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                                <p>&copy; 2026 HopeBridge International. All rights reserved.</p>
+                                <div class="flex space-x-6 mt-4 md:mt-0">
+                                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                                    <a href="#" class="hover:text-white">Terms of Service</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+        </main>
+    </div>
+
+    <script>
+        // Chart.js Configuration
+        const ctx = document.getElementById('donationChart').getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(255, 107, 107, 0.5)'); // Primary color fade
+        gradient.addColorStop(1, 'rgba(255, 107, 107, 0)');
+
+        const donationChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', 'Now'],
+                datasets: [{
+                    label: 'Donations ($)',
+                    data: [120, 190, 150, 250, 220, 300, 450],
+                    borderColor: '#FF6B6B',
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { display: true, borderDash: [5, 5] } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Common Chart Configuration
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } }
+        };
+
+        // Batch 1: Donation & Revenue (1-5)
+        new Chart(document.getElementById('chart1'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Raised', 'Remaining'],
+                datasets: [{
+                    data: [75, 25],
+                    backgroundColor: ['#FF6B6B', '#f3f4f6'],
+                    circumference: 180,
+                    rotation: 270,
+                    borderWidth: 0
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart2'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Recurring', 'One-time', 'Corporate', 'Grants'],
+                datasets: [{
+                    data: [40, 25, 20, 15],
+                    backgroundColor: ['#0F4C5C', '#FF6B6B', '#FFD166', '#4ADE80'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: { ...commonOptions, plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
+        });
+
+        new Chart(document.getElementById('chart3'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Retention %',
+                    data: [65, 68, 72, 70, 75, 82],
+                    borderColor: '#0F4C5C',
+                    tension: 0.4,
+                    fill: false
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart4'), {
+            type: 'line',
+            data: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [{
+                    data: [45, 52, 48, 65],
+                    borderColor: '#FF6B6B',
+                    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart5'), {
+            type: 'bar',
+            data: {
+                labels: ['Water', 'Health', 'Education', 'Emergency', 'Food'],
+                datasets: [{
+                    label: 'ROI Ratio',
+                    data: [4.2, 3.8, 5.1, 2.9, 4.5],
+                    backgroundColor: '#0F4C5C',
+                    borderRadius: 8
+                }]
+            },
+            options: commonOptions
+        });
+
+        // Batch 2: Campaign & Volunteer (6-10)
+        new Chart(document.getElementById('chart6'), {
+            type: 'bar',
+            data: {
+                labels: ['Instagram', 'Facebook', 'Twitter/X', 'LinkedIn', 'YouTube'],
+                datasets: [{
+                    label: 'Conversions',
+                    data: [420, 310, 150, 280, 560],
+                    backgroundColor: ['#E1306C', '#1877F2', '#1DA1F2', '#0A66C2', '#FF0000'],
+                    borderRadius: 6
+                }]
+            },
+            options: { ...commonOptions, indexAxis: 'y' }
+        });
+
+        new Chart(document.getElementById('chart7'), {
+            type: 'line',
+            data: {
+                labels: ['W1', 'W2', 'W3', 'W4'],
+                datasets: [{
+                    label: 'Hours',
+                    data: [1200, 1540, 1420, 1890],
+                    borderColor: '#FFD166',
+                    backgroundColor: 'rgba(255, 209, 102, 0.1)',
+                    fill: true,
+                    tension: 0.5
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart8'), {
+            type: 'radar',
+            data: {
+                labels: ['Medical', 'Logistics', 'Edu', 'Tech', 'Admin'],
+                datasets: [{
+                    label: 'Volunteer Skills',
+                    data: [85, 92, 78, 65, 88],
+                    borderColor: '#0F4C5C',
+                    backgroundColor: 'rgba(15, 76, 92, 0.2)'
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: { r: { ticks: { display: false }, suggestedMin: 0, suggestedMax: 100 } }
+            }
+        });
+
+        new Chart(document.getElementById('chart9'), {
+            type: 'polarArea',
+            data: {
+                labels: ['Africa', 'Asia', 'Europe', 'Americas'],
+                datasets: [{
+                    data: [45, 30, 15, 10],
+                    backgroundColor: ['#0F4C5C', '#FF6B6B', '#FFD166', '#4ADE80']
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart10'), {
+            type: 'pie',
+            data: {
+                labels: ['Direct Aid', 'Operation', 'Logistics', 'Admin'],
+                datasets: [{
+                    data: [70, 15, 10, 5],
+                    backgroundColor: ['#4ADE80', '#FFD166', '#0F4C5C', '#FF6B6B']
+                }]
+            },
+            options: { ...commonOptions, plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } }
+        });
+
+        // Batch 3: Financial & Impact (11-15)
+        new Chart(document.getElementById('chart11'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'App DAU',
+                    data: [450, 520, 680, 810, 950, 1100],
+                    borderColor: '#4ADE80',
+                    tension: 0.3
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart12'), {
+            type: 'bar',
+            data: {
+                labels: ['Ads', 'Email', 'Referral', 'Social'],
+                datasets: [{
+                    label: 'Conversion %',
+                    data: [2.1, 4.5, 6.2, 3.1],
+                    backgroundColor: '#FF6B6B',
+                    borderRadius: 4
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart13'), {
+            type: 'bar',
+            data: {
+                labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+                datasets: [{
+                    label: 'Donors',
+                    data: [150, 320, 280, 190, 120],
+                    backgroundColor: '#0F4C5C',
+                    borderRadius: 4
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart14'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Wildlife', 'Water', 'Forest', 'Air'],
+                datasets: [{
+                    data: [35, 25, 20, 20],
+                    backgroundColor: ['#4ADE80', '#60A5FA', '#FBBF24', '#F87171']
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart15'), {
+            type: 'bar',
+            data: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [
+                    { label: 'Corporate', data: [45000, 52000, 48000, 61000], backgroundColor: '#0F4C5C' },
+                    { label: 'Individual', data: [32000, 38000, 41000, 55000], backgroundColor: '#FF6B6B' }
+                ]
+            },
+            options: { ...commonOptions, scales: { x: { stacked: true }, y: { stacked: true } } }
+        });
+
+        new Chart(document.getElementById('chart16'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Direct Aid', 'Admin', 'Marketing', 'Logistics'],
+                datasets: [{
+                    data: [65, 10, 15, 10],
+                    backgroundColor: ['#4ADE80', '#0F4C5C', '#FF6B6B', '#FFD166'],
+                    borderWidth: 0
+                }]
+            },
+            options: { ...commonOptions, cutout: '70%', plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 8, font: { size: 9 } } } } }
+        });
+
+        new Chart(document.getElementById('chart17'), {
+            type: 'line',
+            data: {
+                labels: ['2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'Impact (Lives)',
+                    data: [150000, 320000, 580000, 890000, 1200000],
+                    borderColor: '#FF6B6B',
+                    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chart18'), {
+            type: 'bar',
+            data: {
+                labels: ['Water', 'Health', 'Education', 'Relief'],
+                datasets: [
+                    { label: 'Budget', data: [400000, 350000, 300000, 200000], backgroundColor: '#E2E8F0', borderRadius: 4 },
+                    { label: 'Actual', data: [385000, 310000, 290000, 240000], backgroundColor: '#0F4C5C', borderRadius: 4 }
+                ]
+            },
+            options: { ...commonOptions, plugins: { legend: { display: true, position: 'top', labels: { boxWidth: 10, font: { size: 10 } } } } }
+        });
+
+        // --- New Charts for Hours & Engagement ---
+        new Chart(document.getElementById('chartVolunteerGrowth'), {
+            type: 'line',
+            data: {
+                labels: ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                datasets: [{
+                    label: 'Volunteers',
+                    data: [850, 920, 980, 1050, 1150, 1250],
+                    borderColor: '#FF6B6B',
+                    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById('chartHoursActivity'), {
+            type: 'bar',
+            data: {
+                labels: ['Events', 'Field Work', 'Admin', 'Remote', 'Training'],
+                datasets: [{
+                    label: 'Hours',
+                    data: [5000, 12000, 3000, 2500, 2000],
+                    backgroundColor: ['#FF6B6B', '#0F4C5C', '#FFD166', '#4ADE80', '#60A5FA'],
+                    borderRadius: 6
+                }]
+            },
+            options: commonOptions
+        });
+
+        // --- Scroll Management Logic ---
+        const mainContent = document.getElementById('main-content');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.scroll-mt-20');
+
+        // Smooth Scroll for Sidebar Links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        mainContent.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // ScrollSpy: Highlight active link on scroll
+        mainContent.addEventListener('scroll', () => {
+            let current = '';
+            const scrollPos = mainContent.scrollTop + 120; // Adjusted offset for better sync
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollPos >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active', 'bg-white/10', 'text-white', 'font-medium');
+                link.classList.add('text-gray-400');
+
+                // Also handle the icon color if necessary
+                const icon = link.querySelector('i');
+                if (icon) icon.classList.remove('text-primary');
+
+                if (current && link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active', 'bg-white/10', 'text-white', 'font-medium');
+                    link.classList.remove('text-gray-400');
+                    if (icon) icon.classList.add('text-primary');
+                }
+            });
+        });
+
+        // Sidebar Toggle Logic
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black/50 z-40 hidden md:hidden backdrop-blur-sm';
+        document.body.appendChild(overlay);
+
+        if (sidebarToggleBtn) {
+            sidebarToggleBtn.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+            });
+        }
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

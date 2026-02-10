@@ -188,6 +188,24 @@ document.addEventListener('DOMContentLoaded', () => {
           <a href="donor-dashboard.html" class="menu-sub-link flex items-center gap-3 p-4 rounded-2xl hover:bg-secondary/10 transition-all duration-300"><i class="fas fa-user text-primary"></i> User Dashboard</a>
         </div>
 
+        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+          <p class="text-sm font-sans font-bold text-gray-400 mb-4 uppercase tracking-wider">Settings</p>
+          <div class="flex items-center gap-4">
+            <button id="mobile-theme-toggle" class="flex-1 flex items-center justify-center gap-3 p-4 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-all duration-300">
+              <i class="fas fa-moon dark:hidden"></i>
+              <i class="fas fa-sun hidden dark:inline"></i>
+              <span class="font-sans text-base">Theme</span>
+            </button>
+            <button id="mobile-rtl-toggle" class="flex-1 flex items-center justify-center gap-3 p-4 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 transition-all duration-300">
+              <i class="fas fa-globe"></i>
+              <span class="font-sans text-base">RTL/LTR</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pt-4">
+          <a href="login.html" class="block w-full text-center p-4 rounded-2xl bg-primary text-white font-sans font-bold hover:bg-primary-dark transition-all duration-300">Log In</a>
+        </div>
 
       </div>
     `;
@@ -225,6 +243,41 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileMenu.querySelectorAll('a').forEach(link =>
       link.addEventListener('click', closeMenu)
     );
+
+    // Mobile theme toggle
+    const mobileThemeToggle = mobileMenu.querySelector('#mobile-theme-toggle');
+    if (mobileThemeToggle) {
+      mobileThemeToggle.addEventListener('click', () => {
+        if (typeof toggleTheme === 'function') {
+          toggleTheme();
+        } else {
+          document.documentElement.classList.toggle('dark');
+          localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        }
+      });
+    }
+
+    // Mobile RTL toggle
+    const mobileRTLToggle = mobileMenu.querySelector('#mobile-rtl-toggle');
+    if (mobileRTLToggle) {
+      mobileRTLToggle.addEventListener('click', () => {
+        if (typeof toggleRTL === 'function') {
+          toggleRTL();
+        } else {
+          const html = document.documentElement;
+          const dir = html.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+          html.setAttribute('dir', dir);
+          localStorage.setItem('hopebridge_dir', dir);
+        }
+        // Update mobile menu position after RTL toggle
+        closeMenu();
+        setTimeout(() => {
+          const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+          mobileMenu.classList.remove('translate-x-full', '-translate-x-full', 'translate-x-0');
+          mobileMenu.classList.add(isRTL ? '-translate-x-full' : 'translate-x-full');
+        }, 100);
+      });
+    }
   }
 
   /* ===============================

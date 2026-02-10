@@ -184,14 +184,19 @@
                     In</a>
 
             </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="navbar-sidebar-toggle" class="md:hidden text-2xl text-secondary dark:text-white focus:outline-none hover:text-primary transition-colors duration-300">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <div class="flex h-[calc(100vh-120px)] overflow-hidden">
+    <div class="flex h-[calc(100vh-64px)] overflow-hidden mt-16">
 
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="w-64 bg-secondary dark:bg-gray-800 text-white fixed inset-y-0 left-0 z-50 transform -translate-x-full md:relative md:translate-x-0 md:flex flex-col border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out">
+            class="w-64 bg-secondary dark:bg-gray-800 text-white fixed inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 flex flex-col border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out pt-16 md:pt-0 md:relative md:z-auto">
             <div
                 class="h-16 flex items-center justify-center border-b border-white/10 font-serif font-bold text-xl uppercase tracking-wider">
                 HopeBridge <span class="text-primary text-xs ml-2">Admin</span>
@@ -1622,22 +1627,39 @@
         // Sidebar Toggle Logic
         const sidebar = document.getElementById('sidebar');
         const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+        const navbarSidebarToggle = document.getElementById('navbar-sidebar-toggle');
 
         // Create overlay
         const overlay = document.createElement('div');
         overlay.className = 'fixed inset-0 bg-black/50 z-40 hidden md:hidden backdrop-blur-sm';
         document.body.appendChild(overlay);
 
+        const toggleSidebar = () => {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        };
+
         if (sidebarToggleBtn) {
-            sidebarToggleBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-                overlay.classList.toggle('hidden');
-            });
+            sidebarToggleBtn.addEventListener('click', toggleSidebar);
+        }
+
+        if (navbarSidebarToggle) {
+            navbarSidebarToggle.addEventListener('click', toggleSidebar);
         }
 
         overlay.addEventListener('click', () => {
             sidebar.classList.add('-translate-x-full');
             overlay.classList.add('hidden');
+        });
+
+        // Close sidebar when clicking a nav link on mobile
+        sidebar.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                }
+            });
         });
     </script>
     <script src="js/main.js"></script>

@@ -1601,3 +1601,242 @@ input[type=range]:focus {
     stroke-dashoffset: 0;
   }
 }
+
+/* ===============================
+   MOBILE OPTIMIZATIONS
+   =============================== */
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 768px) {
+  /* Reduce padding on mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Smaller typography on mobile */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.75rem !important;
+  }
+
+  h3 {
+    font-size: 1.25rem !important;
+  }
+
+  /* Mobile navbar adjustments */
+  #navbar {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  #navbar .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Make cards full-width on mobile */
+  .premium-card {
+    border-radius: 1.5rem;
+  }
+
+  /* Mobile hero section */
+  header.min-h-\[600px\] {
+    min-height: 500px;
+  }
+
+  /* Better touch targets */
+  button,
+  a,
+  .btn,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Fix footer spacing on mobile */
+  footer .grid {
+    gap: 2rem;
+  }
+
+  /* Mobile sidebar overlay */
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 40;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Impact stats mobile layout */
+  .divide-y > div {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  /* Reduce animation intensity on mobile */
+  .animate-float,
+  .animate-float-slow {
+    animation-duration: 8s;
+  }
+
+  /* Better scrolling on mobile */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Mobile form improvements */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+
+  /* Dashboard mobile adjustments */
+  .sidebar {
+    width: 280px;
+    padding-top: 4rem;
+  }
+
+  /* Mobile menu improvements */
+  #mobile-menu {
+    padding-top: 4rem;
+  }
+
+  #mobile-menu a {
+    padding: 1rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  /* Even smaller padding on very small screens */
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  /* Reduce card padding */
+  .p-10 {
+    padding: 1.5rem;
+  }
+
+  .p-8 {
+    padding: 1.25rem;
+  }
+
+  /* Stack buttons on small screens */
+  .flex-col.sm\:flex-row {
+    gap: 0.75rem;
+  }
+
+  /* Fix stats counter size */
+  .counter {
+    font-size: 2.5rem !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Better grid layouts for tablets */
+  .grid-cols-1.md\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-cols-1.md\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+  #navbar {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  #mobile-menu {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  footer {
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Improve touch interactions */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover effects on touch devices */
+  .hover\:scale-110:hover {
+    transform: none;
+  }
+
+  .hover\:rotate-6:hover {
+    transform: none;
+  }
+
+  /* Add active states instead */
+  .hover\:scale-110:active {
+    transform: scale(0.98);
+  }
+
+  button:active,
+  a:active {
+    opacity: 0.8;
+  }
+
+  /* Disable premium card tilt on touch */
+  [data-tilt] {
+    transform: none !important;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-float,
+  .animate-float-slow,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
+  }
+}

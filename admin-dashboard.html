@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - HopeBridge</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -45,17 +46,20 @@
         function toggleTheme() {
             const themeIcon = document.getElementById('theme-icon');
             const desktopThemeIcon = document.getElementById('desktop-theme-icon');
-            
+            const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
                 localStorage.theme = 'light';
                 if (themeIcon) themeIcon.className = 'fas fa-moon';
                 if (desktopThemeIcon) desktopThemeIcon.className = 'fas fa-moon';
+                if (mobileThemeIcon) mobileThemeIcon.className = 'fas fa-moon';
             } else {
                 document.documentElement.classList.add('dark');
                 localStorage.theme = 'dark';
                 if (themeIcon) themeIcon.className = 'fas fa-sun';
                 if (desktopThemeIcon) desktopThemeIcon.className = 'fas fa-sun';
+                if (mobileThemeIcon) mobileThemeIcon.className = 'fas fa-sun';
             }
         }
 
@@ -76,8 +80,10 @@
             if (document.documentElement.classList.contains('dark')) {
                 const icon = document.getElementById('theme-icon');
                 const desktopIcon = document.getElementById('desktop-theme-icon');
+                const mobileIcon = document.getElementById('mobile-theme-icon');
                 if (icon) icon.className = 'fas fa-sun';
                 if (desktopIcon) desktopIcon.className = 'fas fa-sun';
+                if (mobileIcon) mobileIcon.className = 'fas fa-sun';
             }
         };
     </script>
@@ -91,28 +97,105 @@
         .nav-link.active i {
             color: #FF6B6B !important;
         }
+
+        /* Dashboard Section Styles */
+        /* Dashboard Section Styles - Reverted for Long Page Scroll */
+        .dashboard-section {
+            /* display: block; Default behavior */
+            scroll-margin-top: 2rem;
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.dashboard-section');
+
+            // Scroll Spy Logic
+            const highlightLink = (id) => {
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href').substring(1);
+                    if (href === id) {
+                        link.classList.add('active');
+                        link.classList.remove('text-gray-400', 'hover:bg-white/5', 'hover:text-white');
+                        link.classList.add('bg-white/10', 'text-white', 'font-medium');
+                    } else {
+                        link.classList.remove('active');
+                        link.classList.add('text-gray-400', 'hover:bg-white/5', 'hover:text-white');
+                        link.classList.remove('bg-white/10', 'text-white', 'font-medium');
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        highlightLink(entry.target.id);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // Trigger when section is near top
+                threshold: 0
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Mobile Sidebar Toggle
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+            const menuIcon = document.getElementById('menu-icon');
+
+            if (mobileSidebarToggle) {
+                mobileSidebarToggle.addEventListener('click', toggleSidebar);
+            }
+
+            window.toggleSidebar = function () {
+                sidebar.classList.toggle('-translate-x-full');
+                if (sidebarOverlay) sidebarOverlay.classList.toggle('hidden');
+                if (menuIcon) {
+                    if (sidebar.classList.contains('-translate-x-full')) {
+                        menuIcon.className = 'fas fa-bars text-lg';
+                    } else {
+                        menuIcon.className = 'fas fa-times text-lg';
+                    }
+                }
+            };
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 1024) toggleSidebar();
+                });
+            });
+        });
+    </script>
 </head>
 
 <body class="bg-bg text-gray-800 font-sans transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
 
     <!-- Mobile Top Bar -->
-    <div class="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-secondary/95 backdrop-blur-sm px-4 py-3 flex items-center justify-between shadow-lg">
+    <div
+        class="lg:hidden fixed top-0 left-0 right-0 z-[60] bg-secondary/95 backdrop-blur-sm px-4 py-3 flex items-center justify-between shadow-lg">
         <!-- Menu Toggle -->
-        <button id="mobile-sidebar-toggle" 
+        <button id="mobile-sidebar-toggle"
             class="w-10 h-10 bg-white/10 text-white rounded-lg flex items-center justify-center hover:bg-white/20 transition-all">
             <i class="fas fa-bars text-lg" id="menu-icon"></i>
         </button>
-        
+
         <!-- Title with RTL Toggle -->
         <div class="flex items-center gap-3">
             <span class="text-white font-serif font-bold text-lg">Overview</span>
+            <button onclick="toggleTheme()"
+                class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-white">
+                <i class="fas fa-moon text-sm" id="mobile-theme-icon"></i>
+            </button>
             <button onclick="toggleRTL()"
                 class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition text-white">
                 <i class="fas fa-globe text-sm"></i>
             </button>
         </div>
-        
+
         <!-- User Avatar -->
         <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
             <img src="assets/avatar-2.jpg" class="w-full h-full object-cover" alt="User">
@@ -120,16 +203,19 @@
     </div>
 
     <!-- Mobile Overlay -->
-    <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-black/50 z-40 hidden mt-14" onclick="toggleSidebar()"></div>
+    <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-black/50 z-[65] hidden mt-14" onclick="toggleSidebar()">
+    </div>
 
-    <div class="flex min-h-screen overflow-hidden">
+    <div class="flex min-h-screen bg-gray-50 dark:bg-gray-900">
 
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="w-64 bg-secondary dark:bg-gray-800 text-white fixed inset-y-0 left-0 z-50 transform -translate-x-full lg:translate-x-0 flex flex-col border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out lg:relative lg:z-auto">
+            class="w-64 bg-secondary dark:bg-gray-800 text-white fixed inset-y-0 left-0 z-[70] transform -translate-x-full lg:translate-x-0 flex flex-col border-r border-gray-200 dark:border-gray-700 transition-transform duration-300 ease-in-out lg:fixed lg:inset-y-0 lg:left-0 lg:z-auto">
             <a href="index.html"
                 class="h-16 flex items-center justify-center border-b border-white/10 font-serif font-bold text-xl uppercase tracking-wider hover:bg-white/10 transition group">
-                <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-bold mr-2 group-hover:scale-110 transition-transform">H</div>
+                <div
+                    class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-bold mr-2 group-hover:scale-110 transition-transform">
+                    H</div>
                 HopeBridge <span class="text-primary text-xs ml-2">Admin</span>
             </a>
 
@@ -218,7 +304,7 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 flex flex-col overflow-hidden mt-14 md:mt-0">
+        <main class="flex-1 flex flex-col mt-14 md:mt-0 lg:ml-64">
             <!-- Header -->
             <header class="h-16 bg-white dark:bg-gray-800 shadow-sm flex items-center justify-between px-6 z-10">
                 <h2 class="text-xl font-bold text-secondary dark:text-white">Overview</h2>
@@ -246,10 +332,10 @@
             </header>
 
             <!-- Scrollable Content -->
-            <div class="flex-1 overflow-y-auto p-6 scroll-smooth relative" id="main-content">
+            <div class="flex-1 p-6 scroll-smooth relative" id="main-content">
 
                 <!-- Overview Section -->
-                <div id="overview" class="scroll-mt-20">
+                <div id="overview" class="dashboard-section active scroll-mt-20">
                     <div class="mb-8">
                         <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">General</h2>
                         <h3 class="text-3xl font-serif font-bold text-secondary italic">Dashboard Overview</h3>
@@ -341,7 +427,7 @@
                 </div>
 
                 <!-- Charts & Activity -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 scroll-mt-20" id="live-flow">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 dashboard-section scroll-mt-20" id="live-flow">
                     <div class="col-span-full mb-2">
                         <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Real-Time</h2>
                         <h3 class="text-3xl font-serif font-bold text-secondary italic">System Health & Flow</h3>
@@ -413,7 +499,7 @@
                 </div>
 
                 <!-- Batch 1: Donation & Revenue Metrics (Charts 1-3 + Top Donors) -->
-                <div id="donations" class="scroll-mt-20">
+                <div id="donations" class="dashboard-section scroll-mt-20">
                     <div class="mb-8">
                         <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Financials</h2>
                         <h3 class="text-3xl font-serif font-bold text-secondary italic">Revenue Trends</h3>
@@ -484,7 +570,7 @@
                     </div>
                 </div>
 
-                <div id="source-analysis" class="scroll-mt-20">
+                <div id="source-analysis" class="dashboard-section scroll-mt-20">
                     <div class="mb-4 pt-4 border-t border-gray-100">
                         <h4 class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">Sub-Section</h4>
                         <h5 class="text-xl font-serif font-bold text-secondary">Source & Retention Analysis</h5>
@@ -547,7 +633,7 @@
                 </div>
 
                 <!-- Batch 2: Campaign & Volunteer Metrics (Charts 6-7 + Active Projects) -->
-                <div id="campaigns" class="scroll-mt-20">
+                <div id="campaigns" class="dashboard-section scroll-mt-20">
                     <div class="mb-8">
                         <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Operations</h2>
                         <h3 class="text-3xl font-serif font-bold text-secondary italic">Campaign Monitoring</h3>
@@ -642,7 +728,7 @@
                         </div>
                     </div>
 
-                    <div id="performance-roi" class="scroll-mt-20">
+                    <div id="performance-roi" class="dashboard-section scroll-mt-20">
                         <div class="mb-4 pt-4 border-t border-gray-100">
                             <h4 class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">Sub-Section
                             </h4>
@@ -701,7 +787,7 @@
                         </div>
                     </div>
                     <!-- Batch 3: Financial & Impact Metrics (Charts 11-13 + Volunteer Leaderboard) -->
-                    <div id="volunteers" class="scroll-mt-20">
+                    <div id="volunteers" class="dashboard-section scroll-mt-20">
                         <div class="mb-8">
                             <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Community
                             </h2>
@@ -776,7 +862,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="global-roster" class="scroll-mt-20">
+                        <div id="global-roster" class="dashboard-section scroll-mt-20">
                             <div class="mb-4 pt-4 border-t border-gray-100">
                                 <h4 class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">
                                     Sub-Section
@@ -891,7 +977,7 @@
                             </div>
                         </div>
                         <!-- Back Office Section (Charts 14-15 + Audit Logs) -->
-                        <div id="expense-reports" class="scroll-mt-20">
+                        <div id="expense-reports" class="dashboard-section scroll-mt-20">
                             <div class="mb-8">
                                 <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Mission
                                     Impact</h2>
@@ -974,7 +1060,7 @@
                             </div>
                         </div>
 
-                        <div id="audit-logs" class="scroll-mt-20">
+                        <div id="audit-logs" class="dashboard-section scroll-mt-20">
                             <div class="mb-4 pt-4 border-t border-gray-100">
                                 <h4 class="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">
                                     Administrative</h4>
@@ -1062,6 +1148,128 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Audit Logs Section -->
+                <div id="audit-logs" class="dashboard-section scroll-mt-20">
+                    <div class="mb-8">
+                        <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-primary mb-1">Security</h2>
+                        <h3 class="text-3xl font-serif font-bold text-secondary italic">Audit Logs</h3>
+                    </div>
+
+                    <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="p-8 border-b border-gray-50 flex justify-between items-center">
+                            <h4 class="font-bold text-secondary">System Activity</h4>
+                            <div class="flex gap-2">
+                                <button
+                                    class="px-3 py-1.5 bg-gray-50 text-gray-600 rounded-lg text-xs font-bold hover:bg-gray-100 transition">Filter</button>
+                                <button
+                                    class="px-3 py-1.5 bg-secondary text-white rounded-lg text-xs font-bold hover:bg-secondary/90 transition">Export
+                                    CSV</button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead
+                                    class="bg-gray-50/50 text-gray-400 text-[10px] uppercase font-bold tracking-wider">
+                                    <tr>
+                                        <th class="px-8 py-4">User</th>
+                                        <th class="px-6 py-4">Action</th>
+                                        <th class="px-6 py-4">Entity</th>
+                                        <th class="px-6 py-4">IP Address</th>
+                                        <th class="px-6 py-4">Time</th>
+                                        <th class="px-6 py-4">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-50">
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-8 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">
+                                                    SJ</div>
+                                                <div>
+                                                    <p class="font-bold text-secondary text-sm">Sarah J.</p>
+                                                    <p class="text-[10px] text-gray-400">Admin</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm font-medium text-gray-700">Update Campaign</td>
+                                        <td class="px-6 py-4 text-xs text-gray-500">Water For All (ID: 442)</td>
+                                        <td class="px-6 py-4 text-xs text-gray-400 font-mono">192.168.1.42</td>
+                                        <td class="px-6 py-4 text-xs text-gray-500">2 mins ago</td>
+                                        <td class="px-6 py-4"><span
+                                                class="px-2 py-1 bg-green-50 text-green-600 rounded-lg text-[10px] font-bold">Success</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-8 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">
+                                                    MJ</div>
+                                                <div>
+                                                    <p class="font-bold text-secondary text-sm">Michael J.</p>
+                                                    <p class="text-[10px] text-gray-400">Editor</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm font-medium text-gray-700">Upload Media</td>
+                                        <td class="px-6 py-4 text-xs text-gray-500">gallery_hero.jpg</td>
+                                        <td class="px-6 py-4 text-xs text-gray-400 font-mono">10.0.0.15</td>
+                                        <td class="px-6 py-4 text-xs text-gray-500">15 mins ago</td>
+                                        <td class="px-6 py-4"><span
+                                                class="px-2 py-1 bg-green-50 text-green-600 rounded-lg text-[10px] font-bold">Success</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-8 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs font-bold">
+                                                    ?</div>
+                                                <div>
+                                                    <p class="font-bold text-secondary text-sm">Unknown</p>
+                                                    <p class="text-[10px] text-gray-400">Guest</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm font-medium text-gray-700">Login Attempt</td>
+                                        <td class="px-6 py-4 text-xs text-gray-500">System Access</td>
+                                        <td class="px-6 py-4 text-xs text-gray-400 font-mono">45.22.19.112</td>
+                                        <td class="px-6 py-4 text-xs text-gray-500">1 hr ago</td>
+                                        <td class="px-6 py-4"><span
+                                                class="px-2 py-1 bg-red-50 text-red-600 rounded-lg text-[10px] font-bold">Failed</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-8 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center text-xs font-bold">
+                                                    SYS</div>
+                                                <div>
+                                                    <p class="font-bold text-secondary text-sm">System</p>
+                                                    <p class="text-[10px] text-gray-400">Auto</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 text-sm font-medium text-gray-700">Database Backup</td>
+                                        <td class="px-6 py-4 text-xs text-gray-500">Daily Snapshot</td>
+                                        <td class="px-6 py-4 text-xs text-gray-400 font-mono">localhost</td>
+                                        <td class="px-6 py-4 text-xs text-gray-500">4 hrs ago</td>
+                                        <td class="px-6 py-4"><span
+                                                class="px-2 py-1 bg-green-50 text-green-600 rounded-lg text-[10px] font-bold">Success</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 border-t border-gray-50 bg-gray-50/30 flex justify-center">
+                            <button class="text-xs font-bold text-secondary hover:underline">View All Logs</button>
+                        </div>
+                    </div>
+                </div>
+
         </main>
     </div>
 
@@ -1391,57 +1599,7 @@
             options: commonOptions
         });
 
-        // --- Scroll Management Logic ---
-        const mainContent = document.getElementById('main-content');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('.scroll-mt-20');
-
-        // Smooth Scroll for Sidebar Links
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                const href = link.getAttribute('href');
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = href.substring(1);
-                    const targetElement = document.getElementById(targetId);
-
-                    if (targetElement) {
-                        mainContent.scrollTo({
-                            top: targetElement.offsetTop - 20,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-
-        // ScrollSpy: Highlight active link on scroll
-        mainContent.addEventListener('scroll', () => {
-            let current = '';
-            const scrollPos = mainContent.scrollTop + 120; // Adjusted offset for better sync
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollPos >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active', 'bg-white/10', 'text-white', 'font-medium');
-                link.classList.add('text-gray-400');
-
-                // Also handle the icon color if necessary
-                const icon = link.querySelector('i');
-                if (icon) icon.classList.remove('text-primary');
-
-                if (current && link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active', 'bg-white/10', 'text-white', 'font-medium');
-                    link.classList.remove('text-gray-400');
-                    if (icon) icon.classList.add('text-primary');
-                }
-            });
-        });
+        // Scroll Management Logic Removed - Replaced by Tab System
 
         // Sidebar Toggle Logic
         const sidebar = document.getElementById('sidebar');

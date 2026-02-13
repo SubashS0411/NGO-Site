@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - HopeBridge</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B',
+                        secondary: '#0F4C5C',
+                        dark: '#0a0a0a',
+                        glass: 'rgba(255, 255, 255, 0.1)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body
+    class="bg-black text-white font-sans min-h-screen flex items-center justify-center overflow-x-hidden relative py-8">
+
+    <!-- Brand Logo (Clickable - Links to Home) -->
+    <a href="index.html"
+        class="absolute top-4 left-4 sm:top-6 sm:left-6 z-50 flex items-center gap-2 hover:opacity-80 transition">
+        <div
+            class="w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-full flex items-center justify-center text-white text-lg sm:text-xl font-bold shadow-lg">
+            H
+        </div>
+        <span class="text-xl sm:text-2xl font-serif font-bold text-white tracking-tight">HopeBridge</span>
+    </a>
+
+    <!-- Theme & RTL Toggles -->
+    <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center gap-2">
+        <button onclick="toggleTheme()"
+            class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition text-white border border-white/20">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <button onclick="toggleRTL()"
+            class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition text-white border border-white/20">
+            <i class="fas fa-globe"></i>
+        </button>
+    </div>
+
+    <!-- Abstract Background -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <!-- Colorful Gradients -->
+        <div
+            class="absolute top-[-10%] right-[-5%] w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-purple-600 rounded-full mix-blend-screen filter blur-[80px] sm:blur-[100px] opacity-30 animate-pulse">
+        </div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[350px] sm:w-[500px] md:w-[600px] h-[350px] sm:h-[500px] md:h-[600px] bg-blue-600 rounded-full mix-blend-screen filter blur-[80px] sm:blur-[100px] opacity-30 animate-pulse"
+            style="animation-delay: 2s;"></div>
+        <div
+            class="absolute top-[20%] left-[20%] w-[200px] sm:w-[250px] md:w-[300px] h-[200px] sm:h-[250px] md:h-[300px] bg-pink-600 rounded-full mix-blend-screen filter blur-[60px] sm:blur-[80px] opacity-20">
+        </div>
+    </div>
+
+    <!-- Glass Card -->
+    <div id="glass-card"
+        class="relative z-10 w-full max-w-[360px] sm:max-w-[400px] p-5 sm:p-6 md:p-8 mx-4 mt-16 sm:mt-20 transition-transform duration-100 ease-out"
+        style="transform-style: preserve-3d;">
+        <div class="absolute inset-0 bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 shadow-2xl"
+            style="transform: translateZ(-50px);"></div>
+
+        <div class="relative z-20" style="transform: translateZ(30px);">
+            <!-- Header -->
+            <div class="mb-6 sm:mb-8 text-center">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-2">Create an account</h1>
+                <p class="text-white/50 text-xs sm:text-sm">Join the community driving change.</p>
+            </div>
+
+            <!-- Form -->
+            <form class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <input type="text" placeholder="First name"
+                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 focus:bg-white/10 transition placeholder-white/30">
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Last name"
+                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 focus:bg-white/10 transition placeholder-white/30">
+                    </div>
+                </div>
+
+                <div>
+                    <input type="email" placeholder="Email address"
+                        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 focus:bg-white/10 transition placeholder-white/30">
+                </div>
+
+                <div>
+                    <div class="relative">
+                        <input type="password" placeholder="Password"
+                            class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-white/30 focus:bg-white/10 transition placeholder-white/30 pr-10">
+                        <i
+                            class="fas fa-eye text-white/30 absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer hover:text-white/50"></i>
+                    </div>
+                </div>
+
+                <button type="button" onclick="location.href='donor-dashboard.html'"
+                    class="w-full bg-white text-black font-bold py-3 rounded-xl hover:bg-gray-200 transition transform hover:scale-[1.02] shadow-lg mt-2">
+                    Create an account
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="relative my-8">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-white/10"></div>
+                </div>
+                <div class="relative flex justify-center text-xs">
+                    <span
+                        class="bg-transparent px-2 text-white/30 uppercase tracking-widest bg-opacity-0 backdrop-blur-xl">Or
+                        sign in with</span>
+                </div>
+            </div>
+
+            <!-- Social Login -->
+            <div class="grid grid-cols-2 gap-4">
+                <button
+                    class="flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl py-2.5 transition group">
+                    <i class="fab fa-google text-white/70 group-hover:text-white"></i>
+                </button>
+                <button
+                    class="flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl py-2.5 transition group">
+                    <i class="fab fa-apple text-white/70 group-hover:text-white"></i>
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <p class="text-center text-xs text-white/30 mt-8">
+                By creating an account, you agree to our <a href="#"
+                    class="text-white/70 hover:text-white hover:underline">Terms of Service</a>.
+            </p>
+            <p class="text-center text-xs text-white/30 mt-4">
+                Already have an account? <a href="login.html"
+                    class="text-white/70 hover:text-white hover:underline font-bold">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // RTL Toggle
+        function toggleRTL() {
+            const html = document.documentElement;
+            const isRTL = html.getAttribute('dir') === 'rtl';
+            html.setAttribute('dir', isRTL ? 'ltr' : 'rtl');
+            localStorage.setItem('dir', isRTL ? 'ltr' : 'rtl');
+        }
+
+        // Init on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'rtl');
+            }
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const card = document.getElementById('glass-card');
+            const blobs = document.querySelectorAll('.rounded-full.mix-blend-screen');
+
+            const x = (window.innerWidth / 2 - e.pageX) / 25;
+            const y = (window.innerHeight / 2 - e.pageY) / 25;
+
+            // Tilt Card
+            card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+
+            // Move Background Blobs (Parallax)
+            blobs.forEach((blob, index) => {
+                const speed = (index + 1) * 2;
+                const blobX = (window.innerWidth / 2 - e.pageX) / (100 / speed);
+                const blobY = (window.innerHeight / 2 - e.pageY) / (100 / speed);
+                blob.style.transform = `translate(${blobX}px, ${blobY}px)`;
+            });
+        });
+    </script>
+</body>
+
+</html>

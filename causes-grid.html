@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Causes - HopeBridge</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B', // Coral Orange
+                        secondary: '#0F4C5C', // Deep Ocean Teal
+                        bg: '#FAFAFA', // Warm White
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Check for saved direction preference
+        if (localStorage.dir === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        function toggleRTL() {
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('rtl');
+                localStorage.dir = 'ltr';
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('rtl');
+                localStorage.dir = 'rtl';
+            }
+        }
+
+        // Initialize icon state on load
+        window.onload = function () {
+            if (document.documentElement.classList.contains('dark')) {
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-bg text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Emergency Banner -->
+    <div id="emergency-banner"
+        class="bg-gradient-to-r from-red-600 to-red-500 text-white text-sm py-2 px-4 flex justify-between items-center relative z-50 shadow-md">
+        <div class="container mx-auto flex items-center justify-center animate-pulse">
+            <span class="font-bold mr-2"><i class="fas fa-exclamation-triangle"></i> URGENT:</span>
+            <span>Floods in South Asia: 50,000 families need shelter.</span>
+            <a href="cause-details.html" class="ml-4 underline hover:text-gray-200 font-bold">Help Now</a>
+        </div>
+        <button onclick="document.getElementById('emergency-banner').style.display='none'"
+            class="absolute right-4 focus:outline-none opacity-80 hover:opacity-100">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <!-- Navigation (Same as V1) -->
+    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-premium fixed top-0 left-0 w-full z-50 transition-all duration-300 rounded-none mx-0 border-b border-white/20 dark:border-gray-700"
+        id="navbar">
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    H
+                </div>
+                <span
+                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center space-x-1 font-medium text-secondary dark:text-gray-200">
+                <!-- Home Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Home <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="index.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-home mr-2 text-primary"></i> Home Version 1
+                        </a>
+                        <a href="index2.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-layer-group mr-2 text-primary"></i> Home Version 2
+                        </a>
+                    </div>
+                </div>
+
+                <a href="causes-grid.html" class="px-4 py-2 hover:text-primary transition">Causes</a>
+                <a href="about.html" class="px-4 py-2 hover:text-primary transition">About Us</a>
+                <a href="contact.html" class="px-4 py-2 hover:text-primary transition">Contact</a>
+
+                <!-- Dashboard Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Dashboards <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="admin-dashboard.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Admin Dashboard
+                        </a>
+                        <a href="donor-dashboard.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-user mr-2 text-primary"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hidden lg:flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                <!-- RTL Toggle -->
+                <button onclick="toggleRTL()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-globe"></i>
+                </button>
+
+                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+                <a href="login.html"
+                    class="text-sm font-semibold text-secondary hover:text-primary dark:text-white transition">Log
+                    In</a>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn"
+                class="lg:hidden w-10 h-10 flex items-center justify-center text-2xl text-secondary flex-shrink-0 dark:text-white focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-secondary text-white py-12 sm:py-16 md:py-20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20 z-0"></div>
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-3 sm:mb-4">Our Active Causes
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-blue-100 max-w-2xl mx-auto px-2 sm:px-0">Choose where your
+                impact goes. 100% of public donations
+                fund these projects.</p>
+        </div>
+    </header>
+
+    <!-- Filter Section -->
+    <div class="bg-white border-b border-gray-200 sticky top-[72px] z-30">
+        <div class="container mx-auto px-6 py-4 overflow-x-auto">
+            <div class="flex space-x-4 min-w-max">
+                <button class="px-6 py-2 bg-primary text-white rounded-full font-bold text-sm shadow-md">All
+                    Causes</button>
+                <button
+                    class="px-6 py-2 bg-gray-100 text-gray-600 rounded-full font-bold text-sm hover:bg-gray-200 transition">Water</button>
+                <button
+                    class="px-6 py-2 bg-gray-100 text-gray-600 rounded-full font-bold text-sm hover:bg-gray-200 transition">Education</button>
+                <button
+                    class="px-6 py-2 bg-gray-100 text-gray-600 rounded-full font-bold text-sm hover:bg-gray-200 transition">Medical</button>
+                <button
+                    class="px-6 py-2 bg-gray-100 text-gray-600 rounded-full font-bold text-sm hover:bg-gray-200 transition">Emergency
+                    Relief</button>
+                <button
+                    class="px-6 py-2 bg-gray-100 text-gray-600 rounded-full font-bold text-sm hover:bg-gray-200 transition">Food
+                    Security</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Card 1 -->
+                <div
+                    class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition hover:-translate-y-2 border border-gray-100 flex flex-col premium-card">
+                    <div class="relative h-64 overflow-hidden premium-img">
+                        <img src="assets/clean-water.jpg" alt="Clean Water"
+                            class="w-full h-full object-cover transition transform group-hover:scale-110">
+                        <span
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur text-secondary text-xs font-bold px-3 py-1 rounded-full shadow-sm">Water</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3
+                            class="text-xl font-bold text-secondary mb-2 font-serif group-hover:text-primary transition">
+                            Clean Water for Kenya</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">Help us build 10 new solar-powered wells to
+                            provide safe drinking water to 5,000 villagers.</p>
+
+                        <div class="mt-auto">
+                            <!-- Progress Bar -->
+                            <div class="mb-4">
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-primary">75% Raised</span>
+                                    <span class="text-gray-400">$15,000 / $20,000</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-primary h-2.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition hover:-translate-y-2 border border-gray-100 flex flex-col premium-card">
+                    <div class="relative h-64 overflow-hidden premium-img">
+                        <img src="assets/hero-v1.jpg" alt="Education"
+                            class="w-full h-full object-cover transition transform group-hover:scale-110">
+                        <span
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur text-secondary text-xs font-bold px-3 py-1 rounded-full shadow-sm">Education</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3
+                            class="text-xl font-bold text-secondary mb-2 font-serif group-hover:text-primary transition">
+                            School Supplies for All</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">Thousands of children lack basic books and
+                            pens. Your donation kits a classroom.</p>
+
+                        <div class="mt-auto">
+                            <div class="mb-4">
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-primary">45% Raised</span>
+                                    <span class="text-gray-400">$4,500 / $10,000</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-primary h-2.5 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition hover:-translate-y-2 border border-gray-100 flex flex-col premium-card">
+                    <div class="relative h-64 overflow-hidden premium-img">
+                        <img src="assets/yemen-clinic.jpg" alt="Health"
+                            class="w-full h-full object-cover transition transform group-hover:scale-110">
+                        <span
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur text-secondary text-xs font-bold px-3 py-1 rounded-full shadow-sm">Medical</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3
+                            class="text-xl font-bold text-secondary mb-2 font-serif group-hover:text-primary transition">
+                            Mobile Clinics</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">Bringing doctors and medicine to remote
+                            villages that have no access to healthcare.</p>
+
+                        <div class="mt-auto">
+                            <div class="mb-4">
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-primary">90% Raised</span>
+                                    <span class="text-gray-400">$45,000 / $50,000</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-primary h-2.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div
+                    class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition hover:-translate-y-2 border border-gray-100 flex flex-col premium-card">
+                    <div class="relative h-64 overflow-hidden premium-img">
+                        <img src="assets/success-story.jpg" alt="Refugee"
+                            class="w-full h-full object-cover transition transform group-hover:scale-110">
+                        <span
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur text-secondary text-xs font-bold px-3 py-1 rounded-full shadow-sm">Refugee
+                            Aid</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3
+                            class="text-xl font-bold text-secondary mb-2 font-serif group-hover:text-primary transition">
+                            Emergency Shelter for Families</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">Providing tents and blankets for families
+                            displaced by recent conflicts.</p>
+
+                        <div class="mt-auto">
+                            <div class="mb-4">
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-primary">20% Raised</span>
+                                    <span class="text-gray-400">$10,000 / $50,000</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-primary h-2.5 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div
+                    class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition hover:-translate-y-2 border border-gray-100 flex flex-col premium-card">
+                    <div class="relative h-64 overflow-hidden premium-img">
+                        <img src="assets/hero-v1.jpg" alt="Food"
+                            class="w-full h-full object-cover transition transform group-hover:scale-110">
+                        <span
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur text-secondary text-xs font-bold px-3 py-1 rounded-full shadow-sm">Food
+                            Security</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3
+                            class="text-xl font-bold text-secondary mb-2 font-serif group-hover:text-primary transition">
+                            End Hunger in Sahel</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">Distributing emergency food packets to avoid
+                            malnutrition in drought-hit areas.</p>
+
+                        <div class="mt-auto">
+                            <div class="mb-4">
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-primary">60% Raised</span>
+                                    <span class="text-gray-400">$60,000 / $100,000</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-primary h-2.5 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div
+                    class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition hover:-translate-y-2 border border-gray-100 flex flex-col premium-card">
+                    <div class="relative h-64 overflow-hidden premium-img">
+                        <img src="assets/impact-bg.jpg" alt="Business"
+                            class="w-full h-full object-cover transition transform group-hover:scale-110">
+                        <span
+                            class="absolute top-4 left-4 bg-white/90 backdrop-blur text-secondary text-xs font-bold px-3 py-1 rounded-full shadow-sm">Livelihoods</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3
+                            class="text-xl font-bold text-secondary mb-2 font-serif group-hover:text-primary transition">
+                            Women's Empowerment</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">Training and micro-loans for women to start
+                            sustainable businesses.</p>
+
+                        <div class="mt-auto">
+                            <div class="mb-4">
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-primary">15% Raised</span>
+                                    <span class="text-gray-400">$3,000 / $20,000</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                    <div class="bg-primary h-2.5 rounded-full" style="width: 15%"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Search & Exploration Filter (Enhanced) -->
+    <section class="py-24 bg-bg border-t border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="bg-white p-12 rounded-[3.5rem] shadow-premium flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/3">
+                    <h2 class="text-3xl font-serif font-bold text-secondary mb-4">Find Your Cause.</h2>
+                    <p class="text-gray-500">Filter by region, urgency, or impact type to find where you can make the
+                        most difference today.</p>
+                </div>
+                <div class="lg:w-2/3 w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" placeholder="Keywords..."
+                            class="w-full pl-14 pr-6 py-4 bg-bg rounded-2xl border border-gray-100 focus:ring-2 focus:ring-primary outline-none transition">
+                    </div>
+                    <select
+                        class="w-full px-6 py-4 bg-bg rounded-2xl border border-gray-100 focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer">
+                        <option>All Regions</option>
+                        <option>Sub-Saharan Africa</option>
+                        <option>Southeast Asia</option>
+                        <option>Latin America</option>
+                    </select>
+                    <button
+                        class="bg-secondary text-white font-bold py-4 rounded-2xl hover:bg-primary transition shadow-lg">Apply
+                        Filters</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Impact Calculator (Grid Mini) -->
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2 relative">
+                    <div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+                    <img src="assets/volunteers-2.jpg" alt="Impact" class="rounded-[4rem] shadow-premium relative z-10">
+                </div>
+                <div class="lg:w-1/2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">See the Math</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">Visualization of Value.
+                    </h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed">Don't just give blindly. Use our calculator
+                        to see exactly how your contribution converts into real-world change.</p>
+
+                    <div class="bg-bg p-8 rounded-3xl border border-gray-100">
+                        <div class="flex items-center justify-between mb-8">
+                            <span class="font-bold text-secondary">If I donate:</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl font-black text-primary">$</span>
+                                <input type="number" value="100"
+                                    class="w-24 bg-transparent text-2xl font-black text-primary border-b-2 border-primary/20 focus:border-primary outline-none text-center">
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-4 bg-white rounded-2xl">
+                                <span class="text-sm text-gray-500">I will provide:</span>
+                                <span class="font-bold text-secondary">Clean Water for 4 People</span>
+                            </div>
+                            <div class="flex justify-between items-center p-4 bg-white rounded-2xl">
+                                <span class="text-sm text-gray-500">Project Timeline:</span>
+                                <span class="font-bold text-secondary">34 Days to Completion</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Urgent Emergency Alerts -->
+    <section class="py-12 bg-secondary text-white relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="flex items-center gap-4 bg-primary px-6 py-3 rounded-full animate-pulse">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span class="font-bold tracking-widest uppercase text-xs">Critical Need</span>
+                </div>
+                <div class="flex-1 overflow-hidden pointer-events-none">
+                    <div class="whitespace-nowrap inline-block animate-marquee">
+                        <span class="text-xl font-serif italic mx-8">Drought emergency in Somaliland - 1,200 kits
+                            needed.</span>
+                        <span class="text-xl font-serif italic mx-8">Flood relief in Bangladesh - Shelter units
+                            prioritized.</span>
+                        <span class="text-xl font-serif italic mx-8">Medical supply shortage in Goma - Support needed
+                            now.</span>
+                    </div>
+                </div>
+                <button
+                    class="bg-white text-secondary px-8 py-3 rounded-full font-bold hover:bg-accent transition shadow-lg shrink-0">View
+                    Alerts</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Local Leader Spotlights -->
+    <section class="py-24 bg-bg">
+        <div class="container mx-auto px-6 text-center">
+            <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Voices From the
+                Field</span>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-16">The Leaders You're Supporting.
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div
+                    class="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-premium transition-all duration-500 group">
+                    <div class="relative w-32 h-32 mx-auto mb-8">
+                        <img src="assets/avatar-3.jpg"
+                            class="rounded-full grayscale group-hover:grayscale-0 transition duration-500 border-4 border-bg">
+                        <div
+                            class="absolute -bottom-2 -right-2 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-xs">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-2xl font-bold text-secondary mb-2">Amara Okoro</h4>
+                    <p class="text-primary text-sm font-bold uppercase mb-6 tracking-widest">Hydrology Lead, Lagos</p>
+                    <p class="text-gray-500 italic text-sm">"Your donations aren't just buying pipes; they're buying my
+                        time to mentor 10 local engineers."</p>
+                </div>
+                <div
+                    class="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-premium transition-all duration-500 group lg:translate-y-12">
+                    <div class="relative w-32 h-32 mx-auto mb-8">
+                        <img src="assets/avatar-12.jpg"
+                            class="rounded-full grayscale group-hover:grayscale-0 transition duration-500 border-4 border-bg">
+                        <div
+                            class="absolute -bottom-2 -right-2 w-10 h-10 bg-secondary text-white rounded-full flex items-center justify-center text-xs">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-2xl font-bold text-secondary mb-2">Siti Aminah</h4>
+                    <p class="text-primary text-sm font-bold uppercase mb-6 tracking-widest">Education Director, SE Asia
+                    </p>
+                    <p class="text-gray-500 italic text-sm">"Scaling literacy requires local trust. I bridge the gap
+                        between global funding and village elders."</p>
+                </div>
+                <div
+                    class="bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-premium transition-all duration-500 group">
+                    <div class="relative w-32 h-32 mx-auto mb-8">
+                        <img src="assets/avatar-13.jpg"
+                            class="rounded-full grayscale group-hover:grayscale-0 transition duration-500 border-4 border-bg">
+                        <div
+                            class="absolute -bottom-2 -right-2 w-10 h-10 bg-accent text-secondary rounded-full flex items-center justify-center text-xs">
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-2xl font-bold text-secondary mb-2">Mateo Ruiz</h4>
+                    <p class="text-primary text-sm font-bold uppercase mb-6 tracking-widest">Disaster Response, Peru</p>
+                    <p class="text-gray-500 italic text-sm">"Being first on the ground is dangerous, but knowing the
+                        world has our back via HopeBridge is everything."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Verified Impact Badge -->
+    <section class="py-24 bg-white overflow-hidden relative">
+        <div class="container mx-auto px-6">
+            <div
+                class="bg-secondary rounded-[4rem] p-12 md:p-24 text-white relative flex flex-col items-center text-center">
+                <i class="fas fa-certificate text-8xl text-accent mb-10 animate-spin-slow"></i>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8">Every Cause is Field-Verified.</h2>
+                <p class="text-blue-100 text-lg max-w-3xl mb-12">We don't list causes until our field teams have
+                    personally visited the site, met the leaders, and verified the budget. No middlemen, no exceptions.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-12 border-t border-white/10 pt-12 w-full">
+                    <div class="text-center">
+                        <div class="text-4xl font-black mb-2">100%</div>
+                        <div class="text-xs font-bold uppercase tracking-widest text-blue-200">Site Visits Made</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black mb-2">0</div>
+                        <div class="text-xs font-bold uppercase tracking-widest text-blue-200">Third-party brokers</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-black mb-2">24h</div>
+                        <div class="text-xs font-bold uppercase tracking-widest text-blue-200">Alert to Deployment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Corporate Matching Guide -->
+    <section class="py-24 bg-bg border-y border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Double Your
+                        Impact</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">Does Your Company Match?
+                    </h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed">Many employers will match your donation
+                        dollar-for-dollar. Some even triple it. Check our database to see if your company is a
+                        HopeBridge partner.</p>
+
+                    <div
+                        class="flex items-center gap-4 bg-white p-6 rounded-3xl shadow-sm border border-gray-100 max-w-md">
+                        <i class="fas fa-building text-3xl text-primary"></i>
+                        <input type="text" placeholder="Search company name..."
+                            class="flex-1 bg-transparent outline-none font-medium text-secondary">
+                        <button class="bg-secondary text-white p-3 rounded-2xl hover:bg-primary transition"><i
+                                class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-8 rounded-3xl shadow-premium text-center">
+                            <div class="text-3xl font-black text-secondary mb-2">$2.4M</div>
+                            <div class="text-xs font-bold uppercase text-gray-400">Matched in 2025</div>
+                        </div>
+                        <div class="bg-white p-8 rounded-3xl shadow-premium text-center mt-12">
+                            <div class="text-3xl font-black text-primary mb-2">500+</div>
+                            <div class="text-xs font-bold uppercase text-gray-400">Partner Corpos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: In-Kind Donations (Specific) -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div class="md:max-w-xl">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary">Physical Needs.</h2>
+                </div>
+                <p class="text-gray-500 md:max-w-xs mt-4 md:mt-0">Sometimes we need gear, not just cash. Here are the
+                    current physical priorities for our active field teams.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div
+                    class="p-8 rounded-3xl bg-bg border border-gray-100 hover:shadow-premium transition flex flex-col items-center text-center group">
+                    <div
+                        class="w-16 h-16 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-laptop-medical"></i>
+                    </div>
+                    <h4 class="font-bold text-secondary mb-2">Satellite Phones</h4>
+                    <p class="text-xs text-gray-500">Needed for Goma field team communication.</p>
+                </div>
+                <div
+                    class="p-8 rounded-3xl bg-bg border border-gray-100 hover:shadow-premium transition flex flex-col items-center text-center group">
+                    <div
+                        class="w-16 h-16 bg-green-50 text-green-500 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-solar-panel"></i>
+                    </div>
+                    <h4 class="font-bold text-secondary mb-2">Solar Inverters</h4>
+                    <p class="text-xs text-gray-500">For the Turkana well electrification project.</p>
+                </div>
+                <div
+                    class="p-8 rounded-3xl bg-bg border border-gray-100 hover:shadow-premium transition flex flex-col items-center text-center group">
+                    <div
+                        class="w-16 h-16 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-first-aid"></i>
+                    </div>
+                    <h4 class="font-bold text-secondary mb-2">Trauma Kits</h4>
+                    <p class="text-xs text-gray-500">Urgent replenishment for Bangladesh relief.</p>
+                </div>
+                <div
+                    class="p-8 rounded-3xl bg-bg border border-gray-100 hover:shadow-premium transition flex flex-col items-center text-center group">
+                    <div
+                        class="w-16 h-16 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h4 class="font-bold text-secondary mb-2">Borehole Drills</h4>
+                    <p class="text-xs text-gray-500">Heavy equipment maintenance parts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 8: Global Heatmap -->
+    <section class="py-24 bg-secondary text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 grayscale brightness-200">
+            <img src="assets/global-reach.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8">Impact Heatmap</h2>
+            <p class="text-blue-100 text-lg max-w-2xl mx-auto mb-16">See the real-time distribution of aid. The brighter
+                the glow, the more active pulses from our field trackers.</p>
+
+            <div
+                class="relative max-w-4xl mx-auto aspect-video bg-white/5 rounded-[4rem] border border-white/10 backdrop-blur flex items-center justify-center">
+                <i class="fas fa-globe text-[15rem] text-white/5 absolute"></i>
+                <div class="flex flex-col items-center">
+                    <div class="w-4 h-4 bg-primary rounded-full animate-ping mb-4"></div>
+                    <div class="px-6 py-3 bg-white/10 border border-white/20 rounded-2xl font-bold">142 Active Pulses in
+                        the Last 60m</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 9: Funding Milestone Tracker -->
+    <section class="py-24 bg-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 px-4">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-3 block">Nearly There</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-6">Crossing the Finish Line.</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">These projects are over 90% funded. Small gifts here have a
+                    huge psychological impact by triggering immediate deployment.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100">
+                    <h4 class="text-2xl font-bold text-secondary mb-4">Reforestation in Amazon</h4>
+                    <div class="w-full bg-gray-100 rounded-full h-3 mb-4">
+                        <div class="bg-green-500 h-3 rounded-full" style="width: 94%"></div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-green-600">94% Funded</span>
+                        <span class="text-sm text-gray-400">Only $1,200 remaining</span>
+                    </div>
+                </div>
+                <div class="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100">
+                    <h4 class="text-2xl font-bold text-secondary mb-4">Nepal Library 07</h4>
+                    <div class="w-full bg-gray-100 rounded-full h-3 mb-4">
+                        <div class="bg-primary h-3 rounded-full" style="width: 97%"></div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-primary">97% Funded</span>
+                        <span class="text-sm text-gray-400">Only $450 remaining</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 10: The Trust Ledger -->
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Proof of
+                        Work</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">The Live Trust Ledger.
+                    </h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed">Most NGOs show reports once a year. We show
+                        them as they happen. Our digital ledger records every field verification and audit entry in near
+                        real-time.</p>
+
+                    <div class="bg-bg p-8 rounded-[3.5rem] border border-gray-100 divide-y divide-gray-100">
+                        <div class="py-4 flex justify-between items-center">
+                            <span class="text-xs font-bold text-gray-400 uppercase">10:42 AM Today</span>
+                            <span class="text-sm font-bold text-secondary">Well 412: Satellite Confirmed Active</span>
+                        </div>
+                        <div class="py-4 flex justify-between items-center">
+                            <span class="text-xs font-bold text-gray-400 uppercase">09:15 AM Today</span>
+                            <span class="text-sm font-bold text-secondary">Nepal Library: Materials Receipt
+                                Verified</span>
+                        </div>
+                        <div class="py-4 flex justify-between items-center">
+                            <span class="text-xs font-bold text-gray-400 uppercase">Yesterday</span>
+                            <span class="text-sm font-bold text-green-600">Audit Complete: No Discrepancies Found</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative bg-secondary p-4 rounded-[4rem] group">
+                    <img src="assets/ledger.jpg" alt="Ledger"
+                        class="rounded-[3rem] opacity-80 group-hover:opacity-100 transition duration-700">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div
+                            class="bg-white/90 backdrop-blur p-10 rounded-full shadow-2xl scale-0 group-hover:scale-100 transition duration-500">
+                            <i class="fas fa-lock text-4xl text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section 11: Monthly Giving Benefits (Advocacy) -->
+    <section class="py-24 bg-primary text-white overflow-hidden relative">
+        <div
+            class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl">
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8">Sustainability Needs Stability.</h2>
+                    <p class="text-white/80 text-xl mb-10 leading-relaxed">Systemic change doesn't happen in a day.
+                        Monthly givers provide the rock-solid foundation that allows us to plan 15 years into the
+                        future.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 bg-white/10 p-4 rounded-2xl border border-white/10">
+                            <div
+                                class="w-10 h-10 bg-accent text-secondary rounded-full flex items-center justify-center font-bold">
+                                1</div>
+                            <span class="font-bold">Exclusive Quarterly Video Updates from Field Leads</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white/10 p-4 rounded-2xl border border-white/10">
+                            <div
+                                class="w-10 h-10 bg-accent text-secondary rounded-full flex items-center justify-center font-bold">
+                                2</div>
+                            <span class="font-bold">Voting Rights on Global Expansion Priorities</span>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white/10 p-4 rounded-2xl border border-white/10">
+                            <div
+                                class="w-10 h-10 bg-accent text-secondary rounded-full flex items-center justify-center font-bold">
+                                3</div>
+                            <span class="font-bold">Annual Impact Bound Book for Top Supporters</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex justify-center">
+                    <div class="bg-white text-secondary p-12 rounded-[3.5rem] shadow-2xl relative">
+                        <div class="text-4xl font-black text-primary mb-2">Circle of Hope</div>
+                        <p class="text-gray-500 mb-8">Join 1,240 others building a lasting legacy.</p>
+                        <button
+                            class="w-full bg-secondary text-white font-bold py-4 rounded-2xl hover:bg-primary transition mb-4">Join
+                            the Circle</button>
+                        <p
+                            class="text-[10px] text-center text-gray-400 uppercase font-black tracking-widest leading-tight">
+                            100% Model Applies to All Monthly Gifts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 12: Become a Fundraiser -->
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div
+                class="bg-secondary rounded-[4rem] p-12 md:p-24 text-white relative flex flex-col items-center text-center overflow-hidden">
+                <div class="absolute inset-0 opacity-20 bg-[url('assets/pattern-cubes.png')]">
+                </div>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-8 relative z-10">Amplify Your Impact.</h2>
+                <p class="text-blue-100 text-lg max-w-2xl mb-12 relative z-10">Don't just give—lead. Start your own
+                    campaign for a birthday, wedding, or athletic challenge and bring your community into the movement.
+                </p>
+                <div class="flex flex-col md:flex-row gap-6 relative z-10">
+                    <a href="#"
+                        class="bg-primary text-white px-10 py-4 rounded-full font-bold hover:shadow-glow transition">Create
+                        a Campaign</a>
+                    <a href="#"
+                        class="bg-white/10 border border-white/20 px-10 py-4 rounded-full font-bold hover:bg-white/20 transition">Learn
+                        More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 13: Recently Completed -->
+    <section class="py-24 bg-bg">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div class="md:max-w-xl">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Promises
+                        Kept</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary">Mission Fulfilled.</h2>
+                </div>
+                <p class="text-gray-500 md:max-w-xs mt-4 md:mt-0">Take a look at the projects that have entered their
+                    maintenance phase this month. Proof of completion at its finest.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div
+                    class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-premium transition flex flex-col border border-gray-100">
+                    <img src="assets/clean-water.jpg" class="h-48 object-cover">
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <span
+                                class="text-[10px] font-black uppercase text-green-500 bg-green-50 px-3 py-1 rounded-full">Completed</span>
+                            <span class="text-xs text-gray-400">Jan 24, 2026</span>
+                        </div>
+                        <h4 class="font-bold text-secondary text-xl mb-2">Turkana Well 82</h4>
+                        <p class="text-gray-500 text-sm italic leading-relaxed">"Water flowed at 14:02 today. 450 people
+                            now have safe access. Solar array fully commissioned."</p>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-premium transition flex flex-col border border-gray-100">
+                    <img src="assets/hero-v1.jpg" class="h-48 object-cover">
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <span
+                                class="text-[10px] font-black uppercase text-green-500 bg-green-50 px-3 py-1 rounded-full">Completed</span>
+                            <span class="text-xs text-gray-400">Jan 21, 2026</span>
+                        </div>
+                        <h4 class="font-bold text-secondary text-xl mb-2">School Kits - Bangladesh</h4>
+                        <p class="text-gray-500 text-sm italic leading-relaxed">"1,200 kits distributed across 14 remote
+                            schools. 100% verify by local school boards."</p>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-premium transition flex flex-col border border-gray-100 lg:hidden xl:flex">
+                    <img src="assets/yemen-clinic.jpg" class="h-48 object-cover">
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <span
+                                class="text-[10px] font-black uppercase text-green-500 bg-green-50 px-3 py-1 rounded-full">Completed</span>
+                            <span class="text-xs text-gray-400">Jan 18, 2026</span>
+                        </div>
+                        <h4 class="font-bold text-secondary text-xl mb-2">Mobile Clinic Beta</h4>
+                        <p class="text-gray-500 text-sm italic leading-relaxed">"Phase 1 training complete. 5 doctors
+                            deployed to the highlands. Equipment verified."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 14: Transparency Storyboard -->
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-4 block">Follow the
+                        Money</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-secondary mb-8">The Lifecycle of a Gift.
+                    </h2>
+                    <p class="text-gray-600 text-lg mb-10 leading-relaxed">Curious how a $50 gift turns into 5,000
+                        liters of water? Our storyboard breaks down the logistics and costs of a typical project.</p>
+
+                    <div class="space-y-12">
+                        <div class="flex gap-6 group">
+                            <div
+                                class="w-12 h-12 bg-bg border border-gray-100 shadow-sm rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary mb-1">Entry: 0m</h4>
+                                <p class="text-sm text-gray-500">Donation received and instantly allocated to the 'Well
+                                    412' fund.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 group">
+                            <div
+                                class="w-12 h-12 bg-bg border border-gray-100 shadow-sm rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition">
+                                <i class="fas fa-truck-loading"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary mb-1">Procurement: 14d</h4>
+                                <p class="text-sm text-gray-500">Materials purchased at bulk NGO rates, verified by
+                                    field receipts.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 group">
+                            <div
+                                class="w-12 h-12 bg-bg border border-gray-100 shadow-sm rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition">
+                                <i class="fas fa-satellite"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary mb-1">Verification: 45d</h4>
+                                <p class="text-sm text-gray-500">Remote sensors monitor daily usage to ensure 100%
+                                    uptime.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <div class="bg-bg p-8 rounded-[4rem] border border-gray-100 shadow-premium">
+                        <img src="assets/monthly-giving.jpg" class="rounded-[3rem] shadow-premium mb-8">
+                        <div class="flex justify-between items-center px-4">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-dollar-sign text-primary"></i>
+                                <span class="font-black text-2xl text-secondary">50.00</span>
+                            </div>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Digital Snapshot
+                                A4-22</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 15: Gift in Honor Carousel (Mini CTA) -->
+    <section class="py-24 bg-secondary text-white relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="md:max-w-xl">
+                    <h2 class="text-3xl font-serif font-bold mb-4 italic text-accent">A Gift as a Legacy.</h2>
+                    <p class="text-blue-100">Donate in honor of a loved one, a wedding, or a memory. We'll send a
+                        beautiful hand-written card from the field team to your chosen recipient.</p>
+                </div>
+                <button
+                    class="bg-primary text-white px-12 py-4 rounded-full font-bold hover:shadow-glow transition transform hover:-translate-y-1">Give
+                    in Honor</button>
+            </div>
+        </div>
+        <div class="absolute inset-0 z-0">
+            <div class="flex opacity-5 grayscale pointer-events-none">
+                <img src="assets/tech-good-1.jpg" class="h-64">
+                <img src="assets/impact-bg.jpg" class="h-64">
+                <img src="assets/ledger.jpg" class="h-64">
+                <img src="assets/volunteers-2.jpg" class="h-64">
+            </div>
+        </div>
+    </section>
+    <!-- Global Footer -->
+    <footer class="bg-secondary text-white pt-24 pb-6 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="space-y-6">
+                    <a href="index.html" class="flex items-center gap-2 group">
+                        <div
+                            class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform">
+                            H</div>
+                        <span class="text-2xl font-serif font-bold tracking-tight">HopeBridge</span>
+                    </a>
+                    <p class="text-blue-200/70 leading-relaxed text-sm">
+                        Connecting compassionate hearts with communities in need. Transparent, impactful, and
+                        human-centric.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Explore</h4>
+                    <ul class="space-y-4 text-blue-200/70 text-sm">
+                        <li><a href="about.html" class="hover:text-white transition">Our Mission</a></li>
+                        <li><a href="causes-grid.html" class="hover:text-white transition">Active Causes</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Impact Reports</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Support</h4>
+                    <ul class="space-y-4 text-blue-200/70 text-sm">
+                        <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Donor FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition">Corporate Partners</a></li>
+                        <li><a href="#" class="hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Stay Connected</h4>
+                    <p class="text-blue-200/70 text-sm mb-4">Receive inspirational stories and impact updates.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your Email Address"
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-primary text-sm text-white placeholder-white/30">
+                        <button
+                            class="w-full bg-primary hover:bg-red-500 text-white font-bold py-3 rounded-lg transition text-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-blue-200/50">
+                <p>&copy; 2026 HopeBridge NGO. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

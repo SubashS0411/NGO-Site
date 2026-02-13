@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Water for Kenya - HopeBridge</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B', // Coral Orange
+                        secondary: '#0F4C5C', // Deep Ocean Teal
+                        bg: '#FAFAFA', // Warm White
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Check for saved direction preference
+        if (localStorage.dir === 'rtl') {
+            document.documentElement.setAttribute('dir', 'rtl');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('theme-icon').className = 'fas fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('theme-icon').className = 'fas fa-sun';
+            }
+        }
+
+        function toggleRTL() {
+            if (document.documentElement.getAttribute('dir') === 'rtl') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('rtl');
+                localStorage.dir = 'ltr';
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('rtl');
+                localStorage.dir = 'rtl';
+            }
+        }
+
+        // Initialize icon state on load
+        window.onload = function () {
+            if (document.documentElement.classList.contains('dark')) {
+                const icon = document.getElementById('theme-icon');
+                if (icon) icon.className = 'fas fa-sun';
+            }
+        };
+    </script>
+</head>
+
+<body class="bg-bg text-gray-800 transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+    <!-- Emergency Banner -->
+    <div id="emergency-banner"
+        class="bg-gradient-to-r from-red-600 to-red-500 text-white text-sm py-2 px-4 flex justify-between items-center relative z-50 shadow-md">
+        <div class="container mx-auto flex items-center justify-center animate-pulse">
+            <span class="font-bold mr-2"><i class="fas fa-exclamation-triangle"></i> URGENT:</span>
+            <span>Floods in South Asia: 50,000 families need shelter.</span>
+            <a href="cause-details.html" class="ml-4 underline hover:text-gray-200 font-bold">Help Now</a>
+        </div>
+        <button onclick="document.getElementById('emergency-banner').style.display='none'"
+            class="absolute right-4 focus:outline-none opacity-80 hover:opacity-100">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <!-- Navigation (Same as V1) -->
+    <nav class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-premium fixed top-0 left-0 w-full z-50 transition-all duration-300 rounded-none mx-0 border-b border-white/20 dark:border-gray-700"
+        id="navbar">
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div
+                    class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    H
+                </div>
+                <span
+                    class="text-2xl font-serif font-bold text-secondary dark:text-white tracking-tight">HopeBridge</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center space-x-1 font-medium text-secondary dark:text-gray-200">
+                <!-- Home Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Home <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="index.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-home mr-2 text-primary"></i> Home Version 1
+                        </a>
+                        <a href="index2.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-layer-group mr-2 text-primary"></i> Home Version 2
+                        </a>
+                    </div>
+                </div>
+
+                <a href="causes-grid.html" class="px-4 py-2 hover:text-primary transition">Causes</a>
+                <a href="about.html" class="px-4 py-2 hover:text-primary transition">About Us</a>
+                <a href="contact.html" class="px-4 py-2 hover:text-primary transition">Contact</a>
+
+                <!-- Dashboard Dropdown -->
+                <div class="nav-item group">
+                    <button class="px-4 py-2 hover:text-primary transition flex items-center gap-1">
+                        Dashboards <i class="fas fa-chevron-down text-xs opacity-50"></i>
+                    </button>
+                    <div class="dropdown-menu dark:bg-gray-800 dark:border-gray-700">
+                        <a href="admin-dashboard.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-tachometer-alt mr-2 text-primary"></i> Admin Dashboard
+                        </a>
+                        <a href="donor-dashboard.html" class="dropdown-item dark:text-gray-200 dark:hover:bg-gray-700">
+                            <i class="fas fa-user mr-2 text-primary"></i> User Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hidden lg:flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+
+                <!-- RTL Toggle -->
+                <button onclick="toggleRTL()"
+                    class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center transition focus:outline-none text-secondary dark:text-white">
+                    <i class="fas fa-globe"></i>
+                </button>
+
+                <div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+                <a href="login.html"
+                    class="text-sm font-semibold text-secondary hover:text-primary dark:text-white transition">Log
+                    In</a>
+
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn"
+                class="lg:hidden w-10 h-10 flex items-center justify-center text-2xl text-secondary flex-shrink-0 dark:text-white focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Cause Header -->
+    <header class="relative h-[50vh] sm:h-[55vh] md:h-[50vh]">
+        <img src="assets/clean-water.jpg" alt="Water" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end">
+            <div class="container mx-auto px-4 sm:px-6 pb-8 sm:pb-12 text-white">
+                <span
+                    class="bg-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 inline-block">Water</span>
+                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-3 sm:mb-4">Clean Water
+                    for Kenya</h1>
+                <div class="flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm md:text-base opacity-90">
+                    <span><i class="fas fa-map-marker-alt text-primary"></i> Turkana, Kenya</span>
+                    <span><i class="fas fa-clock text-primary"></i> 15 Days Left</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-12">
+        <div class="flex flex-col lg:flex-row gap-12">
+
+            <!-- Left Content: Story -->
+            <div class="lg:w-2/3">
+
+                <!-- Mobile Progress (Visible only on mobile) -->
+                <div class="lg:hidden mb-10 bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <span class="text-3xl font-bold text-secondary">$15,400</span>
+                        <span class="text-gray-500 font-medium">raised of $20,000</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-3 mb-4">
+                        <div class="bg-primary h-3 rounded-full" style="width: 77%"></div>
+                    </div>
+
+                </div>
+
+                <!-- Tabs -->
+                <div class="border-b border-gray-200 mb-8 flex space-x-8">
+                    <button class="pb-4 border-b-2 border-secondary font-bold text-secondary">The Story</button>
+                    <button
+                        class="pb-4 border-b-2 border-transparent text-gray-500 hover:text-secondary font-medium">Updates
+                        <span class="bg-gray-100 text-xs px-2 py-1 rounded-full ml-1">2</span></button>
+                    <button
+                        class="pb-4 border-b-2 border-transparent text-gray-500 hover:text-secondary font-medium">Donors</button>
+                </div>
+
+                <!-- Story Text -->
+                <div class="prose prose-lg text-gray-600 max-w-none">
+                    <p class="lead text-xl text-gray-800 font-serif mb-6">
+                        In the arid region of Turkana, women and children walk over 10 kilometers daily just to fetch
+                        water. Often, this water is contaminated, leading to preventable diseases.
+                    </p>
+                    <p class="mb-6">
+                        HopeBridge is partnering with local engineers to drill 10 solar-powered boreholes. These wells
+                        will provide safe, clean, and endless water to 5,000 villagers, drastically reducing disease and
+                        allowing children to return to school instead of walking for water.
+                    </p>
+                    <h3 class="text-2xl font-bold text-secondary font-serif mt-8 mb-4">The Solution</h3>
+                    <p class="mb-6">
+                        Solar-powered pumps differ from traditional hand-pumps. They are automated, require less
+                        physical labor, and fill overhead tanks that distribute water to tap stands throughout the
+                        village.
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 mb-8">
+                        <li><strong>Deep Aquifer Access:</strong> Drilling 150m deep to reach pure water.</li>
+                        <li><strong>Solar Energy:</strong> Zero running costs for the community.</li>
+                        <li><strong>Sustainability:</strong> Local water committees trained for maintenance.</li>
+                    </ul>
+
+                    <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 flex gap-4 my-8">
+                        <i class="fas fa-quote-left text-3xl text-blue-200"></i>
+                        <div>
+                            <p class="italic text-gray-700 font-medium mb-2">"Before the well, my children were always
+                                sick. Now, they are healthy and in school. Water is life."</p>
+                            <p class="text-sm font-bold text-secondary">— Amina, Village Elder</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Sidebar: Donation Card -->
+            <div class="lg:w-1/3 relative">
+                <div class="sticky top-24">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <span class="text-4xl font-bold text-secondary">$15,400</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                            <span>raised of <strong>$20,000</strong> goal</span>
+                            <span class="bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded text-xs">77%</span>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-gray-100 rounded-full h-3 mb-8">
+                            <div class="bg-primary h-3 rounded-full relative" style="width: 77%">
+                                <div
+                                    class="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-primary rounded-full shadow">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-6 text-sm text-gray-500">
+                            <i class="fas fa-user-friends text-primary"></i> <strong>452</strong> people have donated
+                        </div>
+
+                        <!-- Amount Buttons -->
+                        <div class="grid grid-cols-3 gap-3 mb-4">
+                            <button
+                                class="border border-gray-200 rounded-lg py-2 font-bold hover:border-primary hover:text-primary transition">$25</button>
+                            <button
+                                class="bg-primary text-white border border-primary rounded-lg py-2 font-bold shadow-md">$50</button>
+                            <button
+                                class="border border-gray-200 rounded-lg py-2 font-bold hover:border-primary hover:text-primary transition">$100</button>
+                        </div>
+
+
+
+                        <button
+                            class="block w-full py-3 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-600 font-bold text-center transition">
+                            <i class="fas fa-share-alt mr-2"></i> Share Campaign
+                        </button>
+
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <h4 class="font-bold text-secondary mb-4">Recent Donors</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs">
+                                        S</div>
+                                    <div class="text-sm">
+                                        <p class="font-bold text-gray-800">Sarah M.</p>
+                                        <p class="text-gray-400 text-xs">Donated $50 • 2m ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-xs">
+                                        J</div>
+                                    <div class="text-sm">
+                                        <p class="font-bold text-gray-800">James K.</p>
+                                        <p class="text-gray-400 text-xs">Donated $100 • 15m ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white pt-24 pb-6 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="space-y-6">
+                    <a href="index.html" class="flex items-center gap-2 group">
+                        <div
+                            class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-110 transition-transform">
+                            H</div>
+                        <span class="text-2xl font-serif font-bold tracking-tight">HopeBridge</span>
+                    </a>
+                    <p class="text-blue-200/70 leading-relaxed text-sm">
+                        Connecting compassionate hearts with communities in need. Transparent, impactful, and
+                        human-centric.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Explore</h4>
+                    <ul class="space-y-4 text-blue-200/70 text-sm">
+                        <li><a href="about.html" class="hover:text-white transition">Our Mission</a></li>
+                        <li><a href="causes-grid.html" class="hover:text-white transition">Active Causes</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Impact Reports</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Support</h4>
+                    <ul class="space-y-4 text-blue-200/70 text-sm">
+                        <li><a href="contact.html" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Donor FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition">Corporate Partners</a></li>
+                        <li><a href="#" class="hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Stay Connected</h4>
+                    <p class="text-blue-200/70 text-sm mb-4">Receive inspirational stories and impact updates.</p>
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your Email Address"
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-primary text-sm text-white placeholder-white/30">
+                        <button
+                            class="w-full bg-primary hover:bg-red-500 text-white font-bold py-3 rounded-lg transition text-sm">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-blue-200/50">
+                <p>&copy; 2026 HopeBridge NGO. All rights reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

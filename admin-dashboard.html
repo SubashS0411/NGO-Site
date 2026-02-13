@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Vitality.AI</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌿</text></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌿</text></svg>">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" defer></script>
     <style>
         .dashboard-sidebar {
             position: fixed;
             left: 0;
-            top: 70px;
-            width: 250px;
-            height: calc(100vh - 70px);
+            top: 0;
+            width: 260px;
+            height: 100vh;
             background: white;
             border-right: 1px solid var(--color-gray-200);
-            padding: 2rem 0;
+            padding: 0;
             overflow-y: auto;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
         }
+
         .dashboard-main {
-            margin-left: 250px;
+            margin-left: 260px;
             padding: 2rem;
-            min-height: calc(100vh - 70px);
-            margin-top: 70px;
-            width: calc(100% - 250px);
-            max-width: calc(100vw - 250px);
+            min-height: 100vh;
+            margin-top: 0;
+            width: calc(100% - 260px);
+            max-width: calc(100vw - 260px);
             overflow-x: hidden;
             box-sizing: border-box;
+            background: var(--color-gray-50);
         }
+
         .sidebar-link {
             display: flex;
             align-items: center;
@@ -37,27 +46,31 @@
             color: var(--color-gray-700);
             transition: all 0.3s ease;
         }
+
         .sidebar-link:hover,
         .sidebar-link.active {
             background: linear-gradient(90deg, rgba(139, 191, 159, 0.1) 0%, transparent 100%);
             color: var(--color-sage);
             border-left: 4px solid var(--color-sage);
         }
+
         .stat-card {
             background: white;
             border-radius: var(--radius-lg);
             padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
         }
+
         .calendar-view {
             background: white;
             border-radius: var(--radius-lg);
             padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
+
         .appointment-slot {
             padding: 1rem;
             background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
@@ -66,6 +79,7 @@
             margin-bottom: 0.5rem;
             cursor: move;
         }
+
         .patient-queue-item {
             padding: 1rem;
             border: 2px solid var(--color-gray-200);
@@ -73,10 +87,12 @@
             margin-bottom: 0.75rem;
             transition: all 0.3s ease;
         }
+
         .patient-queue-item:hover {
             border-color: var(--color-sage);
             transform: translateX(5px);
         }
+
         .revenue-bar {
             height: 200px;
             background: linear-gradient(to top, var(--color-primary) 0%, var(--color-primary-light) 100%);
@@ -89,48 +105,97 @@
             color: white;
             font-weight: 700;
         }
+
         .charts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.25rem;
         }
-        
+
         /* Optimize grid-4 for dashboard */
         .grid.grid-4 {
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
             width: 100%;
         }
-            gap: 1.25rem;
-        }
+
+
+
         .chart-anim-line {
             stroke-dasharray: 900;
             stroke-dashoffset: 900;
             animation: drawLine 1.8s ease forwards;
         }
-        .chart-anim-line-delayed { animation: drawLine 1.8s ease 0.25s forwards; }
+
+        .chart-anim-line-delayed {
+            animation: drawLine 1.8s ease 0.25s forwards;
+        }
+
         .chart-anim-fill {
             transform-origin: bottom;
             animation: riseFill 1.4s ease forwards;
         }
-        .chart-glow { filter: drop-shadow(0 6px 14px rgba(17, 24, 39, 0.2)); }
-        .chart-pulse { animation: pulseDot 2s ease-in-out infinite; }
+
+        .chart-glow {
+            filter: drop-shadow(0 6px 14px rgba(17, 24, 39, 0.2));
+        }
+
+        .chart-pulse {
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+
         .chart-spark {
             stroke: rgba(255, 255, 255, 0.28);
             stroke-width: 1.25;
             stroke-dasharray: 4 8;
             animation: drift 5s linear infinite;
         }
-        @keyframes drawLine { to { stroke-dashoffset: 0; } }
-        @keyframes riseFill { from { opacity: 0; transform: scaleY(0.85) translateY(12px); } to { opacity: 1; transform: scaleY(1) translateY(0); } }
-        @keyframes pulseDot { 0%, 100% { r: 3.5; opacity: 0.9; } 50% { r: 5; opacity: 1; } }
-        @keyframes drift { to { stroke-dashoffset: -80; } }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes riseFill {
+            from {
+                opacity: 0;
+                transform: scaleY(0.85) translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scaleY(1) translateY(0);
+            }
+        }
+
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+                r: 3.5;
+                opacity: 0.9;
+            }
+
+            50% {
+                r: 5;
+                opacity: 1;
+            }
+        }
+
+        @keyframes drift {
+            to {
+                stroke-dashoffset: -80;
+            }
+        }
+
         .chart-card {
             background: white;
             border-radius: var(--radius-lg);
             padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
+
         .chart-placeholder {
             height: 240px;
             border: 2px dashed var(--color-gray-200);
@@ -142,54 +207,64 @@
             color: var(--color-gray-600);
             gap: 0.5rem;
         }
+
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
         }
+
         @media (max-width: 768px) {
             .dashboard-sidebar {
                 transform: translateX(-100%);
                 z-index: 1000;
-                box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
             }
+
             .dashboard-sidebar.active {
                 transform: translateX(0);
             }
+
             .dashboard-main {
                 margin-left: 0;
             }
+
             .sidebar-overlay {
                 display: none;
                 position: fixed;
                 inset: 0;
-                background: rgba(0,0,0,0.5);
+                background: rgba(0, 0, 0, 0.5);
                 z-index: 999;
                 top: 70px;
             }
+
             .sidebar-overlay.active {
                 display: block;
             }
         }
-        
+
         @media (min-width: 769px) and (max-width: 1280px) {
             .dashboard-main {
                 padding: 1.5rem;
             }
+
             .grid.grid-4 {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.25rem;
             }
         }
+
         @media (max-width: 1024px) {
             .dashboard-sidebar {
                 transform: translateX(-100%);
                 z-index: 1000;
-                box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
             }
+
             .dashboard-sidebar.active {
                 transform: translateX(0);
             }
+
             .dashboard-main {
                 margin-left: 0;
                 padding: 1.5rem;
@@ -197,12 +272,17 @@
                 max-width: 100vw;
                 overflow-x: hidden;
             }
-            .grid.grid-4 { 
+
+            .grid.grid-4 {
                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
                 gap: 1rem;
             }
-            .grid.grid-2 { grid-template-columns: 1fr; }
+
+            .grid.grid-2 {
+                grid-template-columns: 1fr;
+            }
         }
+
         @media (max-width: 640px) {
             .dashboard-main {
                 padding: 1rem;
@@ -210,422 +290,548 @@
                 max-width: 100vw;
                 overflow-x: hidden;
             }
-            .grid.grid-4 { 
+
+            .grid.grid-4 {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
+
             .stat-card {
                 padding: 1.5rem;
                 max-width: 100%;
                 box-sizing: border-box;
             }
+
             .kpi-grid {
                 grid-template-columns: 1fr;
             }
+
             h1 {
-                font-size: 1.75rem !important;
-                margin: 0 0 0.5rem 0;
+                font-size: 1.5rem !important;
+                margin: 0 0 0.25rem 0;
             }
+
             .flex.justify-between {
-                flex-direction: column;
-                align-items: flex-start !important;
-                width: 100%;
-            }
-            .flex.gap-2 {
-                width: 100%;
-                margin-top: 0.5rem;
+                flex-direction: row;
+                /* Keep row generally */
                 flex-wrap: wrap;
             }
-            .flex.gap-2 button {
-                flex: 1;
-                min-width: 140px;
-                font-size: 0.85rem;
+        }
+
+        @media (max-width: 380px) {
+            .flex.justify-between.items-center.mb-6 {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 1rem;
+            }
+
+            .flex.justify-between.items-center.mb-6>div {
+                width: 100%;
+                justify-content: space-between;
             }
         }
     </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="container nav-container">
-            <div class="nav-left">
-                <button class="sidebar-toggle" onclick="toggleDashboardSidebar()" aria-label="Toggle sidebar">
-                    <i class="ph ph-list"></i>
-                </button>
-                <a href="index.html" class="logo"><i class="ph ph-leaf"></i> Vitality.AI Admin</a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="admin-dashboard.html" class="nav-link active">Dashboard</a></li>
-                <li><a href="#" class="nav-link">Patients</a></li>
-                <li><a href="#" class="nav-link">Staff</a></li>
-            </ul>
-            <div class="nav-actions">
-                <button class="dir-toggle" onclick="toggleDirection()" title="Toggle Text Direction (LTR/RTL)">
-                    <i class="ph ph-globe"></i>
-                </button>
-                <div class="user-avatar" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-accent), var(--color-rose)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; cursor: pointer;">
-                    AD
-                </div>
-            </div>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
 
+<body>
     <div class="sidebar-overlay" onclick="toggleDashboardSidebar()"></div>
 
     <div class="dashboard-sidebar">
-        <a href="#overview" class="sidebar-link active">
-            <i class="ph ph-chart-line" style="font-size: 1.5rem;"></i>
-            <span>Overview</span>
-        </a>
-        <a href="#calendar" class="sidebar-link">
-            <i class="ph ph-calendar" style="font-size: 1.5rem;"></i>
-            <span>Schedule</span>
-        </a>
-        <a href="#patients" class="sidebar-link">
-            <i class="ph ph-users" style="font-size: 1.5rem;"></i>
-            <span>Patients</span>
-        </a>
-        <a href="#appointments" class="sidebar-link">
-            <i class="ph ph-clipboard-text" style="font-size: 1.5rem;"></i>
-            <span>Appointments</span>
-        </a>
-        <a href="#revenue" class="sidebar-link">
-            <i class="ph ph-currency-dollar" style="font-size: 1.5rem;"></i>
-            <span>Revenue</span>
-        </a>
-        <a href="#services" class="sidebar-link">
-            <i class="ph ph-heart" style="font-size: 1.5rem;"></i>
-            <span>Services</span>
-        </a>
-        <a href="#staff" class="sidebar-link">
-            <i class="ph ph-identification-badge" style="font-size: 1.5rem;"></i>
-            <span>Staff</span>
-        </a>
-        <a href="#settings" class="sidebar-link">
-            <i class="ph ph-gear" style="font-size: 1.5rem;"></i>
-            <span>Settings</span>
-        </a>
-        <a href="login.html" class="sidebar-link">
-            <i class="ph ph-sign-out" style="font-size: 1.5rem;"></i>
-            <span>Logout</span>
-        </a>
-    </div>
-
-    <main class="dashboard-main">
-        <div class="flex justify-between items-center mb-4" style="flex-wrap: wrap; gap: 1rem; max-width: 100%; box-sizing: border-box;">
-            <div style="max-width: 100%;">
-                <h1 style="color: white;">Admin Dashboard</h1>
-                <p style="color: var(--color-gray-600);">Today: January 20, 2025</p>
-            </div>
-            <div class="flex gap-2" style="flex-wrap: wrap; max-width: 100%;">
-                <button class="btn btn-primary">
-                    <i class="ph ph-plus"></i> New Appointment
-                </button>
-                <button class="btn btn-secondary">
-                    <i class="ph ph-download-simple"></i> Export Report
-                </button>
-            </div>
+        <!-- Logo in Sidebar -->
+        <div style="padding: 1.5rem 2rem; margin-bottom: 1rem;">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <i class="ph ph-leaf" style="color: var(--color-primary);"></i>
+                <span style="color: var(--color-gray-900); font-weight: 800; font-size: 1.2rem;">Vitality.AI</span>
+            </a>
         </div>
 
-        <!-- Key Metrics -->
-        <div class="grid grid-4 mb-4">
-            <div class="stat-card">
-                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-sage), var(--color-mint)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                    <i class="ph ph-users" style="font-size: 1.5rem; color: white;"></i>
-                </div>
-                <h3 style="font-size: 2rem; margin: 0.5rem 0;">247</h3>
-                <p style="color: var(--color-gray-600); margin: 0;">Total Patients</p>
-                <span style="font-size: 0.85rem; color: var(--color-sage); font-weight: 600;">+12 this week</span>
-            </div>
+        <!-- ... -->
 
-            <div class="stat-card">
-                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-coral), #FF8A73); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                    <i class="ph ph-calendar-check" style="font-size: 1.5rem; color: white;"></i>
-                </div>
-                <h3 style="font-size: 2rem; margin: 0.5rem 0;">32</h3>
-                <p style="color: var(--color-gray-600); margin: 0;">Appointments Today</p>
-                <span style="font-size: 0.85rem; color: var(--color-coral); font-weight: 600;">8 remaining</span>
-            </div>
-
-            <div class="stat-card">
-                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-lavender), #D4A5F3); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                    <i class="ph ph-currency-dollar" style="font-size: 1.5rem; color: white;"></i>
-                </div>
-                <h3 style="font-size: 2rem; margin: 0.5rem 0;">$45.2K</h3>
-                <p style="color: var(--color-gray-600); margin: 0;">Revenue This Month</p>
-                <span style="font-size: 0.85rem; color: var(--color-lavender); font-weight: 600;">+18% vs last month</span>
-            </div>
-
-            <div class="stat-card">
-                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-mint), var(--color-sage)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                    <i class="ph ph-star" style="font-size: 1.5rem; color: white;"></i>
-                </div>
-                <h3 style="font-size: 2rem; margin: 0.5rem 0;">4.8/5.0</h3>
-                <p style="color: var(--color-gray-600); margin: 0;">Patient Satisfaction</p>
-                <span style="font-size: 0.85rem; color: var(--color-mint); font-weight: 600;">Based on 156 reviews</span>
-            </div>
-        </div>
-
-        <!-- Main Content Grid -->
-        <div class="grid grid-2 mb-4" style="gap: 2rem; align-items: start;">
-            <!-- Today's Schedule -->
-            <div class="calendar-view">
-                <h3 style="margin: 0 0 1.5rem 0;">Today's Schedule</h3>
-                <div style="max-height: 500px; overflow-y: auto;">
-                    <div class="appointment-slot" draggable="true">
-                        <div class="flex justify-between items-start mb-1">
-                            <strong>Sarah Mitchell</strong>
-                            <span>9:00 AM</span>
-                        </div>
-                        <p style="margin: 0; font-size: 0.9rem;">Cryotherapy Session</p>
-                        <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i> Dr. Chen</p>
-                    </div>
-
-                    <div class="appointment-slot" style="background: linear-gradient(135deg, var(--color-lavender), #D4A5F3);" draggable="true">
-                        <div class="flex justify-between items-start mb-1">
-                            <strong>John Davis</strong>
-                            <span>10:00 AM</span>
-                        </div>
-                        <p style="margin: 0; font-size: 0.9rem;">AI Diagnostics</p>
-                        <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i> Dr. Mitchell</p>
-                    </div>
-
-                    <div class="appointment-slot" style="background: linear-gradient(135deg, var(--color-coral), #FF8A73);" draggable="true">
-                        <div class="flex justify-between items-start mb-1">
-                            <strong>Emily Parker</strong>
-                            <span>11:00 AM</span>
-                        </div>
-                        <p style="margin: 0; font-size: 0.9rem;">Wellness Spa</p>
-                        <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i> Dr. Rodriguez</p>
-                    </div>
-
-                    <div class="appointment-slot" style="background: linear-gradient(135deg, var(--color-mint), var(--color-sage));" draggable="true">
-                        <div class="flex justify-between items-start mb-1">
-                            <strong>Michael Brown</strong>
-                            <span>1:00 PM</span>
-                        </div>
-                        <p style="margin: 0; font-size: 0.9rem;">Personal Training</p>
-                        <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i> Coach Thompson</p>
-                    </div>
-
-                    <div class="appointment-slot" style="background: linear-gradient(135deg, var(--color-lavender), #D4A5F3);" draggable="true">
-                        <div class="flex justify-between items-start mb-1">
-                            <strong>Lisa Anderson</strong>
-                            <span>2:00 PM</span>
-                        </div>
-                        <p style="margin: 0; font-size: 0.9rem;">Nutrition Consultation</p>
-                        <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i> Dr. Rodriguez</p>
+        <main class="dashboard-main">
+            <!-- Mobile Header / Top Bar for Actions -->
+            <div class="flex justify-between items-center mb-6" style="flex-wrap: wrap; gap: 1rem;">
+                <div class="flex items-center gap-3">
+                    <button class="sidebar-toggle btn btn-glass" onclick="toggleDashboardSidebar()"
+                        aria-label="Toggle sidebar"
+                        style="padding: 0.5rem; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid var(--color-gray-300);">
+                        <i class="ph ph-list" style="font-size: 1.5rem; color: var(--color-gray-700);"></i>
+                    </button>
+                    <div>
+                        <h1 style="font-size: 1.75rem; margin: 0; color: var(--color-gray-900);">Admin Dashboard</h1>
+                        <p style="color: var(--color-gray-700); margin: 0; font-size: 0.9rem;">Today: January 20, 2025
+                        </p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Patient Queue -->
-            <div class="calendar-view">
-                <h3 style="margin: 0 0 1.5rem 0;">Patient Waiting Room</h3>
-                <div class="patient-queue-item" style="border-color: var(--color-sage); background: rgba(139, 191, 159, 0.05);">
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="flex items-center gap-2">
-                            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-sage), var(--color-mint)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
-                                SM
-                            </div>
-                            <div>
-                                <h4 style="margin: 0;">Sarah Mitchell</h4>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-600);">Cryotherapy</p>
+                <!-- ... -->
+
+                <div class="grid grid-2 mb-4" style="gap: 2rem; align-items: start;">
+                    <!-- Today's Schedule -->
+                    <div class="calendar-view">
+                        <h3 style="margin: 0 0 1.5rem 0;">Today's Schedule</h3>
+                        <!-- Removed scrolling as requested -->
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <a href="#overview" class="sidebar-link active">
+                                <i class="ph ph-chart-line" style="font-size: 1.5rem;"></i>
+                                <span>Overview</span>
+                            </a>
+                            <a href="#calendar" class="sidebar-link">
+                                <i class="ph ph-calendar" style="font-size: 1.5rem;"></i>
+                                <span>Schedule</span>
+                            </a>
+                            <a href="#patients" class="sidebar-link">
+                                <i class="ph ph-users" style="font-size: 1.5rem;"></i>
+                                <span>Patients</span>
+                            </a>
+                            <a href="#appointments" class="sidebar-link">
+                                <i class="ph ph-clipboard-text" style="font-size: 1.5rem;"></i>
+                                <span>Appointments</span>
+                            </a>
+                            <a href="#revenue" class="sidebar-link">
+                                <i class="ph ph-currency-dollar" style="font-size: 1.5rem;"></i>
+                                <span>Revenue</span>
+                            </a>
+                            <a href="#services" class="sidebar-link">
+                                <i class="ph ph-heart" style="font-size: 1.5rem;"></i>
+                                <span>Services</span>
+                            </a>
+                            <a href="#staff" class="sidebar-link">
+                                <i class="ph ph-identification-badge" style="font-size: 1.5rem;"></i>
+                                <span>Staff</span>
+                            </a>
+                            <a href="#settings" class="sidebar-link">
+                                <i class="ph ph-gear" style="font-size: 1.5rem;"></i>
+                                <span>Settings</span>
+                            </a>
+                            <div style="margin-top: auto; padding-top: 2rem;">
+                                <a href="login.html" class="sidebar-link" style="color: var(--color-rose);">
+                                    <i class="ph ph-sign-out" style="font-size: 1.5rem;"></i>
+                                    <span>Logout</span>
+                                </a>
                             </div>
                         </div>
-                        <span style="background: var(--color-primary); color: white; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem;">Checked In</span>
-                    </div>
-                    <div class="flex gap-2">
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem; flex: 1;">Start Appointment</button>
-                    </div>
-                </div>
 
-                <div class="patient-queue-item">
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="flex items-center gap-2">
-                            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-lavender), #D4A5F3); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
-                                JD
+                        <main class="dashboard-main">
+                            <!-- Mobile Header / Top Bar for Actions -->
+                            <div class="flex justify-between items-center mb-6" style="flex-wrap: wrap; gap: 1rem;">
+                                <div class="flex items-center gap-3">
+                                    <button class="sidebar-toggle btn btn-glass" onclick="toggleDashboardSidebar()"
+                                        aria-label="Toggle sidebar"
+                                        style="padding: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                                        <i class="ph ph-list" style="font-size: 1.5rem;"></i>
+                                    </button>
+                                    <div>
+                                        <h1 style="font-size: 1.75rem; margin: 0;">Admin Dashboard</h1>
+                                        <p style="color: var(--color-gray-500); margin: 0; font-size: 0.9rem;">Today:
+                                            January 20, 2025</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-3">
+                                    <button class="dir-toggle" onclick="toggleDirection()"
+                                        title="Toggle Text Direction (LTR/RTL)"
+                                        style="width: 40px; height: 40px; border-radius: 50%;">
+                                        <i class="ph ph-globe"></i>
+                                    </button>
+                                    <div class="user-avatar"
+                                        style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; cursor: pointer;">
+                                        AD
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <h4 style="margin: 0;">John Davis</h4>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-600);">AI Diagnostics</p>
+
+                            <div class="flex justify-between items-center mb-4" style="flex-wrap: wrap; gap: 1rem;">
+                                <!-- Placeholder for spacing if needed, or remove this wrapper if empty -->
                             </div>
-                        </div>
-                        <span style="background: var(--color-gray-300); color: var(--color-gray-700); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem;">Expected</span>
-                    </div>
-                </div>
 
-                <div class="patient-queue-item">
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="flex items-center gap-2">
-                            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-coral), #FF8A73); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
-                                EP
+                            <div class="flex gap-2 mb-4" style="flex-wrap: wrap;">
+                                <button class="btn btn-primary">
+                                    <i class="ph ph-plus"></i> New Appointment
+                                </button>
+                                <button class="btn btn-outline" style="background: white;">
+                                    <i class="ph ph-download-simple"></i> Export Report
+                                </button>
                             </div>
-                            <div>
-                                <h4 style="margin: 0;">Emily Parker</h4>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--color-gray-600);">Wellness Spa</p>
+
+                            <!-- Key Metrics -->
+                            <div class="grid grid-4 mb-4">
+                                <div class="stat-card">
+                                    <div
+                                        style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-sage), var(--color-mint)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                        <i class="ph ph-users" style="font-size: 1.5rem; color: white;"></i>
+                                    </div>
+                                    <h3 style="font-size: 2rem; margin: 0.5rem 0;">247</h3>
+                                    <p style="color: var(--color-gray-600); margin: 0;">Total Patients</p>
+                                    <span style="font-size: 0.85rem; color: var(--color-sage); font-weight: 600;">+12
+                                        this week</span>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div
+                                        style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-coral), #FF8A73); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                        <i class="ph ph-calendar-check" style="font-size: 1.5rem; color: white;"></i>
+                                    </div>
+                                    <h3 style="font-size: 2rem; margin: 0.5rem 0;">32</h3>
+                                    <p style="color: var(--color-gray-600); margin: 0;">Appointments Today</p>
+                                    <span style="font-size: 0.85rem; color: var(--color-coral); font-weight: 600;">8
+                                        remaining</span>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div
+                                        style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-lavender), #D4A5F3); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                        <i class="ph ph-currency-dollar" style="font-size: 1.5rem; color: white;"></i>
+                                    </div>
+                                    <h3 style="font-size: 2rem; margin: 0.5rem 0;">$45.2K</h3>
+                                    <p style="color: var(--color-gray-600); margin: 0;">Revenue This Month</p>
+                                    <span
+                                        style="font-size: 0.85rem; color: var(--color-lavender); font-weight: 600;">+18%
+                                        vs last
+                                        month</span>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div
+                                        style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-mint), var(--color-sage)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                        <i class="ph ph-star" style="font-size: 1.5rem; color: white;"></i>
+                                    </div>
+                                    <h3 style="font-size: 2rem; margin: 0.5rem 0;">4.8/5.0</h3>
+                                    <p style="color: var(--color-gray-600); margin: 0;">Patient Satisfaction</p>
+                                    <span style="font-size: 0.85rem; color: var(--color-mint); font-weight: 600;">Based
+                                        on 156
+                                        reviews</span>
+                                </div>
                             </div>
-                        </div>
-                        <span style="background: var(--color-gray-300); color: var(--color-gray-700); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem;">Expected</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Revenue Analytics -->
-        <div class="calendar-view mb-4">
-            <h3 style="margin: 0 0 1.5rem 0;">Revenue by Service Type</h3>
-            <div class="grid grid-4" style="gap: 1rem;">
-                <div style="text-align: center;">
-                    <div class="revenue-bar" style="height: 180px;">
-                        $12.5K
-                    </div>
-                    <p style="margin-top: 0.5rem; font-weight: 600;">Cryotherapy</p>
-                </div>
-                <div style="text-align: center;">
-                    <div class="revenue-bar" style="height: 220px; background: linear-gradient(to top, var(--color-lavender), #D4A5F3);">
-                        $18.2K
-                    </div>
-                    <p style="margin-top: 0.5rem; font-weight: 600;">AI Diagnostics</p>
-                </div>
-                <div style="text-align: center;">
-                    <div class="revenue-bar" style="height: 160px; background: linear-gradient(to top, var(--color-coral), #FF8A73);">
-                        $9.8K
-                    </div>
-                    <p style="margin-top: 0.5rem; font-weight: 600;">Wellness Spa</p>
-                </div>
-                <div style="text-align: center;">
-                    <div class="revenue-bar" style="height: 140px; background: linear-gradient(to top, var(--color-mint), var(--color-sage));">
-                        $7.3K
-                    </div>
-                    <p style="margin-top: 0.5rem; font-weight: 600;">Training</p>
-                </div>
-            </div>
-        </div>
+                            <!-- Main Content Grid -->
+                            <div class="grid grid-2 mb-4" style="gap: 2rem; align-items: start;">
+                                <!-- Today's Schedule -->
+                                <div class="calendar-view">
+                                    <h3 style="margin: 0 0 1.5rem 0;">Today's Schedule</h3>
+                                    <div style="max-height: 500px; overflow-y: auto;">
+                                        <div class="appointment-slot" draggable="true">
+                                            <div class="flex justify-between items-start mb-1">
+                                                <strong>Sarah Mitchell</strong>
+                                                <span>9:00 AM</span>
+                                            </div>
+                                            <p style="margin: 0; font-size: 0.9rem;">Cryotherapy Session</p>
+                                            <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i>
+                                                Dr. Chen</p>
+                                        </div>
 
-        <!-- Operational Insights -->
-        <div class="charts-grid mb-4">
-            <div class="chart-card">
-                <div class="flex justify-between items-center" style="margin-bottom: 0.75rem;">
-                    <h3 style="margin: 0;">Appointments vs Cancellations</h3>
-                    <span style="color: var(--color-gray-600); font-size: 0.9rem;">Last 30 days</span>
-                </div>
-                <div class="chart-placeholder" aria-label="Appointments vs cancellations line chart">
-                    <svg width="100%" height="240" viewBox="0 0 320 240" role="img">
-                        <defs>
-                            <linearGradient id="lineA" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#8bbf9f" stop-opacity="0.85" />
-                                <stop offset="100%" stop-color="#8bbf9f" stop-opacity="0.05" />
-                            </linearGradient>
-                            <linearGradient id="lineB" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#ff9f88" stop-opacity="0.85" />
-                                <stop offset="100%" stop-color="#ff9f88" stop-opacity="0.05" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="0" y="0" width="320" height="240" fill="url(#bgGridAdmin1)" fill-opacity="0" />
-                        <g stroke="#e5e7eb" stroke-width="1" opacity="0.5">
-                            <line x1="0" y1="200" x2="320" y2="200" />
-                            <line x1="0" y1="150" x2="320" y2="150" />
-                            <line x1="0" y1="100" x2="320" y2="100" />
-                            <line x1="0" y1="50" x2="320" y2="50" />
-                        </g>
-                        <path d="M10 180 C 40 120, 70 140, 100 90 S 160 80, 190 110 S 250 70, 310 60" fill="none" stroke="#8bbf9f" stroke-width="3" stroke-linecap="round" class="chart-anim-line chart-glow" />
-                        <path d="M10 190 C 50 160, 90 150, 130 170 S 190 150, 230 140 S 270 130, 310 150" fill="none" stroke="#ff9f88" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6" class="chart-anim-line-delayed chart-glow" />
-                        <g fill="#8bbf9f" opacity="0.9">
-                            <circle cx="100" cy="90" r="4" class="chart-pulse" />
-                            <circle cx="190" cy="110" r="4" class="chart-pulse" />
-                            <circle cx="310" cy="60" r="4" class="chart-pulse" />
-                        </g>
-                        <g fill="#ff9f88" opacity="0.9">
-                            <circle cx="130" cy="170" r="4" class="chart-pulse" />
-                            <circle cx="230" cy="140" r="4" class="chart-pulse" />
-                            <circle cx="310" cy="150" r="4" class="chart-pulse" />
-                        </g>
-                        <path d="M20 95 C 60 75, 120 85, 160 70" class="chart-spark" />
-                    </svg>
-                </div>
-                <div class="kpi-grid" style="margin-top: 1rem;">
-                    <div class="premium-card" style="padding: 0.9rem;">
-                        <p style="margin: 0; color: var(--color-gray-500);">Completion rate</p>
-                        <strong style="font-size: 1.4rem; color: var(--color-sage);">92%</strong>
-                    </div>
-                    <div class="premium-card" style="padding: 0.9rem;">
-                        <p style="margin: 0; color: var(--color-gray-500);">Cancellations</p>
-                        <strong style="font-size: 1.4rem; color: var(--color-coral);">14</strong>
-                    </div>
-                    <div class="premium-card" style="padding: 0.9rem;">
-                        <p style="margin: 0; color: var(--color-gray-500);">Average wait</p>
-                        <strong style="font-size: 1.4rem; color: var(--color-primary);">6m</strong>
-                    </div>
-                </div>
-            </div>
+                                        <div class="appointment-slot"
+                                            style="background: linear-gradient(135deg, var(--color-lavender), #D4A5F3);"
+                                            draggable="true">
+                                            <div class="flex justify-between items-start mb-1">
+                                                <strong>John Davis</strong>
+                                                <span>10:00 AM</span>
+                                            </div>
+                                            <p style="margin: 0; font-size: 0.9rem;">AI Diagnostics</p>
+                                            <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i>
+                                                Dr. Mitchell</p>
+                                        </div>
 
-            <div class="chart-card">
-                <div class="flex justify-between items-center" style="margin-bottom: 0.75rem;">
-                    <h3 style="margin: 0;">Patient Satisfaction Trend</h3>
-                    <span style="color: var(--color-gray-600); font-size: 0.9rem;">Quarter to date</span>
-                </div>
-                <div class="chart-placeholder" style="height: 260px;" aria-label="Patient satisfaction area chart">
-                    <svg width="100%" height="260" viewBox="0 0 320 260" role="img">
-                        <defs>
-                            <linearGradient id="csatFill" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#8bbf9f" stop-opacity="0.32" />
-                                <stop offset="100%" stop-color="#8bbf9f" stop-opacity="0.08" />
-                            </linearGradient>
-                        </defs>
-                        <g stroke="#e5e7eb" stroke-width="1" opacity="0.45">
-                            <line x1="0" y1="210" x2="320" y2="210" />
-                            <line x1="0" y1="150" x2="320" y2="150" />
-                            <line x1="0" y1="90" x2="320" y2="90" />
-                        </g>
-                        <path d="M0 200 L0 160 C40 140 80 150 120 120 C160 95 200 110 240 80 C280 65 310 70 320 60 L320 200 Z" fill="url(#csatFill)" stroke="none" class="chart-anim-fill" />
-                        <path d="M0 160 C40 140 80 150 120 120 C160 95 200 110 240 80 C280 65 310 70 320 60" fill="none" stroke="#8bbf9f" stroke-width="3" stroke-linecap="round" class="chart-anim-line chart-glow" />
-                        <path d="M0 190 C60 170 110 175 150 160 C200 145 245 150 320 135" fill="none" stroke="#ff9f88" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" class="chart-anim-line-delayed chart-glow" />
-                        <path d="M30 120 C70 105 120 110 170 95" class="chart-spark" />
-                    </svg>
-                </div>
-                <div class="flex gap-2" style="margin-top: 1rem; flex-wrap: wrap;">
-                    <span class="pill" style="background: rgba(139,191,159,0.15); color: var(--color-sage); padding: 0.35rem 0.75rem; border-radius: 999px;">CSAT 4.8/5</span>
-                    <span class="pill" style="background: rgba(255,159,136,0.15); color: var(--color-coral); padding: 0.35rem 0.75rem; border-radius: 999px;">NPS +6</span>
-                </div>
-            </div>
+                                        <div class="appointment-slot"
+                                            style="background: linear-gradient(135deg, var(--color-coral), #FF8A73);"
+                                            draggable="true">
+                                            <div class="flex justify-between items-start mb-1">
+                                                <strong>Emily Parker</strong>
+                                                <span>11:00 AM</span>
+                                            </div>
+                                            <p style="margin: 0; font-size: 0.9rem;">Wellness Spa</p>
+                                            <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i>
+                                                Dr. Rodriguez</p>
+                                        </div>
 
-            <div class="chart-card">
-                <div class="flex justify-between items-center" style="margin-bottom: 0.75rem;">
-                    <h3 style="margin: 0;">Resource Utilization</h3>
-                    <span style="color: var(--color-gray-600); font-size: 0.9rem;">This week</span>
-                </div>
-                <div class="chart-placeholder" style="height: 200px;" aria-label="Resource utilization donut chart">
-                    <svg width="100%" height="200" viewBox="0 0 200 200" role="img">
-                        <circle cx="100" cy="100" r="70" fill="#f5f7fb" />
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#8bbf9f" stroke-width="20" stroke-dasharray="330 440" transform="rotate(-90 100 100)" class="chart-anim-line chart-glow" style="stroke-dashoffset: 440;" />
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#ff9f88" stroke-width="20" stroke-dasharray="120 440" transform="rotate(20 100 100)" stroke-linecap="round" class="chart-anim-line-delayed chart-glow" style="stroke-dashoffset: 440;" />
-                        <circle cx="100" cy="100" r="70" fill="none" stroke="#a78bfa" stroke-width="20" stroke-dasharray="90 440" transform="rotate(90 100 100)" stroke-linecap="round" class="chart-anim-line-delayed chart-glow" style="stroke-dashoffset: 440; animation-delay: 0.4s;" />
-                        <text x="100" y="105" text-anchor="middle" font-size="22" fill="#111827" font-weight="700">82%</text>
-                        <text x="100" y="125" text-anchor="middle" font-size="12" fill="#6b7280">Utilized</text>
-                    </svg>
-                </div>
-                <div class="kpi-grid" style="margin-top: 1rem;">
-                    <div class="premium-card" style="padding: 0.9rem;">
-                        <p style="margin: 0; color: var(--color-gray-500);">Rooms booked</p>
-                        <strong style="font-size: 1.4rem;">78%</strong>
-                    </div>
-                    <div class="premium-card" style="padding: 0.9rem;">
-                        <p style="margin: 0; color: var(--color-gray-500);">Staff utilization</p>
-                        <strong style="font-size: 1.4rem;">83%</strong>
-                    </div>
-                    <div class="premium-card" style="padding: 0.9rem;">
-                        <p style="margin: 0; color: var(--color-gray-500);">Avg session length</p>
-                        <strong style="font-size: 1.4rem;">54m</strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+                                        <div class="appointment-slot"
+                                            style="background: linear-gradient(135deg, var(--color-mint), var(--color-sage));"
+                                            draggable="true">
+                                            <div class="flex justify-between items-start mb-1">
+                                                <strong>Michael Brown</strong>
+                                                <span>1:00 PM</span>
+                                            </div>
+                                            <p style="margin: 0; font-size: 0.9rem;">Personal Training</p>
+                                            <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i>
+                                                Coach Thompson</p>
+                                        </div>
 
-    <script src="js/main.js"></script>
+                                        <div class="appointment-slot"
+                                            style="background: linear-gradient(135deg, var(--color-lavender), #D4A5F3);"
+                                            draggable="true">
+                                            <div class="flex justify-between items-start mb-1">
+                                                <strong>Lisa Anderson</strong>
+                                                <span>2:00 PM</span>
+                                            </div>
+                                            <p style="margin: 0; font-size: 0.9rem;">Nutrition Consultation</p>
+                                            <p style="margin: 0; font-size: 0.85rem;"><i class="ph ph-user-circle"></i>
+                                                Dr. Rodriguez</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Patient Queue -->
+                                <div class="calendar-view">
+                                    <h3 style="margin: 0 0 1.5rem 0;">Patient Waiting Room</h3>
+                                    <div class="patient-queue-item"
+                                        style="border-color: var(--color-sage); background: rgba(139, 191, 159, 0.05);">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <div class="flex items-center gap-2">
+                                                <div
+                                                    style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-sage), var(--color-mint)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                                                    SM
+                                                </div>
+                                                <div>
+                                                    <h4 style="margin: 0;">Sarah Mitchell</h4>
+                                                    <p
+                                                        style="margin: 0; font-size: 0.85rem; color: var(--color-gray-600);">
+                                                        Cryotherapy</p>
+                                                </div>
+                                            </div>
+                                            <span
+                                                style="background: var(--color-primary); color: white; padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem;">Checked
+                                                In</span>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="btn btn-primary"
+                                                style="padding: 0.5rem 1rem; font-size: 0.85rem; flex: 1;">Start
+                                                Appointment</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="patient-queue-item">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <div class="flex items-center gap-2">
+                                                <div
+                                                    style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-lavender), #D4A5F3); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                                                    JD
+                                                </div>
+                                                <div>
+                                                    <h4 style="margin: 0;">John Davis</h4>
+                                                    <p
+                                                        style="margin: 0; font-size: 0.85rem; color: var(--color-gray-600);">
+                                                        AI Diagnostics
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <span
+                                                style="background: var(--color-gray-300); color: var(--color-gray-700); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem;">Expected</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="patient-queue-item">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <div class="flex items-center gap-2">
+                                                <div
+                                                    style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--color-coral), #FF8A73); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700;">
+                                                    EP
+                                                </div>
+                                                <div>
+                                                    <h4 style="margin: 0;">Emily Parker</h4>
+                                                    <p
+                                                        style="margin: 0; font-size: 0.85rem; color: var(--color-gray-600);">
+                                                        Wellness Spa</p>
+                                                </div>
+                                            </div>
+                                            <span
+                                                style="background: var(--color-gray-300); color: var(--color-gray-700); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: 0.85rem;">Expected</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Revenue Analytics -->
+                            <div class="calendar-view mb-4">
+                                <h3 style="margin: 0 0 1.5rem 0;">Revenue by Service Type</h3>
+                                <!-- Changed to flex for better alignment and spacing on all screens -->
+                                <div
+                                    style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1.5rem; align-items: flex-end;">
+                                    <div style="text-align: center; flex: 1; min-width: 80px;">
+                                        <div class="revenue-bar" style="height: 180px;">
+                                            $12.5K
+                                        </div>
+                                        <p style="margin-top: 0.5rem; font-weight: 600;">Cryotherapy</p>
+                                    </div>
+                                    <div style="text-align: center; flex: 1; min-width: 80px;">
+                                        <div class="revenue-bar"
+                                            style="height: 220px; background: linear-gradient(to top, var(--color-lavender), #D4A5F3);">
+                                            $18.2K
+                                        </div>
+                                        <p style="margin-top: 0.5rem; font-weight: 600;">AI Diagnostics</p>
+                                    </div>
+                                    <div style="text-align: center; flex: 1; min-width: 80px;">
+                                        <div class="revenue-bar"
+                                            style="height: 160px; background: linear-gradient(to top, var(--color-coral), #FF8A73);">
+                                            $9.8K
+                                        </div>
+                                        <p style="margin-top: 0.5rem; font-weight: 600;">Wellness Spa</p>
+                                    </div>
+                                    <div style="text-align: center; flex: 1; min-width: 80px;">
+                                        <div class="revenue-bar"
+                                            style="height: 140px; background: linear-gradient(to top, var(--color-mint), var(--color-sage));">
+                                            $7.3K
+                                        </div>
+                                        <p style="margin-top: 0.5rem; font-weight: 600;">Training</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Operational Insights -->
+                            <div class="charts-grid mb-4">
+                                <div class="chart-card">
+                                    <div class="flex justify-between items-center" style="margin-bottom: 0.75rem;">
+                                        <h3 style="margin: 0;">Appointments vs Cancellations</h3>
+                                        <span style="color: var(--color-gray-600); font-size: 0.9rem;">Last 30
+                                            days</span>
+                                    </div>
+                                    <div class="chart-placeholder"
+                                        aria-label="Appointments vs cancellations line chart">
+                                        <svg width="100%" height="240" viewBox="0 0 320 240" role="img">
+                                            <defs>
+                                                <linearGradient id="lineA" x1="0" y1="0" x2="0" y2="1">
+                                                    <stop offset="0%" stop-color="#8bbf9f" stop-opacity="0.85" />
+                                                    <stop offset="100%" stop-color="#8bbf9f" stop-opacity="0.05" />
+                                                </linearGradient>
+                                                <linearGradient id="lineB" x1="0" y1="0" x2="0" y2="1">
+                                                    <stop offset="0%" stop-color="#ff9f88" stop-opacity="0.85" />
+                                                    <stop offset="100%" stop-color="#ff9f88" stop-opacity="0.05" />
+                                                </linearGradient>
+                                            </defs>
+                                            <rect x="0" y="0" width="320" height="240" fill="url(#bgGridAdmin1)"
+                                                fill-opacity="0" />
+                                            <g stroke="#e5e7eb" stroke-width="1" opacity="0.5">
+                                                <line x1="0" y1="200" x2="320" y2="200" />
+                                                <line x1="0" y1="150" x2="320" y2="150" />
+                                                <line x1="0" y1="100" x2="320" y2="100" />
+                                                <line x1="0" y1="50" x2="320" y2="50" />
+                                            </g>
+                                            <path
+                                                d="M10 180 C 40 120, 70 140, 100 90 S 160 80, 190 110 S 250 70, 310 60"
+                                                fill="none" stroke="#8bbf9f" stroke-width="3" stroke-linecap="round"
+                                                class="chart-anim-line chart-glow" />
+                                            <path
+                                                d="M10 190 C 50 160, 90 150, 130 170 S 190 150, 230 140 S 270 130, 310 150"
+                                                fill="none" stroke="#ff9f88" stroke-width="3" stroke-linecap="round"
+                                                stroke-dasharray="6 6" class="chart-anim-line-delayed chart-glow" />
+                                            <g fill="#8bbf9f" opacity="0.9">
+                                                <circle cx="100" cy="90" r="4" class="chart-pulse" />
+                                                <circle cx="190" cy="110" r="4" class="chart-pulse" />
+                                                <circle cx="310" cy="60" r="4" class="chart-pulse" />
+                                            </g>
+                                            <g fill="#ff9f88" opacity="0.9">
+                                                <circle cx="130" cy="170" r="4" class="chart-pulse" />
+                                                <circle cx="230" cy="140" r="4" class="chart-pulse" />
+                                                <circle cx="310" cy="150" r="4" class="chart-pulse" />
+                                            </g>
+                                            <path d="M20 95 C 60 75, 120 85, 160 70" class="chart-spark" />
+                                        </svg>
+                                    </div>
+                                    <div class="kpi-grid" style="margin-top: 1rem;">
+                                        <div class="premium-card" style="padding: 0.9rem;">
+                                            <p style="margin: 0; color: var(--color-gray-500);">Completion rate</p>
+                                            <strong style="font-size: 1.4rem; color: var(--color-sage);">92%</strong>
+                                        </div>
+                                        <div class="premium-card" style="padding: 0.9rem;">
+                                            <p style="margin: 0; color: var(--color-gray-500);">Cancellations</p>
+                                            <strong style="font-size: 1.4rem; color: var(--color-coral);">14</strong>
+                                        </div>
+                                        <div class="premium-card" style="padding: 0.9rem;">
+                                            <p style="margin: 0; color: var(--color-gray-500);">Average wait</p>
+                                            <strong style="font-size: 1.4rem; color: var(--color-primary);">6m</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="chart-card">
+                                    <div class="flex justify-between items-center" style="margin-bottom: 0.75rem;">
+                                        <h3 style="margin: 0;">Patient Satisfaction Trend</h3>
+                                        <span style="color: var(--color-gray-600); font-size: 0.9rem;">Quarter to
+                                            date</span>
+                                    </div>
+                                    <div class="chart-placeholder" style="height: 260px;"
+                                        aria-label="Patient satisfaction area chart">
+                                        <svg width="100%" height="260" viewBox="0 0 320 260" role="img">
+                                            <defs>
+                                                <linearGradient id="csatFill" x1="0" y1="0" x2="0" y2="1">
+                                                    <stop offset="0%" stop-color="#8bbf9f" stop-opacity="0.32" />
+                                                    <stop offset="100%" stop-color="#8bbf9f" stop-opacity="0.08" />
+                                                </linearGradient>
+                                            </defs>
+                                            <g stroke="#e5e7eb" stroke-width="1" opacity="0.45">
+                                                <line x1="0" y1="210" x2="320" y2="210" />
+                                                <line x1="0" y1="150" x2="320" y2="150" />
+                                                <line x1="0" y1="90" x2="320" y2="90" />
+                                            </g>
+                                            <path
+                                                d="M0 200 L0 160 C40 140 80 150 120 120 C160 95 200 110 240 80 C280 65 310 70 320 60 L320 200 Z"
+                                                fill="url(#csatFill)" stroke="none" class="chart-anim-fill" />
+                                            <path
+                                                d="M0 160 C40 140 80 150 120 120 C160 95 200 110 240 80 C280 65 310 70 320 60"
+                                                fill="none" stroke="#8bbf9f" stroke-width="3" stroke-linecap="round"
+                                                class="chart-anim-line chart-glow" />
+                                            <path d="M0 190 C60 170 110 175 150 160 C200 145 245 150 320 135"
+                                                fill="none" stroke="#ff9f88" stroke-width="2.5" stroke-dasharray="6 6"
+                                                stroke-linecap="round" class="chart-anim-line-delayed chart-glow" />
+                                            <path d="M30 120 C70 105 120 110 170 95" class="chart-spark" />
+                                        </svg>
+                                    </div>
+                                    <div class="flex gap-2" style="margin-top: 1rem; flex-wrap: wrap;">
+                                        <span class="pill"
+                                            style="background: rgba(139,191,159,0.15); color: var(--color-sage); padding: 0.35rem 0.75rem; border-radius: 999px;">CSAT
+                                            4.8/5</span>
+                                        <span class="pill"
+                                            style="background: rgba(255,159,136,0.15); color: var(--color-coral); padding: 0.35rem 0.75rem; border-radius: 999px;">NPS
+                                            +6</span>
+                                    </div>
+                                </div>
+
+                                <div class="chart-card">
+                                    <div class="flex justify-between items-center" style="margin-bottom: 0.75rem;">
+                                        <h3 style="margin: 0;">Resource Utilization</h3>
+                                        <span style="color: var(--color-gray-600); font-size: 0.9rem;">This week</span>
+                                    </div>
+                                    <div class="chart-placeholder" style="height: 200px;"
+                                        aria-label="Resource utilization donut chart">
+                                        <svg width="100%" height="200" viewBox="0 0 200 200" role="img">
+                                            <circle cx="100" cy="100" r="70" fill="#f5f7fb" />
+                                            <circle cx="100" cy="100" r="70" fill="none" stroke="#8bbf9f"
+                                                stroke-width="20" stroke-dasharray="330 440"
+                                                transform="rotate(-90 100 100)" class="chart-anim-line chart-glow"
+                                                style="stroke-dashoffset: 440;" />
+                                            <circle cx="100" cy="100" r="70" fill="none" stroke="#ff9f88"
+                                                stroke-width="20" stroke-dasharray="120 440"
+                                                transform="rotate(20 100 100)" stroke-linecap="round"
+                                                class="chart-anim-line-delayed chart-glow"
+                                                style="stroke-dashoffset: 440;" />
+                                            <circle cx="100" cy="100" r="70" fill="none" stroke="#a78bfa"
+                                                stroke-width="20" stroke-dasharray="90 440"
+                                                transform="rotate(90 100 100)" stroke-linecap="round"
+                                                class="chart-anim-line-delayed chart-glow"
+                                                style="stroke-dashoffset: 440; animation-delay: 0.4s;" />
+                                            <text x="100" y="105" text-anchor="middle" font-size="22" fill="#111827"
+                                                font-weight="700">82%</text>
+                                            <text x="100" y="125" text-anchor="middle" font-size="12"
+                                                fill="#6b7280">Utilized</text>
+                                        </svg>
+                                    </div>
+                                    <div class="kpi-grid" style="margin-top: 1rem;">
+                                        <div class="premium-card" style="padding: 0.9rem;">
+                                            <p style="margin: 0; color: var(--color-gray-500);">Rooms booked</p>
+                                            <strong style="font-size: 1.4rem;">78%</strong>
+                                        </div>
+                                        <div class="premium-card" style="padding: 0.9rem;">
+                                            <p style="margin: 0; color: var(--color-gray-500);">Staff utilization</p>
+                                            <strong style="font-size: 1.4rem;">83%</strong>
+                                        </div>
+                                        <div class="premium-card" style="padding: 0.9rem;">
+                                            <p style="margin: 0; color: var(--color-gray-500);">Avg session length</p>
+                                            <strong style="font-size: 1.4rem;">54m</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        <script src="js/main.js"></script>
 </body>
+
 </html>

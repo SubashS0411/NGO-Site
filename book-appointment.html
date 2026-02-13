@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Appointment - Vitality.AI</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌿</text></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌿</text></svg>">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="css/styles.css">
     <style>
@@ -12,12 +14,14 @@
             max-width: 800px;
             margin: 0 auto;
         }
+
         .wizard-steps {
             display: flex;
             justify-content: space-between;
             margin-bottom: 3rem;
             position: relative;
         }
+
         .wizard-steps::before {
             content: '';
             position: absolute;
@@ -28,6 +32,7 @@
             background: var(--color-gray-300);
             z-index: -1;
         }
+
         .wizard-step {
             display: flex;
             flex-direction: column;
@@ -35,6 +40,7 @@
             flex: 1;
             cursor: pointer;
         }
+
         .step-circle {
             width: 50px;
             height: 50px;
@@ -48,32 +54,39 @@
             margin-bottom: 0.5rem;
             transition: all 0.3s ease;
         }
+
         .wizard-step.active .step-circle {
             background: var(--color-primary);
             border-color: var(--color-primary);
             color: white;
         }
+
         .wizard-step.completed .step-circle {
             background: var(--color-success);
             border-color: var(--color-success);
             color: white;
         }
+
         .step-label {
             font-size: 0.9rem;
             color: var(--color-gray-600);
             text-align: center;
         }
+
         .wizard-step.active .step-label {
             color: var(--color-primary);
             font-weight: 600;
         }
+
         .wizard-content {
             display: none;
         }
+
         .wizard-content.active {
             display: block;
             animation: fadeInUp 0.5s ease;
         }
+
         .service-option {
             padding: 1.5rem;
             border: 2px solid var(--color-gray-200);
@@ -82,14 +95,17 @@
             transition: all 0.3s ease;
             margin-bottom: 1rem;
         }
+
         .service-option:hover {
             border-color: var(--color-sage);
             background: var(--color-porcelain);
         }
+
         .service-option.selected {
             border-color: var(--color-sage);
             background: rgba(139, 191, 159, 0.1);
         }
+
         .doctor-option {
             padding: 1.5rem;
             border: 2px solid var(--color-gray-200);
@@ -101,20 +117,24 @@
             gap: 1rem;
             margin-bottom: 1rem;
         }
+
         .doctor-option:hover {
             border-color: var(--color-lavender);
             transform: translateX(5px);
         }
+
         .doctor-option.selected {
             border-color: var(--color-lavender);
             background: rgba(224, 195, 252, 0.1);
         }
+
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 0.5rem;
             margin-bottom: 2rem;
         }
+
         .calendar-day {
             aspect-ratio: 1;
             display: flex;
@@ -126,18 +146,22 @@
             transition: all 0.3s ease;
             font-weight: 600;
         }
+
         .calendar-day:hover:not(.disabled) {
             background: var(--color-mint);
             color: white;
         }
+
         .calendar-day.selected {
             background: var(--color-sage);
             color: white;
         }
+
         .calendar-day.disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
+
         .time-slot {
             padding: 1rem;
             border: 2px solid var(--color-gray-200);
@@ -146,19 +170,23 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
+
         .time-slot:hover {
             border-color: var(--color-coral);
             background: rgba(255, 159, 136, 0.1);
         }
+
         .time-slot.selected {
             border-color: var(--color-coral);
             background: var(--color-coral);
             color: white;
         }
+
         @media (max-width: 768px) {
             .wizard-steps {
                 flex-wrap: wrap;
             }
+
             .wizard-step {
                 flex: 0 0 50%;
                 margin-bottom: 1rem;
@@ -166,52 +194,22 @@
         }
     </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo"><i class="ph ph-leaf"></i> Vitality.AI</a>
-            <ul class="nav-menu">
-                <li class="nav-dropdown">
-                    <button class="nav-dropdown-toggle" onclick="toggleDropdown(this)">
-                        Home <i class="ph ph-caret-down"></i>
-                    </button>
-                    <div class="nav-dropdown-menu">
-                        <a href="index.html" class="nav-dropdown-item"><i class="ph ph-hospital"></i> Wellness Focus</a>
-                        <a href="index2.html" class="nav-dropdown-item"><i class="ph ph-barbell"></i> Fitness Focus</a>
-                    </div>
-                </li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-                <li class="nav-dropdown">
-                    <button class="nav-dropdown-toggle" onclick="toggleDropdown(this)">
-                        Dashboard <i class="ph ph-caret-down"></i>
-                    </button>
-                    <div class="nav-dropdown-menu">
-                        <a href="admin-dashboard.html" class="nav-dropdown-item"><i class="ph ph-users-three"></i> Admin</a>
-                        <a href="user-dashboard.html" class="nav-dropdown-item"><i class="ph ph-user"></i> User</a>
-                    </div>
-                </li>
-            </ul>
-            
-            <div class="nav-actions">
-                <button class="dir-toggle" onclick="toggleDirection()" title="Toggle Text Direction (LTR/RTL)">
-                    <i class="ph ph-globe"></i>
-                </button>
-                <a href="book-appointment.html" class="btn btn-outline">Sign Up</a>
-                <a href="login.html" class="btn btn-dark">Login</a>
-            </div>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
 
-    <section style="padding-block: 6rem; min-height: 100vh;">
-        <div class="container wizard-container">
-            <h1 class="text-center mb-3">Book Your Appointment</h1>
-            <p class="text-center mb-4" style="color: var(--color-gray-600);">Follow these simple steps to schedule your visit</p>
+<body>
+    <div class="login-container"
+        style="background: var(--color-gray-50); align-items: flex-start; padding-top: 4rem; min-height: 100vh; height: auto;">
+        <div class="container wizard-container" style="max-width: 800px; width: 100%;">
+
+            <div class="text-center mb-4">
+                <a href="index.html" style="display: inline-block; text-decoration: none;">
+                    <h2 class="logo" style="margin: 0; font-size: 1.75rem;"><i class="ph ph-leaf"
+                            style="color: var(--color-primary);"></i> Vitality.AI</h2>
+                </a>
+            </div>
+
+            <h1 class="text-center mb-2" style="font-size: 2rem;">Book Your Appointment</h1>
+            <p class="text-center mb-5" style="color: var(--color-gray-600);">Follow these simple steps to schedule your
+                visit</p>
 
             <div class="wizard-steps">
                 <div class="wizard-step active" data-step="1">
@@ -237,56 +235,65 @@
             </div>
 
             <!-- Step 1: Select Service -->
-            <div class="wizard-content active glass-card" data-step="1" style="padding: 3rem;">
-                <h2 class="mb-3">Select a Service</h2>
+            <div class="wizard-content active glass-card" data-step="1"
+                style="padding: 3rem; background: white; border-top: 4px solid var(--color-primary);">
+                <h2 class="mb-4" style="font-size: 1.5rem;">Select a Service</h2>
                 <div class="service-option" onclick="selectService(this, 'cryotherapy')">
                     <div class="flex items-center gap-3">
-                        <i class="ph ph-snowflake" style="font-size: 2.5rem; color: var(--color-sage);"></i>
+                        <i class="ph ph-snowflake" style="font-size: 2.5rem; color: var(--color-primary);"></i>
                         <div class="flex-1">
                             <h4 style="margin: 0 0 0.5rem 0;">Cryotherapy</h4>
                             <p style="margin: 0; color: var(--color-gray-600);">Whole-body cold therapy for recovery</p>
                         </div>
-                        <span style="font-weight: 700; font-size: 1.25rem; color: var(--color-sage);">$150</span>
+                        <span style="font-weight: 700; font-size: 1.25rem; color: var(--color-primary);">$150</span>
                     </div>
                 </div>
                 <div class="service-option" onclick="selectService(this, 'ai-diagnostics')">
                     <div class="flex items-center gap-3">
-                        <i class="ph ph-brain" style="font-size: 2.5rem; color: var(--color-lavender);"></i>
+                        <i class="ph ph-brain" style="font-size: 2.5rem; color: var(--color-purple);"></i>
                         <div class="flex-1">
                             <h4 style="margin: 0 0 0.5rem 0;">AI Diagnostics</h4>
                             <p style="margin: 0; color: var(--color-gray-600);">Advanced health screening</p>
                         </div>
-                        <span style="font-weight: 700; font-size: 1.25rem; color: var(--color-lavender);">$300</span>
+                        <span style="font-weight: 700; font-size: 1.25rem; color: var(--color-purple);">$300</span>
                     </div>
                 </div>
                 <div class="service-option" onclick="selectService(this, 'wellness-spa')">
                     <div class="flex items-center gap-3">
-                        <i class="ph ph-sparkle" style="font-size: 2.5rem; color: var(--color-coral);"></i>
+                        <i class="ph ph-sparkle" style="font-size: 2.5rem; color: var(--color-rose);"></i>
                         <div class="flex-1">
                             <h4 style="margin: 0 0 0.5rem 0;">Wellness Spa</h4>
                             <p style="margin: 0; color: var(--color-gray-600);">Luxury spa treatments</p>
                         </div>
-                        <span style="font-weight: 700; font-size: 1.25rem; color: var(--color-coral);">$200</span>
+                        <span style="font-weight: 700; font-size: 1.25rem; color: var(--color-rose);">$200</span>
                     </div>
                 </div>
                 <div class="service-option" onclick="selectService(this, 'personal-training')">
                     <div class="flex items-center gap-3">
-                        <i class="ph ph-barbell" style="font-size: 2.5rem; color: var(--color-mint);"></i>
+                        <i class="ph ph-barbell" style="font-size: 2.5rem; color: var(--color-teal);"></i>
                         <div class="flex-1">
                             <h4 style="margin: 0 0 0.5rem 0;">Personal Training</h4>
                             <p style="margin: 0; color: var(--color-gray-600);">One-on-one fitness coaching</p>
                         </div>
-                        <span style="font-weight: 700; font-size: 1.25rem; color: var(--color-mint);">$180</span>
+                        <span style="font-weight: 700; font-size: 1.25rem; color: var(--color-teal);">$180</span>
                     </div>
                 </div>
-                <button class="btn btn-primary w-full mt-3" onclick="nextStep()">Continue</button>
+                <button class="btn btn-primary w-full mt-4" onclick="nextStep()"
+                    style="background: var(--color-primary);">Continue</button>
+
+                <div class="text-center mt-4">
+                    <a href="login.html" style="color: var(--color-gray-500); font-size: 0.9rem;">Already have an
+                        account? Login</a>
+                </div>
             </div>
 
             <!-- Step 2: Choose Provider -->
-            <div class="wizard-content glass-card" data-step="2" style="padding: 3rem;">
-                <h2 class="mb-3">Choose Your Provider</h2>
+            <div class="wizard-content glass-card" data-step="2"
+                style="padding: 3rem; background: white; border-top: 4px solid var(--color-primary);">
+                <h2 class="mb-4" style="font-size: 1.5rem;">Choose Your Provider</h2>
                 <div class="doctor-option" onclick="selectDoctor(this, 'dr-mitchell')">
-                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-sage), var(--color-mint)); display: flex; align-items: center; justify-content: center;">
+                    <div
+                        style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-primary-light); display: flex; align-items: center; justify-content: center;">
                         <i class="ph ph-user-circle" style="font-size: 2rem; color: white;"></i>
                     </div>
                     <div class="flex-1">
@@ -295,7 +302,8 @@
                     </div>
                 </div>
                 <div class="doctor-option" onclick="selectDoctor(this, 'dr-chen')">
-                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-lavender), #D4A5F3); display: flex; align-items: center; justify-content: center;">
+                    <div
+                        style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-purple); display: flex; align-items: center; justify-content: center;">
                         <i class="ph ph-user-circle" style="font-size: 2rem; color: white;"></i>
                     </div>
                     <div class="flex-1">
@@ -304,7 +312,8 @@
                     </div>
                 </div>
                 <div class="doctor-option" onclick="selectDoctor(this, 'dr-rodriguez')">
-                    <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--color-coral), #FF8A73); display: flex; align-items: center; justify-content: center;">
+                    <div
+                        style="width: 60px; height: 60px; border-radius: 50%; background: var(--color-rose); display: flex; align-items: center; justify-content: center;">
                         <i class="ph ph-user-circle" style="font-size: 2rem; color: white;"></i>
                     </div>
                     <div class="flex-1">
@@ -312,24 +321,40 @@
                         <p style="margin: 0; color: var(--color-gray-600);">Wellness & Nutrition Expert</p>
                     </div>
                 </div>
-                <div class="flex gap-2 mt-3">
-                    <button class="btn btn-glass flex-1" onclick="prevStep()">Back</button>
-                    <button class="btn btn-primary flex-1" onclick="nextStep()">Continue</button>
+                <div class="flex gap-2 mt-4">
+                    <button class="btn btn-outline flex-1" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary flex-1" onclick="nextStep()"
+                        style="background: var(--color-primary);">Continue</button>
                 </div>
             </div>
 
             <!-- Step 3: Date & Time -->
-            <div class="wizard-content glass-card" data-step="3" style="padding: 3rem;">
-                <h2 class="mb-3">Select Date & Time</h2>
-                <h4 class="mb-2">Choose a Date</h4>
+            <div class="wizard-content glass-card" data-step="3"
+                style="padding: 3rem; background: white; border-top: 4px solid var(--color-primary);">
+                <h2 class="mb-4" style="font-size: 1.5rem;">Select Date & Time</h2>
+                <h4 class="mb-2" style="font-size: 1.1rem;">Choose a Date</h4>
                 <div class="calendar-grid">
-                    <div style="font-weight: 700; text-align: center;">Mon</div>
-                    <div style="font-weight: 700; text-align: center;">Tue</div>
-                    <div style="font-weight: 700; text-align: center;">Wed</div>
-                    <div style="font-weight: 700; text-align: center;">Thu</div>
-                    <div style="font-weight: 700; text-align: center;">Fri</div>
-                    <div style="font-weight: 700; text-align: center;">Sat</div>
-                    <div style="font-weight: 700; text-align: center;">Sun</div>
+                    <div
+                        style="font-weight: 700; text-align: center; color: var(--color-gray-500); font-size: 0.85rem;">
+                        Mon</div>
+                    <div
+                        style="font-weight: 700; text-align: center; color: var(--color-gray-500); font-size: 0.85rem;">
+                        Tue</div>
+                    <div
+                        style="font-weight: 700; text-align: center; color: var(--color-gray-500); font-size: 0.85rem;">
+                        Wed</div>
+                    <div
+                        style="font-weight: 700; text-align: center; color: var(--color-gray-500); font-size: 0.85rem;">
+                        Thu</div>
+                    <div
+                        style="font-weight: 700; text-align: center; color: var(--color-gray-500); font-size: 0.85rem;">
+                        Fri</div>
+                    <div
+                        style="font-weight: 700; text-align: center; color: var(--color-gray-500); font-size: 0.85rem;">
+                        Sat</div>
+                    <div
+                        style="font-weight: 700; text-align: center; color: var(--color-gray-500); font-size: 0.85rem;">
+                        Sun</div>
                     <div class="calendar-day disabled">27</div>
                     <div class="calendar-day disabled">28</div>
                     <div class="calendar-day disabled">29</div>
@@ -345,8 +370,8 @@
                     <div class="calendar-day" onclick="selectDate(this)">8</div>
                     <div class="calendar-day" onclick="selectDate(this)">9</div>
                 </div>
-                <h4 class="mb-2">Choose a Time</h4>
-                <div class="grid grid-4" style="gap: 1rem;">
+                <h4 class="mb-2" style="font-size: 1.1rem;">Choose a Time</h4>
+                <div class="grid grid-4" style="gap: 0.75rem;">
                     <div class="time-slot" onclick="selectTime(this)">9:00 AM</div>
                     <div class="time-slot" onclick="selectTime(this)">10:00 AM</div>
                     <div class="time-slot" onclick="selectTime(this)">11:00 AM</div>
@@ -356,15 +381,17 @@
                     <div class="time-slot" onclick="selectTime(this)">4:00 PM</div>
                     <div class="time-slot" onclick="selectTime(this)">5:00 PM</div>
                 </div>
-                <div class="flex gap-2 mt-3">
-                    <button class="btn btn-glass flex-1" onclick="prevStep()">Back</button>
-                    <button class="btn btn-primary flex-1" onclick="nextStep()">Continue</button>
+                <div class="flex gap-2 mt-4">
+                    <button class="btn btn-outline flex-1" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary flex-1" onclick="nextStep()"
+                        style="background: var(--color-primary);">Continue</button>
                 </div>
             </div>
 
             <!-- Step 4: Your Details -->
-            <div class="wizard-content glass-card" data-step="4" style="padding: 3rem;">
-                <h2 class="mb-3">Your Information</h2>
+            <div class="wizard-content glass-card" data-step="4"
+                style="padding: 3rem; background: white; border-top: 4px solid var(--color-primary);">
+                <h2 class="mb-4" style="font-size: 1.5rem;">Your Information</h2>
                 <form id="detailsForm">
                     <div class="float-label form-group">
                         <input type="text" class="form-input" id="fullName" placeholder=" " required>
@@ -383,16 +410,18 @@
                         <textarea class="form-textarea" id="notes" placeholder="Optional notes..."></textarea>
                     </div>
                 </form>
-                <div class="flex gap-2 mt-3">
-                    <button class="btn btn-glass flex-1" onclick="prevStep()">Back</button>
-                    <button class="btn btn-primary flex-1" onclick="nextStep()">Continue</button>
+                <div class="flex gap-2 mt-4">
+                    <button class="btn btn-outline flex-1" onclick="prevStep()">Back</button>
+                    <button class="btn btn-primary flex-1" onclick="nextStep()"
+                        style="background: var(--color-primary);">Continue</button>
                 </div>
             </div>
 
             <!-- Step 5: Confirm -->
-            <div class="wizard-content glass-card" data-step="5" style="padding: 3rem;">
-                <h2 class="mb-3">Confirm Your Appointment</h2>
-                <div class="clay-card mb-3" style="padding: 2rem;">
+            <div class="wizard-content glass-card" data-step="5"
+                style="padding: 3rem; background: white; border-top: 4px solid var(--color-primary);">
+                <h2 class="mb-4" style="font-size: 1.5rem;">Confirm Your Appointment</h2>
+                <div class="clay-card mb-4" style="padding: 2rem; background: var(--color-gray-50);">
                     <h4 style="margin-bottom: 1.5rem;">Appointment Summary</h4>
                     <div style="display: grid; gap: 1rem;">
                         <div class="flex justify-between">
@@ -411,29 +440,28 @@
                             <span style="color: var(--color-gray-600);">Time:</span>
                             <strong id="summaryTime">10:00 AM</strong>
                         </div>
-                        <div class="flex justify-between" style="border-top: 2px solid var(--color-gray-200); padding-top: 1rem; margin-top: 1rem;">
+                        <div class="flex justify-between"
+                            style="border-top: 2px solid var(--color-gray-200); padding-top: 1rem; margin-top: 0.5rem;">
                             <span style="color: var(--color-gray-600);">Total:</span>
-                            <strong style="font-size: 1.5rem; color: var(--color-sage);">$150</strong>
+                            <strong style="font-size: 1.5rem; color: var(--color-primary);">$150</strong>
                         </div>
                     </div>
                 </div>
                 <div class="flex gap-2">
-                    <button class="btn btn-glass flex-1" onclick="prevStep()">Back</button>
-                    <button class="btn btn-accent flex-1" onclick="confirmAppointment()">
+                    <button class="btn btn-outline flex-1" onclick="prevStep()">Back</button>
+                    <button class="btn btn-accent flex-1" onclick="confirmAppointment()"
+                        style="background: var(--color-accent);">
                         <i class="ph ph-check-circle"></i> Confirm Booking
                     </button>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2025 Vitality.AI. All rights reserved.</p>
+            <div class="text-center mt-5" style="padding-bottom: 2rem;">
+                <p style="font-size: 0.85rem; color: var(--color-gray-400);">&copy; 2025 Vitality.AI. All rights
+                    reserved.</p>
             </div>
         </div>
-    </footer>
+    </div>
 
     <script src="js/main.js"></script>
     <script>
@@ -501,4 +529,5 @@
         }
     </script>
 </body>
+
 </html>

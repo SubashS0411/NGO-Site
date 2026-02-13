@@ -98,7 +98,158 @@
     <main>
       <!-- ======================== HOME 1 (WELLNESS) ======================== -->
       <section id="home" class="hero" style="min-height: 92vh; position: relative; overflow: hidden;">
-        <!-- ... (Content from index.html Hero) ... -->
+        <!-- ========== SCOPED HERO STYLES — IMMUNE TO EXTERNAL CSS ========== -->
+        <style>
+          /* Expand the hero container */
+          section#home>.container {
+            max-width: 1400px !important;
+            width: 92% !important;
+          }
+
+          /* Main 2-column layout */
+          #h1-grid {
+            display: flex !important;
+            align-items: center !important;
+            gap: 3rem !important;
+            width: 100% !important;
+            padding: 3rem 0 !important;
+          }
+
+          /* Image column — takes exactly 50% */
+          #h1-images-col {
+            flex: 0 0 48% !important;
+            max-width: 48% !important;
+            opacity: 1 !important;
+            transform: none !important;
+          }
+
+          /* Image collage uses CSS Grid — creates REAL intrinsic width */
+          #h1-collage {
+            display: grid !important;
+            grid-template-columns: 3fr 2fr !important;
+            grid-template-rows: 2fr 1fr !important;
+            gap: 0.75rem !important;
+            width: 100% !important;
+            min-height: 520px !important;
+          }
+
+          #h1-collage * {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
+          }
+
+          /* Main image — spans both rows of first column */
+          #h1-photo-main {
+            grid-row: 1 / 3 !important;
+            grid-column: 1 / 2 !important;
+            border-radius: 1.25rem !important;
+            overflow: hidden !important;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4) !important;
+            position: relative !important;
+          }
+
+          #h1-photo-main img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+          }
+
+          /* Secondary image — top-right */
+          #h1-photo-secondary {
+            grid-row: 1 / 2 !important;
+            grid-column: 2 / 3 !important;
+            border-radius: 1.25rem !important;
+            overflow: hidden !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35) !important;
+          }
+
+          #h1-photo-secondary img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+          }
+
+          /* Circle image — bottom-right */
+          #h1-photo-circle {
+            grid-row: 2 / 3 !important;
+            grid-column: 2 / 3 !important;
+            border-radius: 1.25rem !important;
+            overflow: hidden !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+
+          #h1-photo-circle img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+          }
+
+          /* Floating badges over images */
+          #h1-images-col {
+            position: relative !important;
+          }
+
+          #h1-float-badge-1 {
+            position: absolute !important;
+            bottom: 22% !important;
+            left: -5% !important;
+            background: rgba(255, 255, 255, 0.97) !important;
+            padding: 0.8rem 1.2rem !important;
+            border-radius: 0.875rem !important;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+            z-index: 10 !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.6) !important;
+          }
+
+          #h1-float-badge-2 {
+            position: absolute !important;
+            top: 22% !important;
+            right: -5% !important;
+            background: rgba(255, 255, 255, 0.97) !important;
+            padding: 0.8rem 1.2rem !important;
+            border-radius: 0.875rem !important;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+            z-index: 10 !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.6) !important;
+          }
+
+          /* Text column — takes remaining space */
+          #h1-text-col {
+            flex: 1 !important;
+            min-width: 0 !important;
+          }
+
+          @media (max-width: 991px) {
+            #h1-grid {
+              flex-direction: column-reverse !important;
+            }
+
+            #h1-images-col {
+              flex: 0 0 auto !important;
+              max-width: 100% !important;
+              width: 100% !important;
+            }
+
+            #h1-collage {
+              min-height: 350px !important;
+            }
+
+            #h1-text-col {
+              text-align: center !important;
+            }
+          }
+        </style>
+
+        <!-- Particles -->
         <div class="floating-particles" aria-hidden="true">
           <div class="particle" style="left: 8%; animation-delay: 0s;"></div>
           <div class="particle" style="left: 18%; animation-delay: 1.2s;"></div>
@@ -110,86 +261,61 @@
         </div>
 
         <div class="container" style="position: relative; z-index: 2;">
-          <div class="hero-grid hero-grid--home1"
-            style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 3rem; align-items: center; width: 100%;">
+          <div id="h1-grid">
 
-            <!-- ===== LEFT: Stunning Image Composition ===== -->
-            <div class="hero-image-composition"
-              style="position: relative; width: 100%; min-height: 620px; opacity: 1; transform: none;">
-              <!-- Decorative gradient blob behind -->
-              <div class="hero-blob"
-                style="position: absolute; width: 90%; max-width: 550px; aspect-ratio: 1; background: radial-gradient(circle, rgba(99,102,241,0.35), rgba(236,72,153,0.2), transparent 70%); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%,-50%); filter: blur(80px); z-index: 0;">
-              </div>
-              <!-- Decorative dots pattern -->
-              <div class="hero-dots-pattern"
-                style="position: absolute; width: 200px; height: 200px; top: 0; left: 0; background-image: radial-gradient(rgba(255,255,255,0.15) 1.5px, transparent 1.5px); background-size: 18px 18px; z-index: 0;">
-              </div>
-
-              <!-- Main Doctor Image -->
-              <div class="hero-img-main"
-                style="position: absolute; top: 3%; left: 2%; width: 72%; max-width: 500px; aspect-ratio: 4/5; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1); z-index: 2;">
-                <img
-                  src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=700&h=900&fit=crop&crop=faces&q=80"
-                  alt="Expert Doctor" loading="eager"
-                  style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              </div>
-
-              <!-- Secondary Image (overlapping) -->
-              <div class="hero-img-secondary"
-                style="position: absolute; bottom: 5%; right: 0; width: 55%; max-width: 380px; aspect-ratio: 4/3; border-radius: 1.25rem; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.35), 0 0 0 3px rgba(255,255,255,0.15); z-index: 3; background: #1e1b4b;">
-                <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=300&fit=crop&q=80"
-                  alt="Modern Medical Facility" loading="eager"
-                  style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+            <!-- ===== LEFT: Image Collage (CSS Grid — no absolute positioning) ===== -->
+            <div id="h1-images-col">
+              <div id="h1-collage">
+                <!-- Main Doctor Image (spans both rows, left column) -->
+                <div id="h1-photo-main">
+                  <img
+                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=700&h=900&fit=crop&crop=faces&q=80"
+                    alt="Expert Doctor" loading="eager" />
+                </div>
+                <!-- Secondary Image (top-right cell) -->
+                <div id="h1-photo-secondary">
+                  <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=300&fit=crop&q=80"
+                    alt="Modern Medical Facility" loading="eager" />
+                </div>
+                <!-- Third Image (bottom-right cell) -->
+                <div id="h1-photo-circle">
+                  <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=200&h=200&fit=crop&q=80"
+                    alt="AI Technology" loading="eager" />
+                </div>
               </div>
 
-              <!-- Third Image (small circle) -->
-              <div class="hero-img-circle"
-                style="position: absolute; top: 8%; right: 0; width: 130px; height: 130px; border-radius: 50%; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 0 3px rgba(255,255,255,0.2); z-index: 4; background: #1e1b4b;">
-                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=200&h=200&fit=crop&q=80"
-                  alt="AI Technology" loading="eager"
-                  style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              </div>
-
-              <!-- Floating Experience Badge -->
-              <div class="hero-float-badge"
-                style="position: absolute; bottom: 28%; left: -3%; background: rgba(255,255,255,0.95); padding: 1rem 1.4rem; border-radius: 1rem; box-shadow: 0 20px 50px rgba(0,0,0,0.18); z-index: 5; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); opacity: 1; transform: none;">
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <!-- Floating Badge: Patients -->
+              <div id="h1-float-badge-1">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
                   <div
-                    style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                    <i class="ph ph-heart-half" style="color: white; font-size: 1.3rem;"></i>
+                    style="width: 42px; height: 42px; background: linear-gradient(135deg, #6366F1, #EC4899); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="ph ph-heart-half" style="color: white; font-size: 1.1rem;"></i>
                   </div>
                   <div>
-                    <p style="margin: 0; font-size: 0.75rem; color: var(--color-gray-500);">Since 2018</p>
-                    <p style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--color-gray-900);">50K+
-                      Patients</p>
+                    <p style="margin: 0; font-size: 0.65rem; color: #94a3b8;">Since 2018</p>
+                    <p style="margin: 0; font-size: 1rem; font-weight: 800; color: #1e293b;">50K+ Patients</p>
                   </div>
                 </div>
               </div>
 
-              <!-- Floating Rating Card -->
-              <div class="hero-float-rating"
-                style="position: absolute; top: 28%; right: -3%; background: rgba(255,255,255,0.95); padding: 0.9rem 1.3rem; border-radius: 1rem; box-shadow: 0 20px 50px rgba(0,0,0,0.18); z-index: 5; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); opacity: 1; transform: none;">
-                <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <!-- Floating Badge: Rating -->
+              <div id="h1-float-badge-2">
+                <div style="display: flex; align-items: center; gap: 0.6rem;">
                   <div
-                    style="width: 44px; height: 44px; background: linear-gradient(135deg, #F59E0B, #FBBF24); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                    <i class="ph-fill ph-star" style="color: white; font-size: 1.2rem;"></i>
+                    style="width: 42px; height: 42px; background: linear-gradient(135deg, #F59E0B, #FBBF24); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <i class="ph-fill ph-star" style="color: white; font-size: 1.1rem;"></i>
                   </div>
                   <div>
-                    <p style="margin: 0; font-size: 0.75rem; color: var(--color-gray-500);">Rating</p>
-                    <p style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--color-gray-900);">4.9/5 <span
-                        style="font-size: 0.7rem; color: var(--color-gray-400);">(2.8K)</span></p>
+                    <p style="margin: 0; font-size: 0.65rem; color: #94a3b8;">Rating</p>
+                    <p style="margin: 0; font-size: 1rem; font-weight: 800; color: #1e293b;">4.9/5 <span
+                        style="font-size: 0.6rem; color: #94a3b8;">(2.8K)</span></p>
                   </div>
                 </div>
-              </div>
-
-              <!-- Pulse Ring Decoration -->
-              <div class="hero-pulse-ring"
-                style="position: absolute; top: 50%; left: 42%; width: 20px; height: 20px; background: var(--color-success); border-radius: 50%; z-index: 5; box-shadow: 0 0 0 4px rgba(16,185,129,0.2);">
               </div>
             </div>
 
             <!-- ===== RIGHT: Text Content ===== -->
-            <div class="hero-content">
+            <div id="h1-text-col">
               <!-- Eyebrow Badge -->
               <div class="hero-badge" data-animate="fade-up">
                 <i class="ph ph-sparkle"></i>
